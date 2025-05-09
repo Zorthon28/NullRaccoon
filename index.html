@@ -1,61 +1,85 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gustavo Tello - Ingeniero Biomédico</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gustavo Tello | CV</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <header>
-    <div class="container">
-      <img src="tu-foto.jpg" alt="Foto de Gustavo" class="profile-img">
-      <h1>Gustavo Tello</h1>
-      <p>Ingeniero Biomédico | Desarrollo de software clínico | Gestión de equipos médicos</p>
-    </div>
-  </header>
+<body class="bg-gray-100 text-gray-800 font-sans">
+  <div class="max-w-4xl mx-auto p-6">
+    <!-- Header -->
+    <header class="text-center bg-white p-6 rounded-lg shadow mb-6">
+      <img src="assets/pfp2.png" alt="Gustavo Tello" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-md" />
+      <h1 class="text-3xl font-bold">Gustavo Tello</h1>
+      <p class="text-gray-600">Ingeniero Biomédico | Desarrollo de software clínico | Gestión hospitalaria</p>
+    </header>
 
-  <main class="container">
-    <section>
-      <h2>Sobre mí</h2>
-      <p>Soy un ingeniero biomédico con experiencia en el desarrollo de plataformas para gestión hospitalaria, enfocado en la mejora de procesos y tecnologías médicas...</p>
+    <!-- Sobre mí -->
+    <section class="bg-white p-6 rounded-lg shadow mb-6">
+      <h2 class="text-xl font-semibold text-blue-900 mb-2">Sobre mí</h2>
+      <p>
+        Soy un ingeniero biomédico apasionado por la tecnología médica y el desarrollo de soluciones digitales que optimicen la gestión hospitalaria. He trabajado en proyectos de automatización de mantenimiento, control de inventarios, integración con sensores y plataformas web seguras.
+      </p>
     </section>
 
-    <section>
-      <h2>Experiencia</h2>
+    <div class="flex justify-center mt-4">
+        <a href="assets/CV-Tello-0.3.pdf" download class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition duration-300">
+          Descargar CV
+        </a>
+      </div>
+      
+    <!-- Experiencia -->
+    <section class="bg-white p-6 rounded-lg shadow mb-6">
+      <h2 class="text-xl font-semibold text-blue-900 mb-2">Experiencia</h2>
+      <ul class="space-y-2">
+        <li>
+          <strong>Centro Médico Premier</strong><br />
+          <span class="text-sm text-gray-600">Desarrollador de Plataforma de Gestión Hospitalaria (2024–2025)</span>
+          <p>Creación de sistema web para control de equipos médicos, mantenimiento, etiquetado QR y registros.</p>
+        </li>
+        <li>
+          <strong>Residencia Profesional</strong><br />
+          <span class="text-sm text-gray-600">ITT | Proyecto de Innovación Biomédica</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Educación -->
+    <section class="bg-white p-6 rounded-lg shadow mb-6">
+      <h2 class="text-xl font-semibold text-blue-900 mb-2">Educación</h2>
       <ul>
-        <li><strong>Centro Médico Premier</strong> - Desarrollo de plataforma de gestión (2024-2025)</li>
-        <li><strong>Residencia profesional</strong> - Automatización de inventarios, mantenimiento, códigos QR</li>
+        <li>
+          <strong>Ingeniería Biomédica</strong> – Instituto Tecnológico de Tijuana<br />
+          <span class="text-sm text-gray-600">2019 – 2025</span>
+        </li>
       </ul>
     </section>
 
-    <section>
-      <h2>Educación</h2>
-      <ul>
-        <li>Ingeniería Biomédica - Instituto Tecnológico de Tijuana (2019 - 2025)</li>
-      </ul>
+    <!-- Habilidades -->
+    <section class="bg-white p-6 rounded-lg shadow mb-6">
+      <h2 class="text-xl font-semibold text-blue-900 mb-2">Habilidades Técnicas</h2>
+      <div class="flex flex-wrap gap-2">
+        <span class="bg-blue-100 text-blue-900 px-3 py-1 rounded-full">PHP</span>
+        <span class="bg-blue-100 text-blue-900 px-3 py-1 rounded-full">MySQL</span>
+        <span class="bg-blue-100 text-blue-900 px-3 py-1 rounded-full">HTML/CSS</span>
+        <span class="bg-blue-100 text-blue-900 px-3 py-1 rounded-full">JavaScript</span>
+        <span class="bg-blue-100 text-blue-900 px-3 py-1 rounded-full">Appium</span>
+        <span class="bg-blue-100 text-blue-900 px-3 py-1 rounded-full">Raspberry Pi Pico</span>
+      </div>
     </section>
 
-    <section>
-      <h2>Habilidades</h2>
-      <ul class="skills">
-        <li>PHP / MySQL</li>
-        <li>HTML / CSS / JavaScript</li>
-        <li>Appium, ADB, Raspberry Pi Pico</li>
-        <li>Diseño de interfaces y pruebas</li>
-      </ul>
+    <!-- Contacto -->
+    <section class="bg-white p-6 rounded-lg shadow mb-6">
+      <h2 class="text-xl font-semibold text-blue-900 mb-2">Contacto</h2>
+      <p><strong>Email:</strong> gustavo@example.com</p>
+      <p><strong>LinkedIn:</strong> <a href="#" class="text-blue-700 hover:underline">linkedin.com/in/gustavotello</a></p>
+      <p><strong>GitHub:</strong> <a href="#" class="text-blue-700 hover:underline">github.com/gustavotello</a></p>
     </section>
 
-    <section>
-      <h2>Contacto</h2>
-      <p>Email: gustavo@example.com</p>
-      <p>LinkedIn: <a href="#">linkedin.com/in/gustavotello</a></p>
-      <p>GitHub: <a href="#">github.com/gustavotello</a></p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Gustavo Tello</p>
-  </footer>
+    <footer class="text-center text-sm text-gray-500 mt-6">
+      &copy; 2025 Gustavo Tello. Todos los derechos reservados.
+    </footer>
+  </div>
 </body>
 </html>
