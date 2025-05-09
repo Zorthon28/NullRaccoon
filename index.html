@@ -19,6 +19,14 @@
       es.forEach(el => el.classList.toggle('hidden'));
       en.forEach(el => el.classList.toggle('hidden'));
     }
+    // Agrega este script
+    document.querySelectorAll('.timeline-item h3').forEach(header => {
+      header.style.cursor = 'pointer';
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling.nextElementSibling;
+        content.style.display = content.style.display === 'none' ? 'block' : 'none';
+      });
+    });
   </script>
 </head>
 <dy>
@@ -99,23 +107,28 @@
               <ul style="margin-top: 0.5rem; list-style-type: disc; padding-left: 1.25rem; color: #374151; font-size: 0.875rem;">
                 <li lang="es">Desarrollo e implementación de pruebas automatizadas para aplicaciones móviles en iOS y Android</li>
                 <li class="hidden" lang="en">Development and implementation of automated tests for mobile applications on iOS and Android</li>
-                <li lang="es">Liderazgo de equipos de QA para garantizar la calidad del software</li>
+                <li lang="es">Liderazgo del proceso de triage en esfuerzos de automatización, priorizando bugs y coordinando la ejecución de pruebas en colaboración con equipos de desarrollo.</li>
                 <li class="hidden" lang="en">Leading QA teams to ensure software quality</li>
                 <li lang="es">Optimización de procesos de testing, reduciendo tiempos de ejecución en 30%</li>
                 <li class="hidden" lang="en">Optimized testing processes, reducing execution time by 30%</li>
+                <li lang="es">Documentación de procesos de validación y generación de reportes técnicos para auditorías internas y revisiones de cumplimiento.</li>
+                <li lang="es">Mentoría a nuevos integrantes del equipo de QA, impulsando la mejora continua del área.</li>
               </ul>
             </div>
             
             <div class="timeline-item" style="margin-top: 1.5rem;">
               <div class="timeline-dot"></div>
               <h3 style="font-weight: 700; color: #111827;">Desarrollador Web</h3>
-              <p style="color: #4b5563;">Hospital Premier · <span lang="es">Contrato</span><span class="hidden" lang="en">Contract</span></p>
+              <p style="color: #4b5563;">Hospital Premier · <span lang="es">Residencia Profesional</span><span class="hidden" lang="en">Contract</span></p>
               <p style="font-size: 0.875rem; color: #6b7280;">2023 - 2024</p>
               <ul style="margin-top: 0.5rem; list-style-type: disc; padding-left: 1.25rem; color: #374151; font-size: 0.875rem;">
-                <li lang="es">Diseño e implementación de plataforma de gestión hospitalaria con PHP y MySQL</li>
+                <li lang="es">Diseño e implementación de una plataforma web para la gestión y mantenimiento de equipos médicos.</li>
                 <li class="hidden" lang="en">Design and implementation of hospital management platform with PHP and MySQL</li>
-                <li lang="es">Integración de sistema de control de equipos médicos con etiquetado QR</li>
+                <li lang="es">Desarrollo de módulos para el registro, búsqueda y actualización de información técnica y de mantenimiento.</li>
                 <li class="hidden" lang="en">Integration of medical equipment control system with QR tagging</li>
+                <li lang="es">Integración de códigos QR para facilitar el acceso a los datos de los equipos desde dispositivos móviles.</li>
+                <li lang="es">Generación automática de etiquetas y fichas técnicas con datos relevantes del inventario.</li>
+                
               </ul>
             </div>
           </div>
@@ -189,7 +202,6 @@
                 <span class="skill-tag">MySQL</span>
                 <span class="skill-tag">HTML/CSS</span>
                 <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">Tailwind</span>
               </div>
             </div>
             
@@ -228,13 +240,12 @@
             <div style="margin-bottom: 1rem;">
               <h3 style="font-weight: 700; color: #111827;">Ingeniería Biomédica</h3>
               <p style="color: #4b5563;">Instituto Tecnológico de Tijuana</p>
-              <p style="font-size: 0.875rem; color: #6b7280;">2019 - 2025</p>
+              <p style="font-size: 0.875rem; color: #6b7280;">2018 - Graduado: 2025</p>
             </div>
             <div>
-              <h3 style="font-weight: 700; color: #111827;" lang="es">Certificación en Pruebas Automatizadas</h3>
-              <h3 style="font-weight: 700; color: #111827;" class="hidden" lang="en">Automated Testing Certification</h3>
-              <p style="color: #4b5563;">Udemy</p>
-              <p style="font-size: 0.875rem; color: #6b7280;">2022</p>
+              <h3 style="font-weight: 700; color: #111827;" lang="es">Tecnico en programación</h3>
+              <p style="color: #4b5563;">CETis #58</p>
+              <p style="font-size: 0.875rem; color: #6b7280;">2015 - 2018</p>
             </div>
           </div>
         </section>
