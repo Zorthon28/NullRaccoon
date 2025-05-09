@@ -35,38 +35,48 @@
     }
     
     function toggleLanguage() {
-      const es = document.querySelectorAll('[lang="es"]');
-      const en = document.querySelectorAll('[lang="en"]');
-      es.forEach(el => el.classList.toggle('hidden'));
-      en.forEach(el => el.classList.toggle('hidden'));
+      const esElements = document.querySelectorAll('[lang="es"]');
+      const enElements = document.querySelectorAll('[lang="en"]');
       
-      // Update HTML lang attribute
-      const html = document.documentElement;
-      html.lang = html.lang === 'es' ? 'en' : 'es';
+      // Check current state
+      const isEnglish = document.documentElement.lang === 'en';
+      
+      if (isEnglish) {
+        // Switch to Spanish
+        esElements.forEach(el => el.classList.remove('hidden'));
+        enElements.forEach(el => el.classList.add('hidden'));
+        document.documentElement.lang = 'es';
+      } else {
+        // Switch to English
+        esElements.forEach(el => el.classList.add('hidden'));
+        enElements.forEach(el => el.classList.remove('hidden'));
+        document.documentElement.lang = 'en';
+      }
     }
     
-    // Initialize with Spanish visible
+    // Initialize with Spanish
     document.addEventListener('DOMContentLoaded', function() {
       document.documentElement.lang = 'es';
-    });
-  </script>
-  <style>
-    .skill-category {
-      @apply text-sm font-semibold text-primary-700 mb-1;
-    }
-    .project-card {
-      @apply p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow duration-300;
-    }
-    .timeline-item {
-      @apply relative pl-6 pb-4 border-l-2 border-primary-200;
-    }
-    .timeline-item:last-child {
-      @apply pb-0;
-    }
-    .timeline-dot {
-      @apply absolute w-3 h-3 bg-primary-600 rounded-full -left-[7px] top-1;
-    }
-  </style>
+      document.documentElement.lang = 'es';
+  });
+</script>
+<style>
+  .skill-category {
+    @apply text-sm font-semibold text-primary-700 mb-1;
+  }
+  .project-card {
+    @apply p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow duration-300;
+  }
+  .timeline-item {
+    @apply relative pl-6 pb-4 border-l-2 border-primary-200;
+  }
+  .timeline-item:last-child {
+    @apply pb-0;
+  }
+  .timeline-dot {
+    @apply absolute w-3 h-3 bg-primary-600 rounded-full -left-[7px] top-1;
+  }
+</style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
