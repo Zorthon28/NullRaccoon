@@ -35,48 +35,49 @@
     }
     
     function toggleLanguage() {
-      const esElements = document.querySelectorAll('[lang="es"]');
-      const enElements = document.querySelectorAll('[lang="en"]');
+      const es = document.querySelectorAll('[lang="es"]');
+      const en = document.querySelectorAll('[lang="en"]');
       
-      // Check current state
-      const isEnglish = document.documentElement.lang === 'en';
+      // Check which language is currently visible
+      const isSpanishVisible = !es[0].classList.contains('hidden');
       
-      if (isEnglish) {
-        // Switch to Spanish
-        esElements.forEach(el => el.classList.remove('hidden'));
-        enElements.forEach(el => el.classList.add('hidden'));
-        document.documentElement.lang = 'es';
-      } else {
+      if (isSpanishVisible) {
         // Switch to English
-        esElements.forEach(el => el.classList.add('hidden'));
-        enElements.forEach(el => el.classList.remove('hidden'));
+        es.forEach(el => el.classList.add('hidden'));
+        en.forEach(el => el.classList.remove('hidden'));
         document.documentElement.lang = 'en';
+      } else {
+        // Switch to Spanish
+        es.forEach(el => el.classList.remove('hidden'));
+        en.forEach(el => el.classList.add('hidden'));
+        document.documentElement.lang = 'es';
       }
     }
     
-    // Initialize with Spanish
+    // Initialize - make sure Spanish is visible and English is hidden
     document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('[lang="es"]').forEach(el => el.classList.remove('hidden'));
+      document.querySelectorAll('[lang="en"]').forEach(el => el.classList.add('hidden'));
       document.documentElement.lang = 'es';
-      document.documentElement.lang = 'es';
-  });
-</script>
-<style>
-  .skill-category {
-    @apply text-sm font-semibold text-primary-700 mb-1;
-  }
-  .project-card {
-    @apply p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow duration-300;
-  }
-  .timeline-item {
-    @apply relative pl-6 pb-4 border-l-2 border-primary-200;
-  }
-  .timeline-item:last-child {
-    @apply pb-0;
-  }
-  .timeline-dot {
-    @apply absolute w-3 h-3 bg-primary-600 rounded-full -left-[7px] top-1;
-  }
-</style>
+    });
+  </script>
+  <style>
+    .skill-category {
+      @apply text-sm font-semibold text-primary-700 mb-1;
+    }
+    .project-card {
+      @apply p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow duration-300;
+    }
+    .timeline-item {
+      @apply relative pl-6 pb-4 border-l-2 border-primary-200;
+    }
+    .timeline-item:last-child {
+      @apply pb-0;
+    }
+    .timeline-dot {
+      @apply absolute w-3 h-3 bg-primary-600 rounded-full -left-[7px] top-1;
+    }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
@@ -341,7 +342,7 @@
               <div class="w-full bg-gray-200 rounded-full h-2">
                 <div class="bg-primary-600 h-2 rounded-full" style="width: 75%">
                   <span class="text-sm font-medium text-gray-700">Certificado</span>
-                <span class="text-sm text-gray-500">https://cert.efset.org/en/d81VH6</span>
+                  <span class="text-sm text-gray-500">https://cert.efset.org/en/d81VH6</span>
                 </div>
               </div>
             </div>
