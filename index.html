@@ -8,32 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: {
-              50: '#f0f9ff',
-              100: '#e0f2fe',
-              200: '#bae6fd',
-              300: '#7dd3fc',
-              400: '#38bdf8',
-              500: '#0ea5e9',
-              600: '#0284c7',
-              700: '#0369a1',
-              800: '#075985',
-              900: '#0c4a6e',
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
-        }
-      }
-    }
-    
+  
     function toggleLanguage() {
       console.log("Button clicked!"); // Debugging line
       
@@ -55,23 +31,6 @@
       });
     }
   </script>
-  <style>
-    .skill-category {
-      @apply text-sm font-semibold text-primary-700 mb-1;
-    }
-    .project-card {
-      @apply p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow duration-300;
-    }
-    .timeline-item {
-      @apply relative pl-6 pb-4 border-l-2 border-primary-200;
-    }
-    .timeline-item:last-child {
-      @apply pb-0;
-    }
-    .timeline-dot {
-      @apply absolute w-3 h-3 bg-primary-600 rounded-full -left-[7px] top-1;
-    }
-  </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
