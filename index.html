@@ -379,4 +379,33 @@
       </section>
     </div>
   </div>
+  <!-- Add this script at the bottom of your body, before closing </body> tag -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Initialize - hide all language elements first
+    $('[lang]').hide();
+    // Show only Spanish by default
+    $('[lang="es"]').show();
+    
+    $('#lang-switch').change(function() {
+        var lang = $(this).val();
+        $('[lang]').hide(); // Hide all language versions
+        
+        switch(lang) {
+            case 'en':
+                $('[lang="en"]').show();
+                document.documentElement.lang = 'en';
+                break;
+            case 'es':
+                $('[lang="es"]').show();
+                document.documentElement.lang = 'es';
+                break;
+            default:
+                $('[lang="es"]').show();
+                document.documentElement.lang = 'es';
+        }
+    });
+});
+</script>
 </body>
