@@ -35,31 +35,25 @@
     }
     
     function toggleLanguage() {
-      const es = document.querySelectorAll('[lang="es"]');
-      const en = document.querySelectorAll('[lang="en"]');
+      console.log("Button clicked!"); // Debugging line
       
-      // Check which language is currently visible
-      const isSpanishVisible = !es[0].classList.contains('hidden');
+      const esElements = document.querySelectorAll('[lang="es"]');
+      const enElements = document.querySelectorAll('[lang="en"]');
       
-      if (isSpanishVisible) {
-        // Switch to English
-        es.forEach(el => el.classList.add('hidden'));
-        en.forEach(el => el.classList.remove('hidden'));
-        document.documentElement.lang = 'en';
-      } else {
-        // Switch to Spanish
-        es.forEach(el => el.classList.remove('hidden'));
-        en.forEach(el => el.classList.add('hidden'));
-        document.documentElement.lang = 'es';
-      }
+      console.log(`Found ${esElements.length} Spanish elements`); // Debugging
+      console.log(`Found ${enElements.length} English elements`); // Debugging
+      
+      // Toggle visibility
+      esElements.forEach(el => {
+        console.log("Toggling Spanish element:", el); // Debugging
+        el.classList.toggle('hidden');
+      });
+      
+      enElements.forEach(el => {
+        console.log("Toggling English element:", el); // Debugging
+        el.classList.toggle('hidden');
+      });
     }
-    
-    // Initialize - make sure Spanish is visible and English is hidden
-    document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('[lang="es"]').forEach(el => el.classList.remove('hidden'));
-      document.querySelectorAll('[lang="en"]').forEach(el => el.classList.add('hidden'));
-      document.documentElement.lang = 'es';
-    });
   </script>
   <style>
     .skill-category {
