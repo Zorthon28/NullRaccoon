@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gustavo Tello | CV</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    function toggleLanguage() {
+      const es = document.querySelectorAll('[lang="es"]');
+      const en = document.querySelectorAll('[lang="en"]');
+      es.forEach(el => el.classList.toggle('hidden'));
+      en.forEach(el => el.classList.toggle('hidden'));
+    }
+  </script>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
   <div class="max-w-4xl mx-auto p-6">
@@ -13,12 +21,22 @@
       <img src="assets/pfp2.png" alt="Gustavo Tello" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-md" />
       <h1 class="text-3xl font-bold">Gustavo Tello</h1>
       <p class="text-gray-600">Ingeniero Biomédico | Automation engineer | QA Tester</p>
+      <div class="flex justify-center mt-4 space-x-2">
+        <a href="assets/CV_Gustavo_Tello.pdf" download class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition duration-300">
+          <span lang="es">Descargar CV</span>
+          <span class="hidden" lang="en">Download CV</span>
+        </a>
+        <button onclick="toggleLanguage()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg transition duration-300">
+          <span lang="es">English</span>
+          <span class="hidden" lang="en">Español</span>
+        </button>
+      </div>
     </header>
-
+    
     <!-- Sobre mí -->
     <section class="bg-white p-6 rounded-lg shadow mb-6">
       <h2 class="text-xl font-semibold text-blue-900 mb-2">Sobre mí</h2>
-      <p>
+      <p lang="es">
         Soy un ingeniero biomédico con especialización en pruebas automatizadas para aplicaciones móviles y desarrollo de páginas web. 
         Me considero una persona detallista y comprometida con el cumplimiento de metas y desafíos, sin importar su magnitud. 
         Desde hace más de tres años me desempeño como VnV Engineer en ITJ, donde he adquirido habilidades técnicas y de liderazgo. 
@@ -26,30 +44,27 @@
         Como desarrollador web, he participado en diversos proyectos personales y profesionales. Mi más reciente trabajo fue el desarrollo de 
         una plataforma de gestión hospitalaria para el hospital Premier, orientada al control de equipos médicos y procesos clínicos.
       </p>
+      <p class="hidden" lang="en">
+        I'm a biomedical engineer passionate about medical technology and developing digital solutions to optimize hospital management. I've worked on maintenance automation, inventory control, sensor integration, and secure web platforms.
+      </p>
     </section>
-
-    <div class="flex justify-center mt-4">
-        <a href="assets/CV-Tello-0.3.pdf" download class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition duration-300">
-          Descargar CV
-        </a>
-      </div>
-      
-    <!-- Experiencia -->
+    
+    <!-- Portfolio -->
     <section class="bg-white p-6 rounded-lg shadow mb-6">
-      <h2 class="text-xl font-semibold text-blue-900 mb-2">Experiencia</h2>
-      <ul class="space-y-2">
+      <h2 class="text-xl font-semibold text-blue-900 mb-2" lang="es">Portafolio</h2>
+      <h2 class="text-xl font-semibold text-blue-900 mb-2 hidden" lang="en">Portfolio</h2>
+      <ul class="space-y-3">
         <li>
-          <strong>Centro Médico Premier</strong><br />
-          <span class="text-sm text-gray-600">Desarrollador de Plataforma de Gestión Hospitalaria (2024–2025)</span>
-          <p>Creación de sistema web para control de equipos médicos, mantenimiento, etiquetado QR y registros.</p>
+          <strong lang="es">Sistema de Gestión Hospitalaria</strong>
+          <strong class="hidden" lang="en">Hospital Management System</strong><br />
+          <span class="text-sm text-gray-600">2024–2025</span>
+          <p lang="es">Sistema web para control de equipos médicos, mantenimiento, etiquetado QR y registros.</p>
+          <p class="hidden" lang="en">Web system for managing medical equipment, maintenance, QR tagging, and records.</p>
         </li>
-        <li>
-          <strong>Residencia Profesional</strong><br />
-          <span class="text-sm text-gray-600">ITT | Proyecto de Innovación Biomédica</span>
-        </li>
+        <!-- Add more projects as needed -->
       </ul>
     </section>
-
+    
     <!-- Educación -->
     <section class="bg-white p-6 rounded-lg shadow mb-6">
       <h2 class="text-xl font-semibold text-blue-900 mb-2">Educación</h2>
@@ -60,10 +75,11 @@
         </li>
       </ul>
     </section>
-
+    
     <!-- Habilidades -->
     <section class="bg-white p-6 rounded-lg shadow mb-6">
-      <h2 class="text-xl font-semibold text-blue-900 mb-2">Habilidades Técnicas</h2>
+      <h2 class="text-xl font-semibold text-blue-900 mb-2" lang="es">Habilidades Técnicas</h2>
+      <h2 class="text-xl font-semibold text-blue-900 mb-2 hidden" lang="en">Technical Skills</h2>
       <div class="flex flex-wrap gap-2">
         <span class="bg-blue-100 text-blue-900 px-3 py-1 rounded-full">PHP</span>
         <span class="bg-blue-100 text-blue-900 px-3 py-1 rounded-full">MySQL</span>
@@ -73,15 +89,16 @@
         <span class="bg-blue-100 text-blue-900 px-3 py-1 rounded-full">Raspberry Pi Pico</span>
       </div>
     </section>
-
+    
     <!-- Contacto -->
     <section class="bg-white p-6 rounded-lg shadow mb-6">
-      <h2 class="text-xl font-semibold text-blue-900 mb-2">Contacto</h2>
+      <h2 class="text-xl font-semibold text-blue-900 mb-2" lang="es">Contacto</h2>
+      <h2 class="text-xl font-semibold text-blue-900 mb-2 hidden" lang="en">Contact</h2>
       <p><strong>Email:</strong> gustavo@example.com</p>
       <p><strong>LinkedIn:</strong> <a href="#" class="text-blue-700 hover:underline">linkedin.com/in/gustavotello</a></p>
       <p><strong>GitHub:</strong> <a href="#" class="text-blue-700 hover:underline">github.com/gustavotello</a></p>
     </section>
-
+    
     <footer class="text-center text-sm text-gray-500 mt-6">
       &copy; 2025 Gustavo Tello. Todos los derechos reservados.
     </footer>
