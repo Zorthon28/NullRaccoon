@@ -87,38 +87,45 @@
           </div>
         </section>
         
-        <!-- Projects -->
-        <section class="card">
-          <h2 class="text-xl font-semibold" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-            <img src="assets/proyects.png" alt="info" style="width: 20px; height: 18px;"/>
-            <span id="featureProjects"></span>
-          </h2>
-          <div style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem;">
-            <div style="padding: 1rem; border: 1px solid; border-radius: 0.5rem; transition: box-shadow 0.3s ease;">
-              <h3 style="font-weight: 700;">
-                <span id="featureProjectsSub1"></span>
-              </h3>
-              <p style="font-size: 0.875rem;">2024</p>
-              <p style="margin-top: 0.5rem; font-size: 0.875rem;" id="featureProjectsDescription1"></p>
-              <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <!-- Projects Section -->
+        <section class="card projects-section">
+          <div class="section-header">
+            <img src="assets/proyects.png" alt="Projects icon" class="section-icon"/>
+            <h2 class="section-title" id="featureProjects"></h2>
+          </div>
+          
+          <div class="projects-grid">
+            <!-- Project 1 -->
+            <article class="project-card">
+              <header class="project-header">
+                <h3 class="project-title" id="featureProjectsSub1"></h3>
+                <time class="project-year" datetime="2024">2024</time>
+              </header>
+              
+              <p class="project-description" id="featureProjectsDescription1"></p>
+              
+              <footer class="project-technologies">
                 <span class="skill-tag">PHP</span>
                 <span class="skill-tag">MySQL</span>
                 <span class="skill-tag">JavaScript</span>
-              </div>
-            </div>
+              </footer>
+            </article>
             
-            <div style="padding: 1rem; border: 1px solid; border-radius: 0.5rem; transition: box-shadow 0.3s ease;">
-              <h3 style="font-weight: 700;">
-                <span id="featureProjectsSub2"></span>
-              </h3>
-              <p style="font-size: 0.875rem;">2023</p>
-              <p style="margin-top: 0.5rem; font-size: 0.875rem;" id="featureProjectsDescription2"></p>
-              <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <!-- Project 2 -->
+            <article class="project-card">
+              <header class="project-header">
+                <h3 class="project-title" id="featureProjectsSub2"></h3>
+                <time class="project-year" datetime="2023">2023</time>
+              </header>
+              
+              <p class="project-description" id="featureProjectsDescription2"></p>
+              
+              <footer class="project-technologies">
                 <span class="skill-tag">Appium</span>
                 <span class="skill-tag">Python</span>
                 <span class="skill-tag">Selenium</span>
-              </div>
-            </div>
+              </footer>
+            </article>
           </div>
         </section>
       </div>
