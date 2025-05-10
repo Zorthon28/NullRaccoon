@@ -19,23 +19,21 @@
       <div style="position: relative; width: 10rem; height: 10rem; margin: 0 auto 1rem;">
         <img src="assets/pfp2.png" alt="Gustavo Tello" class="profile-img" />
       </div>
-      <h1 class="text-3xl font-bold" style="color: #111827;">Gustavo Tello</h1>
-      <p style="color: #4b5563; margin-top: 0.5rem;">
+      <h1 class="text-3xl font-bold">Gustavo Tello</h1>
+      <p style=" margin-top: 0.5rem;">
         <span id="title"></span>
       </p>
-      <div style="display: flex; justify-content: center; margin-top: 1.5rem; gap: 0.75rem;">
+      <div class="button-group">
         <a href="assets/CV_Gustavo_Tello.pdf" download class="btn btn-primary">
-          <img src="assets/download.png" alt="download" style="width: 20px; height: 20px; padding-right: 8px;" />
+          <img src="assets/download.png" alt="download" class="btn-icon" />
           <span id="downloadCV"></span>
         </a>
         
         <button onclick="toggleLanguage()" class="btn btn-primary">
-          <img src="assets/trad.png" alt="translate" style="width: 22px; height: 20px; padding-right: 8px;" />
+          <img src="assets/trad.png" alt="translate" class="btn-icon" />
           <span id="language_button"></span>
         </button>
       </div>
-      
-      
     </header>
     
     <div class="main-grid">
@@ -43,7 +41,7 @@
       <div>
         <!-- About -->
         <section class="card">
-          <h2 class="text-xl font-semibold" style="color: #075985; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <h2 class="text-xl font-semibold" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
             <img src="assets/info.png" alt="info" style="width: 20px; height: 20px;"/>
             <span id="aboutMe"></span>
           </h2>
@@ -55,17 +53,17 @@
         
         <!-- Experience -->
         <section class="card">
-          <h2 class="text-xl font-semibold" style="color: #075985; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <h2 class="text-xl font-semibold" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
             <img src="assets/experience.png" alt="info" style="width: 20px; height: 20px;"/>
             <span id="expProf"></span>
           </h2>
           <div style="margin-top: 1.5rem; text-align: justify;">
             <div class="timeline-item">
               <div class="timeline-dot"></div>
-              <h3 style="font-weight: 700; color: #111827;" id="vnvEngineer"></h3>
-              <p style="color: #4b5563;">ITJ · <span id="fullTime"></span></p>
-              <p style="font-size: 0.875rem; color: #6b7280;">2021 - <span id="present"></span></p>
-              <ul style="margin-top: 0.5rem; list-style-type: disc; padding-left: 1.25rem; color: #374151; font-size: 0.875rem;">
+              <h3 style="font-weight: 700;" id="vnvEngineer"></h3>
+              <p >ITJ · <span id="fullTime"></span></p>
+              <p style="font-size: 0.875rem;">2021 - <span id="present"></span></p>
+              <ul style="margin-top: 0.5rem; list-style-type: disc; padding-left: 1.25rem; font-size: 0.875rem;">
                 <li id="iTJbullet1"></li>
                 <li id="iTJbullet2"></li>
                 <li id="iTJbullet3"></li>
@@ -76,10 +74,10 @@
             
             <div class="timeline-item" style="margin-top: 1.5rem;">
               <div class="timeline-dot"></div>
-              <h3 style="font-weight: 700; color: #111827;" id="webDeveloper"></h3>
-              <p style="color: #4b5563;">Hospital Premier · <span id="residenceP"></span></p>
-              <p style="font-size: 0.875rem; color: #6b7280;">2023 - 2024</p>
-              <ul style="margin-top: 0.5rem; list-style-type: disc; padding-left: 1.25rem; color: #374151; font-size: 0.875rem;">
+              <h3 style="font-weight: 700;" id="webDeveloper"></h3>
+              <p >Hospital Premier · <span id="residenceP"></span></p>
+              <p style="font-size: 0.875rem;">2023 - 2024</p>
+              <ul style="margin-top: 0.5rem; list-style-type: disc; padding-left: 1.25rem; font-size: 0.875rem;">
                 <li id="webBullet1"></li>
                 <li id="webBullet2"></li>
                 <li id="webBullet3"></li>
@@ -91,17 +89,17 @@
         
         <!-- Projects -->
         <section class="card">
-          <h2 class="text-xl font-semibold" style="color: #075985; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <h2 class="text-xl font-semibold" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
             <img src="assets/proyects.png" alt="info" style="width: 20px; height: 18px;"/>
             <span id="featureProjects"></span>
           </h2>
           <div style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem;">
-            <div style="padding: 1rem; border: 1px solid #e5e7eb; border-radius: 0.5rem; transition: box-shadow 0.3s ease;">
-              <h3 style="font-weight: 700; color: #111827;">
+            <div style="padding: 1rem; border: 1px solid; border-radius: 0.5rem; transition: box-shadow 0.3s ease;">
+              <h3 style="font-weight: 700;">
                 <span id="featureProjectsSub1"></span>
               </h3>
-              <p style="font-size: 0.875rem; color: #6b7280;">2024</p>
-              <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #374151;" id="featureProjectsDescription1"></p>
+              <p style="font-size: 0.875rem;">2024</p>
+              <p style="margin-top: 0.5rem; font-size: 0.875rem;" id="featureProjectsDescription1"></p>
               <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
                 <span class="skill-tag">PHP</span>
                 <span class="skill-tag">MySQL</span>
@@ -109,12 +107,12 @@
               </div>
             </div>
             
-            <div style="padding: 1rem; border: 1px solid #e5e7eb; border-radius: 0.5rem; transition: box-shadow 0.3s ease;">
-              <h3 style="font-weight: 700; color: #111827;">
+            <div style="padding: 1rem; border: 1px solid; border-radius: 0.5rem; transition: box-shadow 0.3s ease;">
+              <h3 style="font-weight: 700;">
                 <span id="featureProjectsSub2"></span>
               </h3>
-              <p style="font-size: 0.875rem; color: #6b7280;">2023</p>
-              <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #374151;" id="featureProjectsDescription2"></p>
+              <p style="font-size: 0.875rem;">2023</p>
+              <p style="margin-top: 0.5rem; font-size: 0.875rem;" id="featureProjectsDescription2"></p>
               <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
                 <span class="skill-tag">Appium</span>
                 <span class="skill-tag">Python</span>
@@ -128,85 +126,88 @@
       <!-- Right Column -->
       <!-- Skills -->
       <div>
-        <section class="card" style="height: fit-content;">
-          <h2 class="text-xl font-semibold" style="color: #075985; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-            <img src="assets/skills.png" alt="info" style="width: 22px; height: 22px;"/>
-            <span id="skillstitle1"></span>
-          </h2>
-          
-          <div style="margin-top: 1rem;">
-            <div style="margin-bottom: 1rem;">
-              <p style="font-size: 0.875rem; font-weight: 600; color: #0369a1; margin-bottom: 0.25rem;" id="skillstag1"></p>
-              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                <span class="skill-tag">PHP</span>
-                <span class="skill-tag">MySQL</span>
-                <span class="skill-tag">HTML/CSS</span>
-                <span class="skill-tag">JavaScript</span>
-              </div>
-            </div>
+        <div class="skills-section">
+          <section class="card">
+            <h2 class="skills-heading">
+              <img src="assets/skills.png" alt="info" class="skills-icon"/>
+              <span id="skillstitle1"></span>
+            </h2>
             
-            <div style="margin-bottom: 1rem;">
-              <p style="font-size: 0.875rem; font-weight: 600; color: #0369a1; margin-bottom: 0.25rem;" id="skillstag2"></p>
-              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                <span class="skill-tag">Appium</span>
-                <span class="skill-tag">Selenium</span>
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">JIRA</span>
+            <div class="skills-container">
+              <div class="skill-category">
+                <p class="skill-category-title" id="skillstag1"></p>
+                <div class="skill-tags">
+                  <span class="skill-tag">PHP</span>
+                  <span class="skill-tag">MySQL</span>
+                  <span class="skill-tag">HTML/CSS</span>
+                  <span class="skill-tag">JavaScript</span>
+                </div>
+              </div>
+              
+              <div class="skill-category">
+                <p class="skill-category-title" id="skillstag2"></p>
+                <div class="skill-tags">
+                  <span class="skill-tag">Appium</span>
+                  <span class="skill-tag">Selenium</span>
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">JIRA</span>
+                </div>
+              </div>
+              
+              <div class="skill-category">
+                <p class="skill-category-title" id="skillstag3"></p>
+                <div class="skill-tags">
+                  <span class="skill-tag">Raspberry Pi</span>
+                  <span class="skill-tag">Arduino</span>
+                  <span class="skill-tag" id="skillstag3sub1"></span>
+                  <span class="skill-tag">IoT</span>
+                </div>
               </div>
             </div>
-            <div>
-              <p style="font-size: 0.875rem; font-weight: 600; color: #0369a1; margin-bottom: 0.25rem;" id="skillstag3"></p>
-              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                <span class="skill-tag">Raspberry Pi</span>
-                <span class="skill-tag">Arduino</span>
-                <span class="skill-tag" id="skillstag3sub1"></span>
-                <span class="skill-tag">IoT</span>
-              </div>
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
         
         <!-- Education -->
         <section class="card" style="height: fit-content;">
-          <h2 class="text-xl font-semibold" style="color: #075985; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <h2 class="text-xl font-semibold" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
             <img src="assets/education.png" alt="info" style="width: 22px; height: 22px;"/>
             <span id="education"></span>
           </h2>
           <div style="margin-top: 1rem;">
             <div style="margin-bottom: 1rem;">
-              <h3 style="font-weight: 700; color: #111827;" id="career"></h3>
-              <p style="color: #4b5563;" id="school1"></p>
-              <p style="font-size: 0.875rem; color: #6b7280;" id="period1"></p>
+              <h3 style="font-weight: 700;" id="career"></h3>
+              <p  id="school1"></p>
+              <p style="font-size: 0.875rem;" id="period1"></p>
             </div>
             <div>
-              <h3 style="font-weight: 700; color: #111827;" lang="es" id="career2"></h3>
-              <p style="color: #4b5563;" id="school2"></p>
-              <p style="font-size: 0.875rem; color: #6b7280;">2015 - 2018</p>
+              <h3 style="font-weight: 700;" lang="es" id="career2"></h3>
+              <p  id="school2"></p>
+              <p style="font-size: 0.875rem;">2015 - 2018</p>
             </div>
           </div>
         </section>
         
         <!-- Languages -->
         <section class="card">
-          <h2 class="text-xl font-semibold" style="color: #075985; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <h2 class="text-xl font-semibold" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
             <img src="assets/trad.png" alt="info" style="width: 22px; height: 22px;"/>
             <span id="languages"></span>
           </h2>
           <div style="margin-top: 0.75rem;">
             <div style="margin-bottom: 0.75rem;">
               <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                <span style="font-size: 0.875rem; font-weight: 500; color: #374151;" id="language_spanish"></span>
+                <span style="font-size: 0.875rem; font-weight: 500;" id="language_spanish"></span>
               </div>
-              <div style="width: 100%; background-color: #e5e7eb; border-radius: 9999px; height: 0.5rem;">
+              <div style="width: 100%; border-radius: 9999px; height: 0.5rem;">
                 <div style="background-color: #0284c7; height: 0.5rem; border-radius: 9999px; width: 100%"></div>
               </div>
             </div>
             <div>
               <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                <span style="font-size: 0.875rem; font-weight: 500; color: #374151;" id="language_english"></span>
-                <span style="font-size: 0.875rem; color: #6b7280;"  id="language_certificate"></span>
+                <span style="font-size: 0.875rem; font-weight: 500;" id="language_english"></span>
+                <span style="font-size: 0.875rem;"  id="language_certificate"></span>
               </div>
-              <div style="width: 100%; background-color: #e5e7eb; border-radius: 9999px; height: 0.5rem;">
+              <div style="width: 100%; border-radius: 9999px; height: 0.5rem;">
                 <div style="background-color: #0284c7; height: 0.5rem; border-radius: 9999px; width: 100%"></div>
               </div>
               <div style="margin-top: 0.5rem;">
