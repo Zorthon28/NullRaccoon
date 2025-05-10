@@ -8,28 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="styles.css" rel="stylesheet">
-  <style>
-    
-  </style>
-  <script>
-    function toggleLanguage() {
-      const es = document.querySelectorAll('[lang="es"]');
-      const en = document.querySelectorAll('[lang="en"]');
-      es.forEach(el => el.classList.toggle('hidden'));
-      en.forEach(el => el.classList.toggle('hidden'));
-    }
-    // Agrega este script
-    document.querySelectorAll('.timeline-item h3').forEach(header => {
-      header.style.cursor = 'pointer';
-      header.addEventListener('click', () => {
-        const content = header.nextElementSibling.nextElementSibling;
-        content.style.display = content.style.display === 'none' ? 'block' : 'none';
-      });
-    });
-  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="css/styles.css" rel="stylesheet">
+  <script type="module" src="js/main.js"></script>
 </head>
-<dy>
+<body>
   <div class="container">
     <!-- Header -->
     <header class="header card">
@@ -38,22 +21,21 @@
       </div>
       <h1 class="text-3xl font-bold" style="color: #111827;">Gustavo Tello</h1>
       <p style="color: #4b5563; margin-top: 0.5rem;">
-        <span lang="es">Ingeniero Biomédico | Especialista en Automatización | Desarrollador Web</span>
-        <span class="hidden" lang="en">Biomedical Engineer | Automation Specialist | Web Developer</span>
+        <span id="title"></span>
       </p>
       <div style="display: flex; justify-content: center; margin-top: 1.5rem; gap: 0.75rem;">
         <a href="assets/CV_Gustavo_Tello.pdf" download class="btn btn-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="margin-right: 0.5rem;">
-            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-          <span lang="es">Descargar CV</span>
-          <span class="hidden" lang="en">Download CV</span>
+          <img src="assets/download.png" alt="download" style="width: 20px; height: 20px; padding-right: 8px;" />
+          <span id="downloadCV"></span>
         </a>
-        <button onclick="toggleLanguage()" style="background-color: #e5e7eb; color: #374151; font-weight: 600; padding: 0.5rem 1rem; border-radius: 0.375rem; transition: all 0.3s ease;">
-          <span lang="es">English</span>
-          <span class="hidden" lang="en">Español</span>
+        
+        <button onclick="toggleLanguage()" class="btn btn-primary">
+          <img src="assets/trad.png" alt="translate" style="width: 22px; height: 20px; padding-right: 8px;" />
+          <span id="language_button"></span>
         </button>
       </div>
+      
+      
     </header>
     
     <div class="main-grid">
@@ -63,31 +45,11 @@
         <section class="card">
           <h2 class="text-xl font-semibold" style="color: #075985; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
             <img src="assets/info.png" alt="info" style="width: 20px; height: 20px;"/>
-            <span lang="es">Sobre mí</span>
-            <span class="hidden" lang="en">About Me</span>
+            <span id="aboutMe"></span>
           </h2>
           <div style="margin-top: 1rem; text-align: justify;">
-            <p lang="es">
-              Soy Ingeniero Biomédico con más de 3 años de experiencia en automatización de pruebas para aplicaciones móviles 
-              y desarrollo web. Me apasiona crear soluciones tecnológicas innovadoras para el sector salud, fusionando mi conocimiento 
-              en medicina con habilidades técnicas avanzadas en automatización y desarrollo de software.
-            </p>
-            <p lang="es" style="margin-top: 1rem;">
-              En mi puesto actual como VnV Engineer en ITJ, lidero proyectos de automatización de pruebas para plataformas iOS y 
-              Android. Mi trabajo se centra en implementar estrategias que optimizan la eficiencia y reducen los tiempos de entrega, 
-              mientras mantengo un enfoque detallado en la resolución de problemas y depuración de errores. Gracias a esto, he logrado 
-              hacer más ágiles los procesos, aportando mejoras significativas al equipo y los proyectos.
-            </p>
-            <p class="hidden" lang="en" style="margin-top: 1rem;">
-              Biomedical Engineer with over 3 years of experience in automated testing for mobile applications and web development. 
-              Specialized in creating technological solutions for the healthcare sector, combining medical knowledge with advanced 
-              technical skills in automation and software development.
-            </p>
-            <p class="hidden" lang="en" style="margin-top: 1rem;">
-              In my current role as VnV Engineer at ITJ, I lead test automation projects for iOS and Android platforms, implementing 
-              strategies that improve efficiency by 40%. My meticulous approach to problem-solving and debugging has significantly 
-              reduced delivery times.
-            </p>
+            <p id="bioFirst"></p>
+            <p id="bioSecond" style="margin-top: 1rem;"></p>
           </div>
         </section>
         
@@ -95,40 +57,33 @@
         <section class="card">
           <h2 class="text-xl font-semibold" style="color: #075985; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
             <img src="assets/experience.png" alt="info" style="width: 20px; height: 20px;"/>
-            <span lang="es">Experiencia Profesional</span>
-            <span class="hidden" lang="en">Professional Experience</span>
+            <span id="expProf"></span>
           </h2>
           <div style="margin-top: 1.5rem; text-align: justify;">
             <div class="timeline-item">
               <div class="timeline-dot"></div>
-              <h3 style="font-weight: 700; color: #111827;">VnV Engineer</h3>
-              <p style="color: #4b5563;">ITJ · <span lang="es">Tiempo completo</span><span class="hidden" lang="en">Full-time</span></p>
-              <p style="font-size: 0.875rem; color: #6b7280;">2021 - <span lang="es">Presente</span><span class="hidden" lang="en">Present</span></p>
+              <h3 style="font-weight: 700; color: #111827;" id="vnvEngineer"></h3>
+              <p style="color: #4b5563;">ITJ · <span id="fullTime"></span></p>
+              <p style="font-size: 0.875rem; color: #6b7280;">2021 - <span id="present"></span></p>
               <ul style="margin-top: 0.5rem; list-style-type: disc; padding-left: 1.25rem; color: #374151; font-size: 0.875rem;">
-                <li lang="es">Desarrollo e implementación de pruebas automatizadas para aplicaciones móviles en iOS y Android</li>
-                <li class="hidden" lang="en">Development and implementation of automated tests for mobile applications on iOS and Android</li>
-                <li lang="es">Liderazgo del proceso de triage en esfuerzos de automatización, priorizando bugs y coordinando la ejecución de pruebas en colaboración con equipos de desarrollo.</li>
-                <li class="hidden" lang="en">Leading QA teams to ensure software quality</li>
-                <li lang="es">Optimización de procesos de testing, reduciendo tiempos de ejecución en 30%</li>
-                <li class="hidden" lang="en">Optimized testing processes, reducing execution time by 30%</li>
-                <li lang="es">Documentación de procesos de validación y generación de reportes técnicos para auditorías internas y revisiones de cumplimiento.</li>
-                <li lang="es">Mentoría a nuevos integrantes del equipo de QA, impulsando la mejora continua del área.</li>
+                <li id="iTJbullet1"></li>
+                <li id="iTJbullet2"></li>
+                <li id="iTJbullet3"></li>
+                <li id="iTJbullet4"></li>
+                <li id="iTJbullet5"></li>
               </ul>
             </div>
             
             <div class="timeline-item" style="margin-top: 1.5rem;">
               <div class="timeline-dot"></div>
-              <h3 style="font-weight: 700; color: #111827;">Desarrollador Web</h3>
-              <p style="color: #4b5563;">Hospital Premier · <span lang="es">Residencia Profesional</span><span class="hidden" lang="en">Contract</span></p>
+              <h3 style="font-weight: 700; color: #111827;" id="webDeveloper"></h3>
+              <p style="color: #4b5563;">Hospital Premier · <span id="residenceP"></span></p>
               <p style="font-size: 0.875rem; color: #6b7280;">2023 - 2024</p>
               <ul style="margin-top: 0.5rem; list-style-type: disc; padding-left: 1.25rem; color: #374151; font-size: 0.875rem;">
-                <li lang="es">Diseño e implementación de una plataforma web para la gestión y mantenimiento de equipos médicos.</li>
-                <li class="hidden" lang="en">Design and implementation of hospital management platform with PHP and MySQL</li>
-                <li lang="es">Desarrollo de módulos para el registro, búsqueda y actualización de información técnica y de mantenimiento.</li>
-                <li class="hidden" lang="en">Integration of medical equipment control system with QR tagging</li>
-                <li lang="es">Integración de códigos QR para facilitar el acceso a los datos de los equipos desde dispositivos móviles.</li>
-                <li lang="es">Generación automática de etiquetas y fichas técnicas con datos relevantes del inventario.</li>
-                
+                <li id="webBullet1"></li>
+                <li id="webBullet2"></li>
+                <li id="webBullet3"></li>
+                <li id="webBullet4"></li>
               </ul>
             </div>
           </div>
@@ -138,22 +93,15 @@
         <section class="card">
           <h2 class="text-xl font-semibold" style="color: #075985; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
             <img src="assets/proyects.png" alt="info" style="width: 20px; height: 18px;"/>
-            <span lang="es">Proyectos Destacados</span>
-            <span class="hidden" lang="en">Featured Projects</span>
+            <span id="featureProjects"></span>
           </h2>
           <div style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem;">
             <div style="padding: 1rem; border: 1px solid #e5e7eb; border-radius: 0.5rem; transition: box-shadow 0.3s ease;">
               <h3 style="font-weight: 700; color: #111827;">
-                <span lang="es">Sistema de Gestión Hospitalaria</span>
-                <span class="hidden" lang="en">Hospital Management System</span>
+                <span id="featureProjectsSub1"></span>
               </h3>
               <p style="font-size: 0.875rem; color: #6b7280;">2024</p>
-              <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #374151;" lang="es">
-                Plataforma web integral para control de equipos médicos, programación de mantenimientos preventivos y generación de reportes.
-              </p>
-              <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #374151;" class="hidden" lang="en">
-                Comprehensive web platform for medical equipment control, preventive maintenance scheduling, and report generation.
-              </p>
+              <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #374151;" id="featureProjectsDescription1"></p>
               <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
                 <span class="skill-tag">PHP</span>
                 <span class="skill-tag">MySQL</span>
@@ -163,16 +111,10 @@
             
             <div style="padding: 1rem; border: 1px solid #e5e7eb; border-radius: 0.5rem; transition: box-shadow 0.3s ease;">
               <h3 style="font-weight: 700; color: #111827;">
-                <span lang="es">Framework de Pruebas Automatizadas</span>
-                <span class="hidden" lang="en">Automated Testing Framework</span>
+                <span id="featureProjectsSub2"></span>
               </h3>
               <p style="font-size: 0.875rem; color: #6b7280;">2023</p>
-              <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #374151;" lang="es">
-                Framework personalizado para pruebas automatizadas en aplicaciones móviles, reduciendo tiempos de testing en 40%.
-              </p>
-              <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #374151;" class="hidden" lang="en">
-                Custom framework for automated mobile app testing, reducing testing time by 40%.
-              </p>
+              <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #374151;" id="featureProjectsDescription2"></p>
               <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
                 <span class="skill-tag">Appium</span>
                 <span class="skill-tag">Python</span>
@@ -189,14 +131,12 @@
         <section class="card" style="height: fit-content;">
           <h2 class="text-xl font-semibold" style="color: #075985; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
             <img src="assets/skills.png" alt="info" style="width: 22px; height: 22px;"/>
-            <span lang="es">Habilidades</span>
-            <span class="hidden" lang="en">Skills</span>
+            <span id="skillstitle1"></span>
           </h2>
           
           <div style="margin-top: 1rem;">
             <div style="margin-bottom: 1rem;">
-              <p style="font-size: 0.875rem; font-weight: 600; color: #0369a1; margin-bottom: 0.25rem;" lang="es">Desarrollo Web</p>
-              <p style="font-size: 0.875rem; font-weight: 600; color: #0369a1; margin-bottom: 0.25rem;" class="hidden" lang="en">Web Development</p>
+              <p style="font-size: 0.875rem; font-weight: 600; color: #0369a1; margin-bottom: 0.25rem;" id="skillstag1"></p>
               <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                 <span class="skill-tag">PHP</span>
                 <span class="skill-tag">MySQL</span>
@@ -206,8 +146,7 @@
             </div>
             
             <div style="margin-bottom: 1rem;">
-              <p style="font-size: 0.875rem; font-weight: 600; color: #0369a1; margin-bottom: 0.25rem;" lang="es">Pruebas Automatizadas</p>
-              <p style="font-size: 0.875rem; font-weight: 600; color: #0369a1; margin-bottom: 0.25rem;" class="hidden" lang="en">Automated Testing</p>
+              <p style="font-size: 0.875rem; font-weight: 600; color: #0369a1; margin-bottom: 0.25rem;" id="skillstag2"></p>
               <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                 <span class="skill-tag">Appium</span>
                 <span class="skill-tag">Selenium</span>
@@ -215,14 +154,12 @@
                 <span class="skill-tag">JIRA</span>
               </div>
             </div>
-            
             <div>
-              <p style="font-size: 0.875rem; font-weight: 600; color: #0369a1; margin-bottom: 0.25rem;" lang="es">Dispositivos Médicos</p>
-              <p style="font-size: 0.875rem; font-weight: 600; color: #0369a1; margin-bottom: 0.25rem;" class="hidden" lang="en">Medical Devices</p>
+              <p style="font-size: 0.875rem; font-weight: 600; color: #0369a1; margin-bottom: 0.25rem;" id="skillstag3"></p>
               <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                 <span class="skill-tag">Raspberry Pi</span>
                 <span class="skill-tag">Arduino</span>
-                <span class="skill-tag">Sensores</span>
+                <span class="skill-tag" id="skillstag3sub1"></span>
                 <span class="skill-tag">IoT</span>
               </div>
             </div>
@@ -233,18 +170,17 @@
         <section class="card" style="height: fit-content;">
           <h2 class="text-xl font-semibold" style="color: #075985; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
             <img src="assets/education.png" alt="info" style="width: 22px; height: 22px;"/>
-            <span lang="es">Educación</span>
-            <span class="hidden" lang="en">Education</span>
+            <span id="education"></span>
           </h2>
           <div style="margin-top: 1rem;">
             <div style="margin-bottom: 1rem;">
-              <h3 style="font-weight: 700; color: #111827;">Ingeniería Biomédica</h3>
-              <p style="color: #4b5563;">Instituto Tecnológico de Tijuana</p>
-              <p style="font-size: 0.875rem; color: #6b7280;">2018 - Graduado: 2025</p>
+              <h3 style="font-weight: 700; color: #111827;" id="career"></h3>
+              <p style="color: #4b5563;" id="school1"></p>
+              <p style="font-size: 0.875rem; color: #6b7280;" id="period1"></p>
             </div>
             <div>
-              <h3 style="font-weight: 700; color: #111827;" lang="es">Tecnico en programación</h3>
-              <p style="color: #4b5563;">CETis #58</p>
+              <h3 style="font-weight: 700; color: #111827;" lang="es" id="career2"></h3>
+              <p style="color: #4b5563;" id="school2"></p>
               <p style="font-size: 0.875rem; color: #6b7280;">2015 - 2018</p>
             </div>
           </div>
@@ -254,32 +190,28 @@
         <section class="card">
           <h2 class="text-xl font-semibold" style="color: #075985; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
             <img src="assets/trad.png" alt="info" style="width: 22px; height: 22px;"/>
-            <span lang="es">Idiomas</span>
-            <span class="hidden" lang="en">Languages</span>
+            <span id="languages"></span>
           </h2>
           <div style="margin-top: 0.75rem;">
             <div style="margin-bottom: 0.75rem;">
               <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                <span style="font-size: 0.875rem; font-weight: 500; color: #374151;">Español</span>
-                <span style="font-size: 0.875rem; color: #6b7280;">Nativo</span>
+                <span style="font-size: 0.875rem; font-weight: 500; color: #374151;" id="language_spanish"></span>
               </div>
               <div style="width: 100%; background-color: #e5e7eb; border-radius: 9999px; height: 0.5rem;">
                 <div style="background-color: #0284c7; height: 0.5rem; border-radius: 9999px; width: 100%"></div>
               </div>
             </div>
-            <!-- In your Languages section, modify the English proficiency part like this: -->
             <div>
               <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                <span style="font-size: 0.875rem; font-weight: 500; color: #374151;">English</span>
-                <span style="font-size: 0.875rem; color: #6b7280;">C2 (EF SET Certificate)</span>
+                <span style="font-size: 0.875rem; font-weight: 500; color: #374151;" id="language_english"></span>
+                <span style="font-size: 0.875rem; color: #6b7280;"  id="language_certificate"></span>
               </div>
               <div style="width: 100%; background-color: #e5e7eb; border-radius: 9999px; height: 0.5rem;">
                 <div style="background-color: #0284c7; height: 0.5rem; border-radius: 9999px; width: 100%"></div>
               </div>
               <div style="margin-top: 0.5rem;">
                 <a href="https://cert.efset.org/en/d81VH6" target="_blank" style="font-size: 0.875rem; color: #0284c7; text-decoration: underline;">
-                  <span lang="en">View EF SET Certificate</span>
-                  <span lang="es" class="hidden">Ver Certificado EF SET</span>
+                  <span id="language_certificate2"></span>
                 </a>
               </div>
             </div>
@@ -288,4 +220,127 @@
       </div>
     </div>
   </div>
+  <section id="contact">
+    <h2>Contacto</h2>
+    <form onsubmit="sendMessage(event)">
+      <input type="text" placeholder="Tu nombre" required><br><br>
+      <input type="email" placeholder="Correo electrónico" required><br><br>
+      <textarea placeholder="Mensaje..." required></textarea><br><br>
+      <button type="submit" class="btn">Enviar</button>
+    </form>
+  </section>
+  
+  <button id="scrollToTopBtn" title="Volver arriba">
+    ↑
+  </button>
+  
+  
+  <script>
+    function toggleLanguage() {
+      currentLang = currentLang === 'es' ? 'en' : 'es';
+      loadTranslations(currentLang);
+      document.getElementById('langBtn').textContent = currentLang === 'es' ? 'English' : 'Español';
+    }
+    
+    window.toggleLanguage = function () {
+      currentLang = currentLang === 'es' ? 'en' : 'es';
+      applyTranslations(currentLang);
+    };
+    
+    
+    
+    document.querySelectorAll('.timeline-item h3').forEach(header => {
+      header.style.cursor = 'pointer';
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling.nextElementSibling;
+        content.style.display = content.style.display === 'none' ? 'block' : 'none';
+      });
+    });
+    
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      document.documentElement.setAttribute("data-theme", currentTheme === "dark" ? "light" : "dark");
+    }
+    
+    const scrollBtn = document.getElementById("scrollToTopBtn");
+    
+    window.onscroll = function () {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        scrollBtn.style.display = "flex";
+      } else {
+        scrollBtn.style.display = "none";
+      }
+    };
+    
+    scrollBtn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    
+    
+    function sendMessage(event) {
+      event.preventDefault();
+      alert("Mensaje enviado correctamente ✉️ (simulado)");
+    }
+    
+    const storageKey = 'theme-preference'
+    
+    const onClick = () => {
+      theme.value = theme.value === 'light' ? 'dark' : 'light'
+      setPreference()
+    }
+    
+    const getColorPreference = () => {
+      if (localStorage.getItem(storageKey)) {
+        return localStorage.getItem(storageKey)
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    }
+    
+    const setPreference = () => {
+      localStorage.setItem(storageKey, theme.value)
+      reflectPreference()
+    }
+    
+    const reflectPreference = () => {
+      document.firstElementChild.setAttribute('data-theme', theme.value)
+      document.querySelector('#theme-toggle')?.setAttribute('aria-label', theme.value)
+    }
+    
+    const theme = {
+      value: getColorPreference(),
+    }
+    
+    reflectPreference()
+    
+    window.onload = () => {
+      reflectPreference()
+      document.querySelector('#theme-toggle')?.addEventListener('click', onClick)
+    }
+    
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({matches: isDark}) => {
+      theme.value = isDark ? 'dark' : 'light'
+      setPreference()
+    })
+    
+  </script>
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="theme-toggle" title="Toggle light & dark mode" aria-label="auto" aria-live="polite">
+    <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+      <mask class="moon" id="moon-mask">
+        <rect x="0" y="0" width="100%" height="100%" fill="white" />
+        <circle cx="24" cy="10" r="6" fill="black" />
+      </mask>
+      <circle class="sun" cx="12" cy="12" r="6" mask="url(#moon-mask)" fill="currentColor" />
+      <g class="sun-beams" stroke="currentColor">
+        <line x1="12" y1="1" x2="12" y2="3" />
+        <line x1="12" y1="21" x2="12" y2="23" />
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+        <line x1="1" y1="12" x2="3" y2="12" />
+        <line x1="21" y1="12" x2="23" y2="12" />
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+      </g>
+    </svg>
+  </button>
 </body>
