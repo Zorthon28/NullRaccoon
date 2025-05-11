@@ -2,6 +2,7 @@ export const es = {
     "title": "Ingeniero Biomédico | Especialista en Automatización | Desarrollador Web",
     "downloadCV": "Descargar CV",
     "language_button" : "Inglés",
+    "education" : "Educación",
     "language_spanish" : "Español",
     "language_english" : "Inglés",
     "aboutMe": "Sobre mí",

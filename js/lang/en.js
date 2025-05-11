@@ -2,6 +2,7 @@ export const en = {
     "title": "Biomedical Engineer | Automation Specialist | Web Developer",
     "downloadCV": "Download CV",
     "language_button": "Spanish",
+    "education" : "Education",
     "language_spanish": "Spanish",
     "language_english": "English",
     "aboutMe": "About Me",

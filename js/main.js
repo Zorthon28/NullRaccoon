@@ -8,6 +8,7 @@ function applyTranslations(lang) {
     const t = translations[lang];
     document.getElementById('title').textContent = t.title;
     document.getElementById('downloadCV').textContent = t.downloadCV;
+    document.getElementById('education').textContent = t.education;
     document.getElementById('language_button').textContent = t.language_button;
     document.getElementById('language_spanish').textContent = t.language_spanish;
     document.getElementById('language_english').textContent = t.language_english;
