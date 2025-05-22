@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/web-sales-site/static/css/main.e0405f2e.css",
+    "main.js": "/web-sales-site/static/js/main.757e8ada.js",
+    "index.html": "/web-sales-site/index.html",
+    "main.e0405f2e.css.map": "/web-sales-site/static/css/main.e0405f2e.css.map",
+    "main.757e8ada.js.map": "/web-sales-site/static/js/main.757e8ada.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e0405f2e.css",
+    "static/js/main.757e8ada.js"
+  ]
+}
