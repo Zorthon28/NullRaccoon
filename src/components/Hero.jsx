@@ -79,13 +79,6 @@ const translations = {
       "Mobile First",
       "Carga rápida",
     ],
-    certificationsTitle: "Certificaciones",
-    certifications: [
-      "ISO 9001",
-      "Socio Google",
-      "Certificación AWS",
-      "Scrum Master Certificado",
-    ],
     portfolioTitle: "Portafolio",
     portfolioSubtitle: "Algunos de nuestros trabajos recientes",
     portfolioProjects: [
