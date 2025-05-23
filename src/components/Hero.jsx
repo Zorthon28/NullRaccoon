@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Certifications from "../pages/Certifications";
 import Portfolio from "../pages/Portfolio";
-import QuoteModal from "./QuoteModal";
+import QuoteModal from "../pages/QuoteModal";
 
 const translations = {
   en: {
