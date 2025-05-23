@@ -1,4 +1,3 @@
-// tailwind.config.js
 /** @type {import('tailwindcss').Config} */ // <--- This is the correct way
 module.exports = {
   content: [
@@ -6,7 +5,16 @@ module.exports = {
     "./public/index.html",
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        float: 'float 6s ease-in-out infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)', opacity: '0.2' },
+          '50%': { transform: 'translateY(-20px)', opacity: '0.4' },
+        },
+      },
+    },
   },
-  plugins: [],
 }
