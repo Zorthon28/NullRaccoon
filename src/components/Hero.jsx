@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Certifications from "../pages/Certifications";
 import Portfolio from "../pages/Portfolio";
+import QuoteModal from "./QuoteModal";
 
 const translations = {
   en: {
@@ -281,6 +282,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
+      {showQuoteModal && <QuoteModal onClose={() => setShowQuoteModal(false)} />}
     </section>
   );
 }
