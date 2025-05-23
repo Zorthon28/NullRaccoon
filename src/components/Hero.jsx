@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import QuoteModal from "../pages/QuoteModal";
 import Certifications from "../pages/Certifications";
 import Portfolio from "../pages/Portfolio";
 
@@ -16,13 +15,6 @@ const translations = {
       "Bilingual Support",
       "Mobile First",
       "Fast Loading",
-    ],
-    certificationsTitle: "Certifications",
-    certifications: [
-      "ISO 9001",
-      "Google Partner",
-      "AWS Certified",
-      "Certified Scrum Master",
     ],
     portfolioTitle: "Portfolio",
     portfolioSubtitle: "Some of our recent work",
@@ -125,7 +117,6 @@ const translations = {
 
 export default function Hero() {
   const [lang, setLang] = useState("en");
-  const [showOptions, setShowOptions] = useState(false);
   const [showQuoteModal, setShowQuoteModal] = useState(false);
 
   useEffect(() => {
