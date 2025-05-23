@@ -100,17 +100,17 @@ const translations = {
       {
         name: "Certificado de CSS",
         imgSrc: "/images/CSS-Cert.png",
-        url: "https://example.com/css-cert",
+        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/3a62023b0054dc793edc0adecd715fd7",
       },
       {
         name: "Certificado de Junit",
         imgSrc: "/images/Junit-Cert.png",
-        url: "https://example.com/junit-cert",
+        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/e95ecc4c837848d4a6548967fb8fe349",
       },
       {
         name: "Certificado de React",
         imgSrc: "/images/React-Cert.png",
-        url: "https://example.com/junit-cert",
+        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/af00e5032d0a68cc84879983f5d8333b",
       },
     ],
   },
@@ -227,7 +227,7 @@ export default function Hero() {
         >
           {/* Botón de WhatsApp */}
           <a
-            href="https://wa.me/5211234567890?text=Hola,%20quiero%20informes%20sobre%20su%20servicio"
+            href="https://wa.me/5211234567890?text=Hola,%20estoy%20interesado/a%20en%20sus%20servicios.%20%C2%BFPodrían%20darme%20más%20detalles%3F"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium px-5 py-3 rounded-full shadow-md transition duration-300 text-sm"
@@ -282,7 +282,12 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      {showQuoteModal && <QuoteModal onClose={() => setShowQuoteModal(false)} />}
+      {showQuoteModal && (
+        <QuoteModal
+          isOpen={showQuoteModal}
+          onClose={() => setShowQuoteModal(false)}
+        />
+      )}
     </section>
   );
 }
