@@ -22,3 +22,22 @@
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
+
+/* Ensure nothing is covering the buttons */
+.floating-buttons {
+  z-index: 9999;
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+}
+
+/* Ensure particles don't interfere with buttons */
+.animate-float {
+  z-index: 1 !important;
+}
+
+/* Fix for floating buttons */
+.fixed {
+  position: fixed;
+  z-index: 9999;
+}
