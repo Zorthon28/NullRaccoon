@@ -7,7 +7,7 @@ export default function FloatingButtons({ lang, setLang, showQuoteModal, setShow
     <div className="fixed right-4 bottom-4 z-50 flex flex-col items-end gap-3 pointer-events-auto" style={{ position: "fixed", bottom: "1.5rem", right: "1.5rem", zIndex: 9999, }} >
       {/* WhatsApp Button */}
       <a
-        href="https://wa.me/5211234567890?text=Hola,%20estoy%20interesado/a%20en%20sus%20servicios.%20%C2%BFPodr%C3%ADan%20darme%20m%C3%A1s%20detalles%3F"
+        href="https://wa.me/526645789729?text=Hola,%20estoy%20interesado/a%20en%20sus%20servicios.%20%C2%BFPodr%C3%ADan%20darme%20m%C3%A1s%20detalles%3F"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium px-5 py-3 rounded-full shadow-md transition duration-300 text-sm"
