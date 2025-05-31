@@ -1,133 +1,7 @@
-import React, { useState, useEffect } from "react";
 import Certifications from "../pages/Certifications";
 import Portfolio from "../pages/Portfolio";
-import FloatingButtons from "./FloatingButtons";
 
-const translations = {
-  en: {
-    bilingualBadge: "Bilingual Support",
-    availability: "Accepting new clients",
-    headline: "Professional Websites",
-    subheadline: "We build websites that convert visitors into customers",
-    ctaStart: "Get Started",
-    ctaPortfolio: "Portfolio",
-    indicators: [
-      "2+ Years Experience",
-      "Bilingual Support",
-      "Mobile First",
-      "Fast Loading",
-    ],
-    portfolioTitle: "Portfolio",
-    portfolioSubtitle: "Some of our recent work",
-    portfolioProjects: [
-      {
-        title: "E-commerce Platform",
-        description:
-          "A modern online store with cart, checkout, and admin panel.",
-      },
-      {
-        title: "Medical Web App",
-        description: "A health tech app for managing patient records securely.",
-      },
-      {
-        title: "Personal Portfolio",
-        description: "A responsive portfolio site for a creative freelancer.",
-      },
-    ],
-
-    certificationsTitle: "My Certifications",
-    certificationsList: [
-      {
-        name: "Codecademy User",
-        imgSrc: "/images/codecademy-logo.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28",
-      },
-      {
-        name: "CSS Certificate",
-        imgSrc: "/images/CSS-Cert.png",
-        url: "https://example.com/css-cert",
-      },
-      {
-        name: "Junit Certificate",
-        imgSrc: "/images/Junit-Cert.png",
-        url: "https://example.com/junit-cert",
-      },
-      {
-        name: "React Certificate",
-        imgSrc: "/images/React-Cert.png",
-        url: "https://example.com/junit-cert",
-      },
-    ],
-  },
-  es: {
-    bilingualBadge: "Soporte Bilingüe",
-    availability: "Aceptando nuevos clientes",
-    headline: "Sitios web profesionales",
-    subheadline: "Creamos sitios web que convierten visitantes en clientes",
-    ctaStart: "Comenzar",
-    ctaPortfolio: "Portafolio",
-    indicators: [
-      "2+ Años de experiencia",
-      "Soporte bilingüe",
-      "Mobile First",
-      "Carga rápida",
-    ],
-    portfolioTitle: "Portafolio",
-    portfolioSubtitle: "Algunos de nuestros trabajos recientes",
-    portfolioProjects: [
-      {
-        title: "Plataforma de Comercio",
-        description:
-          "Tienda en línea moderna con carrito, pagos y panel de administración.",
-      },
-      {
-        title: "Premier Centro Médico",
-        description:
-          "Equipment and maintenance management system for a private medical center.",
-        image: "/images/premier-project.png",
-        link: "/medtechpremier",
-      },
-      {
-        title: "Portafolio Personal",
-        description: "Sitio web responsivo para un freelancer creativo.",
-      },
-    ],
-    certificationsTitle: "Mis Certificaciones",
-    certificationsList: [
-      {
-        name: "Usuario de Codecademy",
-        imgSrc: "/images/codecademy-logo.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28",
-      },
-      {
-        name: "Certificado de CSS",
-        imgSrc: "/images/CSS-Cert.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/3a62023b0054dc793edc0adecd715fd7",
-      },
-      {
-        name: "Certificado de Junit",
-        imgSrc: "/images/Junit-Cert.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/e95ecc4c837848d4a6548967fb8fe349",
-      },
-      {
-        name: "Certificado de React",
-        imgSrc: "/images/React-Cert.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/af00e5032d0a68cc84879983f5d8333b",
-      },
-    ],
-  },
-};
-
-export default function Hero() {
-  const [lang, setLang] = useState("en");
-  const [showQuoteModal, setShowQuoteModal] = useState(false);
-
-  useEffect(() => {
-    const userLang = navigator.language || navigator.userLanguage;
-    setLang(userLang.startsWith("es") ? "es" : "en");
-  }, []);
-
-  const t = translations[lang];
+export default function Hero({ lang, t, showQuoteModal, setShowQuoteModal }) {
 
   return (
     <section className="relative overflow-hidden min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900">
@@ -216,14 +90,6 @@ export default function Hero() {
 
         {/* Certificaciones */}
         <Certifications t={t} />
-      </div>
-      <div className="fixed right-4 bottom-4 z-50 flex flex-col items-end gap-3">
-        <FloatingButtons
-          lang={lang}
-          setLang={setLang}
-          showQuoteModal={showQuoteModal}
-          setShowQuoteModal={setShowQuoteModal}
-        />
       </div>
     </section>
   );

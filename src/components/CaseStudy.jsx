@@ -1,41 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import FloatingButtons from "./FloatingButtons";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
-const translations = {
-  en: {
-    backToCases: "Back to Case Studies",
-    viewScreenshots: "View Screenshots",
-    overview: "Project Overview",
-    challenge: "The Challenge",
-    solution: "Our Solution",
-    technologies: "Technologies Used",
-    results: "Key Results",
-    testimonial: "Client Testimonial",
-    nextCase: "Next Case Study",
-    features: "Key Features",
-    screenshot: "Screenshot",
-    previous: "Previous",
-    next: "Next",
-  },
-  es: {
-    backToCases: "Volver a Casos de Estudio",
-    viewScreenshots: "Ver Capturas de Pantalla",
-    overview: "Resumen del Proyecto",
-    challenge: "El Desafío",
-    solution: "Nuestra Solución",
-    technologies: "Tecnologías Utilizadas",
-    results: "Resultados Clave",
-    testimonial: "Testimonio del Cliente",
-    nextCase: "Siguiente Caso de Estudio",
-    features: "Características Clave",
-    screenshot: "Captura de Pantalla",
-    previous: "Anterior",
-    next: "Siguiente",
-  },
-};
 
 const caseStudies = [
   {
@@ -284,12 +251,12 @@ const caseStudies = [
   // Add more case studies as needed
 ];
 
-export default function CaseStudy() {
+
+
+export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }) {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [modalImageSrc, setModalImageSrc] = useState("");
-  const [lang, setLang] = useState("en");
-  const [showQuoteModal, setShowQuoteModal] = useState(false);
   const { caseId } = useParams();
   const caseStudy = caseStudies.find((caseStudy) => caseStudy.id === caseId);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
@@ -301,17 +268,6 @@ export default function CaseStudy() {
     // Alternatively, to go to a specific portfolio page:
     // navigate('/portfolio'); // Replace '/portfolio' with your actual portfolio route
   };
-
-  useEffect(() => {
-    const userLang = navigator.language || navigator.userLanguage;
-    setLang(userLang.startsWith("es") ? "es" : "en");
-    setCurrentScreenshotIndex(0); // Reset index when case study changes
-    console.log(
-      `useEffect: Initializing for caseId: ${caseId}, Language set to: ${
-        userLang.startsWith("es") ? "es" : "en"
-      }`
-    );
-  }, [caseId]);
 
   useEffect(() => {
     const handleEscape = (event) => {
@@ -362,7 +318,6 @@ export default function CaseStudy() {
   console.log(`CaseStudy loaded: ${caseStudy?.title?.[lang]}`); // ADD THIS
   console.log("CaseStudy details:", caseStudy); // ADD THIS (careful with sensitive data)
 
-  const t = translations?.[lang];
   const hasScreenshots = caseStudy?.screenshots?.length > 0;
   const currentScreenshot = hasScreenshots
     ? caseStudy.screenshots?.[currentScreenshotIndex]
@@ -731,12 +686,6 @@ export default function CaseStudy() {
           </div>
         </div>
       )}
-      <FloatingButtons
-        lang={lang}
-        setLang={setLang}
-        showQuoteModal={showQuoteModal}
-        setShowQuoteModal={setShowQuoteModal}
-      />
     </section>
   );
 }
