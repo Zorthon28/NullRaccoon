@@ -22,8 +22,8 @@ export default function Portfolio({ t }) {
     {
       title: "Personal Portfolio",
       description: "A responsive portfolio site for a creative freelancer.",
-      image: "/images/portfolio-project.jpg",
-      link: "#", // Regular project link
+      image: "/images/portfolio-project-thumbnail.png",
+      link: "/Portfolio/", // Regular project link
     },
   ];
 
