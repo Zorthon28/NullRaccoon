@@ -415,38 +415,34 @@ export default function CaseStudy() {
           ></span>
         ))}
       </div>
-      
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
-
         {/* Back Button */}
-            <div className="absolute top-4 left-4 z-40 md:top-8 md:left-8">
-              {" "}
-              {/* Adjust positioning as needed */}
-              <button
-                onClick={handleGoBack}
-                className="flex items-center space-x-2 p-3 bg-blue-700/70 hover:bg-blue-600 text-white rounded-full shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
-                aria-label="Go back to portfolio"
-              >
-                {/* Example: A simple left arrow icon (you might need to import one like from Heroicons) */}
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                  ></path>
-                </svg>
-                <span className="hidden sm:inline">Back to Portfolio</span>{" "}
-                {/* Show text on larger screens */}
-              </button>
-            </div>
+        <div className="absolute top-8 left-8 z-50 sm:top-10 sm:left-10 md:top-12 md:left-12">
+          {" "}
+          {/* Increased top/left for mobile and higher z-index */}
+          <button
+            onClick={handleGoBack}
+            className="flex items-center space-x-2 p-3 bg-blue-700/70 hover:bg-blue-600 text-white rounded-full shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+            aria-label="Go back to portfolio"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              ></path>
+            </svg>
+            <span className="hidden sm:inline">Back to Portfolio</span>
+          </button>
+        </div>
         {/* Case Study Header */}
         <div className="mb-10 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
