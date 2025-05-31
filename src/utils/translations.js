@@ -102,7 +102,7 @@ const translations = {
         description: "Sitio web responsivo para un freelancer creativo.",
       },
     ],
-    certificationsTitle: "Mis Certificaciones",
+    certificationsTitle: "Nuestras Certificaciones",
     certificationsList: [
       {
         name: "Usuario de Codecademy",
