@@ -15,7 +15,7 @@ export default function Portfolio({ t }) {
       title: "Medical Equipment Management",
       description:
         "Inventory and maintenance system for medical center with QR tracking",
-      image: "/images/medtech-premier-thumbnail.jpg",
+      image: "/images/medtech-premier-thumbnail.png",
       type: "CaseStudy",
       link: "/case-study/medtech-premier",
     },
