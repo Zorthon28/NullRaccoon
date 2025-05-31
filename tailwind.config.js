@@ -1,8 +1,11 @@
 /** @type {import('tailwindcss').Config} */ // <--- This is the correct way
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./public/index.html",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}", // For Next.js App Router
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}", // For Next.js Pages Router
+    "./components/**/*.{js,ts,jsx,tsx,mdx}", // If you have a components folder
+    "./src/**/*.{js,ts,jsx,tsx,mdx}", // Or if your main source is in 'src'
+    // Ensure your CaseStudy.jsx file's path is included here
   ],
   theme: {
     extend: {

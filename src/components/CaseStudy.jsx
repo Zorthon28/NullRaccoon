@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import FloatingButtons from "./FloatingButtons";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 const translations = {
   en: {
@@ -284,6 +285,7 @@ const caseStudies = [
 ];
 
 export default function CaseStudy() {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [modalImageSrc, setModalImageSrc] = useState("");
   const [lang, setLang] = useState("en");
@@ -292,10 +294,23 @@ export default function CaseStudy() {
   const caseStudy = caseStudies.find((caseStudy) => caseStudy.id === caseId);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
 
+  console.log("CaseStudy component rendered/re-rendered.");
+
+  const handleGoBack = () => {
+    navigate(-1); // This tells React Router to go back one step in history
+    // Alternatively, to go to a specific portfolio page:
+    // navigate('/portfolio'); // Replace '/portfolio' with your actual portfolio route
+  };
+
   useEffect(() => {
     const userLang = navigator.language || navigator.userLanguage;
     setLang(userLang.startsWith("es") ? "es" : "en");
     setCurrentScreenshotIndex(0); // Reset index when case study changes
+    console.log(
+      `useEffect: Initializing for caseId: ${caseId}, Language set to: ${
+        userLang.startsWith("es") ? "es" : "en"
+      }`
+    );
   }, [caseId]);
 
   useEffect(() => {
@@ -344,6 +359,9 @@ export default function CaseStudy() {
     );
   }
 
+  console.log(`CaseStudy loaded: ${caseStudy?.title?.[lang]}`); // ADD THIS
+  console.log("CaseStudy details:", caseStudy); // ADD THIS (careful with sensitive data)
+
   const t = translations?.[lang];
   const hasScreenshots = caseStudy?.screenshots?.length > 0;
   const currentScreenshot = hasScreenshots
@@ -351,25 +369,33 @@ export default function CaseStudy() {
     : null;
 
   const goToPreviousSlide = () => {
-    setCurrentScreenshotIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : caseStudy.screenshots.length - 1
-    );
+    setCurrentScreenshotIndex((prevIndex) => {
+      const newIndex =
+        prevIndex > 0 ? prevIndex - 1 : caseStudy.screenshots.length - 1;
+      console.log(`Navigating to previous slide. New index: ${newIndex}`); // ADD THIS
+      return newIndex;
+    });
   };
 
   const goToNextSlide = () => {
-    setCurrentScreenshotIndex((prevIndex) =>
-      prevIndex < caseStudy.screenshots.length - 1 ? prevIndex + 1 : 0
-    );
+    setCurrentScreenshotIndex((prevIndex) => {
+      const newIndex =
+        prevIndex < caseStudy.screenshots.length - 1 ? prevIndex + 1 : 0;
+      console.log(`Navigating to next slide. New index: ${newIndex}`); // ADD THIS
+      return newIndex;
+    });
   };
 
   const openImagePreview = (src) => {
     setModalImageSrc(src);
     setShowModal(true);
+    console.log(`Opening image preview for: ${src}`); // ADD THIS
   };
 
   const closeImagePreview = () => {
     setModalImageSrc("");
     setShowModal(false);
+    console.log("Closing image preview."); // ADD THIS
   };
 
   return (
@@ -389,28 +415,38 @@ export default function CaseStudy() {
           ></span>
         ))}
       </div>
+      
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
-        {/* Back button */}
-        <a
-          href="/portfolio"
-          className="inline-flex items-center text-gray-300 hover:text-white mb-8 transition duration-300"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 mr-2"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-          {t?.backToCases}
-        </a>
 
+        {/* Back Button */}
+            <div className="absolute top-4 left-4 z-40 md:top-8 md:left-8">
+              {" "}
+              {/* Adjust positioning as needed */}
+              <button
+                onClick={handleGoBack}
+                className="flex items-center space-x-2 p-3 bg-blue-700/70 hover:bg-blue-600 text-white rounded-full shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                aria-label="Go back to portfolio"
+              >
+                {/* Example: A simple left arrow icon (you might need to import one like from Heroicons) */}
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                  ></path>
+                </svg>
+                <span className="hidden sm:inline">Back to Portfolio</span>{" "}
+                {/* Show text on larger screens */}
+              </button>
+            </div>
         {/* Case Study Header */}
         <div className="mb-10 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
@@ -454,7 +490,10 @@ export default function CaseStudy() {
 
               {/* Navigation Buttons */}
               {/* LEFT (Previous) Button */}
-              <div className="absolute top-1/2 left-[32px] transform -translate-y-1/2">
+              <div
+                className="absolute top-1/2 transform -translate-y-1/2"
+                style={{ left: "32px" }}
+              >
                 <button
                   onClick={goToPreviousSlide}
                   className="bg-blue-700/50 hover:bg-blue-600 text-white rounded-full p-2 focus:outline-none"
@@ -465,7 +504,10 @@ export default function CaseStudy() {
               </div>
 
               {/* RIGHT (Next) Button */}
-              <div className="absolute top-1/2 right-[32px] transform -translate-y-1/2">
+              <div
+                className="absolute top-1/2 transform -translate-y-1/2"
+                style={{ right: "32px" }}
+              >
                 <button
                   onClick={goToNextSlide}
                   className="bg-blue-700/50 hover:bg-blue-600 text-white rounded-full p-2 focus:outline-none"
