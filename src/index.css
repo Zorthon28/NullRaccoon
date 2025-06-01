@@ -41,3 +41,11 @@
   position: fixed;
   z-index: 9999;
 }
+
+.truncate-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limits to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Certifications = ({ t }) => {
   return (
@@ -14,16 +14,18 @@ const Certifications = ({ t }) => {
             href={cert.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.02] p-6 text-center w-full max-w-sm min-h-[300px] flex flex-col justify-between"
+            className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.02] p-6 text-center w-full max-w-sm h-[320px] flex flex-col overflow-hidden"
           >
-            <img
-              src={cert.imgSrc}
-              alt={cert.name}
-              className="w-full max-h-36 min-h-24 object-contain mb-4 transition-opacity duration-300 group-hover:opacity-90"
-            />
-            <h3 className="text-lg font-semibold text-zinc-800 group-hover:text-red-600 transition-colors duration-300">
-              {cert.name}
-            </h3>
+            <div className="flex flex-col flex-grow">
+              <img
+                src={cert.imgSrc}
+                alt={cert.name}
+                className="w-full max-h-36 min-h-24 object-contain mb-4 transition-opacity duration-300 group-hover:opacity-90"
+              />
+              <h3 className="text-lg font-semibold text-zinc-800 group-hover:text-red-600 transition-colors duration-300 truncate-multiline mt-auto">
+                {cert.name}
+              </h3>
+            </div>
           </a>
         ))}
       </div>
