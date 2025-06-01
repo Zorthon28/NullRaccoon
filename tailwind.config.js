@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */ // <--- This is the correct way
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}", // For Next.js App Router
@@ -11,13 +11,23 @@ module.exports = {
     extend: {
       animation: {
         float: 'float 6s ease-in-out infinite',
+        // ADD THIS LINE for the fade-in animation:
+        'fade-in': 'fadeIn 0.7s ease-out forwards', // You can adjust duration (e.g., '0.7s') and timing ('ease-out')
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0)', opacity: '0.2' },
           '50%': { transform: 'translateY(-20px)', opacity: '0.4' },
         },
+        // ADD THESE LINES for the fadeIn keyframes:
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
       },
     },
   },
+  plugins: [
+    // ... your existing plugins
+  ],
 }

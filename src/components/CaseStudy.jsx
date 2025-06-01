@@ -412,9 +412,6 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
 
         {hasScreenshots && (
           <section className="mb-20">
-            <h2 className="text-3xl font-bold text-center mb-8 text-blue-300">
-              {t?.viewScreenshots}
-            </h2>
             {/* THIS DIV MUST HAVE THE 'relative' CLASS for buttons to position correctly */}
             <div className="relative bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
               {/* Current Screenshot Container */}

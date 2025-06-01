@@ -1,34 +1,8 @@
 import React from "react";
 
 export default function Portfolio({ t }) {
-  // Update your portfolio projects to include case study links
-  const portfolioProjects = [
-    {
-      title: "E-commerce Platform",
-      description:
-        "A modern online store with cart, checkout, and admin panel.",
-      image: "/images/ecommerce-project.jpg",
-      type: "CaseStudy",
-      link: "/case-study/ecommerce-platform", // Link to case study
-    },
-    {
-      title: "Medical Equipment Management",
-      description:
-        "Inventory and maintenance system for medical center with QR tracking",
-      image: "/images/medtech-premier-thumbnail.png",
-      type: "CaseStudy",
-      link: "/case-study/medtech-premier",
-    },
-    {
-      title: "Personal Portfolio",
-      description: "A responsive portfolio site for a creative freelancer.",
-      image: "/images/portfolio-project-thumbnail.png",
-      link: "/Portfolio/", // Regular project link
-    },
-  ];
-
   return (
-    <section id="portfolio" className="py-24 bg-gray-950 text-white">
+    <section id="portfolio" className="mt-20 bg-gray-950 text-white">
       <div className="max-w-7xl mx-auto px-4 text-center">
         <h2 className="text-4xl font-bold mb-6">{t.portfolioTitle}</h2>
         <p className="text-gray-400 mb-12 max-w-2xl mx-auto">
@@ -36,7 +10,7 @@ export default function Portfolio({ t }) {
         </p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {portfolioProjects.map((project, index) => (
+          {t.portfolioProjects.map((project, index) => (
             <a
               key={index}
               href={project.link}
@@ -53,7 +27,7 @@ export default function Portfolio({ t }) {
                 {project.type === "CaseStudy" && (
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4">
                     <span className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold px-3 py-1 rounded-full">
-                      Case Study Available
+                      {t.casestudyavailable}
                     </span>
                   </div>
                 )}
