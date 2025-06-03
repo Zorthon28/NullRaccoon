@@ -29,7 +29,13 @@ export default function Product({ product }) {
             ${product.price.toFixed(2)}
           </span>
           <button
-            onClick={() => addToCart({ ...product, quantity: 1 })}
+            onClick={() =>
+              addToCart({
+                ...product,
+                quantity: 1,
+                image: product.images?.[0], // Add this line
+              })
+            }
             className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition transform hover:scale-105 active:scale-95"
           >
             Add to Cart

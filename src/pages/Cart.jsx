@@ -40,9 +40,9 @@ export default function Cart() {
       {cartItems.length === 0 ? (
         <div className="flex flex-col items-center justify-center text-center py-16">
           <img
-            src="/images/empty-cart.png" // add an illustration to your /public/images
+            src="/images/empty-cart.png"
             alt="Empty cart"
-            className="w-40 h-40 mb-6 opacity-80"
+            className="w-50 h-40 mb-6 opacity-80"
           />
           <h2 className="text-xl font-semibold text-gray-700 mb-2">
             Your cart is empty
