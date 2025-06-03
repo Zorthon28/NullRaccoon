@@ -22,7 +22,7 @@ const translations = {
         description: "A modern online store with cart, checkout, and admin panel.",
         image: "/images/ecommerce-project.jpg",
         type: "CaseStudy",
-        link: "/case-study/ecommerce-platform",
+        link: "/store",
       },
       {
         title: "Medical Equipment Management",
@@ -112,7 +112,7 @@ const translations = {
         description: "Una tienda en línea moderna con carrito, pago y panel de administración.",
         image: "/images/ecommerce-project.jpg",
         type: "CaseStudy",
-        link: "/case-study/ecommerce-platform",
+        link: "/store",
       },
       {
         title: "Gestión de Equipos Médicos",

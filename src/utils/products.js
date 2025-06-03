@@ -2,86 +2,111 @@
 export const products = [
   {
     id: 1,
-    name: "Zorthon T-Shirt",
+    name: "705 T-Shirt",
     price: 25.0, // ← numeric
-    image: "/images/label.png",
+    images: ["/images/Store/Tshirt/front.jpg", "/images/Store/Tshirt/back.jpg"],
     description: "Comfortable cotton T-shirt with the Zorthon logo.",
   },
   {
     id: 2,
-    name: "BioMed Sticker Pack",
+    name: "#1 Sticker Pack",
     price: 10.0,
-    image: "/images/logo512.png",
-    description: "A pack of premium BioMed-related stickers.",
+    images: ["/images/Store/Stickers/1.jpg"],
+    description: "A pack of premium stickers.",
   },
   {
     id: 3,
     name: "Premium PDF Bundle",
     price: 15.0,
-    image: "/images/React-Cert.png",
+    images: ["/images/Store/PDF/invoice.jpg", "/images/Store/PDF/stock.jpg"],
     description: "Downloadable PDFs of key project certifications and guides.",
   },
   {
     id: 4,
     name: "Wireless Earbuds",
     price: 45,
-    image: "https://via.placeholder.com/200x150?text=Wireless+Earbuds",
+    images: [
+      "/images/Store/earbuds/airpods.jpg",
+      "/images/Store/earbuds/fullShot.jpg",
+    ],
     description: "High-quality earbuds with noise cancellation.",
   },
   {
     id: 5,
     name: "Fitness Tracker",
     price: 60,
-    image: "https://via.placeholder.com/200x150?text=Fitness+Tracker",
+    images: [
+      "/images/Store/SmartWatch/watch.jpg",
+      "/images/Store/SmartWatch/box.jpg",
+    ],
     description: "Keep track of your daily activities and health.",
   },
   {
     id: 6,
     name: "Smart Water Bottle",
     price: 30,
-    image: "https://via.placeholder.com/200x150?text=Smart+Water+Bottle",
+    images: [
+      "/images/Store/SmartWaterB/HQ212_AV2.jpg",
+      "/images/Store/SmartWaterB/HQ212.jpg",
+    ],
     description: "Tracks your hydration and syncs with your phone.",
   },
   {
     id: 7,
     name: "Bluetooth Speaker",
     price: 40,
-    image: "https://via.placeholder.com/200x150?text=Bluetooth+Speaker",
+    images: [
+      "/images/Store/BluetoothSpeaker/front.jpg",
+      "/images/Store/BluetoothSpeaker/back.jpg",
+    ],
     description: "Portable speaker with rich bass and stereo sound.",
   },
   {
     id: 8,
     name: "Laptop Sleeve",
     price: 20,
-    image: "https://via.placeholder.com/200x150?text=Laptop+Sleeve",
+    images: [
+      "/images/Store/LaptopSleeve/front.jpg",
+      "/images/Store/LaptopSleeve/back.jpg",
+    ],
     description: "Protect your laptop with this stylish sleeve.",
   },
   {
     id: 9,
     name: "Wireless Charger",
     price: 25,
-    image: "https://via.placeholder.com/200x150?text=Wireless+Charger",
+    images: [
+      "/images/Store/WirelessCharger/front.jpg",
+      "/images/Store/WirelessCharger/back.jpg",
+    ],
     description: "Fast wireless charger compatible with most devices.",
   },
   {
     id: 10,
     name: "LED Desk Lamp",
     price: 35,
-    image: "https://via.placeholder.com/200x150?text=LED+Desk+Lamp",
+    images: [
+      "/images/Store/LEDDeskLamp/front.jpg",
+    ],
     description: "Energy-saving desk lamp with adjustable brightness.",
   },
   {
     id: 11,
     name: "Portable Hard Drive",
     price: 80,
-    image: "https://via.placeholder.com/200x150?text=Portable+Hard+Drive",
+    images: [
+      "/images/Store/PortableHardDrive/front.jpg",
+      "/images/Store/PortableHardDrive/back.jpg",
+    ],
     description: "Store your files securely on the go.",
   },
   {
     id: 12,
     name: "Noise Cancelling Headphones",
     price: 120,
-    image: "https://via.placeholder.com/200x150?text=Noise+Cancelling+Headphones",
+    images: [
+      "/images/Store/NoiseCancellingHeadphones/front.jpg",
+    ],
     description: "Experience immersive sound without distractions.",
   },
 ];

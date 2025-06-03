@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { products } from "../utils/products";
@@ -6,7 +6,15 @@ import { products } from "../utils/products";
 export default function Product() {
   const { productId } = useParams();
   const { addToCart } = useCart();
-  const product = products.find((p) => p.id === parseInt(productId));
+
+  const [product, setProduct] = useState(null);
+  const [selectedImage, setSelectedImage] = useState("");
+
+  useEffect(() => {
+    const found = products.find((p) => p.id === parseInt(productId));
+    setProduct(found);
+    setSelectedImage(found?.images?.[0] || ""); // 🟢 Update image on route change
+  }, [productId]);
 
   if (!product) {
     return (
@@ -24,62 +32,67 @@ export default function Product() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
-      {/* ── Breadcrumb ─────────────────────────────────────────────────────────────── */}
+      {/* Breadcrumb */}
       <nav className="max-w-6xl mx-auto px-4 text-sm text-gray-500 mb-6">
-        <Link to="/" className="hover:underline">
-          Home
-        </Link>{" "}
-        &gt;{" "}
-        <Link to="/store" className="hover:underline">
-          Store
-        </Link>{" "}
-        &gt; <span className="text-gray-700">{product.name}</span>
+        <Link to="/" className="hover:underline">Home</Link> &gt;{" "}
+        <Link to="/store" className="hover:underline">Store</Link> &gt;{" "}
+        <span className="text-gray-700">{product.name}</span>
       </nav>
 
-      {/* ── Main Product Section ───────────────────────────────────────────────────── */}
+      {/* Main Product Section */}
       <div className="max-w-6xl mx-auto px-4 grid gap-10 md:grid-cols-2 animate-fadeIn">
-        {/* Left: Large Image */}
+        {/* Image Section */}
         <div className="bg-white rounded-xl shadow-md p-4">
           <img
-            src={product.image}
+            src={selectedImage}
             alt={product.name}
             className="w-full h-[400px] object-contain rounded-lg transition-transform duration-300 hover:scale-105"
             loading="lazy"
           />
+          <div className="flex space-x-2 mt-4 justify-center">
+            {product.images.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`${product.name} ${index + 1}`}
+                className={`h-20 w-20 object-contain rounded cursor-pointer border ${
+                  img === selectedImage ? "border-green-500" : "border-gray-200"
+                }`}
+                onClick={() => setSelectedImage(img)}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* Right: Product Info */}
+        {/* Info Section */}
         <div className="space-y-6 flex flex-col justify-between">
           <div>
             <h1 className="text-3xl font-extrabold text-gray-900">
               {product.name}
             </h1>
             <p className="text-gray-700 mt-4">{product.description}</p>
-          </div>
-
-          <div className="flex items-center space-x-6">
-            <span className="text-2xl font-bold text-green-700">
-              ${product.price.toFixed(2)}
-            </span>
-            <button
-              onClick={() => addToCart({ ...product, quantity: 1 })}
-              className="bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700 transition-all duration-200 transform hover:scale-105"
-            >
-              Add to Cart
-            </button>
+            <div className="flex items-center space-x-6">
+              <span className="text-2xl font-bold text-green-700">
+                ${product.price.toFixed(2)}
+              </span>
+              <button
+                onClick={() => addToCart({ ...product, quantity: 1 })}
+                className="bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700 transition-all duration-200 transform hover:scale-105"
+              >
+                Add to Cart
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* ── Related Products Section ───────────────────────────────────────────────── */}
+      {/* Related Products */}
       <div className="max-w-6xl mx-auto px-4 mt-16">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-          Related Products
-        </h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Related Products</h2>
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {products
-            .filter((p) => p.id !== product.id) // exclude current product
-            .slice(0, 4) // show up to 4 related items
+            .filter((p) => p.id !== product.id)
+            .slice(0, 4)
             .map((related) => (
               <div
                 key={related.id}
@@ -87,7 +100,7 @@ export default function Product() {
               >
                 <Link to={`/store/product/${related.id}`}>
                   <img
-                    src={related.image}
+                    src={related.images[0]}
                     alt={related.name}
                     className="w-full h-32 object-contain rounded-md mb-3"
                     loading="lazy"

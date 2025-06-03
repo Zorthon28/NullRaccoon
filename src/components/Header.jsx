@@ -9,7 +9,7 @@ export default function Header() {
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between p-4">
         <Link to="/store" className="text-2xl font-bold text-green-700">
-          MedTech Premier
+          NullRaccon
         </Link>
 
         <nav className="space-x-6 hidden md:flex text-gray-700 font-semibold">
