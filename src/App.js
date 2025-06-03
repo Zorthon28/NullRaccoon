@@ -3,13 +3,17 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Hero from "./components/Hero";
 import CaseStudy from "./components/CaseStudy";
 import FloatingButtons from "./components/FloatingButtons";
-import translations from "./utils/translations"; // <--- UPDATED IMPORT PATH
+import StoreHome from "./pages/StoreHome";
+import Product from "./pages/Product";
+import Cart from "./pages/Cart";
+import translations from "./utils/translations";
+import StoreLayout from "./layouts/StoreLayout"; // import layout
 
 import "./index.css";
 
 function App() {
   const [lang, setLang] = useState("en");
-  const [showQuoteModal, setShowQuoteModal] = useState(false); // Global modal state
+  const [showQuoteModal, setShowQuoteModal] = useState(false);
 
   useEffect(() => {
     const userLang = navigator.language || navigator.userLanguage;
@@ -19,9 +23,9 @@ function App() {
         userLang.startsWith("es") ? "es" : "en"
       }`
     );
-  }, []); // Runs once on mount
+  }, []);
 
-  const t = translations[lang]; // Derive translations object here
+  const t = translations[lang];
 
   return (
     <Router>
@@ -32,7 +36,7 @@ function App() {
             element={
               <Hero
                 lang={lang}
-                t={t} // Pass translations object
+                t={t}
                 showQuoteModal={showQuoteModal}
                 setShowQuoteModal={setShowQuoteModal}
               />
@@ -44,19 +48,30 @@ function App() {
             element={
               <CaseStudy
                 lang={lang}
-                t={t} // Make sure this is passed!
+                t={t}
                 showQuoteModal={showQuoteModal}
                 setShowQuoteModal={setShowQuoteModal}
               />
             }
           />
 
+          {/* 🛍️ Store Routes */}
+
+          {/* Store routes wrapped with StoreLayout */}
+          <Route path="/store" element={<StoreLayout />}>
+            <Route index element={<StoreHome />} />
+            <Route path="product/:productId" element={<Product />} />
+            <Route path="cart" element={<Cart />} />
+          </Route>
+
+          
+
           <Route
             path="*"
             element={
               <Hero
                 lang={lang}
-                t={t} // Pass translations object
+                t={t}
                 showQuoteModal={showQuoteModal}
                 setShowQuoteModal={setShowQuoteModal}
               />
@@ -64,7 +79,6 @@ function App() {
           />
         </Routes>
 
-        {/* FloatingButtons component rendered globally */}
         <FloatingButtons
           lang={lang}
           setLang={setLang}
