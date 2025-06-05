@@ -2,112 +2,112 @@
 export const products = [
   {
     id: 1,
-    name: "705 T-Shirt",
-    price: 25.0, // ← numeric
+    nameKey: "product1Name", // Changed to translation key
+    price: 25.0,
     images: ["/images/Store/Tshirt/front.jpg", "/images/Store/Tshirt/back.jpg"],
-    description: "Comfortable cotton T-shirt with the Zorthon logo.",
+    descriptionKey: "product1Description", // Changed to translation key
   },
   {
     id: 2,
-    name: "#1 Sticker Pack",
+    nameKey: "product2Name",
     price: 10.0,
     images: ["/images/Store/Stickers/front.jpg"],
-    description: "A pack of premium stickers.",
+    descriptionKey: "product2Description",
   },
   {
     id: 3,
-    name: "Premium PDF Bundle",
+    nameKey: "product3Name",
     price: 15.0,
     images: ["/images/Store/PDF/front.jpg", "/images/Store/PDF/back.jpg"],
-    description: "Downloadable PDFs of key project certifications and guides.",
+    descriptionKey: "product3Description",
   },
   {
     id: 4,
-    name: "Wireless Earbuds",
+    nameKey: "product4Name",
     price: 45,
     images: [
       "/images/Store/earbuds/front.jpg",
       "/images/Store/earbuds/back.jpg",
     ],
-    description: "High-quality earbuds with noise cancellation.",
+    descriptionKey: "product4Description",
   },
   {
     id: 5,
-    name: "Fitness Tracker",
+    nameKey: "product5Name",
     price: 60,
     images: [
       "/images/Store/SmartWatch/front.jpg",
       "/images/Store/SmartWatch/back.jpg",
     ],
-    description: "Keep track of your daily activities and health.",
+    descriptionKey: "product5Description",
   },
   {
     id: 6,
-    name: "Smart Water Bottle",
+    nameKey: "product6Name",
     price: 30,
     images: [
       "/images/Store/SmartWaterB/front.jpg",
       "/images/Store/SmartWaterB/back.jpg",
     ],
-    description: "Tracks your hydration and syncs with your phone.",
+    descriptionKey: "product6Description",
   },
   {
     id: 7,
-    name: "Bluetooth Speaker",
+    nameKey: "product7Name",
     price: 40,
     images: [
       "/images/Store/BluetoothSpeaker/front.jpg",
       "/images/Store/BluetoothSpeaker/back.jpg",
     ],
-    description: "Portable speaker with rich bass and stereo sound.",
+    descriptionKey: "product7Description",
   },
   {
     id: 8,
-    name: "Laptop Sleeve",
+    nameKey: "product8Name",
     price: 20,
     images: [
       "/images/Store/LaptopSleeve/front.jpg",
       "/images/Store/LaptopSleeve/back.jpg",
     ],
-    description: "Protect your laptop with this stylish sleeve.",
+    descriptionKey: "product8Description",
   },
   {
     id: 9,
-    name: "Wireless Charger",
+    nameKey: "product9Name",
     price: 25,
     images: [
       "/images/Store/WirelessCharger/front.jpg",
       "/images/Store/WirelessCharger/back.jpg",
     ],
-    description: "Fast wireless charger compatible with most devices.",
+    descriptionKey: "product9Description",
   },
   {
     id: 10,
-    name: "LED Desk Lamp",
+    nameKey: "product10Name",
     price: 35,
     images: [
       "/images/Store/LEDDeskLamp/front.jpg",
     ],
-    description: "Energy-saving desk lamp with adjustable brightness.",
+    descriptionKey: "product10Description",
   },
   {
     id: 11,
-    name: "Portable Hard Drive",
+    nameKey: "product11Name",
     price: 80,
     images: [
       "/images/Store/PortableHardDrive/front.jpg",
       "/images/Store/PortableHardDrive/back.jpg",
     ],
-    description: "Store your files securely on the go.",
+    descriptionKey: "product11Description",
   },
   {
     id: 12,
-    name: "Noise Cancelling Headphones",
+    nameKey: "product12Name",
     price: 120,
     images: [
       "/images/Store/NoiseCancellingHeadphones/front.jpg",
     ],
-    description: "Experience immersive sound without distractions.",
+    descriptionKey: "product12Description",
   },
 ];
 

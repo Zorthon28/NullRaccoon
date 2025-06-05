@@ -7,7 +7,8 @@ import StoreHome from "./pages/StoreHome";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import translations from "./utils/translations";
-import StoreLayout from "./layouts/StoreLayout"; // import layout
+import StoreLayout from "./layouts/StoreLayout";
+import StoreLanding from "./pages/StoreLanding";
 
 import "./index.css";
 
@@ -30,6 +31,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen">
+        
         <Routes>
           <Route
             path="/"
@@ -58,13 +60,17 @@ function App() {
           {/* 🛍️ Store Routes */}
 
           {/* Store routes wrapped with StoreLayout */}
-          <Route path="/store" element={<StoreLayout />}>
-            <Route index element={<StoreHome />} />
-            <Route path="product/:productId" element={<Product />} />
+          <Route path="/store" element={<StoreLayout lang={lang} t={t} />}>
+            <Route index element={<StoreLanding lang={lang} t={t} />} />
+            {/* 🏠 Landing */}
+            <Route
+              path="products"
+              element={<StoreHome lang={lang} t={t} />}
+            />{" "}
+            {/* 🛍️ Product list */}
+            <Route path="product/:productId" element={<Product lang={lang} t={t}/>} />
             <Route path="cart" element={<Cart />} />
           </Route>
-
-          
 
           <Route
             path="*"
