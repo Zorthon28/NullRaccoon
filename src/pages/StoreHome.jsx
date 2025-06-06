@@ -7,8 +7,8 @@ export default function StoreHome({ lang, t }) {
   const store = t.store;
 
   // Filter states
-  const [filterName, setFilterName] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
+  const [filterName] = useState("");
+  const [maxPrice] = useState("");
   const [sortBy, setSortBy] = useState("popularity"); // Default sorting
 
   // Get translated product name
