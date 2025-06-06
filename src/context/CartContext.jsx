@@ -43,6 +43,7 @@ export function CartProvider({ children }) {
     setCartItems((prev) =>
       prev.map((item) => (item.id === productId ? { ...item, quantity } : item))
     );
+    console.log("Updating quantity to:", quantity, "for ID:", productId);
   };
 
   const value = {

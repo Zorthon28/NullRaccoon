@@ -19,11 +19,18 @@ export const fetchExchangeRate = async (base = "USD", target = "MXN") => {
 
 export const formatCurrency = (lang, price, currency) => {
   const locale = lang === "es" ? "es-MX" : "en-US";
-  return new Intl.NumberFormat(locale, {
+  const symbol = new Intl.NumberFormat(locale, {
     style: "currency",
     currency,
-    currencyDisplay: "code", // <- this shows "MXN 425.00"
+    currencyDisplay: "symbol",
     minimumFractionDigits: 2,
-  }).format(price);
+  })
+    .formatToParts(price)
+    .find(part => part.type === "currency")?.value || "$";
+
+  const amount = price.toFixed(2);
+
+  return `${symbol} ${amount} ${currency}`;  // ← Your desired format
 };
+
 

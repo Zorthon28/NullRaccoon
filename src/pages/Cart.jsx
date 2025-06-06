@@ -1,7 +1,8 @@
 import { useCart } from "../context/CartContext";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import React, { useState } from "react";
+import { fetchExchangeRate, formatCurrency } from "../utils/currency";
 
 function CartItemImage({ src, alt }) {
   const [loaded, setLoaded] = useState(false);
@@ -24,8 +25,24 @@ function CartItemImage({ src, alt }) {
   );
 }
 
-export default function Cart({ lang, t}) {
+export default function Cart({ lang, t }) {
   const { cartItems, removeFromCart, clearCart, updateQuantity } = useCart();
+  const [exchangeRate, setExchangeRate] = useState(1);
+  const [currency, setCurrency] = useState("USD");
+
+  useEffect(() => {
+    const getRate = async () => {
+      const base = "USD";
+      const target = lang === "es" ? "MXN" : "USD";
+      const rate = await fetchExchangeRate(base, target);
+      if (rate) {
+        setExchangeRate(rate);
+        setCurrency(target);
+      }
+    };
+
+    getRate();
+  }, [lang]);
 
   const total = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -48,9 +65,7 @@ export default function Cart({ lang, t}) {
           <h2 className="text-2xl font-semibold text-gray-700 mb-2">
             {t.cartEmptyTitle}
           </h2>
-          <p className="text-gray-500 mb-6">
-            {t.cartEmptySubtitle}
-          </p>
+          <p className="text-gray-500 mb-6">{t.cartEmptySubtitle}</p>
           <Link to="/store">
             <button className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition transform hover:scale-105">
               {t.cartBrowseButton}
@@ -72,25 +87,34 @@ export default function Cart({ lang, t}) {
                     {item.name}
                   </h2>
                   <p className="text-green-700 font-semibold text-md">
-                    ${item.price.toFixed(2)}
+                    {formatCurrency(lang, item.price * exchangeRate, currency)}
                   </p>
 
                   <div className="flex items-center gap-2 mt-2">
                     <button
                       onClick={() => {
-                        if (item.quantity - 1 < 1) {
+                        const newQty = item.quantity - 1;
+                        if (newQty <= 0) {
                           removeFromCart(item.id);
-                          toast.success(t("cartRemoved", { name: item.name }));
+                          const msg = t.cartRemoved.replace(
+                            "{name}",
+                            item.name
+                          );
+                          toast.success(msg);
                         } else {
-                          const newQty = item.quantity - 1;
                           updateQuantity(item.id, newQty);
                           toast.info(
-                            t("cartQtyUpdated", {
-                              qty: newQty,
-                              name: item.name,
-                            })
+                            t.cartQtyUpdated
+                              .replace("{qty}", newQty)
+                              .replace("{name}", item.name)
                           );
                         }
+                        console.log(
+                          "Current quantity:",
+                          item.quantity,
+                          "New quantity:",
+                          newQty
+                        );
                       }}
                       className="px-3 py-1 bg-gray-100 rounded-full hover:bg-gray-200 text-sm font-bold text-gray-700"
                     >
@@ -105,9 +129,10 @@ export default function Cart({ lang, t}) {
                       onClick={() => {
                         const newQty = item.quantity + 1;
                         updateQuantity(item.id, newQty);
-                        toast.info(
-                          `Quantity updated to ${newQty} for ${item.name}`
-                        );
+                        const msg = t.cartQtyUpdated
+                          .replace("{qty}", newQty)
+                          .replace("{name}", item.name);
+                        toast.info(msg);
                       }}
                       className="px-3 py-1 bg-gray-100 rounded-full hover:bg-gray-200 text-sm font-bold text-gray-700"
                     >
@@ -119,11 +144,12 @@ export default function Cart({ lang, t}) {
                 <button
                   onClick={() => {
                     removeFromCart(item.id);
-                    toast.success(`${item.name} removed from cart`);
+                    const msg = t.cartRemoved.replace("{name}", item.name);
+                    toast.success(msg);
                   }}
                   className="text-red-500 hover:text-red-700 text-sm hover:underline transition duration-200"
                 >
-                  Remove
+                  {t.remove}
                 </button>
               </li>
             ))}
@@ -131,7 +157,8 @@ export default function Cart({ lang, t}) {
 
           <div className="mt-12 bg-white p-6 rounded-2xl shadow-xl flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-2xl font-extrabold text-green-800">
-              Total: ${total.toFixed(2)}
+              {t.cartTotalLabel}
+              {formatCurrency(lang, total * exchangeRate, currency)}
             </p>
 
             <div className="flex items-center gap-4">

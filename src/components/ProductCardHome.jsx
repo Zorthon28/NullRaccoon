@@ -15,7 +15,7 @@ export default function ProductCardHome({ product, lang }) {
   const { cartItems, addToCart, updateQuantity, removeFromCart } = useCart();
   const [justAdded, setJustAdded] = useState(false);
   const [showQuantity, setShowQuantity] = useState(false);
-  const [buttonWidth, setButtonWidth] = useState("auto");
+  const buttonWidth = "auto";
   const buttonRef = useRef(null);
   const [convertedPrice, setConvertedPrice] = useState(product.price);
 
@@ -122,7 +122,7 @@ export default function ProductCardHome({ product, lang }) {
           }
         `}
               >
-                {t("AddToCart", "common")}
+                {t("addToCart")}
               </button>
 
               <div
@@ -139,11 +139,14 @@ export default function ProductCardHome({ product, lang }) {
           }
         `}
               >
-                {t("Added!", "common")}
+                {t("addedToCart")}
               </div>
             </div>
           ) : (
-            <div className="flex items-center space-x-2 bg-green-100 text-green-800 rounded-full px-3 py-1 shadow-sm mt-2">
+            <div
+              className="flex items-center space-x-2 bg-gray-100 text-gray-800 rounded-full px-3 py-1 shadow-sm mt-2"
+              style={{ maxWidth: "100px" }}
+            >
               <button
                 onClick={() => handleQuantityChange(cartItem.quantity - 1)}
                 className="text-lg font-bold hover:text-green-600"

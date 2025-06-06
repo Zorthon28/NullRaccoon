@@ -87,7 +87,6 @@ const translations = {
     previous: "Previous",
     next: "Next",
     casestudyavailable: "Case Study Available",
-    addToCart: "Add to Cart",
     store: {
       welcomeTitle: "Welcome to NullRaccon Store",
       welcomeSubtitle:
@@ -159,11 +158,16 @@ const translations = {
     cartEmptyTitle: "Oops! Your cart is empty",
     cartEmptySubtitle: "Looks like you haven’t added anything yet.",
     cartBrowseButton: "Browse Products",
+    remove: "Remove",
     cartTotal: "Total",
     cartClear: "Clear Cart",
     cartCheckout: "Proceed to Checkout",
     cartRemoved: "{name} removed from cart",
     cartQtyUpdated: "Quantity updated to {qty} for {name}",
+    common: {
+      addToCart: "Add to Cart",
+      addedToCart: "Added!!",
+    },
   },
   es: {
     // Existing Hero translations (from your previous Hero.jsx)
@@ -253,7 +257,6 @@ const translations = {
     screenshot: "Captura de Pantalla",
     previous: "Anterior",
     next: "Siguiente",
-    addToCart: "Añadir al carrito",
     casestudyavailable: "Análisis detallado disponible",
     store: {
       welcomeTitle: "Bienvenido a NullRaccon Store",
@@ -328,6 +331,7 @@ const translations = {
     noImageAvailable: "No hay imagen disponible",
     view: "Ver",
     cartTitle: "🛒 Tu carrito",
+    remove: "Eliminar",
     cartEmptyTitle: "¡Ups! Tu carrito está vacío",
     cartEmptySubtitle: "Parece que aún no has agregado nada.",
     cartBrowseButton: "Ver productos",
@@ -336,6 +340,10 @@ const translations = {
     cartCheckout: "Proceder al pago",
     cartRemoved: "{name} eliminado del carrito",
     cartQtyUpdated: "Cantidad actualizada a {qty} para {name}",
+    common: {
+      addToCart: "Añadir al carrito",
+      addedToCart: "Añadido!",
+    },
   },
 };
 
