@@ -417,7 +417,7 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
               {/* Current Screenshot Container */}
               <div className="flex justify-center items-center mb-4 w-full max-w-4xl mx-auto h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[550px] bg-gray-800 rounded-lg overflow-hidden">
                 <div
-                  className="block w-full h-full flex justify-center items-center cursor-pointer"
+                  className="block w-full h-full justify-center items-center cursor-pointer"
                   onClick={() => openImagePreview(currentScreenshot?.src)}
                   role="button"
                   tabIndex="0"

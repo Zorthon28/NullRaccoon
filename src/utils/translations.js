@@ -168,6 +168,11 @@ const translations = {
       addToCart: "Add to Cart",
       addedToCart: "Added!!",
     },
+    sortByPopularity: "Sort by popularity",
+    sortByPriceAsc: "Price: Low to High",
+    sortByPriceDesc: "Price: High to Low",
+    sortByNameAsc: "Name: A to Z",
+    sortByNameDesc: "Name: Z to A",
   },
   es: {
     // Existing Hero translations (from your previous Hero.jsx)
@@ -344,6 +349,11 @@ const translations = {
       addToCart: "Añadir al carrito",
       addedToCart: "Añadido!",
     },
+    sortByPopularity: "Ordenar por popularidad",
+    sortByPriceAsc: "Precio: Menor a Mayor",
+    sortByPriceDesc: "Precio: Mayor a Menor",
+    sortByNameAsc: "Nombre: A a Z",
+    sortByNameDesc: "Nombre: Z a A",
   },
 };
 

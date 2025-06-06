@@ -20,8 +20,8 @@ export default function Header({ lang, t}) {
 
         {/* Desktop Nav */}
         <nav className="space-x-6 hidden md:flex text-gray-700 font-medium">
-          <Link to="/" className="hover:text-green-600 transition">{t.home}</Link>
-          <Link to="/store" className="hover:text-green-600 transition">{t.store}</Link>
+          <Link to="/store" className="hover:text-green-600 transition">{t.home}</Link>
+          <Link to="/store/products" className="hover:text-green-600 transition">{t.store}</Link>
           <Link to="/store/cart" className="hover:text-green-600 transition relative">
             {t.cart}
             {totalItems > 0 && (
