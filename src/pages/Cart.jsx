@@ -1,30 +1,31 @@
 import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import React, { useState } from "react";
 
 function CartItemImage({ src, alt }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="w-20 h-20 rounded overflow-hidden relative">
+    <div className="w-24 h-24 rounded-lg overflow-hidden relative">
       {!loaded && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse rounded" />
+        <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg" />
       )}
       <img
         src={src}
         alt={alt}
         onLoad={() => setLoaded(true)}
-        className={`w-20 h-20 object-contain rounded transform transition duration-300 ease-in-out
+        className={`w-full h-full object-contain transition-opacity duration-300 ease-in-out
           ${loaded ? "opacity-100" : "opacity-0"}
-          hover:scale-105 hover:shadow-md`}
+          hover:scale-105 transform hover:shadow-md`}
         loading="lazy"
       />
     </div>
   );
 }
 
-export default function Cart() {
-  const { cartItems, removeFromCart, clearCart, updateQuantity } = useCart(); // ✅ Aquí añadimos updateQuantity
+export default function Cart({ lang, t}) {
+  const { cartItems, removeFromCart, clearCart, updateQuantity } = useCart();
 
   const total = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -32,27 +33,27 @@ export default function Cart() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 max-w-5xl mx-auto animate-fadeIn">
-      <h1 className="text-3xl font-extrabold text-green-700 mb-8 text-center">
-        Your Cart
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-6 max-w-5xl mx-auto animate-fadeIn">
+      <h1 className="text-4xl font-extrabold text-green-700 mb-10 text-center">
+        {t.cartTitle}
       </h1>
 
       {cartItems.length === 0 ? (
-        <div className="flex flex-col items-center justify-center text-center py-16">
+        <div className="flex flex-col items-center justify-center text-center py-20">
           <img
             src="/images/empty-cart.png"
             alt="Empty cart"
             className="w-50 h-40 mb-6 opacity-80"
           />
-          <h2 className="text-xl font-semibold text-gray-700 mb-2">
-            Your cart is empty
+          <h2 className="text-2xl font-semibold text-gray-700 mb-2">
+            {t.cartEmptyTitle}
           </h2>
           <p className="text-gray-500 mb-6">
-            Looks like you haven’t added anything yet.
+            {t.cartEmptySubtitle}
           </p>
           <Link to="/store">
-            <button className="bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700 transition-transform transform hover:scale-105">
-              Browse Products
+            <button className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition transform hover:scale-105">
+              {t.cartBrowseButton}
             </button>
           </Link>
         </div>
@@ -62,70 +63,93 @@ export default function Cart() {
             {cartItems.map((item) => (
               <li
                 key={item.id}
-                className="grid grid-cols-[auto_1fr_auto] gap-4 items-center bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all"
+                className="flex items-center bg-white border border-gray-200 rounded-xl p-4 shadow-md hover:shadow-lg transition-all gap-6"
               >
                 <CartItemImage src={item.image} alt={item.name} />
 
-                <div className="space-y-1">
-                  <h2 className="text-lg font-semibold text-gray-800">
+                <div className="flex-grow flex flex-col justify-center">
+                  <h2 className="text-lg font-bold text-gray-800">
                     {item.name}
                   </h2>
-                  <p className="text-green-700 font-bold">
+                  <p className="text-green-700 font-semibold text-md">
                     ${item.price.toFixed(2)}
                   </p>
+
                   <div className="flex items-center gap-2 mt-2">
                     <button
-                      onClick={() =>
-                        updateQuantity(item.id, Math.max(1, item.quantity - 1))
-                      }
-                      className="px-3 py-1 bg-gray-100 rounded hover:bg-gray-200 text-sm"
+                      onClick={() => {
+                        if (item.quantity - 1 < 1) {
+                          removeFromCart(item.id);
+                          toast.success(t("cartRemoved", { name: item.name }));
+                        } else {
+                          const newQty = item.quantity - 1;
+                          updateQuantity(item.id, newQty);
+                          toast.info(
+                            t("cartQtyUpdated", {
+                              qty: newQty,
+                              name: item.name,
+                            })
+                          );
+                        }
+                      }}
+                      className="px-3 py-1 bg-gray-100 rounded-full hover:bg-gray-200 text-sm font-bold text-gray-700"
                     >
-                      -
+                      −
                     </button>
-                    <span className="px-2">{item.quantity}</span>
+
+                    <span className="px-4 py-1 border border-gray-300 rounded text-center min-w-[30px]">
+                      {item.quantity}
+                    </span>
+
                     <button
-                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                      className="px-3 py-1 bg-gray-100 rounded hover:bg-gray-200 text-sm"
+                      onClick={() => {
+                        const newQty = item.quantity + 1;
+                        updateQuantity(item.id, newQty);
+                        toast.info(
+                          `Quantity updated to ${newQty} for ${item.name}`
+                        );
+                      }}
+                      className="px-3 py-1 bg-gray-100 rounded-full hover:bg-gray-200 text-sm font-bold text-gray-700"
                     >
                       +
                     </button>
                   </div>
                 </div>
 
-                <div className="flex justify-end">
-                  <button
-                    onClick={() => removeFromCart(item.id)}
-                    className="text-red-500 hover:text-red-700 hover:underline transition-all duration-200"
-                  >
-                    Remove
-                  </button>
-                </div>
+                <button
+                  onClick={() => {
+                    removeFromCart(item.id);
+                    toast.success(`${item.name} removed from cart`);
+                  }}
+                  className="text-red-500 hover:text-red-700 text-sm hover:underline transition duration-200"
+                >
+                  Remove
+                </button>
               </li>
             ))}
           </ul>
 
-          <div className="mt-10 flex justify-between items-center bg-white p-6 rounded-lg shadow">
-            <p className="text-right text-2xl font-bold text-green-800 mt-6">
+          <div className="mt-12 bg-white p-6 rounded-2xl shadow-xl flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-2xl font-extrabold text-green-800">
               Total: ${total.toFixed(2)}
             </p>
 
-            <button
-              onClick={() => alert("Checkout process coming soon!")}
-              disabled={cartItems.length === 0}
-              className={`bg-green-600 text-white px-6 py-3 rounded shadow hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed`}
-            >
-              Checkout
-            </button>
-          </div>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={clearCart}
+                className="text-sm text-red-600 underline hover:text-red-800 transition"
+              >
+                {t.cartClear}
+              </button>
 
-          <div className="text-center mt-4">
-            <button
-              onClick={clearCart}
-              className="text-red-600 hover:underline"
-              disabled={cartItems.length === 0}
-            >
-              Clear Cart
-            </button>
+              <button
+                onClick={() => alert("Checkout process coming soon!")}
+                disabled={cartItems.length === 0}
+                className={`bg-green-600 text-white px-6 py-3 rounded-lg shadow hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed`}
+              >
+                {t.cartCheckout}
+              </button>
+            </div>
           </div>
         </>
       )}

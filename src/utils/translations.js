@@ -155,6 +155,15 @@ const translations = {
     relatedProducts: "Related Products",
     noImageAvailable: "No image available",
     view: "View",
+    cartTitle: "🛒 Your Cart",
+    cartEmptyTitle: "Oops! Your cart is empty",
+    cartEmptySubtitle: "Looks like you haven’t added anything yet.",
+    cartBrowseButton: "Browse Products",
+    cartTotal: "Total",
+    cartClear: "Clear Cart",
+    cartCheckout: "Proceed to Checkout",
+    cartRemoved: "{name} removed from cart",
+    cartQtyUpdated: "Quantity updated to {qty} for {name}",
   },
   es: {
     // Existing Hero translations (from your previous Hero.jsx)
@@ -318,6 +327,15 @@ const translations = {
     relatedProducts: "Productos relacionados",
     noImageAvailable: "No hay imagen disponible",
     view: "Ver",
+    cartTitle: "🛒 Tu carrito",
+    cartEmptyTitle: "¡Ups! Tu carrito está vacío",
+    cartEmptySubtitle: "Parece que aún no has agregado nada.",
+    cartBrowseButton: "Ver productos",
+    cartTotal: "Total",
+    cartClear: "Vaciar carrito",
+    cartCheckout: "Proceder al pago",
+    cartRemoved: "{name} eliminado del carrito",
+    cartQtyUpdated: "Cantidad actualizada a {qty} para {name}",
   },
 };
 

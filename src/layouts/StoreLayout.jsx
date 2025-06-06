@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import { Outlet } from "react-router-dom";
 import translations from "../utils/translations";
 
-export default function StoreLayout({ lang = "en" }) {
+export default function StoreLayout({ lang }) {
   // Get the translations object for current lang
   const t = translations[lang]?.header || translations.en.header;
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Hero from "./components/Hero";
 import CaseStudy from "./components/CaseStudy";
 import FloatingButtons from "./components/FloatingButtons";
@@ -9,11 +10,12 @@ import Cart from "./pages/Cart";
 import translations from "./utils/translations";
 import StoreLayout from "./layouts/StoreLayout";
 import StoreLanding from "./pages/StoreLanding";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./index.css";
 
 function App() {
-  const [lang, setLang] = useState("en");
+  const [lang, setLang] = useState("es");
   const [showQuoteModal, setShowQuoteModal] = useState(false);
 
   useEffect(() => {
@@ -69,7 +71,7 @@ function App() {
             />{" "}
             {/* 🛍️ Product list */}
             <Route path="product/:productId" element={<Product lang={lang} t={t}/>} />
-            <Route path="cart" element={<Cart />} />
+            <Route path="cart" element={<Cart lang={lang} t={t}/>} />
           </Route>
 
           <Route
@@ -92,6 +94,18 @@ function App() {
           setShowQuoteModal={setShowQuoteModal}
         />
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </Router>
   );
 }
