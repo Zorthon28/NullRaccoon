@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import {
+  PlusIcon,
+  MinusIcon,
+  ArrowsPointingOutIcon,
+} from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
 // Helper function to get nested translation safely
 const getNestedTranslation = (obj, path) => {
-  return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
 };
 
 // THIS ARRAY NOW ONLY CONTAINS REFERENCES TO THE TRANSLATION KEYS AND OTHER NON-TRANSLATABLE DATA
@@ -63,70 +68,78 @@ const caseStudies = [
       {
         src: "/images/Calendar.png",
         altKey: "caseStudies.medtechPremier.screenshots.calendar.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.calendar.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.calendar.description",
       },
       {
         src: "/images/label.png",
         altKey: "caseStudies.medtechPremier.screenshots.label.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.label.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.label.description",
       },
       {
         src: "/images/MachineInfo.png",
         altKey: "caseStudies.medtechPremier.screenshots.machineInfo.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.machineInfo.description",
-      },
-      {
-        src: "/images/MachineInfoMobile.png",
-        altKey: "caseStudies.medtechPremier.screenshots.machineInfoMobile.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.machineInfoMobile.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.machineInfo.description",
       },
       {
         src: "/images/Main.png",
         altKey: "caseStudies.medtechPremier.screenshots.main.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.main.description",
-      },
-      {
-        src: "/images/Main-mobile.png",
-        altKey: "caseStudies.medtechPremier.screenshots.mainMobile.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.mainMobile.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.main.description",
       },
       {
         src: "/images/Manuales.png",
         altKey: "caseStudies.medtechPremier.screenshots.manuals.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.manuals.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.manuals.description",
       },
       {
         src: "/images/MultipleLabels.png",
         altKey: "caseStudies.medtechPremier.screenshots.multipleLabels.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.multipleLabels.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.multipleLabels.description",
       },
       {
         src: "/images/NurseEstation.png",
         altKey: "caseStudies.medtechPremier.screenshots.nurseEstation.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.nurseEstation.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.nurseEstation.description",
       },
       {
         src: "/images/Reports.png",
         altKey: "caseStudies.medtechPremier.screenshots.reports.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.reports.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.reports.description",
       },
       {
         src: "/images/Tickets.png",
         altKey: "caseStudies.medtechPremier.screenshots.tickets.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.tickets.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.tickets.description",
       },
     ],
   },
 ];
 
-
-export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }) {
+export default function CaseStudy({
+  lang,
+  t,
+  showQuoteModal,
+  setShowQuoteModal,
+}) {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [modalImageSrc, setModalImageSrc] = useState("");
   const { caseId } = useParams();
   const caseStudy = caseStudies.find((caseStudy) => caseStudy.id === caseId);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
+
+  // For swipe functionality
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const minSwipeDistance = 50; // Minimum distance for a swipe to be recognized
 
   console.log("CaseStudy component rendered/re-rendered.");
 
@@ -146,6 +159,335 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
       document.removeEventListener("keydown", handleEscape);
     };
   }, [showModal]);
+
+  const openImagePreview = (src, index) => {
+    setModalImageSrc(src);
+    setCurrentScreenshotIndex(index); // Set the current index when opening the modal
+    setShowModal(true);
+  };
+
+  const closeImagePreview = () => {
+    setModalImageSrc("");
+    setShowModal(false);
+  };
+
+  const hasScreenshots = caseStudy?.screenshots?.length > 0;
+  const currentScreenshot = hasScreenshots
+    ? caseStudy.screenshots[currentScreenshotIndex]
+    : null;
+
+  const currentScreenshotAlt = currentScreenshot?.altKey
+    ? getNestedTranslation(t, currentScreenshot.altKey)
+    : `${t?.screenshot || "Screenshot"} ${currentScreenshotIndex + 1}`;
+
+  const currentScreenshotDescription = currentScreenshot?.descriptionKey
+    ? getNestedTranslation(t, currentScreenshot.descriptionKey)
+    : "";
+
+  const goToPreviousSlide = () => {
+    setCurrentScreenshotIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : caseStudy.screenshots.length - 1
+    );
+  };
+
+  const goToNextSlide = () => {
+    setCurrentScreenshotIndex((prevIndex) =>
+      prevIndex < caseStudy.screenshots.length - 1 ? prevIndex + 1 : 0
+    );
+  };
+
+  // New functions for modal navigation (already adjusted from previous step, just ensuring context)
+  const goToPreviousModalSlide = (e) => {
+    e.stopPropagation(); // Prevent modal from closing when clicking buttons
+    setCurrentScreenshotIndex((prevIndex) => {
+      const newIndex =
+        prevIndex > 0 ? prevIndex - 1 : caseStudy.screenshots.length - 1;
+      setModalImageSrc(caseStudy.screenshots[newIndex].src); // Update modal image src
+      return newIndex;
+    });
+  };
+
+  const goToNextModalSlide = (e) => {
+    e.stopPropagation(); // Prevent modal from closing when clicking buttons
+    setCurrentScreenshotIndex((prevIndex) => {
+      const newIndex =
+        prevIndex < caseStudy.screenshots.length - 1 ? prevIndex + 1 : 0;
+      setModalImageSrc(caseStudy.screenshots[newIndex].src); // Update modal image src
+      return newIndex;
+    });
+  };
+
+  // Swipe handlers for the modal carousel
+  const onTouchStartModalCarousel = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const onTouchMoveModalCarousel = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const onTouchEndModalCarousel = () => {
+    if (!caseStudy.screenshots || caseStudy.screenshots.length <= 1) return;
+
+    const distance = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      goToNextModalSlide({ stopPropagation: () => {} }); // Pass dummy stopPropagation
+    } else if (isRightSwipe) {
+      goToPreviousModalSlide({ stopPropagation: () => {} }); // Pass dummy stopPropagation
+    }
+  };
+
+  const ImagePreviewModal = ({
+    isOpen,
+    onClose,
+    imageSrc,
+    altText,
+    description,
+    currentIndex,
+    totalItems,
+    onPrevious,
+    onNext,
+    onTouchStart,
+    onTouchMove,
+    onTouchEnd,
+  }) => {
+    const [scale, setScale] = useState(1);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [isDragging, setIsDragging] = useState(false);
+    const [startPos, setStartPos] = useState({ x: 0, y: 0 });
+    const imageRef = useRef(null);
+    const containerRef = useRef(null);
+
+    // Handle wheel zoom
+    const handleWheel = (e) => {
+      e.preventDefault();
+      const delta = e.deltaY * -0.005;
+      const newScale = Math.min(Math.max(0.5, scale + delta), 3);
+      setScale(newScale);
+    };
+
+    // Handle mouse down for dragging
+    const handleMouseDown = (e) => {
+      if (scale <= 1) return;
+      setIsDragging(true);
+      setStartPos({
+        x: e.clientX - position.x,
+        y: e.clientY - position.y,
+      });
+    };
+
+    // Handle mouse move for dragging
+    const handleMouseMove = (e) => {
+      if (!isDragging || scale <= 1) return;
+
+      const newX = e.clientX - startPos.x;
+      const newY = e.clientY - startPos.y;
+
+      const container = containerRef.current;
+      const img = imageRef.current;
+      if (!container || !img) return;
+
+      const containerRect = container.getBoundingClientRect();
+      const imgRect = img.getBoundingClientRect();
+
+      const maxX = (imgRect.width * scale - containerRect.width) / 2;
+      const maxY = (imgRect.height * scale - containerRect.height) / 2;
+
+      setPosition({
+        x: Math.max(-maxX, Math.min(maxX, newX)),
+        y: Math.max(-maxY, Math.min(maxY, newY)),
+      });
+    };
+
+    // Handle mouse up
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    // Handle click - zoom in/out
+    const handleClick = (e) => {
+      if (isDragging) {
+        setIsDragging(false);
+        return;
+      }
+
+      if (e.target.closest("button")) return;
+
+      if (scale > 1) {
+        resetImage();
+      } else {
+        setScale(2);
+      }
+    };
+
+    // Reset image to default state
+    const resetImage = () => {
+      setScale(1);
+      setPosition({ x: 0, y: 0 });
+    };
+
+    // Zoom to specific level
+    const zoomTo = (level) => {
+      setScale(level);
+      setPosition({ x: 0, y: 0 });
+    };
+
+    useEffect(() => {
+      resetImage();
+    }, [imageSrc]);
+
+    if (!isOpen) return null;
+
+    return (
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black backdrop-blur-lg"
+        onClick={onClose}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
+        <div className="relative w-full max-w-6xl h-full flex flex-col">
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="absolute top-2 right-2 z-50 text-white text-2xl p-2 rounded-full hover:bg-white/10 transition"
+            aria-label="Close"
+          >
+            &times;
+          </button>
+
+          {/* Image container */}
+          <div
+            ref={containerRef}
+            className="flex-1 flex items-center justify-center relative overflow-hidden"
+            onWheel={handleWheel}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            onClick={handleClick}
+          >
+            <div
+              className="absolute inset-0 flex items-center justify-center cursor-grab active:cursor-grabbing"
+              style={{
+                transform: `translate(${position.x}px, ${position.y}px)`,
+              }}
+            >
+              <img
+                ref={imageRef}
+                src={imageSrc}
+                alt={altText}
+                className="max-w-full max-h-[80vh] object-contain rounded-lg transition-transform duration-300"
+                style={{
+                  transform: `scale(${scale})`,
+                  cursor:
+                    scale > 1 ? (isDragging ? "grabbing" : "grab") : "zoom-in",
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Controls container at the bottom */}
+          <div className="bg-black/50 p-4 rounded-b-lg">
+            {/* Zoom controls row */}
+            <div className="flex justify-center items-center mb-4 space-x-2">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  zoomTo(0.5);
+                }}
+                className={`px-3 py-1 rounded-full ${
+                  scale === 0.5 ? "bg-white/20" : "hover:bg-white/10"
+                }`}
+              >
+                <span className="text-white text-sm">50%</span>
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  zoomTo(1);
+                }}
+                className={`px-3 py-1 rounded-full ${
+                  scale === 1 ? "bg-white/20" : "hover:bg-white/10"
+                }`}
+              >
+                <span className="text-white text-sm">100%</span>
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  zoomTo(2);
+                }}
+                className={`px-3 py-1 rounded-full ${
+                  scale === 2 ? "bg-white/20" : "hover:bg-white/10"
+                }`}
+              >
+                <span className="text-white text-sm">200%</span>
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  zoomTo(3);
+                }}
+                className={`px-3 py-1 rounded-full ${
+                  scale === 3 ? "bg-white/20" : "hover:bg-white/10"
+                }`}
+              >
+                <span className="text-white text-sm">300%</span>
+              </button>
+            </div>
+
+            {/* Navigation and info row */}
+            <div className="flex justify-between items-center">
+              {/* Navigation arrows (only if multiple items) */}
+              {totalItems > 1 && (
+                <div className="flex space-x-4">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onPrevious(e);
+                      resetImage();
+                    }}
+                    className="bg-black/50 hover:bg-black/75 text-white rounded-full p-2 transition"
+                  >
+                    <ChevronLeftIcon className="h-6 w-6" />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onNext(e);
+                      resetImage();
+                    }}
+                    className="bg-black/50 hover:bg-black/75 text-white rounded-full p-2 transition"
+                  >
+                    <ChevronRightIcon className="h-6 w-6" />
+                  </button>
+                </div>
+              )}
+
+              {/* Image counter */}
+              <div className="text-gray-400 text-sm mx-4">
+                {currentIndex + 1} / {totalItems}
+              </div>
+
+              {/* Empty div to balance the flex layout */}
+              {totalItems <= 1 && <div className="flex-1"></div>}
+            </div>
+
+            {/* Description */}
+            {description && (
+              <p className="text-white text-center text-sm md:text-base mt-4">
+                {description}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   if (!caseStudy) {
     return (
@@ -180,51 +522,47 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
     );
   }
 
-  console.log(`CaseStudy loaded: ${getNestedTranslation(t, caseStudy?.titleKey)}`);
+  const CarouselNavigation = ({
+    onPrevious,
+    onNext,
+    currentIndex,
+    totalItems,
+    className = "",
+    showCounter = true,
+  }) => {
+    return (
+      <div className={`relative ${className}`}>
+        <div className="flex justify-between items-center">
+          <button
+            onClick={onPrevious}
+            className="bg-blue-700/50 hover:bg-blue-600 text-white rounded-full p-2 focus:outline-none transition"
+            aria-label="Previous"
+          >
+            <ChevronLeftIcon className="h-6 w-6" />
+          </button>
+
+          {showCounter && (
+            <div className="text-gray-400 text-sm mx-4">
+              {currentIndex + 1} / {totalItems}
+            </div>
+          )}
+
+          <button
+            onClick={onNext}
+            className="bg-blue-700/50 hover:bg-blue-600 text-white rounded-full p-2 focus:outline-none transition"
+            aria-label="Next"
+          >
+            <ChevronRightIcon className="h-6 w-6" />
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  console.log(
+    `CaseStudy loaded: ${getNestedTranslation(t, caseStudy?.titleKey)}`
+  );
   console.log("CaseStudy details:", caseStudy);
-
-  const hasScreenshots = caseStudy?.screenshots?.length > 0;
-  const currentScreenshot = hasScreenshots
-    ? caseStudy.screenshots?.[currentScreenshotIndex]
-    : null;
-
-  const currentScreenshotAlt = currentScreenshot?.altKey
-    ? getNestedTranslation(t, currentScreenshot.altKey)
-    : `${t?.screenshot || 'Screenshot'} ${currentScreenshotIndex + 1}`;
-
-  const currentScreenshotDescription = currentScreenshot?.descriptionKey
-    ? getNestedTranslation(t, currentScreenshot.descriptionKey)
-    : '';
-
-  const goToPreviousSlide = () => {
-    setCurrentScreenshotIndex((prevIndex) => {
-      const newIndex =
-        prevIndex > 0 ? prevIndex - 1 : caseStudy.screenshots.length - 1;
-      console.log(`Navigating to previous slide. New index: ${newIndex}`);
-      return newIndex;
-    });
-  };
-
-  const goToNextSlide = () => {
-    setCurrentScreenshotIndex((prevIndex) => {
-      const newIndex =
-        prevIndex < caseStudy.screenshots.length - 1 ? prevIndex + 1 : 0;
-      console.log(`Navigating to next slide. New index: ${newIndex}`);
-      return newIndex;
-    });
-  };
-
-  const openImagePreview = (src) => {
-    setModalImageSrc(src);
-    setShowModal(true);
-    console.log(`Opening image preview for: ${src}`);
-  };
-
-  const closeImagePreview = () => {
-    setModalImageSrc("");
-    setShowModal(false);
-    console.log("Closing image preview.");
-  };
 
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900 text-white">
@@ -282,62 +620,61 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
           </p>
         </div>
 
+        {/* Main Carousel */}
         {hasScreenshots && (
           <section className="mb-20">
             <div className="relative bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
-              {/* Current Screenshot Container */}
-              <div className="flex justify-center items-center mb-4 w-full max-w-4xl mx-auto h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[550px] bg-gray-800 rounded-lg overflow-hidden">
-                <div
-                  className="block w-full h-full justify-center items-center cursor-pointer"
-                  onClick={() => openImagePreview(currentScreenshot?.src)}
-                  role="button"
-                  tabIndex="0"
-                  aria-label={`Open preview of image: ${currentScreenshotAlt}`}
-                >
-                  <img
-                    src={currentScreenshot?.src}
-                    alt={currentScreenshotAlt}
-                    className="max-w-full max-h-full object-contain transition-transform duration-300 ease-in-out transform hover:scale-105"
-                  />
-                </div>
+              <h3 className="text-lg font-semibold text-white text-center mb-4">
+                {currentScreenshotAlt}
+              </h3>
+
+              <div className="flex justify-center items-center mb-4 w-full max-w-4xl mx-auto h-[350px] bg-gray-800 rounded-lg overflow-hidden">
+                <img
+                  src={currentScreenshot.src}
+                  alt={currentScreenshotAlt}
+                  className="max-w-full max-h-full object-contain cursor-pointer hover:scale-105 transition-transform"
+                  onClick={() =>
+                    openImagePreview(
+                      currentScreenshot.src,
+                      currentScreenshotIndex
+                    )
+                  }
+                />
               </div>
 
-              {/* Navigation Buttons */}
-              {/* LEFT (Previous) Button */}
-              <div
-                className="absolute top-1/2 transform -translate-y-1/2"
-                style={{ left: "32px" }}
-              >
-                <button
-                  onClick={goToPreviousSlide}
-                  className="bg-blue-700/50 hover:bg-blue-600 text-white rounded-full p-2 focus:outline-none"
-                >
-                  <ChevronLeftIcon className="h-6 w-6" />
-                  <span className="sr-only">{t?.previous}</span>
-                </button>
-              </div>
+              <CarouselNavigation
+                onPrevious={goToPreviousSlide}
+                onNext={goToNextSlide}
+                currentIndex={currentScreenshotIndex}
+                totalItems={caseStudy.screenshots.length}
+                className="mt-4 justify-center"
+              />
 
-              {/* RIGHT (Next) Button */}
-              <div
-                className="absolute top-1/2 transform -translate-y-1/2"
-                style={{ right: "32px" }}
-              >
-                <button
-                  onClick={goToNextSlide}
-                  className="bg-blue-700/50 hover:bg-blue-600 text-white rounded-full p-2 focus:outline-none"
-                >
-                  <ChevronRightIcon className="h-6 w-6" />
-                  <span className="sr-only">{t?.next}</span>
-                </button>
-              </div>
-
-              {/* Image Counter */}
-              <div className="text-center text-gray-400 text-sm">
-                {currentScreenshotIndex + 1} / {caseStudy.screenshots.length}
-              </div>
+              {currentScreenshotDescription && (
+                <p className="text-center text-gray-300 text-sm mt-2">
+                  {currentScreenshotDescription}
+                </p>
+              )}
             </div>
           </section>
         )}
+
+        {/* Image Preview Modal */}
+        <ImagePreviewModal
+          isOpen={showModal}
+          onClose={closeImagePreview}
+          imageSrc={modalImageSrc}
+          altText={currentScreenshotAlt}
+          description={currentScreenshotDescription}
+          currentIndex={currentScreenshotIndex}
+          totalItems={caseStudy.screenshots?.length || 0}
+          onPrevious={goToPreviousModalSlide}
+          onNext={goToNextModalSlide}
+          onTouchStart={onTouchStartModalCarousel}
+          onTouchMove={onTouchMoveModalCarousel}
+          onTouchEnd={onTouchEndModalCarousel}
+        />
+
         {/* Fallback to original demo CTA if no screenshots */}
         {!hasScreenshots && caseStudy?.demoUrl && (
           <div className="flex justify-center mb-20 animate-fade-in-up">
@@ -523,31 +860,6 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
           </a>
         </section>
       </div>
-
-      {showModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-75 backdrop-blur-sm"
-          onClick={closeImagePreview}
-        >
-          <div
-            className="relative max-w-full max-h-full overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={modalImageSrc}
-              alt="Preview"
-              className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-xl"
-            />
-            <button
-              onClick={closeImagePreview}
-              className="absolute top-4 right-4 text-white text-3xl p-2 rounded-full bg-black/50 hover:bg-black/75 transition"
-              aria-label="Close image preview"
-            >
-              &times;
-            </button>
-          </div>
-        </div>
-      )}
     </section>
   );
 }
