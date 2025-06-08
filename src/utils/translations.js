@@ -173,6 +173,117 @@ const translations = {
     sortByPriceDesc: "Price: High to Low",
     sortByNameAsc: "Name: A to Z",
     sortByNameDesc: "Name: Z to A",
+    caseStudies: {
+      ecommercePlatform: {
+        title: "E-commerce Platform",
+        subtitle: "Modern online store with seamless checkout experience",
+        overview:
+          "A complete e-commerce solution built to handle high traffic volumes while maintaining fast load times and excellent user experience.",
+        challenge:
+          "The client needed a scalable platform that could handle seasonal traffic spikes while providing a smooth mobile shopping experience.",
+        solution:
+          "We developed a custom React frontend with a Node.js backend, implementing lazy loading, optimized images, and a progressive web app approach for mobile users.",
+        results: [
+          "40% increase in mobile conversion rate",
+          "2.5 second average page load time at peak traffic",
+          "30% reduction in cart abandonment",
+        ],
+        testimonial:
+          '"The new platform has transformed our online business. The mobile experience is now on par with desktop, and our sales have increased dramatically."',
+      },
+      medtechPremier: {
+        title: "Medical Equipment Management Platform",
+        subtitle:
+          "Comprehensive maintenance and inventory system for Premier Medical Center",
+        overview:
+          "A web-based platform for managing medical equipment maintenance, inventory, and service orders at Premier Medical Center in Tijuana, implementing QR code tracking and a modified Fennigkoh-Smith prioritization method.",
+        challenge:
+          "The medical center faced challenges managing equipment due to manual processes, dispersed records, and inefficient maintenance scheduling, leading to delays and unnecessary costs.",
+        solution:
+          "Developed a PHP/MySQL web application with: QR code inventory tracking, dynamic maintenance calendar, service order management, role-based access control, and equipment prioritization system.",
+        features: [
+          "QR Code Equipment Tracking",
+          "Dynamic Maintenance Calendar",
+          "Fennigkoh-Smith Prioritization",
+          "Role-based Access Control",
+          "Service Order Management",
+        ],
+        results: [
+          "40% reduction in equipment downtime",
+          "Centralized equipment database",
+          "Automated maintenance scheduling",
+        ],
+        testimonial:
+          '"The platform has revolutionized our biomedical department\'s operations, providing instant access to equipment history and streamlined maintenance processes."',
+        screenshots: {
+          calendar: {
+            alt: "Calendar page for scheduling maintenance",
+            description:
+              "This page allows hospital staff to schedule and view maintenance appointments for medical equipment.",
+          },
+          label: {
+            alt: "Medical equipment tracking label leading to MachineInfo.php",
+            description:
+              "A unique QR code label for each piece of medical equipment, linking directly to its detailed information page.",
+          },
+          machineInfo: {
+            alt: "Desktop view of Machine Information page",
+            description:
+              "Detailed information about a specific medical equipment, including model, brand, serial number, location, status, and maintenance history.",
+          },
+          machineInfoMobile: {
+            alt: "Mobile view of Machine Information page",
+            description:
+              "The mobile-friendly version of the equipment details page, optimized for on-the-go access.",
+          },
+          main: {
+            alt: "Main dashboard showing recent tickets and upcoming maintenance",
+            description:
+              "The main dashboard provides a quick overview of recent service tickets and upcoming maintenance schedules.",
+          },
+          mainMobile: {
+            alt: "Mobile view of the Main dashboard",
+            description:
+              "The mobile version of the main dashboard, designed for easy navigation on smaller screens.",
+          },
+          manuals: {
+            alt: "Manuals page to select PDF files",
+            description:
+              "A dedicated section for accessing PDF manuals for various medical equipment.",
+          },
+          multipleLabels: {
+            alt: "Page showing multiple medical equipment labels",
+            description:
+              "An overview of multiple generated QR code labels for different equipment.",
+          },
+          nurseEstation: {
+            alt: "Nurse Station quick access to report issues",
+            description:
+              "A streamlined interface for nurses to quickly report equipment issues, improving response times.",
+          },
+          reports: {
+            alt: "Reports page with graphs and maintenance list",
+            description:
+              "Comprehensive reports displaying maintenance metrics like open/closed orders, total orders, average resolution time, and a detailed list of all maintenance activities.",
+          },
+          tickets: {
+            alt: "Tickets page to create maintenance tickets",
+            description:
+              "The ticketing system allows users to create, modify, prioritize, and view PDF versions of maintenance orders.",
+          },
+        },
+      },
+    },
+    // General Case Study Component Keys
+    caseStudyNotFound: "Case Study Not Found",
+    caseStudyNotFoundMessage:
+      "The requested case study doesn't exist or may have been removed.",
+    returnHome: "Return Home",
+    backToPortfolio: "Back to Portfolio",
+    viewDemo: "View Demo",
+    viewFullReport: "View Full Report",
+    downloadPDF: "Download PDF",
+    exploreMoreCaseStudies: "Explore More Case Studies",
   },
   es: {
     // Existing Hero translations (from your previous Hero.jsx)
@@ -354,6 +465,117 @@ const translations = {
     sortByPriceDesc: "Precio: Mayor a Menor",
     sortByNameAsc: "Nombre: A a Z",
     sortByNameDesc: "Nombre: Z a A",
+    caseStudies: {
+      ecommercePlatform: {
+        title: "Plataforma de Comercio Electrónico",
+        subtitle: "Tienda en línea moderna con experiencia de pago fluida",
+        overview:
+          "Una solución completa de comercio electrónico construida para manejar grandes volúmenes de tráfico manteniendo tiempos de carga rápidos y una excelente experiencia de usuario.",
+        challenge:
+          "El cliente necesitaba una plataforma escalable que pudiera manejar picos de tráfico estacionales mientras proporcionaba una experiencia de compra móvil fluida.",
+        solution:
+          "Desarrollamos un frontend personalizado en React con un backend en Node.js, implementando lazy loading, imágenes optimizadas y un enfoque de aplicación web progresiva para usuarios móviles.",
+        results: [
+          "40% de aumento en la tasa de conversión móvil",
+          "Tiempo de carga promedio de 2.5 segundos en horas pico",
+          "30% de reducción en el abandono de carritos",
+        ],
+        testimonial:
+          '"La nueva plataforma ha transformado nuestro negocio en línea. La experiencia móvil ahora está a la par con el escritorio, y nuestras ventas han aumentado dramáticamente."',
+      },
+      medtechPremier: {
+        title: "Plataforma de Gestión de Equipos Médicos",
+        subtitle:
+          "Sistema integral de mantenimiento e inventario para el Centro Médico Premier",
+        overview:
+          "Plataforma web para la gestión de mantenimiento, inventario y órdenes de servicio de equipos médicos en el Centro Médico Premier de Tijuana, implementando seguimiento por códigos QR y método modificado Fennigkoh-Smith para priorización.",
+        challenge:
+          "El centro médico enfrentaba desafíos en la gestión de equipos debido a procesos manuales, registros dispersos y programación ineficiente de mantenimientos, generando retrasos y costos innecesarios.",
+        solution:
+          "Desarrollamos una aplicación web PHP/MySQL con: seguimiento de inventario por QR, calendario dinámico de mantenimientos, gestión de órdenes de servicio, control de acceso por roles y sistema de priorización de equipos.",
+        features: [
+          "Seguimiento de equipos con QR",
+          "Calendario dinámico de mantenimientos",
+          "Priorización Fennigkoh-Smith",
+          "Control de acceso por roles",
+          "Gestión de órdenes de servicio",
+        ],
+        results: [
+          "40% reducción en tiempo de inactividad",
+          "Base de datos centralizada de equipos",
+          "Programación automática de mantenimientos",
+        ],
+        testimonial:
+          '"La plataforma ha revolucionado las operaciones de nuestro departamento biomédico, proporcionando acceso instantáneo al historial de equipos y procesos de mantenimiento optimizados."',
+        screenshots: {
+          calendar: {
+            alt: "Página de calendario para programar mantenimientos",
+            description:
+              "Esta página permite al personal del hospital programar y visualizar citas de mantenimiento para equipos médicos.",
+          },
+          label: {
+            alt: "Etiqueta de seguimiento de equipos médicos que lleva a MachineInfo.php",
+            description:
+              "Una etiqueta con código QR único para cada equipo médico, que enlaza directamente a su página de información detallada.",
+          },
+          machineInfo: {
+            alt: "Vista de escritorio de la página de información de la máquina",
+            description:
+              "Información detallada sobre un equipo médico específico, incluyendo modelo, marca, número de serie, ubicación, estado e historial de mantenimiento.",
+          },
+          machineInfoMobile: {
+            alt: "Vista móvil de la página de información de la máquina",
+            description:
+              "La versión móvil de la página de detalles del equipo, optimizada para el acceso en movimiento.",
+          },
+          main: {
+            alt: "Panel principal mostrando tickets recientes y próximos mantenimientos programados",
+            description:
+              "El panel principal ofrece una visión rápida de los tickets de servicio recientes y los próximos programas de mantenimiento.",
+          },
+          mainMobile: {
+            alt: "Vista móvil del panel principal",
+            description:
+              "La versión móvil del panel principal, diseñada para una fácil navegación en pantallas más pequeñas.",
+          },
+          manuals: {
+            alt: "Página de manuales para seleccionar archivos PDF",
+            description:
+              "Una sección dedicada para acceder a los manuales en formato PDF de varios equipos médicos.",
+          },
+          multipleLabels: {
+            alt: "Página mostrando múltiples etiquetas de equipos médicos",
+            description:
+              "Una visión general de múltiples etiquetas de códigos QR generadas para diferentes equipos.",
+          },
+          nurseEstation: {
+            alt: "Estación de enfermería: acceso rápido para reportar problemas",
+            description:
+              "Una interfaz optimizada para que las enfermeras reporten rápidamente problemas con el equipo, mejorando los tiempos de respuesta.",
+          },
+          reports: {
+            alt: "Página de informes con gráficos y lista de mantenimientos",
+            description:
+              "Informes completos que muestran métricas de mantenimiento como órdenes abiertas/cerradas, órdenes totales, tiempo promedio de resolución y una lista detallada de todas las actividades de mantenimiento.",
+          },
+          tickets: {
+            alt: "Página de tickets para crear órdenes de mantenimiento",
+            description:
+              "El sistema de tickets permite a los usuarios crear, modificar, priorizar y ver versiones PDF de las órdenes de mantenimiento.",
+          },
+        },
+      },
+    },
+    // General Case Study Component Keys
+    caseStudyNotFound: "Caso de Estudio No Encontrado",
+    caseStudyNotFoundMessage:
+      "El caso de estudio solicitado no existe o puede haber sido eliminado.",
+    returnHome: "Volver al Inicio",
+    backToPortfolio: "Volver al Portafolio",
+    viewDemo: "Ver Demo",
+    viewFullReport: "Ver Informe Completo",
+    downloadPDF: "Descargar PDF",
+    exploreMoreCaseStudies: "Explorar Más Casos de Estudio",
   },
 };
 

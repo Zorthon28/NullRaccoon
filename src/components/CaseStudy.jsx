@@ -3,76 +3,45 @@ import { useParams } from "react-router-dom";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
+// Helper function to get nested translation safely
+const getNestedTranslation = (obj, path) => {
+  return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+};
 
+// THIS ARRAY NOW ONLY CONTAINS REFERENCES TO THE TRANSLATION KEYS AND OTHER NON-TRANSLATABLE DATA
 const caseStudies = [
   {
     id: "ecommerce-platform",
-    title: {
-      en: "E-commerce Platform",
-      es: "Plataforma de Comercio Electrónico",
-    },
-    subtitle: {
-      en: "Modern online store with seamless checkout experience",
-      es: "Tienda en línea moderna con experiencia de pago fluida",
-    },
-    overview: {
-      en: "A complete e-commerce solution built to handle high traffic volumes while maintaining fast load times and excellent user experience.",
-      es: "Una solución completa de comercio electrónico construida para manejar grandes volúmenes de tráfico manteniendo tiempos de carga rápidos y una excelente experiencia de usuario.",
-    },
-    challenge: {
-      en: "The client needed a scalable platform that could handle seasonal traffic spikes while providing a smooth mobile shopping experience.",
-      es: "El cliente necesitaba una plataforma escalable que pudiera manejar picos de tráfico estacionales mientras proporcionaba una experiencia de compra móvil fluida.",
-    },
-    solution: {
-      en: "We developed a custom React frontend with a Node.js backend, implementing lazy loading, optimized images, and a progressive web app approach for mobile users.",
-      es: "Desarrollamos un frontend personalizado en React con un backend en Node.js, implementando lazy loading, imágenes optimizadas y un enfoque de aplicación web progresiva para usuarios móviles.",
-    },
-    technologies: ["React", "Node.js", "MongoDB", "Stripe API", "Tailwind CSS"],
-    results: [
-      {
-        en: "40% increase in mobile conversion rate",
-        es: "40% de aumento en la tasa de conversión móvil",
-      },
-      {
-        en: "2.5 second average page load time at peak traffic",
-        es: "Tiempo de carga promedio de 2.5 segundos en horas pico",
-      },
-      {
-        en: "30% reduction in cart abandonment",
-        es: "30% de reducción en el abandono de carritos",
-      },
+    titleKey: "caseStudies.ecommercePlatform.title", // Reference to the translation key
+    subtitleKey: "caseStudies.ecommercePlatform.subtitle",
+    overviewKey: "caseStudies.ecommercePlatform.overview",
+    challengeKey: "caseStudies.ecommercePlatform.challenge",
+    solutionKey: "caseStudies.ecommercePlatform.solution",
+    resultsKeys: [
+      "caseStudies.ecommercePlatform.results.0", // Referencing array elements by index
+      "caseStudies.ecommercePlatform.results.1",
+      "caseStudies.ecommercePlatform.results.2",
     ],
-    testimonial: {
-      en: '"The new platform has transformed our online business. The mobile experience is now on par with desktop, and our sales have increased dramatically."',
-      es: '"La nueva plataforma ha transformado nuestro negocio en línea. La experiencia móvil ahora está a la par con el escritorio, y nuestras ventas han aumentado dramáticamente."',
-    },
-    client: "Jane Smith, CEO of ShopExample",
-    // No screenshots for this example, only demoUrl (will be ignored if screenshots exist)
+    testimonialKey: "caseStudies.ecommercePlatform.testimonial",
+    client: "Jane Smith, CEO of ShopExample", // This can remain here if it's not translatable
+    technologies: ["React", "Node.js", "MongoDB", "Stripe API", "Tailwind CSS"],
     demoUrl: "https://demo-ecommerce.example.com",
     imageUrl: "/images/ecommerce-case.jpg",
   },
   {
     id: "medtech-premier",
-    title: {
-      en: "Medical Equipment Management Platform",
-      es: "Plataforma de Gestión de Equipos Médicos",
-    },
-    subtitle: {
-      en: "Comprehensive maintenance and inventory system for Premier Medical Center",
-      es: "Sistema integral de mantenimiento e inventario para el Centro Médico Premier",
-    },
-    overview: {
-      en: "A web-based platform for managing medical equipment maintenance, inventory, and service orders at Premier Medical Center in Tijuana, implementing QR code tracking and a modified Fennigkoh-Smith prioritization method.",
-      es: "Plataforma web para la gestión de mantenimiento, inventario y órdenes de servicio de equipos médicos en el Centro Médico Premier de Tijuana, implementando seguimiento por códigos QR y método modificado Fennigkoh-Smith para priorización.",
-    },
-    challenge: {
-      en: "The medical center faced challenges managing equipment due to manual processes, dispersed records, and inefficient maintenance scheduling, leading to delays and unnecessary costs.",
-      es: "El centro médico enfrentaba desafíos en la gestión de equipos debido a procesos manuales, registros dispersos y programación ineficiente de mantenimientos, generando retrasos y costos innecesarios.",
-    },
-    solution: {
-      en: "Developed a PHP/MySQL web application with: QR code inventory tracking, dynamic maintenance calendar, service order management, role-based access control, and equipment prioritization system.",
-      es: "Desarrollamos una aplicación web PHP/MySQL con: seguimiento de inventario por QR, calendario dinámico de mantenimientos, gestión de órdenes de servicio, control de acceso por roles y sistema de priorización de equipos.",
-    },
+    titleKey: "caseStudies.medtechPremier.title",
+    subtitleKey: "caseStudies.medtechPremier.subtitle",
+    overviewKey: "caseStudies.medtechPremier.overview",
+    challengeKey: "caseStudies.medtechPremier.challenge",
+    solutionKey: "caseStudies.medtechPremier.solution",
+    featuresKeys: [
+      "caseStudies.medtechPremier.features.0",
+      "caseStudies.medtechPremier.features.1",
+      "caseStudies.medtechPremier.features.2",
+      "caseStudies.medtechPremier.features.3",
+      "caseStudies.medtechPremier.features.4",
+    ],
     technologies: [
       "PHP",
       "MySQL",
@@ -81,176 +50,74 @@ const caseStudies = [
       "CSS3",
       "QR Code Generation",
     ],
-    features: [
-      {
-        en: "QR Code Equipment Tracking",
-        es: "Seguimiento de equipos con QR",
-      },
-      {
-        en: "Dynamic Maintenance Calendar",
-        es: "Calendario dinámico de mantenimientos",
-      },
-      {
-        en: "Fennigkoh-Smith Prioritization",
-        es: "Priorización Fennigkoh-Smith",
-      },
-      {
-        en: "Role-based Access Control",
-        es: "Control de acceso por roles",
-      },
-      {
-        en: "Service Order Management",
-        es: "Gestión de órdenes de servicio",
-      },
+    resultsKeys: [
+      "caseStudies.medtechPremier.results.0",
+      "caseStudies.medtechPremier.results.1",
+      "caseStudies.medtechPremier.results.2",
     ],
-    results: [
-      {
-        en: "40% reduction in equipment downtime",
-        es: "40% reducción en tiempo de inactividad",
-      },
-      {
-        en: "Centralized equipment database",
-        es: "Base de datos centralizada de equipos",
-      },
-      {
-        en: "Automated maintenance scheduling",
-        es: "Programación automática de mantenimientos",
-      },
-    ],
-    testimonial: {
-      en: '"The platform has revolutionized our biomedical department\'s operations, providing instant access to equipment history and streamlined maintenance processes."',
-      es: '"La plataforma ha revolucionado las operaciones de nuestro departamento biomédico, proporcionando acceso instantáneo al historial de equipos y procesos de mantenimiento optimizados."',
-    },
+    testimonialKey: "caseStudies.medtechPremier.testimonial",
     client: "Centro Médico Premier, Tijuana",
     imageUrl: "/images/medtech-premier.jpg",
-    documentUrl: "/docs/medtech-premier-report.pdf", // Link to your PDF report
+    documentUrl: "/docs/medtech-premier-report.pdf",
     screenshots: [
       {
         src: "/images/Calendar.png",
-        alt: {
-          en: "Calendar page for scheduling maintenance",
-          es: "Página de calendario para programar mantenimientos",
-        },
-        description: {
-          en: "This page allows hospital staff to schedule and view maintenance appointments for medical equipment.",
-          es: "Esta página permite al personal del hospital programar y visualizar citas de mantenimiento para equipos médicos.",
-        },
+        altKey: "caseStudies.medtechPremier.screenshots.calendar.alt",
+        descriptionKey: "caseStudies.medtechPremier.screenshots.calendar.description",
       },
       {
         src: "/images/label.png",
-        alt: {
-          en: "Medical equipment tracking label leading to MachineInfo.php",
-          es: "Etiqueta de seguimiento de equipos médicos que lleva a MachineInfo.php",
-        },
-        description: {
-          en: "A unique QR code label for each piece of medical equipment, linking directly to its detailed information page.",
-          es: "Una etiqueta con código QR único para cada equipo médico, que enlaza directamente a su página de información detallada.",
-        },
+        altKey: "caseStudies.medtechPremier.screenshots.label.alt",
+        descriptionKey: "caseStudies.medtechPremier.screenshots.label.description",
       },
       {
         src: "/images/MachineInfo.png",
-        alt: {
-          en: "Desktop view of Machine Information page",
-          es: "Vista de escritorio de la página de información de la máquina",
-        },
-        description: {
-          en: "Detailed information about a specific medical equipment, including model, brand, serial number, location, status, and maintenance history.",
-          es: "Información detallada sobre un equipo médico específico, incluyendo modelo, marca, número de serie, ubicación, estado e historial de mantenimiento.",
-        },
+        altKey: "caseStudies.medtechPremier.screenshots.machineInfo.alt",
+        descriptionKey: "caseStudies.medtechPremier.screenshots.machineInfo.description",
       },
       {
         src: "/images/MachineInfoMobile.png",
-        alt: {
-          en: "Mobile view of Machine Information page",
-          es: "Vista móvil de la página de información de la máquina",
-        },
-        description: {
-          en: "The mobile-friendly version of the equipment details page, optimized for on-the-go access.",
-          es: "La versión móvil de la página de detalles del equipo, optimizada para el acceso en movimiento.",
-        },
+        altKey: "caseStudies.medtechPremier.screenshots.machineInfoMobile.alt",
+        descriptionKey: "caseStudies.medtechPremier.screenshots.machineInfoMobile.description",
       },
       {
         src: "/images/Main.png",
-        alt: {
-          en: "Main dashboard showing recent tickets and upcoming maintenance",
-          es: "Panel principal mostrando tickets recientes y próximos mantenimientos programados",
-        },
-        description: {
-          en: "The main dashboard provides a quick overview of recent service tickets and upcoming maintenance schedules.",
-          es: "El panel principal ofrece una visión rápida de los tickets de servicio recientes y los próximos programas de mantenimiento.",
-        },
+        altKey: "caseStudies.medtechPremier.screenshots.main.alt",
+        descriptionKey: "caseStudies.medtechPremier.screenshots.main.description",
       },
       {
         src: "/images/Main-mobile.png",
-        alt: {
-          en: "Mobile view of the Main dashboard",
-          es: "Vista móvil del panel principal",
-        },
-        description: {
-          en: "The mobile version of the main dashboard, designed for easy navigation on smaller screens.",
-          es: "La versión móvil del panel principal, diseñada para una fácil navegación en pantallas más pequeñas.",
-        },
+        altKey: "caseStudies.medtechPremier.screenshots.mainMobile.alt",
+        descriptionKey: "caseStudies.medtechPremier.screenshots.mainMobile.description",
       },
       {
         src: "/images/Manuales.png",
-        alt: {
-          en: "Manuals page to select PDF files",
-          es: "Página de manuales para seleccionar archivos PDF",
-        },
-        description: {
-          en: "A dedicated section for accessing PDF manuals for various medical equipment.",
-          es: "Una sección dedicada para acceder a los manuales en formato PDF de varios equipos médicos.",
-        },
+        altKey: "caseStudies.medtechPremier.screenshots.manuals.alt",
+        descriptionKey: "caseStudies.medtechPremier.screenshots.manuals.description",
       },
       {
         src: "/images/MultipleLabels.png",
-        alt: {
-          en: "Page showing multiple medical equipment labels",
-          es: "Página mostrando múltiples etiquetas de equipos médicos",
-        },
-        description: {
-          en: "An overview of multiple generated QR code labels for different equipment.",
-          es: "Una visión general de múltiples etiquetas de códigos QR generadas para diferentes equipos.",
-        },
+        altKey: "caseStudies.medtechPremier.screenshots.multipleLabels.alt",
+        descriptionKey: "caseStudies.medtechPremier.screenshots.multipleLabels.description",
       },
       {
         src: "/images/NurseEstation.png",
-        alt: {
-          en: "Nurse Station quick access to report issues",
-          es: "Estación de enfermería: acceso rápido para reportar problemas",
-        },
-        description: {
-          en: "A streamlined interface for nurses to quickly report equipment issues, improving response times.",
-          es: "Una interfaz optimizada para que las enfermeras reporten rápidamente problemas con el equipo, mejorando los tiempos de respuesta.",
-        },
+        altKey: "caseStudies.medtechPremier.screenshots.nurseEstation.alt",
+        descriptionKey: "caseStudies.medtechPremier.screenshots.nurseEstation.description",
       },
       {
         src: "/images/Reports.png",
-        alt: {
-          en: "Reports page with graphs and maintenance list",
-          es: "Página de informes con gráficos y lista de mantenimientos",
-        },
-        description: {
-          en: "Comprehensive reports displaying maintenance metrics like open/closed orders, total orders, average resolution time, and a detailed list of all maintenance activities.",
-          es: "Informes completos que muestran métricas de mantenimiento como órdenes abiertas/cerradas, órdenes totales, tiempo promedio de resolución y una lista detallada de todas las actividades de mantenimiento.",
-        },
+        altKey: "caseStudies.medtechPremier.screenshots.reports.alt",
+        descriptionKey: "caseStudies.medtechPremier.screenshots.reports.description",
       },
       {
         src: "/images/Tickets.png",
-        alt: {
-          en: "Tickets page to create maintenance tickets",
-          es: "Página de tickets para crear órdenes de mantenimiento",
-        },
-        description: {
-          en: "The ticketing system allows users to create, modify, prioritize, and view PDF versions of maintenance orders.",
-          es: "El sistema de tickets permite a los usuarios crear, modificar, priorizar y ver versiones PDF de las órdenes de mantenimiento.",
-        },
+        altKey: "caseStudies.medtechPremier.screenshots.tickets.alt",
+        descriptionKey: "caseStudies.medtechPremier.screenshots.tickets.description",
       },
     ],
   },
-  // Add more case studies as needed
 ];
-
 
 
 export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }) {
@@ -265,8 +132,6 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
 
   const handleGoBack = () => {
     navigate(-1); // This tells React Router to go back one step in history
-    // Alternatively, to go to a specific portfolio page:
-    // navigate('/portfolio'); // Replace '/portfolio' with your actual portfolio route
   };
 
   useEffect(() => {
@@ -280,7 +145,7 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
     return () => {
       document.removeEventListener("keydown", handleEscape);
     };
-  }, [showModal]); // Re-run effect if showModal changes
+  }, [showModal]);
 
   if (!caseStudy) {
     return (
@@ -300,34 +165,42 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
           ))}
         </div>
         <div className="relative z-10 text-center p-8 bg-white/10 rounded-xl max-w-md mx-auto">
-          <h1 className="text-4xl font-bold mb-4">Case Study Not Found</h1>
+          <h1 className="text-4xl font-bold mb-4">{t?.caseStudyNotFound}</h1>
           <p className="text-xl text-gray-300 mb-8">
-            The requested case study doesn't exist or may have been removed.
+            {t?.caseStudyNotFoundMessage}
           </p>
           <a
             href="/"
             className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-medium hover:opacity-90 transition"
           >
-            Return Home
+            {t?.returnHome}
           </a>
         </div>
       </section>
     );
   }
 
-  console.log(`CaseStudy loaded: ${caseStudy?.title?.[lang]}`); // ADD THIS
-  console.log("CaseStudy details:", caseStudy); // ADD THIS (careful with sensitive data)
+  console.log(`CaseStudy loaded: ${getNestedTranslation(t, caseStudy?.titleKey)}`);
+  console.log("CaseStudy details:", caseStudy);
 
   const hasScreenshots = caseStudy?.screenshots?.length > 0;
   const currentScreenshot = hasScreenshots
     ? caseStudy.screenshots?.[currentScreenshotIndex]
     : null;
 
+  const currentScreenshotAlt = currentScreenshot?.altKey
+    ? getNestedTranslation(t, currentScreenshot.altKey)
+    : `${t?.screenshot || 'Screenshot'} ${currentScreenshotIndex + 1}`;
+
+  const currentScreenshotDescription = currentScreenshot?.descriptionKey
+    ? getNestedTranslation(t, currentScreenshot.descriptionKey)
+    : '';
+
   const goToPreviousSlide = () => {
     setCurrentScreenshotIndex((prevIndex) => {
       const newIndex =
         prevIndex > 0 ? prevIndex - 1 : caseStudy.screenshots.length - 1;
-      console.log(`Navigating to previous slide. New index: ${newIndex}`); // ADD THIS
+      console.log(`Navigating to previous slide. New index: ${newIndex}`);
       return newIndex;
     });
   };
@@ -336,7 +209,7 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
     setCurrentScreenshotIndex((prevIndex) => {
       const newIndex =
         prevIndex < caseStudy.screenshots.length - 1 ? prevIndex + 1 : 0;
-      console.log(`Navigating to next slide. New index: ${newIndex}`); // ADD THIS
+      console.log(`Navigating to next slide. New index: ${newIndex}`);
       return newIndex;
     });
   };
@@ -344,13 +217,13 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
   const openImagePreview = (src) => {
     setModalImageSrc(src);
     setShowModal(true);
-    console.log(`Opening image preview for: ${src}`); // ADD THIS
+    console.log(`Opening image preview for: ${src}`);
   };
 
   const closeImagePreview = () => {
     setModalImageSrc("");
     setShowModal(false);
-    console.log("Closing image preview."); // ADD THIS
+    console.log("Closing image preview.");
   };
 
   return (
@@ -375,7 +248,6 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
         {/* Back Button */}
         <div className="absolute top-8 left-8 z-50 sm:top-10 sm:left-10 md:top-12 md:left-12">
           {" "}
-          {/* Increased top/left for mobile and higher z-index */}
           <button
             onClick={handleGoBack}
             className="flex items-center space-x-2 p-3 bg-blue-700/70 hover:bg-blue-600 text-white rounded-full shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
@@ -395,24 +267,23 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
                 d="M10 19l-7-7m0 0l7-7m-7 7h18"
               ></path>
             </svg>
-            <span className="hidden sm:inline">Back to Portfolio</span>
+            <span className="hidden sm:inline">{t?.backToPortfolio}</span>
           </button>
         </div>
         {/* Case Study Header */}
         <div className="mb-10 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300">
-              {caseStudy?.title?.[lang]}
+              {getNestedTranslation(t, caseStudy?.titleKey)}
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-            {caseStudy?.subtitle?.[lang]}
+            {getNestedTranslation(t, caseStudy?.subtitleKey)}
           </p>
         </div>
 
         {hasScreenshots && (
           <section className="mb-20">
-            {/* THIS DIV MUST HAVE THE 'relative' CLASS for buttons to position correctly */}
             <div className="relative bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
               {/* Current Screenshot Container */}
               <div className="flex justify-center items-center mb-4 w-full max-w-4xl mx-auto h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[550px] bg-gray-800 rounded-lg overflow-hidden">
@@ -421,16 +292,11 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
                   onClick={() => openImagePreview(currentScreenshot?.src)}
                   role="button"
                   tabIndex="0"
-                  aria-label={`Open preview of image: ${
-                    currentScreenshot?.alt?.[lang] || "Screenshot"
-                  }`}
+                  aria-label={`Open preview of image: ${currentScreenshotAlt}`}
                 >
                   <img
                     src={currentScreenshot?.src}
-                    alt={
-                      currentScreenshot?.alt?.[lang] ||
-                      `${t?.screenshot} ${currentScreenshotIndex + 1}`
-                    }
+                    alt={currentScreenshotAlt}
                     className="max-w-full max-h-full object-contain transition-transform duration-300 ease-in-out transform hover:scale-105"
                   />
                 </div>
@@ -508,7 +374,7 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
                 {t?.overview}
               </h2>
               <p className="text-gray-300 leading-relaxed">
-                {caseStudy?.overview?.[lang]}
+                {getNestedTranslation(t, caseStudy?.overviewKey)}
               </p>
             </section>
 
@@ -518,7 +384,7 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
                 {t?.challenge}
               </h2>
               <p className="text-gray-300 leading-relaxed">
-                {caseStudy?.challenge?.[lang]}
+                {getNestedTranslation(t, caseStudy?.challengeKey)}
               </p>
             </section>
 
@@ -528,19 +394,19 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
                 {t?.solution}
               </h2>
               <p className="text-gray-300 leading-relaxed">
-                {caseStudy?.solution?.[lang]}
+                {getNestedTranslation(t, caseStudy?.solutionKey)}
               </p>
             </section>
 
             {/* Key Features (if applicable) */}
-            {caseStudy?.features?.length > 0 && (
+            {caseStudy?.featuresKeys?.length > 0 && (
               <section className="bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20">
                 <h2 className="text-2xl font-bold mb-4 text-green-300">
                   {t?.features}
                 </h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-300">
-                  {caseStudy.features.map((feature, index) => (
-                    <li key={index}>{feature?.[lang]}</li>
+                  {caseStudy.featuresKeys.map((featureKey, index) => (
+                    <li key={index}>{getNestedTranslation(t, featureKey)}</li>
                   ))}
                 </ul>
               </section>
@@ -572,7 +438,7 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
                 {t?.results}
               </h2>
               <ul className="space-y-3">
-                {caseStudy?.results?.map((result, index) => (
+                {caseStudy?.resultsKeys?.map((resultKey, index) => (
                   <li key={index} className="flex items-start text-gray-300">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -586,7 +452,7 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span>{result?.[lang]}</span>
+                    <span>{getNestedTranslation(t, resultKey)}</span>
                   </li>
                 ))}
               </ul>
@@ -598,7 +464,7 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
                 {t?.testimonial}
               </h2>
               <blockquote className="text-gray-300 italic mb-2">
-                "{caseStudy?.testimonial?.[lang]}"
+                "{getNestedTranslation(t, caseStudy?.testimonialKey)}"
               </blockquote>
               <p className="text-gray-400 text-sm">— {caseStudy?.client}</p>
             </section>
@@ -607,7 +473,7 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
             {caseStudy?.documentUrl && (
               <section className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 text-center">
                 <h2 className="text-xl font-bold mb-4 text-blue-300">
-                  View Full Report
+                  {t?.viewFullReport}
                 </h2>
                 <a
                   href={caseStudy.documentUrl}
@@ -627,7 +493,7 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
                       clipRule="evenodd"
                     />
                   </svg>
-                  Download PDF
+                  {t?.downloadPDF}
                 </a>
               </section>
             )}
@@ -637,12 +503,11 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
         {/* Next Case Study */}
         <section className="text-center border-t border-white/10 pt-12">
           <h2 className="text-2xl font-bold mb-8">{t?.nextCase}</h2>
-          {/* You'll need to dynamically link to the next case study */}
           <a
-            href="/portfolio" // Or a function to get the next case study ID
+            href="/portfolio"
             className="inline-flex items-center px-6 py-3 border border-white/20 rounded-full text-white hover:bg-white/10 transition duration-300"
           >
-            Explore More Case Studies
+            {t?.exploreMoreCaseStudies}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 ml-2"
@@ -662,11 +527,11 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
       {showModal && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-75 backdrop-blur-sm"
-          onClick={closeImagePreview} // Close when clicking on the dimmed background
+          onClick={closeImagePreview}
         >
           <div
             className="relative max-w-full max-h-full overflow-hidden"
-            onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking on the image itself
+            onClick={(e) => e.stopPropagation()}
           >
             <img
               src={modalImageSrc}
