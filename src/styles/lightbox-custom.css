@@ -1,0 +1,170 @@
+/* Custom styles for react-image-lightbox */
+
+/* Override background to match your site's dark theme */
+.ril-outer {
+  background-color: rgba(0, 0, 0, 0.95) !important;
+}
+
+/* Make navigation buttons larger and more visually distinct */
+.ril-prev-button,
+.ril-next-button {
+  background-color: rgba(60, 100, 200, 0.6) !important;
+  color: #fff !important;
+  border-radius: 9999px !important;
+  width: 3.5rem !important; /* Slightly smaller for mobile */
+  height: 3.5rem !important; /* Slightly smaller for mobile */
+  transition: background-color 0.3s ease, transform 0.2s ease !important;
+  top: 50% !important; /* Vertically center */
+  transform: translateY(-50%) !important;
+}
+
+.ril-prev-button:hover,
+.ril-next-button:hover {
+  background-color: rgba(60, 100, 200, 0.8) !important;
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* Adjust close button for better visibility */
+.ril-close-button {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+  border-radius: 9999px !important;
+  width: 2.5rem !important; /* Slightly smaller for mobile */
+  height: 2.5rem !important; /* Slightly smaller for mobile */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background-color 0.3s ease !important;
+  top: 1rem !important; /* Keep it near the top */
+  right: 1rem !important; /* Keep it near the right edge */
+}
+
+.ril-close-button:hover {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Style the captions for better readability and mobile responsiveness */
+.ril-caption {
+  background-color: rgba(0, 0, 0, 0.8) !important; /* Slightly more opaque for better contrast */
+  padding: 0.75rem 1rem !important; /* Adjusted padding for mobile */
+  color: #e2e8f0 !important;
+  line-height: 1.4 !important; /* Tighter line height for more content */
+  text-align: center !important;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  max-height: 25vh !important; /* Default max-height for caption */
+  overflow-y: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  position: absolute !important; /* Ensure it stays at the bottom */
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important; /* Occupy full width at the bottom */
+  box-sizing: border-box !important; /* Include padding in width calculation */
+}
+
+/* Crucial adjustments for text wrapping */
+.ril-caption-main {
+  font-weight: 600 !important;
+  color: #fff !important;
+  margin-bottom: 0.25rem !important;
+  font-size: 1rem !important; /* Base font size */
+  
+  /* --- IMPORTANT: Ensure text wraps --- */
+  white-space: normal !important; /* Override any nowrap */
+  word-break: break-word !important; /* Break long words */
+  overflow-wrap: break-word !important; /* Standard property for breaking words */
+  text-overflow: clip !important; /* Prevent ellipsis */
+  /* ------------------------------------- */
+
+  flex-shrink: 0;
+}
+
+.ril-caption-description {
+  font-size: 0.85rem !important; /* Slightly smaller description for mobile */
+  color: #cbd5e1 !important;
+  
+  /* --- IMPORTANT: Ensure text wraps --- */
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  text-overflow: clip !important;
+  /* ------------------------------------- */
+
+  flex-grow: 1;
+}
+
+/* Media queries for specific breakpoints */
+
+/* Tablets and larger phones */
+@media (min-width: 640px) {
+  .ril-caption {
+    padding: 1rem 1.5rem !important;
+    max-height: 30vh !important;
+  }
+  .ril-caption-main {
+    font-size: 1.125rem !important; /* md:text-lg */
+  }
+  .ril-caption-description {
+    font-size: 0.9rem !important;
+  }
+  .ril-prev-button,
+  .ril-next-button {
+    width: 4rem !important;
+    height: 4rem !important;
+  }
+  .ril-close-button {
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+}
+
+/* Desktops and larger */
+@media (min-width: 1024px) {
+  .ril-caption {
+    max-height: 35vh !important; /* Allow more height on large screens */
+  }
+  .ril-caption-main {
+    font-size: 1.25rem !important; /* lg:text-xl */
+  }
+  .ril-caption-description {
+    font-size: 1rem !important;
+  }
+}
+
+/* Target the specific item containing the title in the left toolbar */
+.ril-toolbar-left .ril-toolbar__item__child {
+  /* Ensure text wraps */
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  text-overflow: clip !important;
+
+  /* Allow the toolbar to take up more horizontal space if needed on mobile */
+  /* This might push other toolbar items if space is very limited,
+     but it prioritizes the title. */
+  flex-grow: 1 !important; /* Allow it to grow */
+  flex-shrink: 1 !important; /* Allow it to shrink, but text will wrap */
+  min-width: 0 !important; /* Essential for flex items to shrink below content size */
+  max-width: 70% !important; /* Limit its max width to leave space for other buttons */
+  text-align: left !important; /* Align left if it wraps to multiple lines */
+  padding-right: 0.5rem !important; /* Small padding so it doesn't touch buttons */
+}
+
+/* Potentially adjust padding on the entire toolbar to give more room */
+.ril-toolbar {
+    padding: 0.5rem 1rem !important; /* Adjust overall toolbar padding */
+    height: auto !important; /* Allow toolbar height to expand with wrapping text */
+    align-items: flex-start !important; /* Align items to top if text wraps */
+}
+
+/* Ensure the ril-toolbar-left container behaves correctly */
+.ril-toolbar-left {
+    flex-grow: 1 !important;
+    min-width: 0 !important; /* Allow it to shrink */
+    display: flex !important; /* Ensure it's a flex container */
+    align-items: flex-start !important; /* Align items to the top if the title wraps */
+}

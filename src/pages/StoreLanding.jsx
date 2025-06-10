@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Star, Truck, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
+
 const FeatureCard = ({ Icon, title, description, delay }) => (
   <motion.div
     className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
