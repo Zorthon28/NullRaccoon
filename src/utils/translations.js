@@ -223,7 +223,7 @@ const translations = {
               "This page allows hospital staff to schedule and view maintenance appointments for medical equipment.",
           },
           label: {
-            alt: "Medical equipment tracking label leading to MachineInfo.php",
+            alt: "Medical equipment tracking label",
             altMobile: "Equipment Tracking Label",
             description:
               "A unique QR code label for each piece of medical equipment, linking directly to its detailed information page.",
@@ -514,7 +514,7 @@ const translations = {
               "Esta página permite al personal del hospital programar y visualizar citas de mantenimiento para equipos médicos.",
           },
           label: {
-            alt: "Etiqueta de seguimiento de equipos médicos que lleva a MachineInfo.php",
+            alt: "Etiqueta de seguimiento de equipos médicos",
             altMobile: "Etiqueta de Equipo Médico",
             description:
               "Una etiqueta con código QR único para cada equipo médico, que enlaza directamente a su página de información detallada.",
