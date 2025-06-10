@@ -218,56 +218,55 @@ const translations = {
         screenshots: {
           calendar: {
             alt: "Calendar page for scheduling maintenance",
+            altMobile: "Calendar Scheduling",
             description:
               "This page allows hospital staff to schedule and view maintenance appointments for medical equipment.",
           },
           label: {
             alt: "Medical equipment tracking label leading to MachineInfo.php",
+            altMobile: "Equipment Tracking Label",
             description:
               "A unique QR code label for each piece of medical equipment, linking directly to its detailed information page.",
           },
           machineInfo: {
             alt: "Desktop view of Machine Information page",
+            altMobile: "Machine Info (Desktop)",
             description:
               "Detailed information about a specific medical equipment, including model, brand, serial number, location, status, and maintenance history.",
           },
-          machineInfoMobile: {
-            alt: "Mobile view of Machine Information page",
+          nurseEstation: {
+            alt: "Nurse Station quick access to report issues",
+            altMobile: "Nurse Station Report",
             description:
-              "The mobile-friendly version of the equipment details page, optimized for on-the-go access.",
+              "A streamlined interface for nurses to quickly report equipment issues, improving response times.",
           },
           main: {
             alt: "Main dashboard showing recent tickets and upcoming maintenance",
+            altMobile: "Main Dashboard",
             description:
               "The main dashboard provides a quick overview of recent service tickets and upcoming maintenance schedules.",
           },
-          mainMobile: {
-            alt: "Mobile view of the Main dashboard",
-            description:
-              "The mobile version of the main dashboard, designed for easy navigation on smaller screens.",
-          },
           manuals: {
             alt: "Manuals page to select PDF files",
+            altMobile: "Manuals Page",
             description:
               "A dedicated section for accessing PDF manuals for various medical equipment.",
           },
           multipleLabels: {
             alt: "Page showing multiple medical equipment labels",
+            altMobile: "Multiple Labels",
             description:
               "An overview of multiple generated QR code labels for different equipment.",
           },
-          nurseEstation: {
-            alt: "Nurse Station quick access to report issues",
-            description:
-              "A streamlined interface for nurses to quickly report equipment issues, improving response times.",
-          },
           reports: {
             alt: "Reports page with graphs and maintenance list",
+            altMobile: "Reports & Maintenance",
             description:
               "Comprehensive reports displaying maintenance metrics like open/closed orders, total orders, average resolution time, and a detailed list of all maintenance activities.",
           },
           tickets: {
             alt: "Tickets page to create maintenance tickets",
+            altMobile: "Maintenance Tickets",
             description:
               "The ticketing system allows users to create, modify, prioritize, and view PDF versions of maintenance orders.",
           },
@@ -510,56 +509,67 @@ const translations = {
         screenshots: {
           calendar: {
             alt: "Página de calendario para programar mantenimientos",
+            altMobile: "Calendario de Mantenimiento",
             description:
               "Esta página permite al personal del hospital programar y visualizar citas de mantenimiento para equipos médicos.",
           },
           label: {
             alt: "Etiqueta de seguimiento de equipos médicos que lleva a MachineInfo.php",
+            altMobile: "Etiqueta de Equipo Médico",
             description:
               "Una etiqueta con código QR único para cada equipo médico, que enlaza directamente a su página de información detallada.",
           },
           machineInfo: {
             alt: "Vista de escritorio de la página de información de la máquina",
+            altMobile: "Info Máquina (Escritorio)",
             description:
               "Información detallada sobre un equipo médico específico, incluyendo modelo, marca, número de serie, ubicación, estado e historial de mantenimiento.",
           },
           machineInfoMobile: {
             alt: "Vista móvil de la página de información de la máquina",
+            altMobile: "Info Máquina (Móvil)",
             description:
               "La versión móvil de la página de detalles del equipo, optimizada para el acceso en movimiento.",
           },
           main: {
             alt: "Panel principal mostrando tickets recientes y próximos mantenimientos programados",
+            altMobile: "Panel Principal",
             description:
               "El panel principal ofrece una visión rápida de los tickets de servicio recientes y los próximos programas de mantenimiento.",
           },
           mainMobile: {
             alt: "Vista móvil del panel principal",
+            altMobile: "Panel Principal (Móvil)",
             description:
               "La versión móvil del panel principal, diseñada para una fácil navegación en pantallas más pequeñas.",
           },
           manuals: {
             alt: "Página de manuales para seleccionar archivos PDF",
+            altMobile: "Página de Manuales",
             description:
               "Una sección dedicada para acceder a los manuales en formato PDF de varios equipos médicos.",
           },
           multipleLabels: {
             alt: "Página mostrando múltiples etiquetas de equipos médicos",
+            altMobile: "Múltiples Etiquetas",
             description:
               "Una visión general de múltiples etiquetas de códigos QR generadas para diferentes equipos.",
           },
           nurseEstation: {
             alt: "Estación de enfermería: acceso rápido para reportar problemas",
+            altMobile: "Reporte Enfermería",
             description:
               "Una interfaz optimizada para que las enfermeras reporten rápidamente problemas con el equipo, mejorando los tiempos de respuesta.",
           },
           reports: {
             alt: "Página de informes con gráficos y lista de mantenimientos",
+            altMobile: "Informes y Mantenimiento",
             description:
               "Informes completos que muestran métricas de mantenimiento como órdenes abiertas/cerradas, órdenes totales, tiempo promedio de resolución y una lista detallada de todas las actividades de mantenimiento.",
           },
           tickets: {
             alt: "Página de tickets para crear órdenes de mantenimiento",
+            altMobile: "Órdenes de Mantenimiento",
             description:
               "El sistema de tickets permite a los usuarios crear, modificar, priorizar y ver versiones PDF de las órdenes de mantenimiento.",
           },

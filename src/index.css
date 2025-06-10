@@ -104,3 +104,37 @@
 .animate-slideFadeInOut {
   animation: slideFadeInOut 1.2s ease-out;
 }
+
+/* Custom Scrollbar Styles for WebKit browsers (Chrome, Safari, Edge, newer Firefox) */
+/* Apply this to elements that you want to have a custom scrollbar, e.g., by adding a class like 'custom-scrollbar' */
+
+/* For the scrollbar track (the background) */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1); /* A light, semi-transparent track */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+/* For the scrollbar thumb (the draggable part) */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 255, 0.5); /* A semi-transparent blue thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+  border: 2px solid rgba(255, 255, 255, 0.05); /* A slight border for definition */
+}
+
+/* For the scrollbar thumb on hover */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 100, 255, 0.7); /* Darker blue on hover */
+}
+
+/* For the scrollbar itself (its width) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px; /* Vertical scrollbar width */
+  height: 8px; /* Horizontal scrollbar height (if applicable) */
+}
+
+/* Specific styles for Firefox (modern versions) */
+/* Apply this to the same element as 'custom-scrollbar' */
+.custom-scrollbar {
+  scrollbar-width: thin; /* 'auto' | 'thin' | 'none' */
+  scrollbar-color: rgba(100, 100, 255, 0.5) rgba(255, 255, 255, 0.1); /* thumb-color track-color */
+}

@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ArrowsPointingOutIcon,
+} from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
+import "../styles/lightbox-custom.css";
 
 // Helper function to get nested translation safely
 const getNestedTranslation = (obj, path) => {
-  return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
 };
 
-// THIS ARRAY NOW ONLY CONTAINS REFERENCES TO THE TRANSLATION KEYS AND OTHER NON-TRANSLATABLE DATA
 const caseStudies = [
   {
     id: "ecommerce-platform",
@@ -58,75 +65,123 @@ const caseStudies = [
     testimonialKey: "caseStudies.medtechPremier.testimonial",
     client: "Centro Médico Premier, Tijuana",
     imageUrl: "/images/medtech-premier.jpg",
-    documentUrl: "/docs/medtech-premier-report.pdf",
+    documentUrl: "/files/medtech-premier-report.pdf",
     screenshots: [
       {
         src: "/images/Calendar.png",
         altKey: "caseStudies.medtechPremier.screenshots.calendar.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.calendar.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.calendar.description",
+        altMobileKey:
+          "caseStudies.medtechPremier.screenshots.calendar.altMobile",
       },
       {
         src: "/images/label.png",
         altKey: "caseStudies.medtechPremier.screenshots.label.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.label.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.label.description",
+        altMobileKey: "caseStudies.medtechPremier.screenshots.label.altMobile",
       },
       {
         src: "/images/MachineInfo.png",
         altKey: "caseStudies.medtechPremier.screenshots.machineInfo.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.machineInfo.description",
-      },
-      {
-        src: "/images/MachineInfoMobile.png",
-        altKey: "caseStudies.medtechPremier.screenshots.machineInfoMobile.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.machineInfoMobile.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.machineInfo.description",
+        altMobileKey:
+          "caseStudies.medtechPremier.screenshots.machineInfo.altMobile",
       },
       {
         src: "/images/Main.png",
         altKey: "caseStudies.medtechPremier.screenshots.main.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.main.description",
-      },
-      {
-        src: "/images/Main-mobile.png",
-        altKey: "caseStudies.medtechPremier.screenshots.mainMobile.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.mainMobile.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.main.description",
+        altMobileKey: "caseStudies.medtechPremier.screenshots.main.altMobile",
       },
       {
         src: "/images/Manuales.png",
         altKey: "caseStudies.medtechPremier.screenshots.manuals.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.manuals.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.manuals.description",
+        altMobileKey:
+          "caseStudies.medtechPremier.screenshots.manuals.altMobile",
       },
       {
         src: "/images/MultipleLabels.png",
         altKey: "caseStudies.medtechPremier.screenshots.multipleLabels.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.multipleLabels.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.multipleLabels.description",
+        altMobileKey:
+          "caseStudies.medtechPremier.screenshots.multipleLabels.altMobile",
       },
       {
         src: "/images/NurseEstation.png",
         altKey: "caseStudies.medtechPremier.screenshots.nurseEstation.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.nurseEstation.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.nurseEstation.description",
+        altMobileKey:
+          "caseStudies.medtechPremier.screenshots.nurseEstation.altMobile",
       },
       {
         src: "/images/Reports.png",
         altKey: "caseStudies.medtechPremier.screenshots.reports.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.reports.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.reports.description",
+        altMobileKey:
+          "caseStudies.medtechPremier.screenshots.reports.altMobile",
       },
       {
         src: "/images/Tickets.png",
         altKey: "caseStudies.medtechPremier.screenshots.tickets.alt",
-        descriptionKey: "caseStudies.medtechPremier.screenshots.tickets.description",
+        descriptionKey:
+          "caseStudies.medtechPremier.screenshots.tickets.description",
+        altMobileKey:
+          "caseStudies.medtechPremier.screenshots.tickets.altMobile",
       },
     ],
   },
 ];
 
+// Animation variants for scroll reveal
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 }, // Starts invisible and 50px below its final position
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }, // Fades in and slides up
+};
 
-export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }) {
+export default function CaseStudy({
+  lang,
+  t,
+  showQuoteModal,
+  setShowQuoteModal,
+}) {
   const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
-  const [modalImageSrc, setModalImageSrc] = useState("");
   const { caseId } = useParams();
   const caseStudy = caseStudies.find((caseStudy) => caseStudy.id === caseId);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Assuming 'md' breakpoint from Tailwind CSS (768px) is your mobile cutoff
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Set initial state
+    handleResize();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Empty dependency array means this runs once on mount and cleans up on unmount
+
+  // Function to open the lightbox
+  const openLightbox = (index) => {
+    setPhotoIndex(index);
+    setLightboxOpen(true);
+  };
 
   console.log("CaseStudy component rendered/re-rendered.");
 
@@ -134,18 +189,37 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
     navigate(-1); // This tells React Router to go back one step in history
   };
 
-  useEffect(() => {
-    const handleEscape = (event) => {
-      if (event.key === "Escape" && showModal) {
-        closeImagePreview();
-      }
-    };
+  const hasScreenshots = caseStudy?.screenshots?.length > 0;
+  const currentScreenshot = hasScreenshots
+    ? caseStudy.screenshots[currentScreenshotIndex]
+    : null;
 
-    document.addEventListener("keydown", handleEscape);
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, [showModal]);
+  const currentScreenshotAlt =
+    currentScreenshot?.altMobileKey && isMobile
+      ? getNestedTranslation(t, currentScreenshot.altMobileKey)
+      : currentScreenshot?.altKey
+      ? getNestedTranslation(t, currentScreenshot.altKey)
+      : `${t?.screenshot || "Screenshot"} ${currentScreenshotIndex + 1}`;
+
+  const currentScreenshotDescription = currentScreenshot?.descriptionKey
+    ? getNestedTranslation(t, currentScreenshot.descriptionKey)
+    : "";
+
+  const goToPreviousSlide = () => {
+    setCurrentScreenshotIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : caseStudy.screenshots.length - 1
+    );
+  };
+
+  const goToNextSlide = () => {
+    setCurrentScreenshotIndex((prevIndex) =>
+      prevIndex < caseStudy.screenshots.length - 1 ? prevIndex + 1 : 0
+    );
+  };
+
+  const goToSpecificSlide = (index) => {
+    setCurrentScreenshotIndex(index);
+  };
 
   if (!caseStudy) {
     return (
@@ -180,51 +254,47 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
     );
   }
 
-  console.log(`CaseStudy loaded: ${getNestedTranslation(t, caseStudy?.titleKey)}`);
+  const CarouselNavigation = ({
+    onPrevious,
+    onNext,
+    currentIndex,
+    totalItems,
+    className = "",
+    showCounter = true,
+  }) => {
+    return (
+      <div className={`relative ${className}`}>
+        <div className="flex justify-between items-center">
+          <button
+            onClick={onPrevious}
+            className="bg-blue-700/50 hover:bg-blue-600 text-white rounded-full p-2 focus:outline-none transition"
+            aria-label="Previous"
+          >
+            <ChevronLeftIcon className="h-6 w-6" />
+          </button>
+
+          {showCounter && (
+            <div className="text-gray-400 text-sm mx-4">
+              {currentIndex + 1} / {totalItems}
+            </div>
+          )}
+
+          <button
+            onClick={onNext}
+            className="bg-blue-700/50 hover:bg-blue-600 text-white rounded-full p-2 focus:outline-none transition"
+            aria-label="Next"
+          >
+            <ChevronRightIcon className="h-6 w-6" />
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  console.log(
+    `CaseStudy loaded: ${getNestedTranslation(t, caseStudy?.titleKey)}`
+  );
   console.log("CaseStudy details:", caseStudy);
-
-  const hasScreenshots = caseStudy?.screenshots?.length > 0;
-  const currentScreenshot = hasScreenshots
-    ? caseStudy.screenshots?.[currentScreenshotIndex]
-    : null;
-
-  const currentScreenshotAlt = currentScreenshot?.altKey
-    ? getNestedTranslation(t, currentScreenshot.altKey)
-    : `${t?.screenshot || 'Screenshot'} ${currentScreenshotIndex + 1}`;
-
-  const currentScreenshotDescription = currentScreenshot?.descriptionKey
-    ? getNestedTranslation(t, currentScreenshot.descriptionKey)
-    : '';
-
-  const goToPreviousSlide = () => {
-    setCurrentScreenshotIndex((prevIndex) => {
-      const newIndex =
-        prevIndex > 0 ? prevIndex - 1 : caseStudy.screenshots.length - 1;
-      console.log(`Navigating to previous slide. New index: ${newIndex}`);
-      return newIndex;
-    });
-  };
-
-  const goToNextSlide = () => {
-    setCurrentScreenshotIndex((prevIndex) => {
-      const newIndex =
-        prevIndex < caseStudy.screenshots.length - 1 ? prevIndex + 1 : 0;
-      console.log(`Navigating to next slide. New index: ${newIndex}`);
-      return newIndex;
-    });
-  };
-
-  const openImagePreview = (src) => {
-    setModalImageSrc(src);
-    setShowModal(true);
-    console.log(`Opening image preview for: ${src}`);
-  };
-
-  const closeImagePreview = () => {
-    setModalImageSrc("");
-    setShowModal(false);
-    console.log("Closing image preview.");
-  };
 
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900 text-white">
@@ -246,7 +316,7 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
         {/* Back Button */}
-        <div className="absolute top-8 left-8 z-50 sm:top-10 sm:left-10 md:top-12 md:left-12">
+        <div className="absolute top-12 left-8 z-50 sm:top-14 sm:left-10 md:top-16 md:left-12">
           {" "}
           <button
             onClick={handleGoBack}
@@ -273,7 +343,7 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
         {/* Case Study Header */}
         <div className="mb-10 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300 break-words px-4 sm:px-0">
               {getNestedTranslation(t, caseStudy?.titleKey)}
             </span>
           </h1>
@@ -282,62 +352,134 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
           </p>
         </div>
 
+        {/* Main Carousel */}
         {hasScreenshots && (
-          <section className="mb-20">
+          <motion.section
+            className="mb-20"
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div className="relative bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
-              {/* Current Screenshot Container */}
-              <div className="flex justify-center items-center mb-4 w-full max-w-4xl mx-auto h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[550px] bg-gray-800 rounded-lg overflow-hidden">
-                <div
-                  className="block w-full h-full justify-center items-center cursor-pointer"
-                  onClick={() => openImagePreview(currentScreenshot?.src)}
-                  role="button"
-                  tabIndex="0"
-                  aria-label={`Open preview of image: ${currentScreenshotAlt}`}
+              <h3 className="text-lg font-semibold text-white text-center mb-4">
+                {currentScreenshotAlt}
+              </h3>
+
+              <div className="relative flex justify-center items-center mb-4 w-full max-w-4xl mx-auto h-[350px] bg-gray-800 rounded-lg overflow-hidden group">
+                {/* Main Image with Transition */}
+                <img
+                  src={currentScreenshot.src}
+                  alt={currentScreenshotAlt}
+                  className="max-w-full max-h-full object-contain rounded-lg transition-opacity duration-300 ease-in-out opacity-100"
+                />
+                {/* "View Full Screen" Overlay Button */}
+                <button
+                  onClick={() => openLightbox(currentScreenshotIndex)} // Use the new openLightbox function
+                  className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/70 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:opacity-100 p-4"
+                  aria-label="View full screen image"
                 >
-                  <img
-                    src={currentScreenshot?.src}
-                    alt={currentScreenshotAlt}
-                    className="max-w-full max-h-full object-contain transition-transform duration-300 ease-in-out transform hover:scale-105"
-                  />
+                  <div className="flex flex-col items-center justify-center">
+                    <ArrowsPointingOutIcon className="h-12 w-12 text-white drop-shadow-lg mb-2" />{" "}
+                    {/* Larger icon, shadow */}
+                    <span className="text-white text-lg font-semibold tracking-wide">
+                      {t?.viewFullscreen || "View Fullscreen"}{" "}
+                      {/* Translatable text */}
+                    </span>
+                  </div>
+                </button>
+              </div>
+
+              <CarouselNavigation
+                onPrevious={goToPreviousSlide}
+                onNext={goToNextSlide}
+                currentIndex={currentScreenshotIndex}
+                totalItems={caseStudy.screenshots.length}
+                className="mt-4 justify-center"
+              />
+
+              {/* Thumbnails */}
+              {caseStudy.screenshots.length > 1 && (
+                <div className="flex justify-start sm:justify-center overflow-x-auto whitespace-nowrap gap-3 mt-6 pb-2 scrollbar-hide">
+                  {caseStudy.screenshots.map((screenshot, index) => (
+                    <img
+                      key={index}
+                      src={screenshot.src}
+                      alt={
+                        getNestedTranslation(t, screenshot.altKey) ||
+                        `Thumbnail ${index + 1}`
+                      }
+                      className={`w-20 h-16 object-cover rounded-md cursor-pointer border-2 transition-all duration-200 ${
+                        index === currentScreenshotIndex
+                          ? "border-blue-500 ring-2 ring-blue-500"
+                          : "border-transparent hover:border-blue-300"
+                      }`}
+                      onClick={() => goToSpecificSlide(index)}
+                    />
+                  ))}
                 </div>
-              </div>
+              )}
 
-              {/* Navigation Buttons */}
-              {/* LEFT (Previous) Button */}
-              <div
-                className="absolute top-1/2 transform -translate-y-1/2"
-                style={{ left: "32px" }}
-              >
-                <button
-                  onClick={goToPreviousSlide}
-                  className="bg-blue-700/50 hover:bg-blue-600 text-white rounded-full p-2 focus:outline-none"
-                >
-                  <ChevronLeftIcon className="h-6 w-6" />
-                  <span className="sr-only">{t?.previous}</span>
-                </button>
-              </div>
-
-              {/* RIGHT (Next) Button */}
-              <div
-                className="absolute top-1/2 transform -translate-y-1/2"
-                style={{ right: "32px" }}
-              >
-                <button
-                  onClick={goToNextSlide}
-                  className="bg-blue-700/50 hover:bg-blue-600 text-white rounded-full p-2 focus:outline-none"
-                >
-                  <ChevronRightIcon className="h-6 w-6" />
-                  <span className="sr-only">{t?.next}</span>
-                </button>
-              </div>
-
-              {/* Image Counter */}
-              <div className="text-center text-gray-400 text-sm">
-                {currentScreenshotIndex + 1} / {caseStudy.screenshots.length}
-              </div>
+              {/* Add the description here */}
+              {currentScreenshotDescription && (
+                <p className="text-center text-gray-300 text-sm mt-4">
+                  {currentScreenshotDescription}
+                </p>
+              )}
             </div>
-          </section>
+          </motion.section>
         )}
+
+        {/* React-Image-Lightbox component */}
+        {lightboxOpen && caseStudy.screenshots && (
+          <Lightbox
+            mainSrc={caseStudy.screenshots[photoIndex].src}
+            nextSrc={
+              caseStudy.screenshots[
+                (photoIndex + 1) % caseStudy.screenshots.length
+              ].src
+            }
+            prevSrc={
+              caseStudy.screenshots[
+                (photoIndex + caseStudy.screenshots.length - 1) %
+                  caseStudy.screenshots.length
+              ].src
+            }
+            onCloseRequest={() => setLightboxOpen(false)}
+            onMovePrevRequest={() =>
+              setPhotoIndex(
+                (photoIndex + caseStudy.screenshots.length - 1) %
+                  caseStudy.screenshots.length
+              )
+            }
+            onMoveNextRequest={() =>
+              setPhotoIndex((photoIndex + 1) % caseStudy.screenshots.length)
+            }
+            imageTitle={`${
+              currentScreenshot?.altMobileKey && isMobile
+                ? getNestedTranslation(
+                    t,
+                    caseStudy.screenshots[photoIndex]?.altMobileKey
+                  )
+                : getNestedTranslation(
+                    t,
+                    caseStudy.screenshots[photoIndex]?.altKey
+                  )
+            } (${photoIndex + 1}/${caseStudy.screenshots.length})`}
+            // New props for modern look and feel
+            imageCaption={getNestedTranslation(
+              t,
+              caseStudy.screenshots[photoIndex]?.descriptionKey
+            )}
+            enableZoom={true} // Allow zooming in/out
+            reactModalStyle={{ overlay: { zIndex: 9999 } }} // Ensure it's on top of everything
+            animationDuration={300} // Smooth transitions
+            keyRepeatLimit={150} // Faster navigation on holding arrow keys
+            showImageCount={true} // Display "1 of X" counter
+            clickOutsideToClose={true} // Allow clicking outside to close
+          />
+        )}
+
         {/* Fallback to original demo CTA if no screenshots */}
         {!hasScreenshots && caseStudy?.demoUrl && (
           <div className="flex justify-center mb-20 animate-fade-in-up">
@@ -356,7 +498,7 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
               >
                 <path
                   fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1  0 000-1.414z"
                   clipRule="evenodd"
                 />
               </svg>
@@ -366,74 +508,16 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
 
         {/* Case Study Content */}
         <div className="grid md:grid-cols-3 gap-12 mb-20">
-          {/* Main content */}
-          <div className="md:col-span-2 space-y-12">
-            {/* Overview */}
-            <section className="bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20">
-              <h2 className="text-2xl font-bold mb-4 text-blue-300">
-                {t?.overview}
-              </h2>
-              <p className="text-gray-300 leading-relaxed">
-                {getNestedTranslation(t, caseStudy?.overviewKey)}
-              </p>
-            </section>
-
-            {/* Challenge */}
-            <section className="bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20">
-              <h2 className="text-2xl font-bold mb-4 text-purple-300">
-                {t?.challenge}
-              </h2>
-              <p className="text-gray-300 leading-relaxed">
-                {getNestedTranslation(t, caseStudy?.challengeKey)}
-              </p>
-            </section>
-
-            {/* Solution */}
-            <section className="bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20">
-              <h2 className="text-2xl font-bold mb-4 text-pink-300">
-                {t?.solution}
-              </h2>
-              <p className="text-gray-300 leading-relaxed">
-                {getNestedTranslation(t, caseStudy?.solutionKey)}
-              </p>
-            </section>
-
-            {/* Key Features (if applicable) */}
-            {caseStudy?.featuresKeys?.length > 0 && (
-              <section className="bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20">
-                <h2 className="text-2xl font-bold mb-4 text-green-300">
-                  {t?.features}
-                </h2>
-                <ul className="list-disc list-inside space-y-2 text-gray-300">
-                  {caseStudy.featuresKeys.map((featureKey, index) => (
-                    <li key={index}>{getNestedTranslation(t, featureKey)}</li>
-                  ))}
-                </ul>
-              </section>
-            )}
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-8">
-            {/* Technologies */}
-            <section className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
-              <h2 className="text-xl font-bold mb-4 text-blue-300">
-                {t?.technologies}
-              </h2>
-              <div className="flex flex-wrap gap-2">
-                {caseStudy?.technologies?.map((tech, index) => (
-                  <span
-                    key={index}
-                    className="px-3 py-1 bg-blue-900/50 text-blue-300 rounded-full text-sm"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </section>
-
-            {/* Results */}
-            <section className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+          {/* Sidebar - we will place the 'Results' section here with order control */}
+          <div className="space-y-8 md:col-span-1 flex flex-col">
+            {/* Results Section - Moved here to control its order for mobile */}
+            <motion.section
+              className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 order-first transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
               <h2 className="text-xl font-bold mb-4 text-purple-300">
                 {t?.results}
               </h2>
@@ -456,10 +540,39 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
                   </li>
                 ))}
               </ul>
-            </section>
+            </motion.section>
+
+            {/* Technologies */}
+            <motion.section
+              className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              <h2 className="text-xl font-bold mb-4 text-blue-300">
+                {t?.technologies}
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {caseStudy?.technologies?.map((tech, index) => (
+                  <span
+                    key={index}
+                    className="px-3 py-1 bg-blue-900/50 text-blue-300 rounded-full text-sm"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </motion.section>
 
             {/* Testimonial */}
-            <section className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+            <motion.section
+              className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
               <h2 className="text-xl font-bold mb-4 text-pink-300">
                 {t?.testimonial}
               </h2>
@@ -467,11 +580,17 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
                 "{getNestedTranslation(t, caseStudy?.testimonialKey)}"
               </blockquote>
               <p className="text-gray-400 text-sm">— {caseStudy?.client}</p>
-            </section>
+            </motion.section>
 
             {/* PDF Report Link (if applicable) */}
             {caseStudy?.documentUrl && (
-              <section className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 text-center">
+              <motion.section
+                className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 text-center transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+              >
                 <h2 className="text-xl font-bold mb-4 text-blue-300">
                   {t?.viewFullReport}
                 </h2>
@@ -495,59 +614,86 @@ export default function CaseStudy({ lang, t, showQuoteModal, setShowQuoteModal }
                   </svg>
                   {t?.downloadPDF}
                 </a>
-              </section>
+              </motion.section>
+            )}
+          </div>
+
+          {/* Main content */}
+          <div className="md:col-span-2 space-y-12 order-2 md:order-none">
+            {/* Overview */}
+            <motion.section
+              className="bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              <h2 className="text-2xl font-bold mb-4 text-blue-300">
+                {t?.overview}
+              </h2>
+              <p className="text-gray-300 leading-relaxed">
+                {getNestedTranslation(t, caseStudy?.overviewKey)}
+              </p>
+            </motion.section>
+
+            {/* Challenge */}
+            <motion.section
+              className="bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              <h2 className="text-2xl font-bold mb-4 text-purple-300">
+                {t?.challenge}
+              </h2>
+              <p className="text-gray-300 leading-relaxed">
+                {getNestedTranslation(t, caseStudy?.challengeKey)}
+              </p>
+            </motion.section>
+
+            {/* Solution */}
+            <motion.section
+              className="bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              <h2 className="text-2xl font-bold mb-4 text-pink-300">
+                {t?.solution}
+              </h2>
+              <p className="text-gray-300 leading-relaxed">
+                {getNestedTranslation(t, caseStudy?.solutionKey)}
+              </p>
+            </motion.section>
+
+            {/* Key Features (if applicable) */}
+            {caseStudy?.featuresKeys?.length > 0 && (
+              <motion.section
+                className="bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+              >
+                <h2 className="text-2xl font-bold mb-4 text-green-300">
+                  {t?.features}
+                </h2>
+                <ul className="list-disc list-inside space-y-2 text-gray-300">
+                  {caseStudy.featuresKeys.map((featureKey, index) => (
+                    <li key={index}>{getNestedTranslation(t, featureKey)}</li>
+                  ))}
+                </ul>
+              </motion.section>
             )}
           </div>
         </div>
 
         {/* Next Case Study */}
         <section className="text-center border-t border-white/10 pt-12">
-          <h2 className="text-2xl font-bold mb-8">{t?.nextCase}</h2>
-          <a
-            href="/portfolio"
-            className="inline-flex items-center px-6 py-3 border border-white/20 rounded-full text-white hover:bg-white/10 transition duration-300"
-          >
-            {t?.exploreMoreCaseStudies}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 ml-2"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </a>
         </section>
       </div>
-
-      {showModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-75 backdrop-blur-sm"
-          onClick={closeImagePreview}
-        >
-          <div
-            className="relative max-w-full max-h-full overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={modalImageSrc}
-              alt="Preview"
-              className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-xl"
-            />
-            <button
-              onClick={closeImagePreview}
-              className="absolute top-4 right-4 text-white text-3xl p-2 rounded-full bg-black/50 hover:bg-black/75 transition"
-              aria-label="Close image preview"
-            >
-              &times;
-            </button>
-          </div>
-        </div>
-      )}
     </section>
   );
 }
