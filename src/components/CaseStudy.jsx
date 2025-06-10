@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { useParams } from "react-router-dom";
 import {
   ChevronLeftIcon,
@@ -7,9 +8,16 @@ import {
 } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css";
-import "../styles/lightbox-custom.css";
+import Lightbox from "yet-another-react-lightbox";
+import {
+  Slideshow,
+  Fullscreen,
+  Thumbnails,
+  Zoom,
+} from "yet-another-react-lightbox/plugins";
+import "yet-another-react-lightbox/plugins/thumbnails.css";
+import "yet-another-react-lightbox/styles.css";
+import "../index.css";
 
 // Helper function to get nested translation safely
 const getNestedTranslation = (obj, path) => {
@@ -159,7 +167,6 @@ export default function CaseStudy({
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [photoIndex, setPhotoIndex] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -178,12 +185,10 @@ export default function CaseStudy({
   }, []); // Empty dependency array means this runs once on mount and cleans up on unmount
 
   // Function to open the lightbox
-  const openLightbox = (index) => {
-    setPhotoIndex(index);
+  const openLightbox = () => {
+    console.log("openLightbox called!");
     setLightboxOpen(true);
   };
-
-  console.log("CaseStudy component rendered/re-rendered.");
 
   const handleGoBack = () => {
     navigate(-1); // This tells React Router to go back one step in history
@@ -220,6 +225,24 @@ export default function CaseStudy({
   const goToSpecificSlide = (index) => {
     setCurrentScreenshotIndex(index);
   };
+
+  useEffect(() => {
+    console.log("lightboxOpen state changed to:", lightboxOpen);
+  }, [lightboxOpen]);
+
+  // Debug logging for lightbox
+  useEffect(() => {
+    if (lightboxOpen && caseStudy.screenshots) {
+      console.log(
+        "Lightbox condition met! caseStudy.screenshots:",
+        caseStudy.screenshots
+      );
+    }
+  }, [lightboxOpen, caseStudy.screenshots]);
+
+  console.log("CaseStudy component rendered/re-rendered.");
+  console.log("Current caseStudy:", caseStudy); // DEBUG: Check if caseStudy data is loaded
+  console.log("hasScreenshots:", hasScreenshots); // DEBUG: Check if hasScreenshots is true for expected items
 
   if (!caseStudy) {
     return (
@@ -373,23 +396,24 @@ export default function CaseStudy({
                   alt={currentScreenshotAlt}
                   className="max-w-full max-h-full object-contain rounded-lg transition-opacity duration-300 ease-in-out opacity-100"
                 />
-                {/* "View Full Screen" Overlay Button */}
-                <button
-                  onClick={() => openLightbox(currentScreenshotIndex)} // Use the new openLightbox function
-                  className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/70 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:opacity-100 p-4"
-                  aria-label="View full screen image"
-                >
-                  <div className="flex flex-col items-center justify-center">
-                    <ArrowsPointingOutIcon className="h-12 w-12 text-white drop-shadow-lg mb-2" />{" "}
-                    {/* Larger icon, shadow */}
-                    <span className="text-white text-lg font-semibold tracking-wide">
-                      {t?.viewFullscreen || "View Fullscreen"}{" "}
-                      {/* Translatable text */}
-                    </span>
-                  </div>
-                </button>
+                {/* Fix: Conditionally render the overlay so it hides when the lightbox is open */}
+                {!lightboxOpen && (
+                  <button
+                    onClick={openLightbox} // Use the new openLightbox function
+                    className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/70 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:opacity-100 p-4"
+                    aria-label="View full screen image"
+                  >
+                    <div className="flex flex-col items-center justify-center">
+                      <ArrowsPointingOutIcon className="h-12 w-12 text-white drop-shadow-lg mb-2" />{" "}
+                      {/* Larger icon, shadow */}
+                      <span className="text-white text-lg font-semibold tracking-wide">
+                        {t?.viewFullscreen || "View Fullscreen"}{" "}
+                        {/* Translatable text */}
+                      </span>
+                    </div>
+                  </button>
+                )}
               </div>
-
               <CarouselNavigation
                 onPrevious={goToPreviousSlide}
                 onNext={goToNextSlide}
@@ -430,69 +454,65 @@ export default function CaseStudy({
           </motion.section>
         )}
 
-        {/* React-Image-Lightbox component */}
-        {lightboxOpen && caseStudy.screenshots && (
-          <Lightbox
-            mainSrc={caseStudy.screenshots[photoIndex].src}
-            nextSrc={
-              caseStudy.screenshots[
-                (photoIndex + 1) % caseStudy.screenshots.length
-              ].src
-            }
-            prevSrc={
-              caseStudy.screenshots[
-                (photoIndex + caseStudy.screenshots.length - 1) %
-                  caseStudy.screenshots.length
-              ].src
-            }
-            onCloseRequest={() => setLightboxOpen(false)}
-            onMovePrevRequest={() =>
-              setPhotoIndex(
-                (photoIndex + caseStudy.screenshots.length - 1) %
-                  caseStudy.screenshots.length
-              )
-            }
-            onMoveNextRequest={() =>
-              setPhotoIndex((photoIndex + 1) % caseStudy.screenshots.length)
-            }
-            imageTitle={`${
-              currentScreenshot?.altMobileKey && isMobile
-                ? getNestedTranslation(
-                    t,
-                    caseStudy.screenshots[photoIndex]?.altMobileKey
-                  )
-                : getNestedTranslation(
-                    t,
-                    caseStudy.screenshots[photoIndex]?.altKey
-                  )
-            } (${photoIndex + 1}/${caseStudy.screenshots.length})`}
-            // New props for modern look and feel
-            imageCaption={getNestedTranslation(
-              t,
-              caseStudy.screenshots[photoIndex]?.descriptionKey
-            )}
-            enableZoom={true} // Allow zooming in/out
-            reactModalStyle={{ overlay: { zIndex: 9999 } }} // Ensure it's on top of everything
-            animationDuration={300} // Smooth transitions
-            keyRepeatLimit={150} // Faster navigation on holding arrow keys
-            showImageCount={true} // Display "1 of X" counter
-            clickOutsideToClose={true} // Allow clicking outside to close
-          />
-        )}
+        {/* Lightbox Portal */}
+        {typeof document !== "undefined" &&
+          ReactDOM.createPortal(
+            <div>
+              {lightboxOpen && caseStudy.screenshots && (
+                <>
+                  {/* DEBUG LOGGING */}
+                  {console.log(
+                    "Lightbox Slides being passed:",
+                    caseStudy.screenshots.map((screenshot) => ({
+                      src: screenshot.src,
+                      alt: getNestedTranslation(t, screenshot.altKey) || "",
+                      description:
+                        getNestedTranslation(t, screenshot.descriptionKey) ||
+                        "",
+                    }))
+                  )}
+                  <Lightbox
+                    open={lightboxOpen}
+                    close={() => setLightboxOpen(false)}
+                    slides={caseStudy.screenshots.map((screenshot) => ({
+                      src: screenshot.src,
+                      alt: getNestedTranslation(t, screenshot.altKey) || "",
+                      description:
+                        getNestedTranslation(t, screenshot.descriptionKey) ||
+                        "",
+                    }))}
+                    index={currentScreenshotIndex}
+                    on={{
+                      view: ({ index }) => setCurrentScreenshotIndex(index),
+                      closed: () => setLightboxOpen(false),
+                    }}
+                    plugins={[Slideshow, Fullscreen, Thumbnails, Zoom]}
+                    styles={{
+                      container: { backgroundColor: "rgba(0, 0, 0, 0.9)" },
+                    }}
+                  />
+                </>
+              )}
+            </div>,
+            document.body
+          )}
 
-        {/* Fallback to original demo CTA if no screenshots */}
-        {!hasScreenshots && caseStudy?.demoUrl && (
-          <div className="flex justify-center mb-20 animate-fade-in-up">
+        {/* Consolidated Demo Button Logic */}
+        {caseStudy?.demoUrl && (
+          <div
+            className={`flex justify-center animate-fade-in-up ${
+              hasScreenshots ? "mt-10 mb-20" : "mb-20"
+            }`}
+          >
             <a
               href={caseStudy.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all hover:scale-105 transform duration-300 inline-flex items-center"
             >
-              {t?.viewDemo}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 ml-2"
+                className="h-5 w-5 mr-2"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -502,6 +522,7 @@ export default function CaseStudy({
                   clipRule="evenodd"
                 />
               </svg>
+              {t?.viewDemo || "View Demo"}
             </a>
           </div>
         )}
@@ -509,7 +530,7 @@ export default function CaseStudy({
         {/* Case Study Content */}
         <div className="grid md:grid-cols-3 gap-12 mb-20">
           {/* Sidebar - we will place the 'Results' section here with order control */}
-          <div className="space-y-8 md:col-span-1 flex flex-col">
+          <div className="md:col-span-1 flex flex-col space-y-8">
             {/* Results Section - Moved here to control its order for mobile */}
             <motion.section
               className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 order-first transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
@@ -691,8 +712,7 @@ export default function CaseStudy({
         </div>
 
         {/* Next Case Study */}
-        <section className="text-center border-t border-white/10 pt-12">
-        </section>
+        <section className="text-center border-t border-white/10 pt-12"></section>
       </div>
     </section>
   );
