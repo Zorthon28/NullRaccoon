@@ -7,12 +7,10 @@
     transform: translateY(0);
     opacity: 0.2;
   }
-
   50% {
     transform: translateY(-20px);
     opacity: 0.4;
   }
-
   100% {
     transform: translateY(0);
     opacity: 0.2;
@@ -46,35 +44,20 @@
 
 .truncate-multiline {
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  /* Limits to 2 lines */
+  -webkit-line-clamp: 2; /* Limits to 2 lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
 }
 
 .animate-fadeIn {
@@ -96,7 +79,6 @@
       opacity: 0;
       transform: translateY(1rem);
     }
-
     to {
       opacity: 1;
       transform: translateY(0);
@@ -109,13 +91,10 @@
     opacity: 0;
     transform: translateY(-10px);
   }
-
-  10%,
-  90% {
+  10%, 90% {
     opacity: 1;
     transform: translateY(0);
   }
-
   100% {
     opacity: 0;
     transform: translateY(-10px);
@@ -131,43 +110,33 @@
 
 /* For the scrollbar track (the background) */
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  /* A light, semi-transparent track */
-  border-radius: 10px;
-  /* Rounded corners for the track */
+  background: rgba(255, 255, 255, 0.1); /* A light, semi-transparent track */
+  border-radius: 10px; /* Rounded corners for the track */
 }
 
 /* For the scrollbar thumb (the draggable part) */
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(100, 100, 255, 0.5);
-  /* A semi-transparent blue thumb */
-  border-radius: 10px;
-  /* Rounded corners for the thumb */
-  border: 2px solid rgba(255, 255, 255, 0.05);
-  /* A slight border for definition */
+  background-color: rgba(100, 100, 255, 0.5); /* A semi-transparent blue thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+  border: 2px solid rgba(255, 255, 255, 0.05); /* A slight border for definition */
 }
 
 /* For the scrollbar thumb on hover */
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(100, 100, 255, 0.7);
-  /* Darker blue on hover */
+  background-color: rgba(100, 100, 255, 0.7); /* Darker blue on hover */
 }
 
 /* For the scrollbar itself (its width) */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
-  /* Vertical scrollbar width */
-  height: 8px;
-  /* Horizontal scrollbar height (if applicable) */
+  width: 8px; /* Vertical scrollbar width */
+  height: 8px; /* Horizontal scrollbar height (if applicable) */
 }
 
 /* Specific styles for Firefox (modern versions) */
 /* Apply this to the same element as 'custom-scrollbar' */
 .custom-scrollbar {
-  scrollbar-width: thin;
-  /* 'auto' | 'thin' | 'none' */
-  scrollbar-color: rgba(100, 100, 255, 0.5) rgba(255, 255, 255, 0.1);
-  /* thumb-color track-color */
+  scrollbar-width: thin; /* 'auto' | 'thin' | 'none' */
+  scrollbar-color: rgba(100, 100, 255, 0.5) rgba(255, 255, 255, 0.1); /* thumb-color track-color */
 }
 
 .yarl__portal {
@@ -177,62 +146,4 @@
 
 .yarl__container {
   background-color: rgba(0, 0, 0, 0.9) !important;
-
-  /* Custom style for the select arrow (Tailwind doesn't have a direct utility for custom SVG background images) */
-  .select-with-arrow {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'%3e%3c/path%3e%3c/svg%3e");
-    background-position: right 0.75rem center;
-    background-repeat: no-repeat;
-    background-size: 1.5em 1.5em;
-    padding-right: 2.5rem;
-    /* Ensure space for the arrow */
-  }
-
-  /* Keyframes for simple pulse-fade-in animation (must be in CSS, can't be in Tailwind utilities directly) */
-  @keyframes pulseFadeIn {
-    0% {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-
-    50% {
-      opacity: 1;
-      transform: scale(1.02);
-    }
-
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  .animate-pulse-fade-in {
-    animation: pulseFadeIn 0.6s ease-out forwards;
-  }
-
-  /* Tailwind for React Toastify (overrides default Toastify styles) */
-  /* Fix: Use direct CSS properties instead of @apply for these specific utility classes */
-  .Toastify__toast--warning {
-    background-color: #f97316;
-    /* Tailwind's orange-500 */
-    color: white;
-  }
-
-  .Toastify__toast--success {
-    background-color: #10b981;
-    /* Tailwind's emerald-500 */
-    color: white;
-  }
-
-  .Toastify__toast--error {
-    background-color: #ef4444;
-    /* Tailwind's rose-500 */
-    color: white;
-  }
-
-  .Toastify__toast--info {
-    background-color: #6366f1;
-    /* Tailwind's indigo-500 */
-    color: white;
-  }
 }
