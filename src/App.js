@@ -10,7 +10,10 @@ import Cart from "./pages/Cart";
 import translations from "./utils/translations";
 import StoreLayout from "./layouts/StoreLayout";
 import StoreLanding from "./pages/StoreLanding";
+import Admin from "./pages/Admin";
+import Login from "./components/Login";
 import "react-toastify/dist/ReactToastify.css";
+import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
 
 import "./index.css";
 
@@ -33,8 +36,15 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen">
-        
         <Routes>
+          
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/admin"
+            element={
+              <Admin />
+            }
+          />
           <Route
             path="/"
             element={
@@ -70,8 +80,11 @@ function App() {
               element={<StoreHome lang={lang} t={t} />}
             />{" "}
             {/* 🛍️ Product list */}
-            <Route path="product/:productId" element={<Product lang={lang} t={t}/>} />
-            <Route path="cart" element={<Cart lang={lang} t={t}/>} />
+            <Route
+              path="product/:productId"
+              element={<Product lang={lang} t={t} />}
+            />
+            <Route path="cart" element={<Cart lang={lang} t={t} />} />
           </Route>
 
           <Route
