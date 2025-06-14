@@ -34,7 +34,7 @@ const translations = {
       },
       {
         title: "Personal Portfolio",
-        description: "A responsive portfolio site for a creative freelancer.",
+        description: "Professional presentation of the experience and projects of a biomedical engineer with a focus on technology and automation.",
         image: "/images/portfolio-project-thumbnail.png",
         link: "/Portfolio/",
       },
