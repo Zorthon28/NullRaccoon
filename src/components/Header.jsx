@@ -3,26 +3,44 @@ import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "../assets/logo192.png";
 
-export default function Header({ lang, t}) {
+export default function Header({ lang, t }) {
   const { cartItems } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
-
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between p-4">
-        <Link to="/store" className="text-2xl font-extrabold text-green-700 tracking-wide">
-          {t.brand}
+        <Link
+          to="/store"
+          className="flex items-center text-2xl font-extrabold text-green-700 tracking-wide"
+        >
+          <img
+            src={logo}
+            alt="NullRaccoon Logo"
+            className="h-10 md:h-12 mr-2"
+          />
+          <span className="text-green-700 text-2xl font-bold">{t.brand}</span>
         </Link>
 
         {/* Desktop Nav */}
         <nav className="space-x-6 hidden md:flex text-gray-700 font-medium">
-          <Link to="/store" className="hover:text-green-600 transition">{t.home}</Link>
-          <Link to="/store/products" className="hover:text-green-600 transition">{t.store}</Link>
-          <Link to="/store/cart" className="hover:text-green-600 transition relative">
+          <Link to="/store" className="hover:text-green-600 transition">
+            {t.home}
+          </Link>
+          <Link
+            to="/store/products"
+            className="hover:text-green-600 transition"
+          >
+            {t.store}
+          </Link>
+          <Link
+            to="/store/cart"
+            className="hover:text-green-600 transition relative"
+          >
             {t.cart}
             {totalItems > 0 && (
               <span className="absolute -top-2 -right-3 bg-red-600 text-white text-xs rounded-full px-2">
@@ -30,7 +48,9 @@ export default function Header({ lang, t}) {
               </span>
             )}
           </Link>
-          <Link to="/about" className="hover:text-green-600 transition">{t.about}</Link>
+          <Link to="/about" className="hover:text-green-600 transition">
+            {t.about}
+          </Link>
         </nav>
 
         {/* Mobile Menu Toggle */}
