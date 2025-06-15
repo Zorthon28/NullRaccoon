@@ -52,7 +52,7 @@ export default function Header() {
             alt="NullRaccoon Logo"
             className="h-8 md:h-10 lg:h-12"
           />
-          <span className="text-white font-extrabold text-xl tracking-tight hidden sm:inline">
+          <span className="text-white font-extrabold text-xl tracking-tight sm:inline">
             NullRaccoon
           </span>
         </a>
