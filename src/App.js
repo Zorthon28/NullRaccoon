@@ -29,11 +29,16 @@ function App() {
   }, []);
 
   const t = translations[lang];
+  useEffect(() => {
+    document.title =
+      lang === "es"
+        ? "NullRaccoon | Sitios Web Profesionales"
+        : "NullRaccoon | Professional Websites";
+  }, [lang]);
 
   return (
     <Router>
       <div className="min-h-screen">
-        
         <Routes>
           <Route
             path="/"
@@ -70,8 +75,11 @@ function App() {
               element={<StoreHome lang={lang} t={t} />}
             />{" "}
             {/* 🛍️ Product list */}
-            <Route path="product/:productId" element={<Product lang={lang} t={t}/>} />
-            <Route path="cart" element={<Cart lang={lang} t={t}/>} />
+            <Route
+              path="product/:productId"
+              element={<Product lang={lang} t={t} />}
+            />
+            <Route path="cart" element={<Cart lang={lang} t={t} />} />
           </Route>
 
           <Route
