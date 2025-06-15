@@ -1,5 +1,6 @@
 import Certifications from "../pages/Certifications";
 import Portfolio from "../pages/Portfolio";
+import Header from "../components/HeaderHero";
 
 export default function Hero({ lang, t, showQuoteModal, setShowQuoteModal }) {
   return (
@@ -20,6 +21,8 @@ export default function Hero({ lang, t, showQuoteModal, setShowQuoteModal }) {
           ></span>
         ))}
       </div>
+
+      <Header pageType="hero" />
 
       <div className="relative z-10 px-6 py-20 text-center max-w-7xl mx-auto">
         {/* Bilingual Badge */}
@@ -55,6 +58,7 @@ export default function Hero({ lang, t, showQuoteModal, setShowQuoteModal }) {
         </div>
 
         {/* Trust Indicators */}
+        <div id="portfolio" className="mt-0">
         <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-5 animate-fade-in animation-delay-300">
           {t.indicators.map((text, index) => (
             <div key={index} className="text-center">
@@ -66,12 +70,14 @@ export default function Hero({ lang, t, showQuoteModal, setShowQuoteModal }) {
         </div>
 
         {/* Portfolio Section */}
-        <div id="portfolio" className="mt-0">
+        
           <Portfolio t={t} />
         </div>
 
+        <div id="certifications" className="mt-0">
         {/* Certificaciones */}
         <Certifications t={t} />
+        </div>
       </div>
     </section>
   );

@@ -18,6 +18,7 @@ import {
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "yet-another-react-lightbox/styles.css";
 import "../index.css";
+import Header from "./HeaderHero";
 
 // Helper function to get nested translation safely
 const getNestedTranslation = (obj, path) => {
@@ -246,6 +247,7 @@ export default function CaseStudy({
 
   if (!caseStudy) {
     return (
+      
       <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900 text-white overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 z-0">
           {[...Array(30)].map((_, i) => (
@@ -320,6 +322,8 @@ export default function CaseStudy({
   console.log("CaseStudy details:", caseStudy);
 
   return (
+    
+    
     <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900 text-white">
       {/* Animated background particles */}
       <div className="absolute inset-0 z-0">
@@ -336,7 +340,7 @@ export default function CaseStudy({
           ></span>
         ))}
       </div>
-
+        <Header pageType="casestudy" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
         {/* Back Button */}
         <div className="absolute top-12 left-8 z-50 sm:top-14 sm:left-10 md:top-16 md:left-12">
@@ -376,6 +380,7 @@ export default function CaseStudy({
         </div>
 
         {/* Main Carousel */}
+        <div id="images">
         {hasScreenshots && (
           <motion.section
             className="mb-20"
@@ -453,7 +458,7 @@ export default function CaseStudy({
             </div>
           </motion.section>
         )}
-
+        </div>
         {/* Lightbox Portal */}
         {typeof document !== "undefined" &&
           ReactDOM.createPortal(
