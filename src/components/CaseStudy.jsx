@@ -247,7 +247,6 @@ export default function CaseStudy({
 
   if (!caseStudy) {
     return (
-      
       <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900 text-white overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 z-0">
           {[...Array(30)].map((_, i) => (
@@ -322,8 +321,6 @@ export default function CaseStudy({
   console.log("CaseStudy details:", caseStudy);
 
   return (
-    
-    
     <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900 text-white">
       {/* Animated background particles */}
       <div className="absolute inset-0 z-0">
@@ -340,7 +337,7 @@ export default function CaseStudy({
           ></span>
         ))}
       </div>
-        <Header pageType="casestudy" />
+      <Header t={t} pageType="casestudy" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
         {/* Back Button */}
         <div className="absolute top-12 left-8 z-50 sm:top-14 sm:left-10 md:top-16 md:left-12">
@@ -368,7 +365,7 @@ export default function CaseStudy({
           </button>
         </div>
         {/* Case Study Header */}
-        <div className="mb-10 text-center">
+        <div id="images" className="mb-10 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300 break-words px-4 sm:px-0">
               {getNestedTranslation(t, caseStudy?.titleKey)}
@@ -380,84 +377,87 @@ export default function CaseStudy({
         </div>
 
         {/* Main Carousel */}
-        <div id="images">
-        {hasScreenshots && (
-          <motion.section
-            className="mb-20"
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <div className="relative bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
-              <h3 className="text-lg font-semibold text-white text-center mb-4">
-                {currentScreenshotAlt}
-              </h3>
+        <div>
+          {hasScreenshots && (
+            <motion.section
+              className="mb-20"
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              <div className="relative bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                <h3 className="text-lg font-semibold text-white text-center mb-4">
+                  {currentScreenshotAlt}
+                </h3>
 
-              <div className="relative flex justify-center items-center mb-4 w-full max-w-4xl mx-auto h-[350px] bg-gray-800 rounded-lg overflow-hidden group">
-                {/* Main Image with Transition */}
-                <img
-                  src={currentScreenshot.src}
-                  alt={currentScreenshotAlt}
-                  className="max-w-full max-h-full object-contain rounded-lg transition-opacity duration-300 ease-in-out opacity-100"
+                <div className="relative flex justify-center items-center mb-4 w-full max-w-4xl mx-auto h-[350px] bg-gray-800 rounded-lg overflow-hidden group">
+                  {/* Main Image with Transition */}
+                  <img
+                    src={currentScreenshot.src}
+                    alt={currentScreenshotAlt}
+                    className="max-w-full max-h-full object-contain rounded-lg transition-opacity duration-300 ease-in-out opacity-100"
+                  />
+                  {/* Fix: Conditionally render the overlay so it hides when the lightbox is open */}
+                  {!lightboxOpen && (
+                    <button
+                      onClick={openLightbox} // Use the new openLightbox function
+                      className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/70 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:opacity-100 p-4"
+                      aria-label="View full screen image"
+                    >
+                      <div className="flex flex-col items-center justify-center">
+                        <ArrowsPointingOutIcon className="h-12 w-12 text-white drop-shadow-lg mb-2" />{" "}
+                        {/* Larger icon, shadow */}
+                        <span className="text-white text-lg font-semibold tracking-wide">
+                          {t?.viewFullscreen || "View Fullscreen"}{" "}
+                          {/* Translatable text */}
+                        </span>
+                      </div>
+                    </button>
+                  )}
+                </div>
+                <CarouselNavigation
+                  onPrevious={goToPreviousSlide}
+                  onNext={goToNextSlide}
+                  currentIndex={currentScreenshotIndex}
+                  totalItems={caseStudy.screenshots.length}
+                  className="mt-4 justify-center"
                 />
-                {/* Fix: Conditionally render the overlay so it hides when the lightbox is open */}
-                {!lightboxOpen && (
-                  <button
-                    onClick={openLightbox} // Use the new openLightbox function
-                    className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/70 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:opacity-100 p-4"
-                    aria-label="View full screen image"
+
+                {/* Thumbnails */}
+                {caseStudy.screenshots.length > 1 && (
+                  <div className="flex justify-start sm:justify-center overflow-x-auto whitespace-nowrap gap-3 mt-6 pb-2 scrollbar-hide">
+                    {caseStudy.screenshots.map((screenshot, index) => (
+                      <img
+                        key={index}
+                        src={screenshot.src}
+                        alt={
+                          getNestedTranslation(t, screenshot.altKey) ||
+                          `Thumbnail ${index + 1}`
+                        }
+                        className={`w-20 h-16 object-cover rounded-md cursor-pointer border-2 transition-all duration-200 ${
+                          index === currentScreenshotIndex
+                            ? "border-blue-500 ring-2 ring-blue-500"
+                            : "border-transparent hover:border-blue-300"
+                        }`}
+                        onClick={() => goToSpecificSlide(index)}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* Add the description here */}
+                {currentScreenshotDescription && (
+                  <p
+                    id="overview"
+                    className="text-center text-gray-300 text-sm mt-4"
                   >
-                    <div className="flex flex-col items-center justify-center">
-                      <ArrowsPointingOutIcon className="h-12 w-12 text-white drop-shadow-lg mb-2" />{" "}
-                      {/* Larger icon, shadow */}
-                      <span className="text-white text-lg font-semibold tracking-wide">
-                        {t?.viewFullscreen || "View Fullscreen"}{" "}
-                        {/* Translatable text */}
-                      </span>
-                    </div>
-                  </button>
+                    {currentScreenshotDescription}
+                  </p>
                 )}
               </div>
-              <CarouselNavigation
-                onPrevious={goToPreviousSlide}
-                onNext={goToNextSlide}
-                currentIndex={currentScreenshotIndex}
-                totalItems={caseStudy.screenshots.length}
-                className="mt-4 justify-center"
-              />
-
-              {/* Thumbnails */}
-              {caseStudy.screenshots.length > 1 && (
-                <div className="flex justify-start sm:justify-center overflow-x-auto whitespace-nowrap gap-3 mt-6 pb-2 scrollbar-hide">
-                  {caseStudy.screenshots.map((screenshot, index) => (
-                    <img
-                      key={index}
-                      src={screenshot.src}
-                      alt={
-                        getNestedTranslation(t, screenshot.altKey) ||
-                        `Thumbnail ${index + 1}`
-                      }
-                      className={`w-20 h-16 object-cover rounded-md cursor-pointer border-2 transition-all duration-200 ${
-                        index === currentScreenshotIndex
-                          ? "border-blue-500 ring-2 ring-blue-500"
-                          : "border-transparent hover:border-blue-300"
-                      }`}
-                      onClick={() => goToSpecificSlide(index)}
-                    />
-                  ))}
-                </div>
-              )}
-
-              {/* Add the description here */}
-              {currentScreenshotDescription && (
-                <p className="text-center text-gray-300 text-sm mt-4">
-                  {currentScreenshotDescription}
-                </p>
-              )}
-            </div>
-          </motion.section>
-        )}
+            </motion.section>
+          )}
         </div>
         {/* Lightbox Portal */}
         {typeof document !== "undefined" &&

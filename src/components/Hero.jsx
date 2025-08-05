@@ -22,7 +22,7 @@ export default function Hero({ lang, t, showQuoteModal, setShowQuoteModal }) {
         ))}
       </div>
 
-      <Header pageType="hero" />
+      <Header t={t} pageType="hero" />
 
       <div className="relative z-10 px-6 py-20 text-center max-w-7xl mx-auto">
         {/* Bilingual Badge */}
@@ -59,24 +59,24 @@ export default function Hero({ lang, t, showQuoteModal, setShowQuoteModal }) {
 
         {/* Trust Indicators */}
         <div id="portfolio" className="mt-0">
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-5 animate-fade-in animation-delay-300">
-          {t.indicators.map((text, index) => (
-            <div key={index} className="text-center">
-              <p className="inline-block px-2 py-1 rounded-full text-xs sm:text-sm text-gray-300 uppercase tracking-wider bg-white/10 border border-white/20 backdrop-blur-sm">
-                {text}
-              </p>
-            </div>
-          ))}
-        </div>
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-5 animate-fade-in animation-delay-300">
+            {t.indicators.map((text, index) => (
+              <div key={index} className="text-center">
+                <p className="inline-block px-2 py-1 rounded-full text-xs sm:text-sm text-gray-300 uppercase tracking-wider bg-white/10 border border-white/20 backdrop-blur-sm">
+                  {text}
+                </p>
+              </div>
+            ))}
+          </div>
 
-        {/* Portfolio Section */}
-        
+          {/* Portfolio Section */}
+
           <Portfolio t={t} />
         </div>
 
         <div id="certifications" className="mt-0">
-        {/* Certificaciones */}
-        <Certifications t={t} />
+          {/* Certificaciones */}
+          <Certifications t={t} />
         </div>
       </div>
     </section>

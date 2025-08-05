@@ -6,6 +6,7 @@ const translations = {
     subheadline: "We build websites that convert visitors into customers",
     ctaStart: "Get Started",
     ctaPortfolio: "Portfolio",
+    footerText: `© ${new Date().getFullYear()} NullRaccoon. All rights reserved.`,
     indicators: [
       "2+ Years Experience",
       "Bilingual Support",
@@ -15,6 +16,7 @@ const translations = {
       "Project Management & Delivery",
     ],
     portfolioTitle: "Portfolio",
+    images: "Images",
     portfolioSubtitle: "Some of our recent work",
     portfolioProjects: [
       {
@@ -34,7 +36,8 @@ const translations = {
       },
       {
         title: "Personal Portfolio",
-        description: "Professional presentation of the experience and projects of a biomedical engineer with a focus on technology and automation.",
+        description:
+          "Professional presentation of the experience and projects of a biomedical engineer with a focus on technology and automation.",
         image: "/images/portfolio-project-thumbnail.png",
         link: "/Portfolio/",
       },
@@ -109,7 +112,7 @@ const translations = {
       },
       featuredProductsTitle: "Featured Products",
       viewAllProducts: "View All Products →",
-      footerText: `© ${new Date().getFullYear()} Gustavo Tello. All rights reserved.`,
+      footerText: `© ${new Date().getFullYear()} NullRaccoon. All rights reserved.`,
     },
     // --- New: Product Translations ---
     products: {
@@ -292,6 +295,7 @@ const translations = {
     subheadline: "Creamos sitios web que convierten visitantes en clientes",
     ctaStart: "Comenzar",
     ctaPortfolio: "Portafolio",
+    footerText: `© ${new Date().getFullYear()} NullRaccoon. Todos los derechos reservados.`,
     indicators: [
       "2+ Años de experiencia",
       "Soporte bilingüe",
@@ -442,6 +446,7 @@ const translations = {
     productNotFound: "Producto no encontrado.",
     backToStore: "← Volver a la tienda",
     home: "Inicio",
+    images: "Imagenes",
     relatedProducts: "Productos relacionados",
     noImageAvailable: "No hay imagen disponible",
     view: "Ver",
