@@ -41,6 +41,13 @@ const translations = {
         image: "/images/portfolio-project-thumbnail.png",
         link: "/Portfolio/",
       },
+      {
+        title: "Italian Restaurant Website",
+        description:
+          "A modern, responsive online website for an Italian restaurant.",
+        image: "/images/restaurant.png",
+        link: "/resturant",
+      },
     ],
     certificationsTitle: "My Certifications",
     certificationsList: [
@@ -328,6 +335,13 @@ const translations = {
           "Presentación profesional de la experiencia y proyectos de un ingeniero biomédico con enfoque en tecnología y automatización.",
         image: "/images/portfolio-project-thumbnail.png",
         link: "/Portfolio/",
+      },
+      {
+        title: "Restaurante italiano",
+        description:
+          "Un sitio web en línea moderno y responsivo para un restaurante italiano.",
+        image: "/images/restaurant.png",
+        link: "/resturant",
       },
     ],
     certificationsTitle: "Certificaciones",
