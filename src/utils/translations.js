@@ -42,11 +42,11 @@ const translations = {
         link: "/Portfolio/",
       },
       {
-        title: "Italian Restaurant Website",
+        title: "Restaurant Website",
         description:
-          "A modern, responsive online website for an Italian restaurant.",
+          "A modern, responsive website that highlights a restaurant’s menu and services.",
         image: "/images/restaurant.png",
-        link: "/resturant",
+        link: "https://restaurant.nullraccoon.com/",
       },
     ],
     certificationsTitle: "My Certifications",
@@ -337,11 +337,11 @@ const translations = {
         link: "/Portfolio/",
       },
       {
-        title: "Restaurante italiano",
+        title: "Sitio Web de Restaurante",
         description:
-          "Un sitio web en línea moderno y responsivo para un restaurante italiano.",
+          "Un sitio web moderno y responsivo que destaca el menú y los servicios del restaurante.",
         image: "/images/restaurant.png",
-        link: "/resturant",
+        link: "https://restaurant.nullraccoon.com/",
       },
     ],
     certificationsTitle: "Certificaciones",
