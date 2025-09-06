@@ -11,7 +11,7 @@ import translations from "./utils/translations";
 import StoreLayout from "./layouts/StoreLayout";
 import StoreLanding from "./pages/StoreLanding";
 import "react-toastify/dist/ReactToastify.css";
-import Footer from './components/Footer';
+import Footer from "./components/Footer";
 
 import "./index.css";
 
@@ -95,7 +95,7 @@ function App() {
             }
           />
         </Routes>
-        
+
         <Footer lang={lang} t={t} />
 
         <FloatingButtons

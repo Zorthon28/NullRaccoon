@@ -9,14 +9,14 @@ export default function Portfolio({ t }) {
           {t.portfolioSubtitle}
         </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
           {t.portfolioProjects.map((project, index) => (
             <a
               key={index}
               href={project.link}
               target={project.link.startsWith("http") ? "_blank" : "_self"}
               rel={project.link.startsWith("http") ? "noopener noreferrer" : ""}
-              className="bg-white/5 hover:bg-white/10 rounded-lg overflow-hidden shadow-lg transition duration-300 transform hover:-translate-y-1 group"
+              className="bg-white/5 hover:bg-white/10 rounded-lg overflow-hidden shadow-lg transition duration-300 transform hover:-translate-y-1 group w-full max-w-sm"
             >
               <div className="relative overflow-hidden h-48">
                 <img

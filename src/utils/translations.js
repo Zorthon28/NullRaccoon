@@ -41,6 +41,13 @@ const translations = {
         image: "/images/portfolio-project-thumbnail.png",
         link: "/Portfolio/",
       },
+      {
+        title: "Restaurant Website",
+        description:
+          "A modern, responsive website that highlights a restaurant’s menu and services.",
+        image: "/images/restaurant.png",
+        link: "https://restaurant.nullraccoon.com/",
+      },
     ],
     certificationsTitle: "My Certifications",
     certificationsList: [
@@ -328,6 +335,13 @@ const translations = {
           "Presentación profesional de la experiencia y proyectos de un ingeniero biomédico con enfoque en tecnología y automatización.",
         image: "/images/portfolio-project-thumbnail.png",
         link: "/Portfolio/",
+      },
+      {
+        title: "Sitio Web de Restaurante",
+        description:
+          "Un sitio web moderno y responsivo que destaca el menú y los servicios del restaurante.",
+        image: "/images/restaurant.png",
+        link: "https://restaurant.nullraccoon.com/",
       },
     ],
     certificationsTitle: "Certificaciones",
