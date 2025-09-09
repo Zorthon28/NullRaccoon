@@ -57,6 +57,23 @@ export default function Hero({ lang, t, showQuoteModal, setShowQuoteModal }) {
           </p>
         </div>
 
+        {/* Secondary mention (Tech Services) */}
+        <div className="mb-10">
+          <p className="text-md text-gray-400 max-w-2xl mx-auto animate-fade-in-up animation-delay-200">
+            {t.secondaryNote}
+          </p>
+
+          {/* Learn More Button */}
+          <div className="mt-6">
+            <a
+              href="#tech-services"
+              className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-semibold shadow-lg hover:scale-105 hover:shadow-pink-500/30 transition-transform duration-300 animate-fade-in-up animation-delay-300"
+            >
+              {t.learnMore}
+            </a>
+          </div>
+        </div>
+
         {/* Trust Indicators */}
         <div id="portfolio" className="mt-0">
           <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-5 animate-fade-in animation-delay-300">

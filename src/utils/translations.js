@@ -15,6 +15,8 @@ const translations = {
       "Effective Problem-Solving",
       "Project Management & Delivery",
     ],
+    secondaryNote: "We also offer technical support and computer maintenance at the local level.",
+    learnMore: "Learn More",
     portfolioTitle: "Portfolio",
     images: "Images",
     portfolioSubtitle: "Some of our recent work",
@@ -311,6 +313,8 @@ const translations = {
       "Resolución de Problemas Eficaz",
       "Gestión y Entrega de Proyectos",
     ],
+    secondaryNote: "También ofrecemos soporte técnico y mantenimiento de computadoras a nivel local.",
+    learnMore: "Más Información",
     portfolioTitle: "Portafolio",
     portfolioSubtitle: "Algunos de nuestros trabajos recientes",
     portfolioProjects: [
