@@ -35,6 +35,13 @@ const translations = {
         link: "/case-study/medtech-premier",
       },
       {
+        title: "NullDental",
+        description:
+          "Complete dental practice management solution with electronic health records, intelligent appointment scheduling, interactive odontograms, treatment planning, inventory tracking, multi-location support, insurance processing, and comprehensive reporting for dental clinics of all sizes.",
+        image: "/images/medtech-premier-thumbnail.png", // placeholder
+        link: "/pricing",
+      },
+      {
         title: "Personal Portfolio",
         description:
           "Professional presentation of the experience and projects of a biomedical engineer with a focus on technology and automation.",
@@ -293,6 +300,109 @@ const translations = {
     viewFullReport: "View Full Report",
     downloadPDF: "Download PDF",
     exploreMoreCaseStudies: "Explore More Case Studies",
+    pricing: {
+      title: "Pricing Plans",
+      subtitle: "Choose the plan that fits your dental clinic",
+      toggle: {
+        oneTime: "Monthly",
+        annualSupport: "Yearly (2 months free)",
+      },
+      plans: {
+        basic: {
+          name: "Basic",
+          monthly: "$2,800 MXN",
+          yearly: "$28,000 MXN",
+          breakEven: "$1,290 MXN",
+          margin: "54%",
+          includes: [
+            "Patient registry",
+            "Appointments",
+            "Email reminders",
+            "Simple dashboard",
+            "1 admin + 2 users",
+          ],
+          addons: [
+            "Odontogram: $1,500 MXN/month",
+            "Advanced Odontogram: $2,500 MXN/month",
+            "Extra messaging/email: $500 MXN/month",
+            "Additional messaging/email: $1,000 MXN/month",
+            "Imaging/X-ray storage upgrade: $1,000 MXN/month",
+            "Additional storage: $2,000 MXN/month",
+          ],
+        },
+        standard: {
+          name: "Standard",
+          monthly: "$4,500 MXN",
+          yearly: "$45,000 MXN",
+          breakEven: "$2,700 MXN",
+          margin: "40%",
+          includes: [
+            "Everything Basic +",
+            "Treatment plans",
+            "Basic reports",
+            "1–2 extra users",
+          ],
+          addons: [
+            "Multi-location support: $2,000 MXN/month",
+            "Insurance & Billing Module: $1,500 MXN/month",
+            "Advanced Reporting & Analytics: $1,000 MXN/month",
+            "Extra messaging/email: $500 MXN/month",
+            "Imaging/X-ray storage upgrade: $1,000 MXN/month",
+          ],
+        },
+        premium: {
+          name: "Premium",
+          monthly: "$7,000 MXN",
+          yearly: "$70,000 MXN",
+          breakEven: "$6,230 MXN",
+          margin: "11%",
+          includes: [
+            "Everything Standard +",
+            "Advanced reports",
+            "Analytics",
+            "User roles",
+            "Automated follow-ups",
+          ],
+          addons: [
+            "Advanced Odontogram: $2,500 MXN/month",
+            "Custom workflows/automation: $2,500 MXN/month",
+            "Additional messaging/email: $1,000 MXN/month",
+            "Extra storage: $2,000 MXN/month",
+            "API / Integrations: $2,000 MXN/month",
+            "Advanced User Roles & Permissions: $1,000 MXN/month",
+          ],
+        },
+        enterprise: {
+          name: "Enterprise",
+          monthly: "$7,500 MXN",
+          yearly: "$75,000 MXN",
+          breakEven: "$4,800 MXN",
+          margin: "36%",
+          includes: [
+            "Everything Premium +",
+            "Unlimited users",
+            "Multi-location",
+            "API integrations",
+          ],
+          addons: [
+            "Dedicated Support SLA: $3,000 MXN/month",
+            "White-labeling / Branding: $2,500 MXN/month",
+            "Custom workflows/automation: $2,500 MXN/month",
+            "Multi-location support: $2,000 MXN/month",
+            "Advanced Reporting & Analytics: $1,000 MXN/month",
+            "API / Integrations: $2,000 MXN/month",
+          ],
+        },
+      },
+      buttons: {
+        payOneTime: "Subscribe Monthly",
+        subscribeAnnual: "Subscribe Yearly",
+        requestAddons: "Request Add-ons",
+      },
+      comingSoon: "Coming Soon",
+      breakEvenTooltip: "Break-even cost per clinic",
+      marginTooltip: "Profit margin percentage",
+    },
   },
   es: {
     // Existing Hero translations (from your previous Hero.jsx)
@@ -328,6 +438,13 @@ const translations = {
         image: "/images/medtech-premier-thumbnail.png",
         type: "CaseStudy",
         link: "/case-study/medtech-premier",
+      },
+      {
+        title: "NullDental",
+        description:
+          "Solución completa de gestión de prácticas dentales con registros de salud electrónicos, programación inteligente de citas, odontogramas interactivos, planificación de tratamientos, seguimiento de inventario, soporte multi-ubicación, procesamiento de seguros e informes integrales para clínicas dentales de todos los tamaños.",
+        image: "/images/medtech-premier-thumbnail.png", // placeholder
+        link: "/pricing",
       },
       {
         title: "Desarrollo profesional",
@@ -605,6 +722,109 @@ const translations = {
     viewFullReport: "Ver Informe Completo",
     downloadPDF: "Descargar PDF",
     exploreMoreCaseStudies: "Explorar Más Casos de Estudio",
+    pricing: {
+      title: "Planes de Precios",
+      subtitle: "Elige el plan que se ajuste a tu clínica dental",
+      toggle: {
+        oneTime: "Mensual",
+        annualSupport: "Anual (2 meses gratis)",
+      },
+      plans: {
+        basic: {
+          name: "Basic",
+          monthly: "$2,800 MXN",
+          yearly: "$28,000 MXN",
+          breakEven: "$1,290 MXN",
+          margin: "54%",
+          includes: [
+            "Registro de pacientes",
+            "Citas",
+            "Recordatorios por email",
+            "Dashboard simple",
+            "1 admin + 2 usuarios",
+          ],
+          addons: [
+            "Odontograma: $1,500 MXN/mes",
+            "Odontograma avanzado: $2,500 MXN/mes",
+            "Mensajería/email extra: $500 MXN/mes",
+            "Mensajería/email adicional: $1,000 MXN/mes",
+            "Actualización de almacenamiento de imágenes/rayos X: $1,000 MXN/mes",
+            "Almacenamiento adicional: $2,000 MXN/mes",
+          ],
+        },
+        standard: {
+          name: "Standard",
+          monthly: "$4,500 MXN",
+          yearly: "$45,000 MXN",
+          breakEven: "$2,700 MXN",
+          margin: "40%",
+          includes: [
+            "Todo lo de Basic +",
+            "Planes de tratamiento",
+            "Reportes básicos",
+            "1–2 usuarios extra",
+          ],
+          addons: [
+            "Soporte multi-ubicación: $2,000 MXN/mes",
+            "Módulo de seguros y facturación: $1,500 MXN/mes",
+            "Reportes y analíticas avanzadas: $1,000 MXN/mes",
+            "Mensajería/email extra: $500 MXN/mes",
+            "Actualización de almacenamiento de imágenes/rayos X: $1,000 MXN/mes",
+          ],
+        },
+        premium: {
+          name: "Premium",
+          monthly: "$7,000 MXN",
+          yearly: "$70,000 MXN",
+          breakEven: "$6,230 MXN",
+          margin: "11%",
+          includes: [
+            "Todo lo de Standard +",
+            "Reportes avanzados",
+            "Analíticas",
+            "Roles de usuario",
+            "Seguimientos automatizados",
+          ],
+          addons: [
+            "Odontograma avanzado: $2,500 MXN/mes",
+            "Flujos de trabajo/automación personalizados: $2,500 MXN/mes",
+            "Mensajería/email adicional: $1,000 MXN/mes",
+            "Almacenamiento extra: $2,000 MXN/mes",
+            "API / Integraciones: $2,000 MXN/mes",
+            "Roles y permisos de usuario avanzados: $1,000 MXN/mes",
+          ],
+        },
+        enterprise: {
+          name: "Enterprise",
+          monthly: "$7,500 MXN",
+          yearly: "$75,000 MXN",
+          breakEven: "$4,800 MXN",
+          margin: "36%",
+          includes: [
+            "Todo lo de Premium +",
+            "Usuarios ilimitados",
+            "Multi-ubicación",
+            "Integraciones API",
+          ],
+          addons: [
+            "SLA de soporte dedicado: $3,000 MXN/mes",
+            "Etiquetado blanco / Branding: $2,500 MXN/mes",
+            "Flujos de trabajo/automación personalizados: $2,500 MXN/mes",
+            "Soporte multi-ubicación: $2,000 MXN/mes",
+            "Reportes y analíticas avanzadas: $1,000 MXN/mes",
+            "API / Integraciones: $2,000 MXN/mes",
+          ],
+        },
+      },
+      buttons: {
+        payOneTime: "Suscribirse Mensual",
+        subscribeAnnual: "Suscribirse Anual",
+        requestAddons: "Solicitar Add-ons",
+      },
+      comingSoon: "Próximamente",
+      breakEvenTooltip: "Costo de punto de equilibrio por clínica",
+      marginTooltip: "Porcentaje de margen de ganancia",
+    },
   },
 };
 

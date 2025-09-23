@@ -7,6 +7,7 @@ import FloatingButtons from "./components/FloatingButtons";
 import StoreHome from "./pages/StoreHome";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
+import Pricing from "./pages/Pricing";
 import translations from "./utils/translations";
 import StoreLayout from "./layouts/StoreLayout";
 import StoreLanding from "./pages/StoreLanding";
@@ -57,6 +58,18 @@ function App() {
             path="/case-study/:caseId"
             element={
               <CaseStudy
+                lang={lang}
+                t={t}
+                showQuoteModal={showQuoteModal}
+                setShowQuoteModal={setShowQuoteModal}
+              />
+            }
+          />
+
+          <Route
+            path="/pricing"
+            element={
+              <Pricing
                 lang={lang}
                 t={t}
                 showQuoteModal={showQuoteModal}
