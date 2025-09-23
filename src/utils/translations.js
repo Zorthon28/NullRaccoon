@@ -37,8 +37,8 @@ const translations = {
       {
         title: "NullDental",
         description:
-          "Complete dental practice management solution with electronic health records, intelligent appointment scheduling, interactive odontograms, treatment planning, inventory tracking, multi-location support, insurance processing, and comprehensive reporting for dental clinics of all sizes.",
-        image: "/images/medtech-premier-thumbnail.png", // placeholder
+          "Dental Practice Management: Patient Registry, Appointments, Basic Messaging & Dashboard",
+        image: "/images/nullDental-main.png",
         link: "/pricing",
       },
       {
