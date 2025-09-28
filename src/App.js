@@ -6,7 +6,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Home, ExternalLink, X, CheckCircle, Star, Plus } from "lucide-react";
+import { Home, ExternalLink, X, CheckCircle, Plus } from "lucide-react";
 import { ToastContainer } from "react-toastify";
 import Hero from "./components/Hero";
 import CaseStudy from "./components/CaseStudy";
