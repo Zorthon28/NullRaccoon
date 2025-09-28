@@ -300,6 +300,24 @@ const translations = {
     viewFullReport: "View Full Report",
     downloadPDF: "Download PDF",
     exploreMoreCaseStudies: "Explore More Case Studies",
+    welcomeModalTitle: "NullRaccoon",
+    welcomeModalSubtitle:
+      "Innovative Healthcare Solutions for Modern Practices",
+    stayOnPortfolio: "View Our Portfolio",
+    stayOnPortfolioLabel: "Looking for our work?",
+    goToNullDental: "Explore NullDental",
+    goToNullDentalLabel: "Explore our dental solution",
+    nullDentalSubtitle:
+      "Dental practice management software that saves time, improves care, and meets NOM standards.",
+    nullDentalCTA: "Visit NullDental",
+    nullDentalBenefits: [
+      "Complete Patient Management",
+      "Smart Appointment Scheduling",
+      "Secure Digital Records",
+      "+ More Tools",
+    ],
+    nullDentalTestimonial:
+      '"NullDental revolutionized our practice workflow and patient satisfaction." - Dr. Maria Rodriguez, DDS',
     pricing: {
       title: "Pricing Plans",
       subtitle: "Choose the plan that fits your dental clinic",
@@ -722,6 +740,24 @@ const translations = {
     viewFullReport: "Ver Informe Completo",
     downloadPDF: "Descargar PDF",
     exploreMoreCaseStudies: "Explorar Más Casos de Estudio",
+    welcomeModalTitle: "Bienvenido a NullRaccoon",
+    welcomeModalSubtitle:
+      "Soluciones Innovadoras de Salud para Prácticas Modernas",
+    stayOnPortfolio: "Ver Nuestro Portafolio",
+    stayOnPortfolioLabel: "¿Buscas nuestro trabajo?",
+    goToNullDental: "Explorar NullDental",
+    goToNullDentalLabel: "Explora nuestra solución dental",
+    nullDentalSubtitle:
+      "Software de gestión de prácticas dentales que ahorra tiempo, mejora la atención y cumple con estándares NOM.",
+    nullDentalCTA: "Visita NullDental",
+    nullDentalBenefits: [
+      "Gestión Completa de Pacientes",
+      "Programación Inteligente de Citas",
+      "Registros Digitales Seguros",
+      "+ Más Herramientas",
+    ],
+    nullDentalTestimonial:
+      '"NullDental revolucionó nuestro flujo de trabajo y la satisfacción del paciente." - Dra. Maria Rodriguez, DDS',
     pricing: {
       title: "Planes de Precios",
       subtitle: "Elige el plan que se ajuste a tu clínica dental",
