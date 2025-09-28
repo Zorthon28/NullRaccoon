@@ -39,7 +39,7 @@ const translations = {
         description:
           "Dental Practice Management: Patient Registry, Appointments, Basic Messaging & Dashboard",
         image: "/images/nullDental-main.png",
-        link: "/pricing",
+        link: "https://nulldental.com/",
       },
       {
         title: "Personal Portfolio",
@@ -462,7 +462,7 @@ const translations = {
         description:
           "Solución completa de gestión de prácticas dentales con registros de salud electrónicos, programación inteligente de citas, odontogramas interactivos, planificación de tratamientos, seguimiento de inventario, soporte multi-ubicación, procesamiento de seguros e informes integrales para clínicas dentales de todos los tamaños.",
         image: "/images/medtech-premier-thumbnail.png", // placeholder
-        link: "/pricing",
+        link: "https://nulldental.com/",
       },
       {
         title: "Desarrollo profesional",
