@@ -8,6 +8,7 @@ import {
 import { motion } from "framer-motion";
 import { Home, ExternalLink, X, CheckCircle, Plus } from "lucide-react";
 import { ToastContainer } from "react-toastify";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 import Hero from "./components/Hero";
 import CaseStudy from "./components/CaseStudy";
 import FloatingButtons from "./components/FloatingButtons";
@@ -47,15 +48,54 @@ function AppContent() {
     }
   }, [location.pathname]);
 
-  useEffect(() => {
-    document.title =
-      lang === "es"
-        ? "NullRaccoon | Sitios Web Profesionales"
-        : "NullRaccoon | Professional Websites";
-  }, [lang]);
+  const pageTitle =
+    lang === "es"
+      ? "NullRaccoon | Sitios Web Profesionales"
+      : "NullRaccoon | Professional Websites";
+
+  const pageDescription =
+    lang === "es"
+      ? "Desarrollo de sitios web profesionales, tiendas en línea y soluciones digitales. Especialistas en React, SEO y diseño moderno."
+      : "Professional website development, online stores, and digital solutions. Specialists in React, SEO, and modern design.";
+
+  const keywords =
+    lang === "es"
+      ? "desarrollo web, sitios web, tiendas en línea, React, SEO, diseño web, NullRaccoon"
+      : "web development, websites, online stores, React, SEO, web design, NullRaccoon";
 
   return (
     <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content={keywords} />
+        <meta name="author" content="NullRaccoon" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:image" content="/logo192.png" />
+        <meta property="og:url" content="https://zorthon28.github.io" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        <meta name="twitter:image" content="/logo192.png" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "NullRaccoon",
+            url: "https://zorthon28.github.io",
+            logo: "https://zorthon28.github.io/logo192.png",
+            description: pageDescription,
+            founder: {
+              "@type": "Person",
+              name: "Gustavo Tello",
+            },
+            sameAs: ["https://github.com/zorthon28"],
+          })}
+        </script>
+      </Helmet>
       <div className="min-h-screen">
         <Routes>
           <Route
@@ -149,6 +189,7 @@ function AppContent() {
                       src="/images/nulldental-logo.png"
                       alt="NullDental Logo"
                       className="h-12 w-auto"
+                      loading="lazy"
                     />
                     <h2 className="text-2xl font-bold text-blue-600">
                       NullDental
@@ -257,21 +298,23 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
-      <AppContent />
-      <ToastContainer
-        position="top-right"
-        autoClose={2500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <AppContent />
+        <ToastContainer
+          position="top-right"
+          autoClose={2500}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+      </Router>
+    </HelmetProvider>
   );
 }
 

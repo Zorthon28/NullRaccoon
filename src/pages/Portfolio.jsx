@@ -23,6 +23,7 @@ export default function Portfolio({ t }) {
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+                  loading="lazy"
                 />
                 {project.type === "CaseStudy" && (
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4">

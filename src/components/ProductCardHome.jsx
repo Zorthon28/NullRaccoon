@@ -85,6 +85,7 @@ export default function ProductCardHome({ product, lang }) {
           src={product.images[0]}
           alt={translatedName}
           className="h-48 w-full object-contain rounded-t-lg bg-gray-100 p-4"
+          loading="lazy"
         />
       </Link>
 

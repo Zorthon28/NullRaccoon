@@ -397,6 +397,7 @@ export default function CaseStudy({
                     src={currentScreenshot.src}
                     alt={currentScreenshotAlt}
                     className="max-w-full max-h-full object-contain rounded-lg transition-opacity duration-300 ease-in-out opacity-100"
+                    loading="lazy"
                   />
                   {/* Fix: Conditionally render the overlay so it hides when the lightbox is open */}
                   {!lightboxOpen && (
@@ -441,6 +442,7 @@ export default function CaseStudy({
                             : "border-transparent hover:border-blue-300"
                         }`}
                         onClick={() => goToSpecificSlide(index)}
+                        loading="lazy"
                       />
                     ))}
                   </div>
