@@ -62,31 +62,63 @@ const translations = {
         name: "Codecademy User",
         imgSrc: "/images/codecademy-logo.png",
         url: "https://www.codecademy.com/profiles/Zorthon28",
+        description:
+          "Active learning platform member with multiple completed courses",
+        date: "2025",
+        category: "Platform",
       },
       {
         name: "CSS Certificate",
         imgSrc: "/images/CSS-Cert.png",
         url: "https://www.codecademy.com/profiles/Zorthon28/certificates/3a62023b0054dc793edc0adecd715fd7",
+        description: "Comprehensive CSS styling and responsive design skills",
+        date: "2025",
+        category: "Web Development",
       },
       {
         name: "Junit Certificate",
         imgSrc: "/images/Junit-Cert.png",
         url: "https://www.codecademy.com/profiles/Zorthon28/certificates/e95ecc4c837848d4a6548967fb8fe349",
+        description:
+          "Java unit testing and test-driven development proficiency",
+        date: "2025",
+        category: "Testing",
       },
       {
         name: "React Certificate",
         imgSrc: "/images/React-Cert.png",
         url: "https://www.codecademy.com/profiles/Zorthon28/certificates/af00e5032d0a68cc84879983f5d8333b",
+        description:
+          "Modern React development with hooks and component architecture",
+        date: "2025",
+        category: "Web Development",
       },
       {
         name: "Design Thinking for Innovation: Prototyping and Testing",
         imgSrc: "/images/Testing-Cert.png",
         url: "https://www.codecademy.com/profiles/Zorthon28/certificates/cf46232352e042c6baa6a2d3c53c62f5",
+        description:
+          "User-centered design and iterative prototyping methodologies",
+        date: "2025",
+        category: "Design",
       },
       {
         name: "Website Deployment & Hosting Fundamentals",
         imgSrc: "/images/DeployWeb-Cert.png",
         url: "https://www.codecademy.com/profiles/Zorthon28/certificates/358e250fca144526a6b2934ff44fbc01",
+        description:
+          "Web deployment, hosting, and production environment management",
+        date: "2025",
+        category: "DevOps",
+      },
+      {
+        name: "Python Programming Fundamentals",
+        imgSrc: "/images/Python-Cert.png",
+        url: "https://www.coursera.org/account/accomplishments/certificate/UC-SAN-DIEGO-PYTHON",
+        description:
+          "Foundational Python programming concepts, data structures, and problem-solving",
+        date: "2024",
+        category: "Programming",
       },
     ],
 
@@ -485,31 +517,63 @@ const translations = {
         name: "Usuario de Codecademy",
         imgSrc: "/images/codecademy-logo.png",
         url: "https://www.codecademy.com/profiles/Zorthon28",
+        description:
+          "Miembro activo de la plataforma de aprendizaje con múltiples cursos completados",
+        date: "2025",
+        category: "Plataforma",
       },
       {
         name: "Certificado de CSS",
         imgSrc: "/images/CSS-Cert.png",
         url: "https://www.codecademy.com/profiles/Zorthon28/certificates/3a62023b0054dc793edc0adecd715fd7",
+        description: "Habilidades completas en estilos CSS y diseño responsivo",
+        date: "2025",
+        category: "Desarrollo Web",
       },
       {
         name: "Certificado de Junit",
         imgSrc: "/images/Junit-Cert.png",
         url: "https://www.codecademy.com/profiles/Zorthon28/certificates/e95ecc4c837848d4a6548967fb8fe349",
+        description:
+          "Competencia en pruebas unitarias Java y desarrollo guiado por pruebas",
+        date: "2025",
+        category: "Pruebas",
       },
       {
         name: "Certificado de React",
         imgSrc: "/images/React-Cert.png",
         url: "https://www.codecademy.com/profiles/Zorthon28/certificates/af00e5032d0a68cc84879983f5d8333b",
+        description:
+          "Desarrollo moderno con React usando hooks y arquitectura de componentes",
+        date: "2025",
+        category: "Desarrollo Web",
       },
       {
         name: "Design Thinking para la innovación: Prototipos y pruebas",
         imgSrc: "/images/Testing-Cert.png",
         url: "https://www.codecademy.com/profiles/Zorthon28/certificates/cf46232352e042c6baa6a2d3c53c62f5",
+        description:
+          "Metodologías de diseño centrado en el usuario y prototipado iterativo",
+        date: "2025",
+        category: "Diseño",
       },
       {
         name: "Fundamentos de implantación y alojamiento de sitios web",
         imgSrc: "/images/DeployWeb-Cert.png",
         url: "https://www.codecademy.com/profiles/Zorthon28/certificates/358e250fca144526a6b2934ff44fbc01",
+        description:
+          "Despliegue web, alojamiento y gestión de entornos de producción",
+        date: "2025",
+        category: "DevOps",
+      },
+      {
+        name: "Fundamentos de Programación en Python",
+        imgSrc: "/images/Python-Cert.png",
+        url: "https://www.coursera.org/account/accomplishments/certificate/UC-SAN-DIEGO-PYTHON",
+        description:
+          "Conceptos fundamentales de programación en Python, estructuras de datos y resolución de problemas",
+        date: "2024",
+        category: "Programación",
       },
     ],
     // --- ADDED CASE STUDY SPECIFIC UI STRINGS HERE ---
