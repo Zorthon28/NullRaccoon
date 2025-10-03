@@ -114,7 +114,7 @@ const translations = {
       {
         name: "Python Programming Fundamentals",
         imgSrc: "/images/Python-Cert.png",
-        url: "https://www.coursera.org/account/accomplishments/certificate/UC-SAN-DIEGO-PYTHON",
+        url: "https://micoach.itj.com/achievements/public/62be38f8d152f617381ade86/68dd78af37cd6a906c578535",
         description:
           "Foundational Python programming concepts, data structures, and problem-solving",
         date: "2024",
@@ -569,7 +569,7 @@ const translations = {
       {
         name: "Fundamentos de Programación en Python",
         imgSrc: "/images/Python-Cert.png",
-        url: "https://www.coursera.org/account/accomplishments/certificate/UC-SAN-DIEGO-PYTHON",
+        url: "https://micoach.itj.com/achievements/public/62be38f8d152f617381ade86/68dd78af37cd6a906c578535",
         description:
           "Conceptos fundamentales de programación en Python, estructuras de datos y resolución de problemas",
         date: "2024",
