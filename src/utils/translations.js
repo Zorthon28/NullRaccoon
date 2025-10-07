@@ -117,7 +117,7 @@ const translations = {
         url: "https://micoach.itj.com/achievements/public/62be38f8d152f617381ade86/68dd78af37cd6a906c578535",
         description:
           "Foundational Python programming concepts, data structures, and problem-solving",
-        date: "2024",
+        date: "2025",
         category: "Programming",
       },
     ],
@@ -572,7 +572,7 @@ const translations = {
         url: "https://micoach.itj.com/achievements/public/62be38f8d152f617381ade86/68dd78af37cd6a906c578535",
         description:
           "Conceptos fundamentales de programación en Python, estructuras de datos y resolución de problemas",
-        date: "2024",
+        date: "2025",
         category: "Programación",
       },
     ],
