@@ -66,6 +66,7 @@ const translations = {
           "Active learning platform member with multiple completed courses",
         date: "2025",
         category: "Platform",
+        provider: "Codecademy",
       },
       {
         name: "CSS Certificate",
@@ -74,6 +75,7 @@ const translations = {
         description: "Comprehensive CSS styling and responsive design skills",
         date: "2025",
         category: "Web Development",
+        provider: "Codecademy",
       },
       {
         name: "Junit Certificate",
@@ -83,6 +85,7 @@ const translations = {
           "Java unit testing and test-driven development proficiency",
         date: "2025",
         category: "Testing",
+        provider: "Codecademy",
       },
       {
         name: "React Certificate",
@@ -92,6 +95,7 @@ const translations = {
           "Modern React development with hooks and component architecture",
         date: "2025",
         category: "Web Development",
+        provider: "Codecademy",
       },
       {
         name: "Design Thinking for Innovation: Prototyping and Testing",
@@ -101,6 +105,7 @@ const translations = {
           "User-centered design and iterative prototyping methodologies",
         date: "2025",
         category: "Design",
+        provider: "Codecademy",
       },
       {
         name: "Website Deployment & Hosting Fundamentals",
@@ -110,6 +115,7 @@ const translations = {
           "Web deployment, hosting, and production environment management",
         date: "2025",
         category: "DevOps",
+        provider: "Codecademy",
       },
       {
         name: "Python Programming Fundamentals",
@@ -119,6 +125,17 @@ const translations = {
           "Foundational Python programming concepts, data structures, and problem-solving",
         date: "2025",
         category: "Programming",
+        provider: "Instituto Tecnológico de Tijuana",
+      },
+      {
+        name: "Intermediate SQL",
+        imgSrc: "/images/IntermediateSQL-Cert.png",
+        url: "https://www.datacamp.com/completed/statement-of-accomplishment/course/95aee834b0201a41b2a0a179e6f394d55a3898b8",
+        description:
+          "Intermediate SQL skills including advanced queries, joins, and data manipulation",
+        date: "Oct 2025",
+        category: "Database",
+        provider: "DataCamp",
       },
     ],
 
@@ -521,6 +538,7 @@ const translations = {
           "Miembro activo de la plataforma de aprendizaje con múltiples cursos completados",
         date: "2025",
         category: "Plataforma",
+        provider: "Codecademy",
       },
       {
         name: "Certificado de CSS",
@@ -529,6 +547,7 @@ const translations = {
         description: "Habilidades completas en estilos CSS y diseño responsivo",
         date: "2025",
         category: "Desarrollo Web",
+        provider: "Codecademy",
       },
       {
         name: "Certificado de Junit",
@@ -538,6 +557,7 @@ const translations = {
           "Competencia en pruebas unitarias Java y desarrollo guiado por pruebas",
         date: "2025",
         category: "Pruebas",
+        provider: "Codecademy",
       },
       {
         name: "Certificado de React",
@@ -547,6 +567,7 @@ const translations = {
           "Desarrollo moderno con React usando hooks y arquitectura de componentes",
         date: "2025",
         category: "Desarrollo Web",
+        provider: "Codecademy",
       },
       {
         name: "Design Thinking para la innovación: Prototipos y pruebas",
@@ -556,6 +577,7 @@ const translations = {
           "Metodologías de diseño centrado en el usuario y prototipado iterativo",
         date: "2025",
         category: "Diseño",
+        provider: "Codecademy",
       },
       {
         name: "Fundamentos de implantación y alojamiento de sitios web",
@@ -565,6 +587,7 @@ const translations = {
           "Despliegue web, alojamiento y gestión de entornos de producción",
         date: "2025",
         category: "DevOps",
+        provider: "Codecademy",
       },
       {
         name: "Fundamentos de Programación en Python",
@@ -574,6 +597,17 @@ const translations = {
           "Conceptos fundamentales de programación en Python, estructuras de datos y resolución de problemas",
         date: "2025",
         category: "Programación",
+        provider: "Instituto Tecnológico de Tijuana",
+      },
+      {
+        name: "SQL Intermedio",
+        imgSrc: "/images/IntermediateSQL-Cert.png",
+        url: "https://www.datacamp.com/completed/statement-of-accomplishment/course/95aee834b0201a41b2a0a179e6f394d55a3898b8",
+        description:
+          "Habilidades intermedias en SQL incluyendo consultas avanzadas, uniones y manipulación de datos",
+        date: "Oct 2025",
+        category: "Base de Datos",
+        provider: "DataCamp",
       },
     ],
     // --- ADDED CASE STUDY SPECIFIC UI STRINGS HERE ---

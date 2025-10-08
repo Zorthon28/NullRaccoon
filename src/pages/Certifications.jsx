@@ -32,7 +32,7 @@ const Certifications = ({ t }) => {
         url: cert.url,
         provider: {
           "@type": "Organization",
-          name: "Codecademy",
+          name: cert.provider,
         },
       },
     })),
