@@ -5,8 +5,6 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Home, ExternalLink, X, CheckCircle, Plus } from "lucide-react";
 import { ToastContainer } from "react-toastify";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import Hero from "./components/Hero";
@@ -26,7 +24,6 @@ import "./index.css";
 function AppContent() {
   const [lang, setLang] = useState("es");
   const [showQuoteModal, setShowQuoteModal] = useState(false);
-  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -41,12 +38,6 @@ function AppContent() {
 
   const t = translations[lang];
 
-  useEffect(() => {
-    const hasSeenModal = sessionStorage.getItem("welcomeModalShown");
-    if (!hasSeenModal && location.pathname === "/") {
-      setShowWelcomeModal(true);
-    }
-  }, [location.pathname]);
 
   const pageTitle =
     lang === "es"
