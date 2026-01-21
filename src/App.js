@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useLocation,
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { HelmetProvider, Helmet } from "react-helmet-async";
@@ -24,7 +23,6 @@ import "./index.css";
 function AppContent() {
   const [lang, setLang] = useState("es");
   const [showQuoteModal, setShowQuoteModal] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     const userLang = navigator.language || navigator.userLanguage;
