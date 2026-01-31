@@ -20,6 +20,20 @@ const translations = {
     portfolioSubtitle: "Some of our recent work",
     portfolioProjects: [
       {
+        title: "NullCommunity Club",
+        description:
+          "Residential Community Platform: Resident & Pet Registry, Finances, Amenity Reservations, Maintenance Reports & Announcements",
+        image: "/images/nullCommunity.png",
+        link: "https://viñasdelmar.club/",
+      },
+      {
+        title: "NullDental",
+        description:
+          "Dental Practice Management: Patient Registry, Appointments, Basic Messaging & Dashboard",
+        image: "/images/nullDental-main.png",
+        link: "https://nulldental.com/",
+      },
+      {
         title: "E-commerce Platform",
         description:
           "A modern online store with cart, checkout, and admin panel.",
@@ -33,13 +47,6 @@ const translations = {
         image: "/images/medtech-premier-thumbnail.png",
         type: "CaseStudy",
         link: "/case-study/medtech-premier",
-      },
-      {
-        title: "NullDental",
-        description:
-          "Dental Practice Management: Patient Registry, Appointments, Basic Messaging & Dashboard",
-        image: "/images/nullDental-main.png",
-        link: "https://nulldental.com/",
       },
       {
         title: "Personal Portfolio",
