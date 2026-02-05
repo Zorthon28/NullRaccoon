@@ -21,7 +21,11 @@ export default function Header({ t }) {
   const navItems = {
     "/": [
       { name: t.portfolioTitle, href: "#portfolio" },
-      { name: t.certificationsTitle, href: "#certifications" },
+      {
+        name: t.certificationsTitle,
+        href: "#certifications",
+        className: "hidden md:block",
+      },
     ],
     // Change this key to a more dynamic check
     caseStudy: [
@@ -82,7 +86,7 @@ export default function Header({ t }) {
           <nav role="navigation" aria-label="Main Navigation">
             <ul className="flex space-x-6">
               {currentNav.map((item) => (
-                <li key={item.name}>
+                <li key={item.name} className={item.className || ""}>
                   <a
                     href={item.href}
                     onClick={(e) => handleSmoothScroll(e, item.href)} // Add the onClick handler
