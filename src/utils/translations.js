@@ -499,6 +499,20 @@ const translations = {
     portfolioSubtitle: "Algunos de nuestros trabajos recientes",
     portfolioProjects: [
       {
+        title: "NullCommunity Club",
+        description:
+          "Plataforma de Comunidad Residencial: Registro de Residentes y Mascotas, Finanzas, Reservas de Amenidades, Reportes de Mantenimiento y Anuncios",
+        image: "/images/nullCommunity.png",
+        link: "https://viñasdelmar.club/",
+      },
+      {
+        title: "NullDental",
+        description:
+          "Gestión de Práctica Dental: Registro de Pacientes, Citas, Mensajería Básica y Panel de Control",
+        image: "/images/nullDental-main.png",
+        link: "https://nulldental.com/",
+      },
+      {
         title: "Plataforma de Comercio Electrónico",
         description:
           "Una tienda en línea moderna con carrito, pago y panel de administración.",
@@ -514,14 +528,7 @@ const translations = {
         link: "/case-study/medtech-premier",
       },
       {
-        title: "NullDental",
-        description:
-          "Solución completa de gestión de prácticas dentales con registros de salud electrónicos, programación inteligente de citas, odontogramas interactivos, planificación de tratamientos, seguimiento de inventario, soporte multi-ubicación, procesamiento de seguros e informes integrales para clínicas dentales de todos los tamaños.",
-        image: "/images/medtech-premier-thumbnail.png", // placeholder
-        link: "https://nulldental.com/",
-      },
-      {
-        title: "Desarrollo profesional",
+        title: "Portafolio Personal",
         description:
           "Presentación profesional de la experiencia y proyectos de un ingeniero biomédico con enfoque en tecnología y automatización.",
         image: "/images/portfolio-project-thumbnail.png",
