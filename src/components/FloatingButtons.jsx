@@ -79,7 +79,10 @@ export default function FloatingButtons({
 
             {/* Quote Button */}
             <button
-              onClick={() => setShowQuoteModal((prev) => !prev)}
+              onClick={() => {
+                localStorage.removeItem("quote_prefill_message");
+                setShowQuoteModal((prev) => !prev);
+              }}
               className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-3 rounded-full shadow-md transition duration-300 text-sm min-w-[140px]"
             >
               <svg

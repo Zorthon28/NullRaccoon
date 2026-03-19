@@ -20,6 +20,7 @@ export default function Header({ t }) {
   // Define nav items for different routes
   const navItems = {
     "/": [
+      { name: t.services || "Services", href: "/services" },
       { name: t.portfolioTitle, href: "#portfolio" },
       {
         name: t.certificationsTitle,
@@ -27,19 +28,28 @@ export default function Header({ t }) {
         className: "hidden md:block",
       },
     ],
+    "/services": [
+      { name: "Home", href: "/" },
+      { name: t.portfolioTitle, href: "/#portfolio" },
+    ],
     // Change this key to a more dynamic check
     caseStudy: [
       { name: t.images, href: "#images" },
       { name: t.overview, href: "#overview" },
     ],
     // fallback or other routes
-    default: [],
+    default: [
+      { name: "Home", href: "/" },
+      { name: t.services || "Services", href: "/services" },
+    ],
   };
 
   // Check if the path starts with "/case-study"
   let currentNav = [];
   if (path.startsWith("/case-study")) {
     currentNav = navItems.caseStudy;
+  } else if (path.startsWith("/services")) {
+    currentNav = navItems["/services"];
   } else {
     // Check for exact path matches for other routes
     currentNav = navItems[path] || navItems.default;
@@ -47,6 +57,10 @@ export default function Header({ t }) {
 
   // Function to handle smooth scrolling
   const handleSmoothScroll = (e, href) => {
+    if (!href.startsWith("#")) {
+      return;
+    }
+
     e.preventDefault(); // Prevent the default jump behavior
     const targetId = href.substring(1); // Get the ID without the '#'
     const targetElement = document.getElementById(targetId);

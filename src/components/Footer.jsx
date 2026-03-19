@@ -1,5 +1,6 @@
 import React from "react";
 import { Github, Linkedin, Instagram, Facebook } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const SocialIcon = ({ href, label, Icon }) => (
   <a
@@ -44,27 +45,47 @@ const SocialIconsList = () => {
 
 export default function Footer({ t }) {
   return (
-    <footer className="w-full bg-gray-900 text-white py-12">
-      <div className="max-w-screen-xl mx-auto px-4 text-center flex flex-col items-center justify-center space-y-4">
-        {/* Logo */}
-        <a
-          href="/"
-          className="flex items-center space-x-2 hover:opacity-90 transition-opacity"
-        >
-          <img
-            src="/logo192.png"
-            alt="NullRaccoon Logo"
-            className="h-8 md:h-10 lg:h-12"
-          />
-          <span className="text-white font-extrabold text-xl tracking-tight sm:inline">
-            NullRaccoon
-          </span>
-        </a>
+    <>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            name: "NullRaccoon",
+            url: "https://www.nullraccoon.com",
+            logo: "https://www.nullraccoon.com/logo192.png",
+            sameAs: [
+              "https://github.com/Zorthon28",
+              "https://www.linkedin.com/in/gustavotellodev/",
+              "https://www.instagram.com/nullraccoontj/",
+              "https://www.facebook.com/NullRaccoon/",
+            ],
+          })}
+        </script>
+      </Helmet>
 
-        <SocialIconsList />
+      <footer className="w-full bg-gray-900 text-white py-12">
+        <div className="max-w-screen-xl mx-auto px-4 text-center flex flex-col items-center justify-center space-y-4">
+          {/* Logo */}
+          <a
+            href="/"
+            className="flex items-center space-x-2 hover:opacity-90 transition-opacity"
+          >
+            <img
+              src="/logo192.png"
+              alt="NullRaccoon Logo"
+              className="h-8 md:h-10 lg:h-12"
+            />
+            <span className="text-white font-extrabold text-xl tracking-tight sm:inline">
+              NullRaccoon
+            </span>
+          </a>
 
-        <p className="text-sm text-gray-500"> {t.footerText}</p>
-      </div>
-    </footer>
+          <SocialIconsList />
+
+          <p className="text-sm text-gray-500"> {t.footerText}</p>
+        </div>
+      </footer>
+    </>
   );
 }

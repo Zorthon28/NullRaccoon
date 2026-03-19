@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import Hero from "./components/Hero";
@@ -12,6 +8,7 @@ import FloatingButtons from "./components/FloatingButtons";
 import StoreHome from "./pages/StoreHome";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
+import Services from "./pages/Services";
 import translations from "./utils/translations";
 import StoreLayout from "./layouts/StoreLayout";
 import StoreLanding from "./pages/StoreLanding";
@@ -30,27 +27,26 @@ function AppContent() {
     console.log(
       `App.js: Initial language set to: ${
         userLang.startsWith("es") ? "es" : "en"
-      }`
+      }`,
     );
   }, []);
 
   const t = translations[lang];
 
-
   const pageTitle =
     lang === "es"
-      ? "NullRaccoon | Sitios Web Profesionales"
-      : "NullRaccoon | Professional Websites";
+      ? "Desarrollador Web Profesional | Sitios Web Personalizados | Soluciones Web Tijuana"
+      : "Professional Web Developer | Custom Websites & Web Solutions | NullRaccoon";
 
   const pageDescription =
     lang === "es"
-      ? "Desarrollo de sitios web profesionales, tiendas en línea y soluciones digitales. Especialistas en React, SEO y diseño moderno."
-      : "Professional website development, online stores, and digital solutions. Specialists in React, SEO, and modern design.";
+      ? "Desarrollador web certificado especializado en sitios web personalizados, tiendas en línea y soluciones digitales. Experto en React, diseño responsivo y SEO. ✓ 2+ años de experiencia. ✓ Apoyo bilingüe. Obtén tu sitio web profesional hoy."
+      : "Certified web developer specializing in custom websites, e-commerce solutions & digital services. React expert, responsive design, SEO-optimized. ✓ 2+ years experience. ✓ Bilingual support. Get your professional website today.";
 
   const keywords =
     lang === "es"
-      ? "desarrollo web, sitios web, tiendas en línea, React, SEO, diseño web, NullRaccoon"
-      : "web development, websites, online stores, React, SEO, web design, NullRaccoon";
+      ? "desarrollador web, desarrollo web, programador web, sitios web personalizados, soluciones web, tienda online, React developer, diseño web responsivo, web solutions colombia, desarrollo sitios web mexico"
+      : "web developer, web development, professional websites, web solutions, custom website development, react developer, responsive web design, online stores, freelance web developer, web development services";
 
   return (
     <>
@@ -63,7 +59,7 @@ function AppContent() {
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
         <meta property="og:image" content="/logo192.png" />
-        <meta property="og:url" content="https://zorthon28.github.io" />
+        <meta property="og:url" content="https://www.nullraccoon.com" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle} />
@@ -72,16 +68,79 @@ function AppContent() {
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Organization",
+            "@type": "ProfessionalService",
             name: "NullRaccoon",
-            url: "https://zorthon28.github.io",
-            logo: "https://zorthon28.github.io/logo192.png",
+            url: "https://www.nullraccoon.com",
+            logo: "https://www.nullraccoon.com/logo192.png",
+            image: "https://www.nullraccoon.com/logo192.png",
             description: pageDescription,
+            priceRange: "$$",
+            areaServed: [
+              { "@type": "Country", name: "Mexico" },
+              { "@type": "Country", name: "Colombia" },
+              { "@type": "Country", name: "United States" },
+              { "@type": "Country", name: "Worldwide" },
+            ],
+            serviceArea: "Worldwide",
+            knowsAbout: [
+              "Web Development",
+              "React",
+              "JavaScript",
+              "Web Design",
+              "E-commerce",
+              "SEO",
+              "Web Solutions",
+              "Custom Websites",
+              "Responsive Design",
+              "Frontend Development",
+            ],
             founder: {
               "@type": "Person",
               name: "Gustavo Tello",
             },
+            contactPoint: {
+              "@type": "ContactPoint",
+              contactType: "Customer Service",
+              availableLanguage: ["en", "es"],
+            },
             sameAs: ["https://github.com/zorthon28"],
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "5",
+              ratingCount: "2",
+            },
+            offers: {
+              "@type": "AggregateOffer",
+              priceCurrency: "USD",
+              lowPrice: "1000",
+              highPrice: "15000",
+              offers: [
+                {
+                  "@type": "Offer",
+                  name: "Custom Website Development",
+                  description:
+                    "Professional website design and development for businesses",
+                  priceCurrency: "USD",
+                  price: "2500",
+                },
+                {
+                  "@type": "Offer",
+                  name: "E-commerce Solutions",
+                  description:
+                    "Complete online store development with payment integration",
+                  priceCurrency: "USD",
+                  price: "5000",
+                },
+                {
+                  "@type": "Offer",
+                  name: "Web Application Development",
+                  description:
+                    "Custom web applications and tools built with modern technologies",
+                  priceCurrency: "USD",
+                  price: "8000",
+                },
+              ],
+            },
           })}
         </script>
       </Helmet>
@@ -94,6 +153,17 @@ function AppContent() {
                 lang={lang}
                 t={t}
                 showQuoteModal={showQuoteModal}
+                setShowQuoteModal={setShowQuoteModal}
+              />
+            }
+          />
+
+          <Route
+            path="/services"
+            element={
+              <Services
+                lang={lang}
+                t={t}
                 setShowQuoteModal={setShowQuoteModal}
               />
             }

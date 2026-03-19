@@ -1,15 +1,23 @@
 import React, { useRef, useState } from "react";
 
-export default function QuoteModal({ isOpen, onClose }) {
+export default function QuoteModal({ isOpen, onClose, prefillMessage }) {
   const modalRef = useRef();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  const storedPrefill = localStorage.getItem("quote_prefill_message") || "";
+  const defaultMessage = prefillMessage || storedPrefill;
+
   if (!isOpen) return null;
+
+  const handleClose = () => {
+    localStorage.removeItem("quote_prefill_message");
+    onClose();
+  };
 
   const handleBackdropClick = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
-      onClose();
+      handleClose();
     }
   };
 
@@ -33,11 +41,12 @@ export default function QuoteModal({ isOpen, onClose }) {
             name: formData.get("name"),
             email: formData.get("email"),
             message: formData.get("message"),
+            serviceInterest: formData.get("serviceInterest"),
             _subject: "New Quote Request!",
             _template: "table",
             _captcha: "false",
           }),
-        }
+        },
       );
 
       const result = await response.json();
@@ -68,7 +77,7 @@ export default function QuoteModal({ isOpen, onClose }) {
         <div className="relative flex items-center mb-6">
           {/* Close button on left */}
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="text-gray-500 hover:text-gray-700 text-2xl font-bold mr-2"
             aria-label="Close"
           >
@@ -106,7 +115,7 @@ export default function QuoteModal({ isOpen, onClose }) {
             <button
               onClick={() => {
                 setIsSuccess(false);
-                onClose();
+                handleClose();
               }}
               className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition"
             >
@@ -117,6 +126,13 @@ export default function QuoteModal({ isOpen, onClose }) {
           /* Form Content */
           <>
             <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="hidden"
+                name="serviceInterest"
+                value={defaultMessage}
+                readOnly
+              />
+
               {/* Name field */}
               <div>
                 <label
@@ -166,6 +182,7 @@ export default function QuoteModal({ isOpen, onClose }) {
                   name="message"
                   placeholder="Cuéntanos sobre tu proyecto..."
                   required
+                  defaultValue={defaultMessage}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                   rows="4"
                 ></textarea>

@@ -2,4 +2,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://zorthon28.github.io/sitemap.xml
+Sitemap: https://www.nullraccoon.com/sitemap.xml

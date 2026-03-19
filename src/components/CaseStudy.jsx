@@ -9,6 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Lightbox from "yet-another-react-lightbox";
+import { Helmet } from "react-helmet-async";
 import {
   Slideshow,
   Fullscreen,
@@ -204,8 +205,8 @@ export default function CaseStudy({
     currentScreenshot?.altMobileKey && isMobile
       ? getNestedTranslation(t, currentScreenshot.altMobileKey)
       : currentScreenshot?.altKey
-      ? getNestedTranslation(t, currentScreenshot.altKey)
-      : `${t?.screenshot || "Screenshot"} ${currentScreenshotIndex + 1}`;
+        ? getNestedTranslation(t, currentScreenshot.altKey)
+        : `${t?.screenshot || "Screenshot"} ${currentScreenshotIndex + 1}`;
 
   const currentScreenshotDescription = currentScreenshot?.descriptionKey
     ? getNestedTranslation(t, currentScreenshot.descriptionKey)
@@ -213,13 +214,13 @@ export default function CaseStudy({
 
   const goToPreviousSlide = () => {
     setCurrentScreenshotIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : caseStudy.screenshots.length - 1
+      prevIndex > 0 ? prevIndex - 1 : caseStudy.screenshots.length - 1,
     );
   };
 
   const goToNextSlide = () => {
     setCurrentScreenshotIndex((prevIndex) =>
-      prevIndex < caseStudy.screenshots.length - 1 ? prevIndex + 1 : 0
+      prevIndex < caseStudy.screenshots.length - 1 ? prevIndex + 1 : 0,
     );
   };
 
@@ -227,23 +228,14 @@ export default function CaseStudy({
     setCurrentScreenshotIndex(index);
   };
 
-  useEffect(() => {
-    console.log("lightboxOpen state changed to:", lightboxOpen);
-  }, [lightboxOpen]);
-
-  // Debug logging for lightbox
-  useEffect(() => {
-    if (lightboxOpen && caseStudy.screenshots) {
-      console.log(
-        "Lightbox condition met! caseStudy.screenshots:",
-        caseStudy.screenshots
-      );
+  const trackDownload = (caseStudyId) => {
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", "download", {
+        event_category: "engagement",
+        event_label: `Case Study PDF: ${caseStudyId}`,
+      });
     }
-  }, [lightboxOpen, caseStudy.screenshots]);
-
-  console.log("CaseStudy component rendered/re-rendered.");
-  console.log("Current caseStudy:", caseStudy); // DEBUG: Check if caseStudy data is loaded
-  console.log("hasScreenshots:", hasScreenshots); // DEBUG: Check if hasScreenshots is true for expected items
+  };
 
   if (!caseStudy) {
     return (
@@ -315,13 +307,31 @@ export default function CaseStudy({
     );
   };
 
-  console.log(
-    `CaseStudy loaded: ${getNestedTranslation(t, caseStudy?.titleKey)}`
-  );
-  console.log("CaseStudy details:", caseStudy);
-
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900 text-white">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Review",
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: "5",
+              bestRating: "5",
+            },
+            author: {
+              "@type": "Organization",
+              name: caseStudy?.client || "Satisfied Client",
+            },
+            reviewBody: getNestedTranslation(t, caseStudy?.testimonialKey),
+            itemReviewed: {
+              "@type": "LocalBusiness",
+              name: "NullRaccoon",
+            },
+          })}
+        </script>
+      </Helmet>
+
       {/* Animated background particles */}
       <div className="absolute inset-0 z-0">
         {[...Array(30)].map((_, i) => (
@@ -476,7 +486,7 @@ export default function CaseStudy({
                       description:
                         getNestedTranslation(t, screenshot.descriptionKey) ||
                         "",
-                    }))
+                    })),
                   )}
                   <Lightbox
                     open={lightboxOpen}
@@ -501,7 +511,7 @@ export default function CaseStudy({
                 </>
               )}
             </div>,
-            document.body
+            document.body,
           )}
 
         {/* Consolidated Demo Button Logic */}
@@ -626,6 +636,7 @@ export default function CaseStudy({
                   href={caseStudy.documentUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackDownload(caseStudy.id)}
                   className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-medium transition"
                 >
                   <svg

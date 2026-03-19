@@ -6,6 +6,7 @@ const translations = {
     subheadline: "We build websites that convert visitors into customers",
     ctaStart: "Get Started",
     ctaPortfolio: "Portfolio",
+    services: "Services",
     footerText: `© ${new Date().getFullYear()} NullRaccoon. All rights reserved.`,
     indicators: [
       "2+ Years Experience",
@@ -486,6 +487,7 @@ const translations = {
     subheadline: "Creamos sitios web que convierten visitantes en clientes",
     ctaStart: "Comenzar",
     ctaPortfolio: "Portafolio",
+    services: "Servicios",
     footerText: `© ${new Date().getFullYear()} NullRaccoon. Todos los derechos reservados.`,
     indicators: [
       "2+ Años de experiencia",
