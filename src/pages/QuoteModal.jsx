@@ -67,7 +67,12 @@ export default function QuoteModal({ isOpen, onClose, prefillMessage }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-60"
+      className="fixed inset-0 z-50 flex items-center justify-center"
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.35)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
+      }}
       onClick={handleBackdropClick}
     >
       <div
