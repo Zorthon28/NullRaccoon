@@ -25,6 +25,18 @@ const routes = [
     files: ["src/pages/Services.jsx", "src/App.js"],
   },
   {
+    route: "/privacy",
+    changefreq: "yearly",
+    priority: "0.4",
+    files: ["public/privacy.html"],
+  },
+  {
+    route: "/terms",
+    changefreq: "yearly",
+    priority: "0.4",
+    files: ["public/terms.html"],
+  },
+  {
     route: "/store",
     changefreq: "weekly",
     priority: "0.9",

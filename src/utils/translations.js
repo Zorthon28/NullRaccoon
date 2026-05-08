@@ -7,6 +7,8 @@ const translations = {
     ctaStart: "Get Started",
     ctaPortfolio: "Portfolio",
     services: "Services",
+    privacyPolicy: "Privacy Policy",
+    termsAndConditions: "Terms & Conditions",
     footerText: `© ${new Date().getFullYear()} NullRaccoon. All rights reserved.`,
     indicators: [
       "2+ Years Experience",
@@ -488,6 +490,8 @@ const translations = {
     ctaStart: "Comenzar",
     ctaPortfolio: "Portafolio",
     services: "Servicios",
+    privacyPolicy: "Política de Privacidad",
+    termsAndConditions: "Términos y Condiciones",
     footerText: `© ${new Date().getFullYear()} NullRaccoon. Todos los derechos reservados.`,
     indicators: [
       "2+ Años de experiencia",

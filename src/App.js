@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import Hero from "./components/Hero";
@@ -167,6 +172,15 @@ function AppContent() {
                 setShowQuoteModal={setShowQuoteModal}
               />
             }
+          />
+
+          <Route
+            path="/privacy"
+            element={<Navigate to="/privacy.html" replace />}
+          />
+          <Route
+            path="/terms"
+            element={<Navigate to="/terms.html" replace />}
           />
 
           <Route

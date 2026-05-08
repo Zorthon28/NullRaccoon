@@ -44,6 +44,9 @@ const SocialIconsList = () => {
 };
 
 export default function Footer({ t }) {
+  const privacyLabel = t?.privacyPolicy || "Privacy Policy";
+  const termsLabel = t?.termsAndConditions || "Terms & Conditions";
+
   return (
     <>
       <Helmet>
@@ -82,6 +85,21 @@ export default function Footer({ t }) {
           </a>
 
           <SocialIconsList />
+
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
+            <a
+              href="/privacy"
+              className="text-gray-300 hover:text-green-400 transition-colors duration-300 ease-in-out"
+            >
+              {privacyLabel}
+            </a>
+            <a
+              href="/terms"
+              className="text-gray-300 hover:text-green-400 transition-colors duration-300 ease-in-out"
+            >
+              {termsLabel}
+            </a>
+          </div>
 
           <p className="text-sm text-gray-500"> {t.footerText}</p>
         </div>
