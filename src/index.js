@@ -1,14 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import './styles.css';  // Change this import
+import "./styles.css"; // Change this import
 import { CartProvider } from "./context/CartContext";
-
+import { AuthProvider } from "./context/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <CartProvider>
-    <App />
-  </CartProvider>
+  <AuthProvider>
+    <CartProvider>
+      <App />
+    </CartProvider>
+  </AuthProvider>,
 );

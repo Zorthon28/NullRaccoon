@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Header({ t }) {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const auth = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,7 +22,9 @@ export default function Header({ t }) {
   // Define nav items for different routes
   const navItems = {
     "/": [
-      { name: t.services || "Services", href: "/services" },
+      ...(auth?.canAccessRestricted
+        ? [{ name: t.services || "Services", href: "/services" }]
+        : [{ name: "Login", href: "/login" }]),
       { name: t.portfolioTitle, href: "#portfolio" },
       {
         name: t.certificationsTitle,
@@ -40,7 +44,9 @@ export default function Header({ t }) {
     // fallback or other routes
     default: [
       { name: "Home", href: "/" },
-      { name: t.services || "Services", href: "/services" },
+      ...(auth?.canAccessRestricted
+        ? [{ name: t.services || "Services", href: "/services" }]
+        : [{ name: "Login", href: "/login" }]),
     ],
   };
 
@@ -98,7 +104,7 @@ export default function Header({ t }) {
         {/* Dynamic Navigation */}
         {currentNav.length > 0 && (
           <nav role="navigation" aria-label="Main Navigation">
-            <ul className="flex space-x-6">
+            <ul className="flex space-x-6 items-center">
               {currentNav.map((item) => (
                 <li key={item.name} className={item.className || ""}>
                   <a
@@ -111,6 +117,19 @@ export default function Header({ t }) {
                   </a>
                 </li>
               ))}
+
+              {auth?.isSignedIn && (
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => auth.signOut()}
+                    className="text-white text-sm md:text-base font-semibold relative group transition-all"
+                  >
+                    Logout
+                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
+                  </button>
+                </li>
+              )}
             </ul>
           </nav>
         )}

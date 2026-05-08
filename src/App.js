@@ -17,6 +17,9 @@ import Services from "./pages/Services";
 import translations from "./utils/translations";
 import StoreLayout from "./layouts/StoreLayout";
 import StoreLanding from "./pages/StoreLanding";
+import Login from "./pages/Login";
+import AuthCallback from "./pages/AuthCallback";
+import RequireAccess from "./components/RequireAccess";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/Footer";
 
@@ -163,42 +166,64 @@ function AppContent() {
             }
           />
 
+          <Route path="/login" element={<Login />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
+
           <Route
             path="/services"
             element={
-              <Services
-                lang={lang}
-                t={t}
-                setShowQuoteModal={setShowQuoteModal}
-              />
+              <RequireAccess>
+                <Services
+                  lang={lang}
+                  t={t}
+                  setShowQuoteModal={setShowQuoteModal}
+                />
+              </RequireAccess>
             }
           />
 
           <Route
             path="/privacy"
-            element={<Navigate to="/privacy.html" replace />}
+            element={
+              <RequireAccess>
+                <Navigate to="/privacy.html" replace />
+              </RequireAccess>
+            }
           />
           <Route
             path="/terms"
-            element={<Navigate to="/terms.html" replace />}
+            element={
+              <RequireAccess>
+                <Navigate to="/terms.html" replace />
+              </RequireAccess>
+            }
           />
 
           <Route
             path="/case-study/:caseId"
             element={
-              <CaseStudy
-                lang={lang}
-                t={t}
-                showQuoteModal={showQuoteModal}
-                setShowQuoteModal={setShowQuoteModal}
-              />
+              <RequireAccess>
+                <CaseStudy
+                  lang={lang}
+                  t={t}
+                  showQuoteModal={showQuoteModal}
+                  setShowQuoteModal={setShowQuoteModal}
+                />
+              </RequireAccess>
             }
           />
 
           {/* 🛍️ Store Routes */}
 
           {/* Store routes wrapped with StoreLayout */}
-          <Route path="/store" element={<StoreLayout lang={lang} t={t} />}>
+          <Route
+            path="/store"
+            element={
+              <RequireAccess>
+                <StoreLayout lang={lang} t={t} />
+              </RequireAccess>
+            }
+          >
             <Route index element={<StoreLanding lang={lang} t={t} />} />
             {/* 🏠 Landing */}
             <Route
@@ -213,17 +238,7 @@ function AppContent() {
             <Route path="cart" element={<Cart lang={lang} t={t} />} />
           </Route>
 
-          <Route
-            path="*"
-            element={
-              <Hero
-                lang={lang}
-                t={t}
-                showQuoteModal={showQuoteModal}
-                setShowQuoteModal={setShowQuoteModal}
-              />
-            }
-          />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
         <Footer lang={lang} t={t} />
