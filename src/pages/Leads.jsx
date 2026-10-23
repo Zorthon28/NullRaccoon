@@ -249,8 +249,31 @@ export default function Leads() {
             const clinicMsg = `Hola buenas tardes ${c.name}, le escribe Gustavo Tello, ingeniero biomédico y de software local aquí en Tijuana. Desarrollé NullDental (https://dental.nullraccoon.com), una plataforma diseñada para clínicas dentales. Estudios en clínicas privadas demuestran que los recordatorios automatizados por WhatsApp reducen el ausentismo entre un 25% y 35%. Nuestro objetivo es comprobar y medir ese impacto directamente en su clínica. Actualmente estamos seleccionando 3 clínicas en Tijuana para una prueba piloto sin costo para automatizar sus confirmaciones y documentar citas recuperadas. ¿Con quién de administración o dirección médica podríamos coordinar una demostración rápida de 10 minutos? Saludos cordiales.`;
             const waUrl = c.whatsapp ? `https://wa.me/${c.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(clinicMsg)}` : null;
             
-            const emailSubject = `Reducción de ausentismo de pacientes en ${c.name} - Propuesta Piloto`;
-            const mailtoUrl = c.email ? `mailto:${c.email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(clinicMsg)}` : null;
+            const emailSubject = `Reducción de ausentismo y citas no asistidas en ${c.name} - Propuesta Piloto`;
+            const emailBody = `Estimado equipo de ${c.name},
+
+Espero que se encuentren muy bien.
+
+Le escribe Gustavo Tello, ingeniero biomédico y de software local aquí en Tijuana. Desarrollé NullDental (https://dental.nullraccoon.com), una plataforma diseñada específicamente para consultorios y clínicas dentales.
+
+Estudios en clínicas privadas demuestran que los recordatorios automatizados por WhatsApp reducen el ausentismo de pacientes entre un 25% y 35%, además de ahorrarle entre 10 y 15 horas semanales a recepción en llamadas y mensajes manuales.
+
+Actualmente estamos seleccionando a 3 clínicas en Tijuana para una prueba piloto sin costo, donde implementamos el sistema de confirmaciones automáticas para comprobar y documentar los resultados en citas recuperadas.
+
+¿Tendrían disponibilidad esta semana para una breve demostración de 10 minutos (por videollamada o presencial) y evaluar si su clínica califica para el piloto?
+
+Quedo a su entera disposición.
+
+Atentamente,
+
+Gustavo Tello
+Fundador & Lead Engineer | NullRaccoon
+Ingeniero Biomédico & Software Engineer
+Tel / WhatsApp: +52 (664) 578-9729
+Web: https://nullraccoon.com | https://dental.nullraccoon.com
+Tijuana, B.C., México`;
+
+            const mailtoUrl = c.email ? `mailto:${c.email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}` : null;
 
             return (
               <div key={i} className="bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-xl p-5 transition-all">
