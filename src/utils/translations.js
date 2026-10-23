@@ -27,7 +27,7 @@ const translations = {
         description:
           "Residential Community Platform: Resident & Pet Registry, Finances, Amenity Reservations, Maintenance Reports & Announcements",
         image: "/images/nullCommunity.png",
-        link: "https://viñasdelmar.club/",
+        link: "https://community.nullraccoon.com/",
       },
       {
         title: "NullDental",
@@ -509,7 +509,7 @@ const translations = {
         description:
           "Plataforma de Comunidad Residencial: Registro de Residentes y Mascotas, Finanzas, Reservas de Amenidades, Reportes de Mantenimiento y Anuncios",
         image: "/images/nullCommunity.png",
-        link: "https://viñasdelmar.club/",
+        link: "https://community.nullraccoon.com/",
       },
       {
         title: "NullDental",

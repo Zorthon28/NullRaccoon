@@ -42,7 +42,7 @@ const caseStudies = [
     testimonialKey: "caseStudies.ecommercePlatform.testimonial",
     client: "Jane Smith, CEO of ShopExample", // This can remain here if it's not translatable
     technologies: ["React", "Node.js", "MongoDB", "Stripe API", "Tailwind CSS"],
-    demoUrl: "https://demo-ecommerce.example.com",
+    demoUrl: "/store",
     imageUrl: "/images/ecommerce-case.jpg",
   },
   {
