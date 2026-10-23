@@ -34,7 +34,7 @@ const translations = {
         description:
           "Dental Practice Management: Patient Registry, Appointments, Basic Messaging & Dashboard",
         image: "/images/nullDental-main.png",
-        link: "https://nulldental.com/",
+        link: "https://dental.nullraccoon.com/",
       },
       {
         title: "E-commerce Platform",
@@ -516,7 +516,7 @@ const translations = {
         description:
           "Gestión de Práctica Dental: Registro de Pacientes, Citas, Mensajería Básica y Panel de Control",
         image: "/images/nullDental-main.png",
-        link: "https://nulldental.com/",
+        link: "https://dental.nullraccoon.com/",
       },
       {
         title: "Plataforma de Comercio Electrónico",
