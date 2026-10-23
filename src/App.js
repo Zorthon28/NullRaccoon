@@ -17,6 +17,7 @@ import Services from "./pages/Services";
 import translations from "./utils/translations";
 import StoreLayout from "./layouts/StoreLayout";
 import StoreLanding from "./pages/StoreLanding";
+import Leads from "./pages/Leads";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/Footer";
 
@@ -183,6 +184,7 @@ function AppContent() {
             element={<Navigate to="/terms.html" replace />}
           />
 
+          <Route path="/leads" element={<Leads />} />
           <Route
             path="/case-study/:caseId"
             element={
