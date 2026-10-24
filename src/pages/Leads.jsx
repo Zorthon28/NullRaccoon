@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "../components/HeaderHero";
+import "../leads.css";
 import {
   Search,
   ExternalLink,
@@ -30,9 +31,9 @@ const CLINICS = [
     whatsapp: "+526649064458",
     email: "smile@novaorthodontic.com",
     rating: 5.0,
-    reviews: 168,
+    reviews: 148,
     type: "Ortodoncia y Estética Dental",
-    highlight: "Alta afluencia de pacientes privados y ortodoncia correctiva"
+    highlight: "Alta afluencia de pacientes privados y tratamientos de ortodoncia correctiva"
   },
   {
     id: 2,
@@ -45,7 +46,7 @@ const CLINICS = [
     rating: 4.8,
     reviews: 210,
     type: "Implantes & Cirugía Maxilofacial",
-    highlight: "Turismo médico y equipo de especialistas quirúrgicos"
+    highlight: "Turismo médico con equipo multidisciplinario de especialistas"
   },
   {
     id: 3,
@@ -58,7 +59,7 @@ const CLINICS = [
     rating: 4.9,
     reviews: 280,
     type: "Odontología Integral & Turismo Médico",
-    highlight: "Ubicación inmediata en garita fronteriza con pacientes binacionales"
+    highlight: "Ubicación estratégica en frontera con alto volumen de pacientes binacionales"
   },
   {
     id: 4,
@@ -71,7 +72,7 @@ const CLINICS = [
     rating: 4.9,
     reviews: 350,
     type: "Implantes & Cosmética Avanzada",
-    highlight: "Tratamientos de alto valor y alta exigencia en puntualidad"
+    highlight: "Tratamientos de alto ticket con agendas densas de evaluación"
   },
   {
     id: 5,
@@ -84,7 +85,7 @@ const CLINICS = [
     rating: 4.8,
     reviews: 190,
     type: "Clínica Dental Internacional",
-    highlight: "Más de 30 años de operación con volumen continuo de pacientes"
+    highlight: "Más de 30 años de operación continua con flujo de pacientes diario"
   },
   {
     id: 6,
@@ -92,12 +93,12 @@ const CLINICS = [
     zone: "Zona Río",
     address: "The F Tower, Circuito Bursatil 9043 Piso 4, Zona Urbana Rio, 22010 Tijuana",
     phone: "+52 664 684 9789",
-    whatsapp: "+526646849789",
+    whatsapp: "+526649064458",
     email: "contacto@clinicadentaldelrio.com",
-    rating: 5.0,
-    reviews: 168,
+    rating: 4.9,
+    reviews: 94,
     type: "Odontología Integral & Estética",
-    highlight: "Torre médica corporativa premium en Zona Río"
+    highlight: "Ubicada en torre corporativa de alta plusvalía en Zona Río"
   },
   {
     id: 7,
@@ -105,12 +106,12 @@ const CLINICS = [
     zone: "NewCity Medical Plaza",
     address: "NewCity Medical Plaza, Ave. Paseo del Centenario 9580, Zona Río, 22010 Tijuana",
     phone: "+52 664 871 0000",
-    whatsapp: "+526648710000",
+    whatsapp: "+526643031284",
     email: "info@newcitymed.com",
-    rating: 4.9,
+    rating: 4.8,
     reviews: 320,
     type: "Especialistas & Torre Médica",
-    highlight: "El complejo de turismo médico más moderno de Baja California"
+    highlight: "El complejo de turismo médico más vanguardista del noroeste del país"
   },
   {
     id: 8,
@@ -118,12 +119,12 @@ const CLINICS = [
     zone: "Zona Río",
     address: "Condominio Plaza California, José Clemente Orozco 2340-304, Zona Río, 22010 Tijuana",
     phone: "+52 664 684 8822",
-    whatsapp: "+526646848822",
+    whatsapp: null, // Landline conmutador
     email: "citas@medicadental.com.mx",
-    rating: 5.0,
+    rating: 4.9,
     reviews: 142,
     type: "Clínica Dental Familiar & Prótesis",
-    highlight: "Base de familias locales recurrentes con agendas frecuentes"
+    highlight: "Base consolidada de familias locales con citas programadas continuas"
   },
   {
     id: 9,
@@ -136,7 +137,7 @@ const CLINICS = [
     rating: 4.9,
     reviews: 175,
     type: "Diseño Digital de Sonrisa",
-    highlight: "Especialidad en estética con consultas programadas de largo tiempo"
+    highlight: "Procedimientos de estética dental con sesiones prolongadas de sillón"
   },
   {
     id: 10,
@@ -149,7 +150,7 @@ const CLINICS = [
     rating: 4.8,
     reviews: 195,
     type: "Odontología Restaurativa",
-    highlight: "Flujo balanceado de pacientes de San Diego y locales"
+    highlight: "Atención bilingüe para pacientes del sur de California"
   },
   {
     id: 11,
@@ -157,12 +158,12 @@ const CLINICS = [
     zone: "Agua Caliente",
     address: "Libramiento Oriente 6237-6, Jardines de Agua Caliente, 22194 Tijuana",
     phone: "+52 664 638 7070",
-    whatsapp: "+526646387070",
+    whatsapp: null, // Landline oficina
     email: "contacto@casadelassonrisas.com",
-    rating: 5.0,
-    reviews: 168,
+    rating: 4.9,
+    reviews: 116,
     type: "Odontopediatría & Ortodoncia",
-    highlight: "Enfoque pediátrico donde el ausentismo de padres es crítico"
+    highlight: "Enfoque pediátrico donde el ausentismo de los padres impacta el horario"
   },
   {
     id: 12,
@@ -175,23 +176,16 @@ const CLINICS = [
     rating: 4.8,
     reviews: 140,
     type: "Rehabilitación Oral & Cosmética",
-    highlight: "Recepción bilingüe activa con citas de evaluación previa"
+    highlight: "Recepción bilingüe activa con agendas de valoración previa"
   }
 ];
 
-const STATUS_CONFIG = {
-  new: { label: "Nuevo", dotClass: "bg-slate-400", badgeClass: "text-slate-300 bg-slate-800/60 border-slate-700/60" },
-  contacted: { label: "Contactado", dotClass: "bg-amber-400", badgeClass: "text-amber-300 bg-amber-500/10 border-amber-500/20" },
-  replied: { label: "Respondió", dotClass: "bg-sky-400", badgeClass: "text-sky-300 bg-sky-500/10 border-sky-500/20" },
-  scheduled: { label: "Demo Agendada", dotClass: "bg-emerald-400 animate-pulse", badgeClass: "text-emerald-300 bg-emerald-500/10 border-emerald-500/30" }
-};
-
 export default function Leads({ lang = "es", t = {} }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortBy, setSortBy] = useState("rating"); // "rating" | "reviews" | "name"
+  const [sortBy, setSortBy] = useState("rating");
   const [activeTab, setActiveTab] = useState("pitch");
   const [isScriptExpanded, setIsScriptExpanded] = useState(false);
-  const [copiedScript, setCopiedScript] = useState(false);
+  const [copiedGeneralScript, setCopiedGeneralScript] = useState(false);
   const [copiedClinicId, setCopiedClinicId] = useState(null);
   const searchInputRef = useRef(null);
 
@@ -217,10 +211,10 @@ export default function Leads({ lang = "es", t = {} }) {
     });
   };
 
-  // Keyboard shortcut listener (Cmd+K or Ctrl+K or /)
+  // Keyboard shortcut listener (Ctrl+K or Cmd+K or /)
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         searchInputRef.current?.focus();
       } else if (e.key === "/" && document.activeElement !== searchInputRef.current) {
@@ -264,7 +258,7 @@ export default function Leads({ lang = "es", t = {} }) {
   const scheduledCount = Object.values(clinicStatuses).filter((s) => s === "scheduled").length;
 
   const pitchWhatsApp = (clinicName = "[Nombre de la clínica]") =>
-    `Hola buenas tardes ${clinicName}, le escribe Gustavo Tello, ingeniero biomédico y de software local aquí en Tijuana. Desarrollé NullDental (https://dental.nullraccoon.com), una plataforma diseñada para clínicas dentales. Estudios en clínicas privadas demuestran que los recordatorios automatizados por WhatsApp reducen el ausentismo entre un 25% y 35%. Nuestro objetivo es comprobar y medir ese impacto directamente en su clínica. Actualmente estamos seleccionando 3 clínicas en Tijuana para una prueba piloto sin costo para automatizar sus confirmaciones y documentar citas recuperadas. ¿Con quién de administración o dirección médica podríamos coordinar una demostración rápida de 10 minutos? Saludos cordiales.`;
+    `Hola, buenas tardes ${clinicName}, le escribe Gustavo Tello, ingeniero biomédico y de software local aquí en Tijuana. Desarrollé NullDental (https://dental.nullraccoon.com), una plataforma diseñada para clínicas dentales. Estudios en clínicas privadas demuestran que los recordatorios automatizados por WhatsApp reducen el ausentismo entre un 25% y 35%. Nuestro objetivo es comprobar y medir ese impacto directamente en su clínica. Actualmente estamos seleccionando 3 clínicas en Tijuana para una prueba piloto sin costo para automatizar sus confirmaciones y documentar citas recuperadas. ¿Con quién de administración o dirección médica podríamos coordinar una demostración rápida de 10 minutos? Saludos cordiales.`;
 
   const pitchEmailSubject = (clinicName = "[Nombre de la clínica]") =>
     `Reducción de ausentismo y citas no asistidas en ${clinicName} - Propuesta Piloto`;
@@ -294,8 +288,8 @@ Tijuana, B.C., México`;
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
-    setCopiedScript(true);
-    setTimeout(() => setCopiedScript(false), 2000);
+    setCopiedGeneralScript(true);
+    setTimeout(() => setCopiedGeneralScript(false), 2000);
   };
 
   const copyPersonalizedScript = (clinic) => {
@@ -306,6 +300,13 @@ Tijuana, B.C., México`;
   };
 
   const downloadCSV = () => {
+    const statusLabels = {
+      new: "Nuevo",
+      contacted: "Contactado",
+      replied: "Respondió",
+      scheduled: "Demo Agendada"
+    };
+
     const headers = [
       "ID",
       "Nombre de Clínica",
@@ -334,7 +335,7 @@ Tijuana, B.C., México`;
       c.rating,
       c.reviews,
       `"${c.type}"`,
-      `"${STATUS_CONFIG[clinicStatuses[c.id] || "new"].label}"`,
+      `"${statusLabels[clinicStatuses[c.id] || "new"]}"`,
       `"https://dental.nullraccoon.com"`
     ]);
 
@@ -354,84 +355,75 @@ Tijuana, B.C., México`;
   };
 
   return (
-    <div className="min-h-screen bg-[#05070f] text-slate-100 flex flex-col selection:bg-indigo-500 selection:text-white pb-24 font-sans">
+    <div className="leads-hub-page">
       <Helmet>
-        <title>Lead & Outreach Hub | NullRaccoon B2B</title>
+        <title>Hub de Prospección B2B | NullDental</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
       {/* Global Header */}
       <Header t={t} pageType="leads" />
 
-      {/* Hero Header with subtle radial glow */}
-      <section className="relative pt-32 pb-8 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-white/[0.06]">
-        {/* Faint radial gradient behind header */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-indigo-500/15 via-purple-500/5 to-transparent rounded-full blur-3xl pointer-events-none"></div>
-
-        <div className="max-w-6xl mx-auto relative z-10 space-y-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+      {/* Hero Header */}
+      <section className="leads-hero-section">
+        <div className="leads-container">
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "24px" }}>
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-3">
-                <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse shrink-0"></span>
-                <span>Prospección B2B &middot; Clínicas Dentales Privadas Tijuana</span>
+              <div className="leads-badge-tag">
+                <span className="leads-badge-dot"></span>
+                <span>Prospección B2B &middot; Clínicas Dentales Tijuana</span>
               </div>
-              <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight leading-tight">
+              <h1 className="leads-hero-title">
                 Hub de Prospección NullDental
               </h1>
-              <p className="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">
-                Directorio curado para el programa piloto de automatización de citas y reducción de no-shows con{" "}
+              <p className="leads-hero-desc">
+                Directorio curado de clínicas privadas para el programa piloto de automatización de citas y reducción de ausentismo con{" "}
                 <a
                   href="https://dental.nullraccoon.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-indigo-400 hover:text-indigo-300 underline font-semibold inline-flex items-center gap-1.5"
+                  style={{ color: "#818cf8", fontWeight: 600, textDecoration: "underline" }}
                 >
-                  <span>NullDental</span>
-                  <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                  NullDental <ExternalLink size={14} style={{ display: "inline", verticalAlign: "middle" }} />
                 </a>.
               </p>
             </div>
 
-            {/* Actions: Ghost CSV Export + Dominant Primary Demo */}
-            <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 shrink-0">
-              <button
-                onClick={downloadCSV}
-                className="inline-flex items-center gap-2 px-4 py-2.5 bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white border border-white/10 rounded-xl font-semibold text-xs sm:text-sm transition-all active:scale-95"
-              >
-                <FileSpreadsheet className="w-4 h-4 text-slate-400 shrink-0" />
+            <div className="leads-hero-actions">
+              <button onClick={downloadCSV} className="leads-btn-ghost">
+                <FileSpreadsheet size={16} />
                 <span>Exportar CSV ({CLINICS.length})</span>
               </button>
               <a
                 href="https://dental.nullraccoon.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-indigo-600/30 transition-all hover:shadow-indigo-600/50 active:scale-95"
+                className="leads-btn-primary"
               >
-                <Sparkles className="w-4 h-4 text-indigo-200 shrink-0" />
+                <Sparkles size={16} />
                 <span>Ver Demo NullDental</span>
               </a>
             </div>
           </div>
 
-          {/* CRM Pilot Goal Tracker */}
-          <div className="bg-[#0b1020] border border-white/[0.08] rounded-xl p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <Target className="w-4 h-4 text-indigo-400 shrink-0" />
-                <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+          {/* Pilot Goal Tracker */}
+          <div className="leads-tracker-card">
+            <div className="leads-tracker-info">
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <Target size={16} style={{ color: "#818cf8" }} />
+                <span style={{ fontSize: "12px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.04em", color: "#e2e8f0" }}>
                   Meta del Piloto: 3 Clínicas Agendadas
                 </span>
               </div>
-              <p className="text-xs text-slate-400">
+              <span style={{ fontSize: "13px", color: "#94a3b8" }}>
                 {contactedCount} de {totalClinics} contactadas &middot;{" "}
-                <span className="text-emerald-400 font-semibold">{scheduledCount} de 3 agendadas</span>
-              </p>
+                <strong style={{ color: "#34d399" }}>{scheduledCount} de 3 agendadas</strong>
+              </span>
             </div>
 
-            {/* Progress bar */}
-            <div className="w-full md:w-64 bg-[#05070f] rounded-full h-2.5 border border-white/10 overflow-hidden">
+            <div className="leads-tracker-bar-bg">
               <div
-                className="bg-gradient-to-r from-indigo-500 to-emerald-400 h-full rounded-full transition-all duration-500"
+                className="leads-tracker-bar-fill"
                 style={{ width: `${Math.min(100, Math.round((scheduledCount / 3) * 100))}%` }}
               ></div>
             </div>
@@ -440,47 +432,41 @@ Tijuana, B.C., México`;
       </section>
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <main className="leads-container" style={{ paddingBottom: "80px" }}>
         
-        {/* Pitch Script Card (Tamed, collapsible, body font) */}
-        <div className="bg-[#0b1020] border border-white/[0.08] rounded-2xl p-5 sm:p-6 shadow-xl relative overflow-hidden transition-all">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-            <div className="flex items-center gap-2">
-              <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                <Send className="w-4 h-4 shrink-0" />
-              </span>
+        {/* Pitch Script Card */}
+        <div className="leads-script-card">
+          <div className="leads-script-header">
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <div style={{ padding: "8px", background: "rgba(99, 102, 241, 0.12)", borderRadius: "10px", color: "#818cf8" }}>
+                <Send size={16} />
+              </div>
               <div>
-                <h2 className="text-sm sm:text-base font-bold text-white">Guión de Prospección (Opción A)</h2>
-                <span className="text-[11px] text-slate-400 block">Personalizable por clínica con un solo clic</span>
+                <h2 style={{ fontSize: "16px", fontWeight: 700, margin: 0, color: "#ffffff" }}>
+                  Guión de Prospección (Opción A)
+                </h2>
+                <span style={{ fontSize: "12px", color: "#94a3b8" }}>
+                  Personalizable por clínica con un solo clic
+                </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
-              {/* Segmented control with high-contrast active state */}
-              <div className="bg-[#05070f] p-1 rounded-xl border border-white/10 flex text-xs font-medium">
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <div className="leads-script-toggle-group">
                 <button
                   onClick={() => setActiveTab("pitch")}
-                  className={`px-3 py-1.5 rounded-lg transition-all ${
-                    activeTab === "pitch"
-                      ? "bg-[#25D366] text-slate-950 font-bold shadow-sm"
-                      : "text-slate-400 hover:text-slate-200"
-                  }`}
+                  className={`leads-script-tab-btn ${activeTab === "pitch" ? "active-wa" : ""}`}
                 >
                   WhatsApp
                 </button>
                 <button
                   onClick={() => setActiveTab("email")}
-                  className={`px-3 py-1.5 rounded-lg transition-all ${
-                    activeTab === "email"
-                      ? "bg-indigo-600 text-white font-bold shadow-sm"
-                      : "text-slate-400 hover:text-slate-200"
-                  }`}
+                  className={`leads-script-tab-btn ${activeTab === "email" ? "active-email" : ""}`}
                 >
                   Correo Formal
                 </button>
               </div>
 
-              {/* Copy default template */}
               <button
                 onClick={() =>
                   copyToClipboard(
@@ -489,151 +475,119 @@ Tijuana, B.C., México`;
                       : pitchEmailBody("[Nombre de la clínica]")
                   )
                 }
-                className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 hover:text-white rounded-lg text-xs font-semibold border border-white/10 transition-all active:scale-95"
-                title="Copiar plantilla general"
+                className="leads-btn-ghost"
+                style={{ padding: "8px 14px", fontSize: "12px" }}
               >
-                {copiedScript ? (
-                  <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                ) : (
-                  <Copy className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                )}
-                <span>{copiedScript ? "¡Copiado!" : "Copiar Guión"}</span>
+                {copiedGeneralScript ? <Check size={14} style={{ color: "#34d399" }} /> : <Copy size={14} />}
+                <span>{copiedGeneralScript ? "¡Copiado!" : "Copiar"}</span>
               </button>
             </div>
           </div>
 
-          {/* Script Content (Body font, not monospace) */}
-          <div className="bg-[#05070f] rounded-xl p-4 border border-white/[0.06] text-sm text-slate-300 leading-relaxed relative">
+          <div className={`leads-script-body-box ${isScriptExpanded ? "" : "collapsed"}`}>
             {activeTab === "email" && (
-              <div className="text-indigo-300 font-semibold mb-2.5 pb-2 border-b border-white/10 text-xs sm:text-sm">
-                <span className="text-slate-400 font-normal">Asunto: </span>
+              <div style={{ fontWeight: 600, color: "#cbd5e1", marginBottom: "10px", paddingBottom: "8px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+                <span style={{ color: "#94a3b8", fontWeight: 400 }}>Asunto: </span>
                 Reducción de ausentismo y citas no asistidas en{" "}
-                <span className="text-indigo-400 bg-indigo-500/10 px-1.5 py-0.5 rounded border border-indigo-500/20">
-                  [Nombre de la clínica]
-                </span>{" "}
-                - Propuesta Piloto
+                <span className="leads-chip-accent">[Nombre de la clínica]</span> - Propuesta Piloto
               </div>
             )}
 
-            <div className={`transition-all ${isScriptExpanded ? "" : "max-h-20 overflow-hidden relative"}`}>
-              {activeTab === "pitch" ? (
-                <p>
-                  Hola buenas tardes{" "}
-                  <span className="text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 font-semibold">
-                    [Nombre de la clínica]
-                  </span>
-                  , le escribe Gustavo Tello, ingeniero biomédico y de software local aquí en Tijuana. Desarrollé NullDental (https://dental.nullraccoon.com), una plataforma diseñada para clínicas dentales. Estudios en clínicas privadas demuestran que los recordatorios automatizados por WhatsApp reducen el ausentismo entre un 25% y 35%. Nuestro objetivo es comprobar y medir ese impacto directamente en su clínica. Actualmente estamos seleccionando 3 clínicas en Tijuana para una prueba piloto sin costo para automatizar sus confirmaciones y documentar citas recuperadas. ¿Con quién de administración o dirección médica podríamos coordinar una demostración rápida de 10 minutos? Saludos cordiales.
-                </p>
-              ) : (
-                <div className="whitespace-pre-wrap">
-                  Estimado equipo de{" "}
-                  <span className="text-indigo-400 bg-indigo-500/10 px-1.5 py-0.5 rounded border border-indigo-500/20 font-semibold">
-                    [Nombre de la clínica]
-                  </span>
-                  ,
-                  {"\n\n"}Espero que se encuentren muy bien.
-                  {"\n\n"}Le escribe Gustavo Tello, ingeniero biomédico y de software local aquí en Tijuana. Desarrollé NullDental (https://dental.nullraccoon.com), una plataforma diseñada específicamente para consultorios y clínicas dentales de alto flujo.
-                  {"\n\n"}Estudios en clínicas privadas demuestran que los recordatorios automatizados por WhatsApp reducen el ausentismo de pacientes entre un 25% y 35%, además de ahorrarle entre 10 y 15 horas semanales a recepción en llamadas y mensajes manuales.
-                  {"\n\n"}Actualmente estamos seleccionando a 3 clínicas en Tijuana para una prueba piloto sin costo, donde implementamos el sistema de confirmaciones automáticas para comprobar y documentar los resultados en citas recuperadas.
-                  {"\n\n"}¿Tendrían disponibilidad esta semana para una breve demostración de 10 minutos (por videollamada o presencial) y evaluar si su clínica califica para el piloto?
-                  {"\n\n"}Quedo a su entera disposición.
-                  {"\n\n"}Atentamente,
-                  {"\n"}Gustavo Tello &middot; Fundador & Lead Engineer | NullRaccoon
-                </div>
-              )}
+            {activeTab === "pitch" ? (
+              <p style={{ margin: 0 }}>
+                Hola, buenas tardes <span className="leads-chip-accent">[Nombre de la clínica]</span>, le escribe Gustavo Tello, ingeniero biomédico y de software local aquí en Tijuana. Desarrollé NullDental (https://dental.nullraccoon.com), una plataforma diseñada para clínicas dentales. Estudios en clínicas privadas demuestran que los recordatorios automatizados por WhatsApp reducen el ausentismo entre un 25% y 35%. Nuestro objetivo es comprobar y medir ese impacto directamente en su clínica. Actualmente estamos seleccionando 3 clínicas en Tijuana para una prueba piloto sin costo para automatizar sus confirmaciones y documentar citas recuperadas. ¿Con quién de administración o dirección médica podríamos coordinar una demostración rápida de 10 minutos? Saludos cordiales.
+              </p>
+            ) : (
+              <div style={{ whiteSpace: "pre-wrap" }}>
+                Estimado equipo de <span className="leads-chip-accent">[Nombre de la clínica]</span>,
+                {"\n\n"}Espero que se encuentren muy bien.
+                {"\n\n"}Le escribe Gustavo Tello, ingeniero biomédico y de software local aquí en Tijuana. Desarrollé NullDental (https://dental.nullraccoon.com), una plataforma diseñada específicamente para consultorios y clínicas dentales de alto flujo.
+                {"\n\n"}Estudios en clínicas privadas demuestran que los recordatorios automatizados por WhatsApp reducen el ausentismo de pacientes entre un 25% y 35%, además de ahorrarle entre 10 y 15 horas semanales a recepción en llamadas y mensajes manuales.
+                {"\n\n"}Actualmente estamos seleccionando a 3 clínicas en Tijuana para una prueba piloto sin costo, donde implementamos el sistema de confirmaciones automáticas para comprobar y documentar los resultados en citas recuperadas.
+                {"\n\n"}¿Tendrían disponibilidad esta semana para una breve demostración de 10 minutos (por videollamada o presencial) y evaluar si su clínica califica para el piloto?
+                {"\n\n"}Quedo a su entera disposición.
+                {"\n\n"}Atentamente,
+                {"\n"}Gustavo Tello &middot; Fundador & Lead Engineer | NullRaccoon
+              </div>
+            )}
+          </div>
 
-              {/* Fade gradient overlay when collapsed */}
-              {!isScriptExpanded && (
-                <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#05070f] to-transparent pointer-events-none"></div>
-              )}
-            </div>
-
-            {/* Expand / Collapse Button */}
-            <div className="pt-2 text-center">
-              <button
-                onClick={() => setIsScriptExpanded(!isScriptExpanded)}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors"
-              >
-                <span>{isScriptExpanded ? "Mostrar menos" : "Mostrar guión completo"}</span>
-                {isScriptExpanded ? (
-                  <ChevronUp className="w-3.5 h-3.5 shrink-0" />
-                ) : (
-                  <ChevronDown className="w-3.5 h-3.5 shrink-0" />
-                )}
-              </button>
-            </div>
+          <div style={{ textAlign: "center" }}>
+            <button
+              onClick={() => setIsScriptExpanded(!isScriptExpanded)}
+              className="leads-toggle-expand-btn"
+            >
+              <span>{isScriptExpanded ? "Mostrar menos" : "Mostrar guión completo"}</span>
+              {isScriptExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+            </button>
           </div>
         </div>
 
-        {/* Search Bar + Sort Tool (Surface #0f1424, ⌘K hint, purple focus ring) */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-[#0b1020] p-3 sm:p-4 rounded-2xl border border-white/[0.08] shadow-lg">
-          <div className="relative flex-1">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 shrink-0" />
+        {/* Search and Sort Toolbar */}
+        <div className="leads-toolbar">
+          <div className="leads-search-wrapper">
+            <Search className="leads-search-icon" size={16} />
             <input
               ref={searchInputRef}
               type="text"
-              placeholder="Buscar clínica, calle, zona o teléfono..."
+              placeholder="Buscar clínica por nombre, calle, zona o teléfono..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-16 py-2.5 bg-[#0f1424] border border-white/10 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-400/50 transition-all"
+              className="leads-search-input"
             />
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none hidden sm:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono text-slate-400 bg-white/[0.06] border border-white/10">
-              ⌘K
-            </div>
+            <span className="leads-search-shortcut">Ctrl K</span>
           </div>
 
-          {/* Sort dropdown */}
-          <div className="flex items-center gap-2 shrink-0">
-            <ArrowUpDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-            <span className="text-xs text-slate-400">Ordenar:</span>
+          <div className="leads-sort-wrapper">
+            <ArrowUpDown size={14} style={{ color: "#94a3b8" }} />
+            <span style={{ fontSize: "12px", color: "#94a3b8" }}>Ordenar:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="bg-[#0f1424] text-slate-200 text-xs font-medium py-2 px-3 rounded-xl border border-white/10 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="leads-sort-select"
             >
-              <option value="rating">Calificación (Estrellas)</option>
-              <option value="reviews">Mayor número de reseñas</option>
+              <option value="rating">Calificación (Mayor a menor)</option>
+              <option value="reviews">Número de reseñas</option>
               <option value="name">Nombre alfabético</option>
             </select>
           </div>
         </div>
 
-        {/* Results Counter */}
-        <div className="flex items-center justify-between text-xs text-slate-400 px-1">
-          <span>Mostrando {filteredClinics.length} de {CLINICS.length} clínicas privadas</span>
+        {/* Results Counter Bar */}
+        <div className="leads-results-bar">
+          <span style={{ fontWeight: 500 }}>
+            Mostrando <strong style={{ color: "#ffffff" }}>{filteredClinics.length}</strong> de {CLINICS.length} clínicas privadas
+          </span>
           {searchTerm && (
             <button
               onClick={() => setSearchTerm("")}
-              className="text-indigo-400 hover:text-indigo-300 hover:underline"
+              style={{ background: "none", border: "none", color: "#818cf8", cursor: "pointer", fontSize: "12px", textDecoration: "underline" }}
             >
-              Limpiar búsqueda
+              Limpiar filtro de búsqueda
             </button>
           )}
         </div>
 
-        {/* Empty State */}
+        {/* Empty Search Result State */}
         {filteredClinics.length === 0 && (
-          <div className="bg-[#0b1020] border border-white/[0.08] rounded-2xl p-12 text-center space-y-3">
-            <Search className="w-8 h-8 text-slate-500 mx-auto" />
-            <h3 className="text-base font-bold text-white">No se encontraron clínicas</h3>
-            <p className="text-xs text-slate-400 max-w-sm mx-auto">
-              No hay clínicas que coincidan con &ldquo;{searchTerm}&rdquo;. Intenta buscar por otra palabra clave o limpia el filtro.
+          <div style={{ textAlign: "center", padding: "48px 20px", background: "#0b1020", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.08)", marginTop: "16px" }}>
+            <Search size={32} style={{ color: "#64748b", margin: "0 auto 12px auto" }} />
+            <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#ffffff", margin: "0 0 6px 0" }}>
+              No se encontraron clínicas
+            </h3>
+            <p style={{ fontSize: "13px", color: "#94a3b8", margin: "0 0 16px 0" }}>
+              No hay coincidencias con &ldquo;{searchTerm}&rdquo;. Intenta con otra palabra clave.
             </p>
-            <button
-              onClick={() => setSearchTerm("")}
-              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-xl"
-            >
-              Restablecer lista
+            <button onClick={() => setSearchTerm("")} className="leads-btn-primary" style={{ padding: "8px 16px", fontSize: "13px" }}>
+              Ver todas las clínicas
             </button>
           </div>
         )}
 
-        {/* Clinics Grid (Cards surface #0b1020 with soft lift & accent border glow on hover) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
+        {/* Clinic Cards Grid */}
+        <div className="leads-cards-grid">
           {filteredClinics.map((c) => {
             const currentStatus = clinicStatuses[c.id] || "new";
-            const statusInfo = STATUS_CONFIG[currentStatus];
-
             const clinicWhatsAppMsg = pitchWhatsApp(c.name);
             const cleanWaNumber = c.whatsapp ? c.whatsapp.replace(/[^0-9]/g, "") : null;
             const waUrl = cleanWaNumber
@@ -641,7 +595,6 @@ Tijuana, B.C., México`;
               : null;
 
             const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.name + ', ' + c.address)}`;
-
             const emailSub = pitchEmailSubject(c.name);
             const emailBody = pitchEmailBody(c.name);
             const mailtoUrl = c.email
@@ -649,195 +602,158 @@ Tijuana, B.C., México`;
               : null;
 
             return (
-              <div
-                key={c.id}
-                className="bg-[#0b1020] border border-white/[0.08] hover:border-indigo-400/50 hover:shadow-[0_12px_32px_rgba(99,102,241,0.12)] hover:-translate-y-0.5 rounded-2xl p-5 sm:p-6 flex flex-col justify-between transition-all duration-200 group"
-              >
-                <div className="space-y-3.5">
-                  {/* Top Bar: Zone Pill + Star Rating + Status Switcher */}
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      {/* Fixed horizontal padding on Zone pill */}
-                      <span className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
-                        {c.zone}
-                      </span>
-                      {/* Rating Gold star + Number + Gray review count */}
-                      <span className="inline-flex items-center gap-1.5 text-xs text-slate-300">
-                        <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400 shrink-0" />
-                        <span className="font-bold text-white">{c.rating.toFixed(1)}</span>
-                        <span className="text-slate-500 font-normal">({c.reviews} reseñas)</span>
-                      </span>
+              <div key={c.id} className="leads-card">
+                <div>
+                  {/* Card Header: Zone + Rating + Status Dropdown */}
+                  <div className="leads-card-header">
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
+                      <span className="leads-pill-zone">{c.zone}</span>
+                      <div className="leads-rating-group">
+                        <Star size={14} style={{ fill: "#fbbf24", color: "#fbbf24" }} />
+                        <span className="leads-rating-num">{c.rating.toFixed(1)}</span>
+                        <span className="leads-rating-reviews">({c.reviews} reseñas)</span>
+                      </div>
                     </div>
 
-                    {/* Interactive CRM Status Pill */}
-                    <div className="relative">
-                      <select
-                        value={currentStatus}
-                        onChange={(e) => updateStatus(c.id, e.target.value)}
-                        className={`text-[11px] font-semibold py-1 pl-2.5 pr-6 rounded-lg border appearance-none cursor-pointer focus:outline-none transition-colors ${statusInfo.badgeClass}`}
-                      >
-                        <option value="new" className="bg-[#0b1020] text-slate-200">⚪ Nuevo</option>
-                        <option value="contacted" className="bg-[#0b1020] text-amber-300">🟡 Contactado</option>
-                        <option value="replied" className="bg-[#0b1020] text-sky-300">🔵 Respondió</option>
-                        <option value="scheduled" className="bg-[#0b1020] text-emerald-300">🟢 Demo Agendada</option>
-                      </select>
-                      <ChevronDown className="w-3 h-3 absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none opacity-60 shrink-0" />
-                    </div>
-                  </div>
-
-                  {/* Header: Clinic Name (prominent) + Specialty subtitle */}
-                  <div>
-                    <a
-                      href={mapsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-lg font-bold text-white hover:text-indigo-300 transition-colors inline-flex items-center gap-2 group/title"
-                      title="Abrir en Google Maps"
+                    <select
+                      value={currentStatus}
+                      onChange={(e) => updateStatus(c.id, e.target.value)}
+                      className={`leads-status-select leads-status-${currentStatus}`}
                     >
-                      <span className="tracking-tight">{c.name}</span>
-                      <ExternalLink className="w-4 h-4 text-slate-500 group-hover/title:text-indigo-300 transition-colors shrink-0" />
-                    </a>
-                    <p className="text-xs text-slate-400 mt-0.5">{c.type}</p>
+                      <option value="new" style={{ background: "#0b1020", color: "#cbd5e1" }}>⚪ Nuevo</option>
+                      <option value="contacted" style={{ background: "#0b1020", color: "#fbbf24" }}>🟡 Contactado</option>
+                      <option value="replied" style={{ background: "#0b1020", color: "#38bdf8" }}>🔵 Respondió</option>
+                      <option value="scheduled" style={{ background: "#0b1020", color: "#34d399" }}>🟢 Demo Agendada</option>
+                    </select>
                   </div>
 
-                  {/* Clickable Address with gap-2 */}
+                  {/* Clinic Name & Specialty */}
+                  <h3 className="leads-card-title">{c.name}</h3>
+                  <div className="leads-card-specialty">{c.type}</div>
+
+                  {/* Address link */}
                   <a
                     href={mapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-start gap-2 text-xs text-slate-400 hover:text-indigo-300 transition-colors group/addr"
+                    className="leads-card-address-link"
                     title="Ver en Google Maps"
                   >
-                    <MapPin className="w-4 h-4 text-slate-500 group-hover/addr:text-indigo-400 mt-0.5 shrink-0" />
-                    <span className="line-clamp-2 underline-offset-2 group-hover/addr:underline">
-                      {c.address}
-                    </span>
+                    <MapPin size={15} style={{ color: "#818cf8", flexShrink: 0, marginTop: "2px" }} />
+                    <span>{c.address}</span>
                   </a>
 
-                  {/* Contact Info (Clean 3-row list, no heavy box) */}
-                  <div className="pt-2 border-t border-white/[0.06] space-y-2 text-xs">
+                  {/* Contact Info (Fixed 2-Column Grid) */}
+                  <div className="leads-contact-grid">
                     {/* Row 1: Email */}
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="flex items-center gap-2 text-slate-400 w-24 shrink-0">
-                        <Mail className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                        <span>Email:</span>
-                      </span>
+                    <div className="leads-contact-label">
+                      <Mail size={15} style={{ color: "#94a3b8" }} />
+                      <span>Email:</span>
+                    </div>
+                    <div className="leads-contact-value">
                       {c.email ? (
-                        <a
-                          href={`mailto:${c.email}`}
-                          className="font-mono text-indigo-300 hover:underline truncate max-w-[220px]"
-                        >
+                        <a href={`mailto:${c.email}`} title={c.email}>
                           {c.email}
                         </a>
                       ) : (
-                        <span className="text-slate-500 italic">No disponible</span>
+                        <span className="muted-italic">No disponible</span>
                       )}
                     </div>
 
                     {/* Row 2: WhatsApp */}
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="flex items-center gap-2 text-slate-400 w-24 shrink-0">
-                        <MessageSquare className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                        <span>WhatsApp:</span>
-                      </span>
+                    <div className="leads-contact-label">
+                      <MessageSquare size={15} style={{ color: "#25d366" }} />
+                      <span>WhatsApp:</span>
+                    </div>
+                    <div className="leads-contact-value">
                       {c.whatsapp ? (
-                        <span className="font-mono text-[#25D366] font-semibold">{c.whatsapp}</span>
+                        <span className="whatsapp-num">{c.whatsapp}</span>
                       ) : (
-                        <span className="text-slate-500 italic">Solo teléfono fijo</span>
+                        <span className="muted-italic">Solo teléfono fijo</span>
                       )}
                     </div>
 
-                    {/* Row 3: Landline phone */}
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="flex items-center gap-2 text-slate-400 w-24 shrink-0">
-                        <Phone className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                        <span>Tel. fijo:</span>
-                      </span>
-                      <a href={`tel:${c.phone}`} className="font-mono text-slate-300 hover:underline">
+                    {/* Row 3: Office Phone */}
+                    <div className="leads-contact-label">
+                      <Phone size={15} style={{ color: "#94a3b8" }} />
+                      <span>Tel. fijo:</span>
+                    </div>
+                    <div className="leads-contact-value">
+                      <a href={`tel:${c.phone}`} style={{ color: "#e2e8f0" }}>
                         {c.phone}
                       </a>
                     </div>
                   </div>
 
-                  {/* Why this clinic (Target tag) */}
-                  <div className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs">
-                    <Target className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
-                    <span>
-                      <strong className="font-semibold text-indigo-200">Por qué esta clínica:</strong>{" "}
-                      {c.highlight}
-                    </span>
+                  {/* Why this clinic */}
+                  <div className="leads-why-box">
+                    <Target size={16} className="leads-why-icon" />
+                    <div>
+                      <strong style={{ color: "#e0e7ff" }}>Por qué esta clínica:</strong> {c.highlight}
+                    </div>
                   </div>
                 </div>
 
-                {/* Actions Bottom Bar */}
-                <div className="pt-4 mt-4 border-t border-white/[0.06] space-y-2">
-                  <div className="flex items-center gap-2">
-                    {/* Primary Action: Solid WhatsApp green */}
+                {/* Card Actions Bottom */}
+                <div>
+                  <div className="leads-card-actions">
+                    {/* Primary WhatsApp Action */}
                     {c.whatsapp ? (
                       <a
                         href={waUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-bold text-xs sm:text-sm rounded-xl shadow-sm transition-all active:scale-95"
+                        className="leads-btn-wa-action"
                       >
-                        <MessageSquare className="w-4 h-4 fill-slate-950 shrink-0" />
+                        <MessageSquare size={16} style={{ fill: "#020617" }} />
                         <span>WhatsApp</span>
                       </a>
                     ) : (
-                      <button
-                        disabled
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 bg-white/[0.03] text-slate-500 font-semibold text-xs rounded-xl cursor-not-allowed border border-white/5"
-                      >
+                      <div className="leads-btn-wa-disabled">
                         <span>Sin WhatsApp</span>
-                      </button>
+                      </div>
                     )}
 
-                    {/* Secondary Ghost Action: Email or Call */}
+                    {/* Secondary Ghost Email */}
                     {c.email ? (
-                      <a
-                        href={mailtoUrl}
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white font-medium text-xs sm:text-sm rounded-xl border border-white/10 transition-all active:scale-95"
-                      >
-                        <Mail className="w-4 h-4 text-slate-400 shrink-0" />
+                      <a href={mailtoUrl} className="leads-btn-card-ghost">
+                        <Mail size={15} style={{ color: "#94a3b8" }} />
                         <span>Correo</span>
                       </a>
                     ) : (
-                      <a
-                        href={`tel:${c.phone}`}
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white font-medium text-xs sm:text-sm rounded-xl border border-white/10 transition-all active:scale-95"
-                      >
-                        <Phone className="w-4 h-4 text-slate-400 shrink-0" />
+                      <a href={`tel:${c.phone}`} className="leads-btn-card-ghost">
+                        <Phone size={15} style={{ color: "#94a3b8" }} />
                         <span>Llamar</span>
                       </a>
                     )}
 
-                    {/* Ghost Maps button with gap-2 */}
+                    {/* Secondary Ghost Maps */}
                     <a
                       href={mapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white font-medium text-xs sm:text-sm rounded-xl border border-white/10 transition-all active:scale-95"
+                      className="leads-btn-card-ghost"
                       title="Abrir en Google Maps"
                     >
-                      <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
-                      <span className="hidden sm:inline">Maps</span>
+                      <MapPin size={15} style={{ color: "#818cf8" }} />
+                      <span>Maps</span>
                     </a>
                   </div>
 
-                  {/* Personalize Pitch copy button per clinic */}
+                  {/* Per-Clinic Quick Copy Button */}
                   <button
                     onClick={() => copyPersonalizedScript(c)}
-                    className="w-full inline-flex items-center justify-center gap-2 px-3 py-1.5 text-xs text-slate-400 hover:text-indigo-300 hover:bg-white/[0.02] rounded-lg transition-colors border border-transparent hover:border-white/5"
+                    className={`leads-btn-copy-quick ${copiedClinicId === c.id ? "copied" : ""}`}
                   >
                     {copiedClinicId === c.id ? (
-                      <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <Check size={14} style={{ color: "#34d399" }} />
                     ) : (
-                      <Copy className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                      <Copy size={14} />
                     )}
                     <span>
                       {copiedClinicId === c.id
-                        ? "¡Guión personalizado copiado al portapapeles!"
-                        : `Copiar guión personalizado para ${c.name}`}
+                        ? "¡Mensaje personalizado copiado!"
+                        : `Copiar mensaje para ${c.name}`}
                     </span>
                   </button>
                 </div>
