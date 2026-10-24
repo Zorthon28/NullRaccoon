@@ -184,7 +184,7 @@ function AppContent() {
             element={<Navigate to="/terms.html" replace />}
           />
 
-          <Route path="/leads" element={<Leads />} />
+          <Route path="/leads" element={<Leads lang={lang} t={t} />} />
           <Route
             path="/case-study/:caseId"
             element={
