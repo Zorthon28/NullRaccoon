@@ -177,24 +177,21 @@ const CLINICS = [
 
 export default function Leads({ lang = "es", t = {} }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedZone, setSelectedZone] = useState("all");
   const [copiedScript, setCopiedScript] = useState(false);
   const [activeTab, setActiveTab] = useState("pitch");
 
-  const zones = ["all", "Zona Río", "NewCity Medical Plaza", "Zona Centro", "Plaza Viva Tijuana", "Agua Caliente"];
-
   const filteredClinics = useMemo(() => {
-    return CLINICS.filter(c => {
-      const matchesSearch =
-        c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        c.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        c.type.toLowerCase().includes(searchTerm.toLowerCase());
-
-      const matchesZone = selectedZone === "all" || c.zone === selectedZone;
-
-      return matchesSearch && matchesZone;
-    });
-  }, [searchTerm, selectedZone]);
+    const term = searchTerm.toLowerCase().trim();
+    if (!term) return CLINICS;
+    return CLINICS.filter(
+      (c) =>
+        c.name.toLowerCase().includes(term) ||
+        c.address.toLowerCase().includes(term) ||
+        c.type.toLowerCase().includes(term) ||
+        c.zone.toLowerCase().includes(term) ||
+        c.phone.toLowerCase().includes(term)
+    );
+  }, [searchTerm]);
 
   const pitchWhatsApp = `Hola buenas tardes, le escribe Gustavo Tello, ingeniero biomédico y de software local aquí en Tijuana. Desarrollé NullDental (https://dental.nullraccoon.com), una plataforma diseñada para clínicas dentales. Estudios en clínicas privadas demuestran que los recordatorios automatizados por WhatsApp reducen el ausentismo entre un 25% y 35%. Nuestro objetivo es comprobar y medir ese impacto directamente en su clínica. Actualmente estamos seleccionando 3 clínicas en Tijuana para una prueba piloto sin costo para automatizar sus confirmaciones y documentar citas recuperadas. ¿Con quién de administración o dirección médica podríamos coordinar una demostración rápida de 10 minutos? Saludos cordiales.`;
 
@@ -235,6 +232,7 @@ Tijuana, B.C., México`;
       "Nombre de Clínica",
       "Zona",
       "Dirección",
+      "Google Maps URL",
       "Email Verificado",
       "WhatsApp Móvil",
       "Teléfono Oficina",
@@ -244,11 +242,12 @@ Tijuana, B.C., México`;
       "Demo NullDental"
     ];
 
-    const rows = CLINICS.map(c => [
+    const rows = CLINICS.map((c) => [
       c.id,
       `"${c.name}"`,
       `"${c.zone}"`,
       `"${c.address}"`,
+      `"https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.name + ' ' + c.address)}"`,
       `"${c.email || ''}"`,
       `"${c.whatsapp || ''}"`,
       `"${c.phone}"`,
@@ -258,7 +257,7 @@ Tijuana, B.C., México`;
       `"https://dental.nullraccoon.com"`
     ]);
 
-    const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+    const csvContent = "data:text/csv;charset=utf-8,﻿" + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -269,7 +268,7 @@ Tijuana, B.C., México`;
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-indigo-500 selection:text-white pb-20">
       <Helmet>
         <title>Lead & Outreach Hub | NullRaccoon B2B</title>
         <meta name="robots" content="noindex, nofollow" />
@@ -278,22 +277,22 @@ Tijuana, B.C., México`;
       {/* Global Header */}
       <Header t={t} pageType="leads" />
 
-      {/* Hero & Overview */}
-      <section className="relative pt-32 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-slate-900 via-indigo-950/40 to-slate-950 border-b border-slate-800/80">
+      {/* Hero Header */}
+      <section className="relative pt-32 pb-8 px-4 sm:px-6 lg:px-8 overflow-hidden bg-slate-950 border-b border-slate-900">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-800/60">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-3 shadow-inner">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                Directorio B2B Verificado &middot; Tijuana Dental Market
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-3">
+                <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse"></span>
+                Directorio B2B Verificado &middot; Clínicas Dentales Tijuana
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
                 Prospección de Clínicas Dentales
               </h1>
               <p className="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">
-                Clínicas privadas de alto volumen seleccionadas estratégicamente en Tijuana para demostración de{" "}
+                Directorio de clínicas privadas seleccionadas para el programa piloto de{" "}
                 <a
                   href="https://dental.nullraccoon.com"
                   target="_blank"
@@ -301,14 +300,14 @@ Tijuana, B.C., México`;
                   className="text-indigo-400 hover:text-indigo-300 underline font-semibold inline-flex items-center gap-1"
                 >
                   NullDental <ExternalLink className="w-3.5 h-3.5 inline" />
-                </a>. Canales móviles de WhatsApp y correos directos verificados.
+                </a>.
               </p>
             </div>
 
             <div className="flex flex-wrap sm:flex-nowrap gap-3 shrink-0">
               <button
                 onClick={downloadCSV}
-                className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-indigo-600/30 transition-all active:scale-95"
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-indigo-600/30 transition-all active:scale-95"
               >
                 <FileSpreadsheet className="w-4 h-4" />
                 Exportar CSV ({CLINICS.length})
@@ -317,35 +316,11 @@ Tijuana, B.C., México`;
                 href="https://dental.nullraccoon.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-xs sm:text-sm rounded-xl transition-all hover:text-white"
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 font-semibold text-xs sm:text-sm rounded-xl transition-all hover:text-white"
               >
                 <Sparkles className="w-4 h-4 text-indigo-400" />
-                Ver NullDental Live
+                Ver Demo NullDental
               </a>
-            </div>
-          </div>
-
-          {/* Quick Metrics */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-6">
-            <div className="bg-slate-900/70 border border-slate-800/80 rounded-xl p-3.5 sm:p-4">
-              <span className="text-xs text-slate-400 font-medium block">Total Prospectos</span>
-              <span className="text-xl sm:text-2xl font-extrabold text-white mt-0.5 block">{CLINICS.length} Clínicas</span>
-            </div>
-            <div className="bg-slate-900/70 border border-slate-800/80 rounded-xl p-3.5 sm:p-4">
-              <span className="text-xs text-slate-400 font-medium block">WhatsApp Verificados</span>
-              <span className="text-xl sm:text-2xl font-extrabold text-emerald-400 mt-0.5 block">
-                {CLINICS.filter(c => c.whatsapp).length} Líneas Móviles
-              </span>
-            </div>
-            <div className="bg-slate-900/70 border border-slate-800/80 rounded-xl p-3.5 sm:p-4">
-              <span className="text-xs text-slate-400 font-medium block">Correos Directos</span>
-              <span className="text-xl sm:text-2xl font-extrabold text-indigo-400 mt-0.5 block">
-                {CLINICS.filter(c => c.email).length} Direcciones
-              </span>
-            </div>
-            <div className="bg-slate-900/70 border border-slate-800/80 rounded-xl p-3.5 sm:p-4">
-              <span className="text-xs text-slate-400 font-medium block">Zonas Clave</span>
-              <span className="text-xl sm:text-2xl font-extrabold text-slate-200 mt-0.5 block">Río / NewCity / Centro</span>
             </div>
           </div>
         </div>
@@ -355,29 +330,29 @@ Tijuana, B.C., México`;
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         
         {/* Pitch Script Card */}
-        <div className="bg-slate-900/90 border border-indigo-500/20 rounded-2xl p-5 sm:p-6 shadow-xl backdrop-blur relative overflow-hidden">
+        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-2xl relative overflow-hidden">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div className="flex items-center gap-2">
               <span className="p-1.5 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
                 <Send className="w-4 h-4" />
               </span>
-              <h2 className="text-base sm:text-lg font-bold text-white">Guión de Prospección (Opción A &middot; Piloto Tijuana)</h2>
+              <h2 className="text-base sm:text-lg font-bold text-white">Guión de Contacto (Opción A &middot; Piloto Tijuana)</h2>
             </div>
 
             <div className="flex items-center gap-2">
               <div className="bg-slate-950 p-1 rounded-xl border border-slate-800 flex text-xs font-semibold">
                 <button
                   onClick={() => setActiveTab("pitch")}
-                  className={`px-3 py-1 rounded-lg transition-all ${
-                    activeTab === "pitch" ? "bg-indigo-600 text-white shadow-sm" : "text-slate-400 hover:text-slate-200"
+                  className={`px-3 py-1.5 rounded-lg transition-all ${
+                    activeTab === "pitch" ? "bg-[#25D366] text-slate-950 font-bold shadow-sm" : "text-slate-400 hover:text-slate-200"
                   }`}
                 >
                   WhatsApp
                 </button>
                 <button
                   onClick={() => setActiveTab("email")}
-                  className={`px-3 py-1 rounded-lg transition-all ${
-                    activeTab === "email" ? "bg-indigo-600 text-white shadow-sm" : "text-slate-400 hover:text-slate-200"
+                  className={`px-3 py-1.5 rounded-lg transition-all ${
+                    activeTab === "email" ? "bg-indigo-600 text-white font-bold shadow-sm" : "text-slate-400 hover:text-slate-200"
                   }`}
                 >
                   Correo Formal
@@ -394,7 +369,7 @@ Tijuana, B.C., México`;
             </div>
           </div>
 
-          <div className="bg-slate-950/80 rounded-xl p-4 border border-slate-800/80 text-xs sm:text-sm text-slate-300 font-mono leading-relaxed whitespace-pre-wrap select-all">
+          <div className="bg-slate-950 rounded-xl p-4 border border-slate-800 text-xs sm:text-sm text-slate-300 font-mono leading-relaxed whitespace-pre-wrap select-all">
             {activeTab === "email" && (
               <div className="text-indigo-400 font-bold mb-3 pb-2 border-b border-slate-800 flex items-center justify-between">
                 <span>Asunto: {pitchEmailSubject}</span>
@@ -404,33 +379,17 @@ Tijuana, B.C., México`;
           </div>
         </div>
 
-        {/* Filter & Search Bar */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 bg-slate-900/60 p-3 sm:p-4 rounded-2xl border border-slate-800">
-          <div className="relative flex-1">
-            <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+        {/* Search Bar (No Filter Pills) */}
+        <div className="bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-800 shadow-xl">
+          <div className="relative">
+            <Search className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Buscar por nombre de clínica, especialidad o calle..."
+              placeholder="Buscar por nombre de clínica, calle, teléfono o especialidad..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs sm:text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
+              className="w-full pl-11 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
             />
-          </div>
-
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none text-xs">
-            {zones.map((zone) => (
-              <button
-                key={zone}
-                onClick={() => setSelectedZone(zone)}
-                className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-all ${
-                  selectedZone === zone
-                    ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
-                    : "bg-slate-950 text-slate-400 hover:text-slate-200 hover:bg-slate-800 border border-slate-800"
-                }`}
-              >
-                {zone === "all" ? `Todas (${CLINICS.length})` : zone}
-              </button>
-            ))}
           </div>
         </div>
 
@@ -449,9 +408,12 @@ Tijuana, B.C., México`;
           {filteredClinics.map((c) => {
             const clinicWhatsAppMsg = `Hola buenas tardes ${c.name}, le escribe Gustavo Tello, ingeniero biomédico y de software local aquí en Tijuana. Desarrollé NullDental (https://dental.nullraccoon.com), una plataforma diseñada para clínicas dentales. Estudios en clínicas privadas demuestran que los recordatorios automatizados por WhatsApp reducen el ausentismo entre un 25% y 35%. Nuestro objetivo es comprobar y medir ese impacto directamente en su clínica. Actualmente estamos seleccionando 3 clínicas en Tijuana para una prueba piloto sin costo para automatizar sus confirmaciones y documentar citas recuperadas. ¿Con quién de administración o dirección médica podríamos coordinar una demostración rápida de 10 minutos? Saludos cordiales.`;
 
-            const waUrl = c.whatsapp
-              ? `https://wa.me/${c.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(clinicWhatsAppMsg)}`
+            const cleanWaNumber = c.whatsapp ? c.whatsapp.replace(/[^0-9]/g, "") : null;
+            const waUrl = cleanWaNumber
+              ? `https://api.whatsapp.com/send?phone=${cleanWaNumber}&text=${encodeURIComponent(clinicWhatsAppMsg)}`
               : null;
+
+            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.name + ', ' + c.address)}`;
 
             const emailSubject = `Reducción de ausentismo y citas no asistidas en ${c.name} - Propuesta Piloto`;
             const emailBody = `Estimado equipo de ${c.name},
@@ -484,12 +446,12 @@ Tijuana, B.C., México`;
             return (
               <div
                 key={c.id}
-                className="bg-slate-900/80 border border-slate-800/80 hover:border-slate-700/80 rounded-2xl p-5 sm:p-6 shadow-xl backdrop-blur flex flex-col justify-between transition-all duration-200 hover:shadow-indigo-500/5 group"
+                className="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-5 sm:p-6 shadow-xl flex flex-col justify-between transition-all duration-200 group"
               >
                 <div className="space-y-3">
-                  {/* Card Header */}
+                  {/* Card Header with Google Maps Link */}
                   <div className="flex items-start justify-between gap-3">
-                    <div>
+                    <div className="flex-1">
                       <div className="flex flex-wrap items-center gap-2 mb-1.5">
                         <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
                           {c.zone}
@@ -499,21 +461,36 @@ Tijuana, B.C., México`;
                           <span className="text-slate-400 font-normal">({c.reviews})</span>
                         </span>
                       </div>
-                      <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-indigo-300 transition-colors">
-                        {c.name}
-                      </h3>
+
+                      {/* Clickable Clinic Name -> Google Maps */}
+                      <a
+                        href={mapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-lg sm:text-xl font-bold text-white hover:text-emerald-400 transition-colors inline-flex items-center gap-2 group/title"
+                        title="Abrir clínica en Google Maps"
+                      >
+                        <span>{c.name}</span>
+                        <ExternalLink className="w-4 h-4 text-slate-500 group-hover/title:text-emerald-400 transition-colors" />
+                      </a>
                       <p className="text-xs text-indigo-400 font-medium mt-0.5">{c.type}</p>
                     </div>
                   </div>
 
-                  {/* Address */}
-                  <div className="flex items-start gap-2 text-xs text-slate-400 pt-1">
-                    <MapPin className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
-                    <span className="line-clamp-2">{c.address}</span>
-                  </div>
+                  {/* Clickable Address -> Google Maps */}
+                  <a
+                    href={mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-2 text-xs text-slate-400 hover:text-emerald-300 transition-colors pt-1 group/addr"
+                    title="Ver ubicación en Google Maps"
+                  >
+                    <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span className="line-clamp-2 underline-offset-2 group-hover/addr:underline">{c.address}</span>
+                  </a>
 
                   {/* Channels Meta */}
-                  <div className="bg-slate-950/60 rounded-xl p-3 border border-slate-800/60 space-y-1.5 text-xs">
+                  <div className="bg-slate-950 rounded-xl p-3 border border-slate-800 space-y-2 text-xs">
                     {c.email ? (
                       <div className="flex items-center justify-between text-slate-300">
                         <span className="flex items-center gap-1.5 text-slate-400">
@@ -535,9 +512,9 @@ Tijuana, B.C., México`;
                     {c.whatsapp ? (
                       <div className="flex items-center justify-between text-slate-300">
                         <span className="flex items-center gap-1.5 text-slate-400">
-                          <MessageSquare className="w-3.5 h-3.5 text-emerald-400" /> WhatsApp:
+                          <MessageSquare className="w-3.5 h-3.5 text-[#25D366]" /> WhatsApp:
                         </span>
-                        <span className="font-mono text-emerald-400 font-semibold">{c.whatsapp}</span>
+                        <span className="font-mono text-[#25D366] font-semibold">{c.whatsapp}</span>
                       </div>
                     ) : (
                       <div className="flex items-center justify-between text-slate-500">
@@ -565,44 +542,58 @@ Tijuana, B.C., México`;
                   </div>
                 </div>
 
-                {/* Actions */}
-                <div className="pt-4 mt-4 border-t border-slate-800/80 flex items-center gap-2">
+                {/* Actions Row */}
+                <div className="pt-4 mt-4 border-t border-slate-800 flex flex-wrap items-center gap-2">
+                  {/* Green Send WhatsApp Button */}
                   {c.whatsapp ? (
                     <a
                       href={waUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 active:from-emerald-700 active:to-emerald-800 text-white font-bold text-xs rounded-xl shadow-lg shadow-emerald-900/30 transition-all"
+                      className="flex-1 min-w-[140px] inline-flex items-center justify-center gap-2 px-3.5 py-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-[#25D366]/20 transition-all active:scale-95"
                     >
-                      <MessageSquare className="w-4 h-4 fill-current" />
-                      WhatsApp
+                      <MessageSquare className="w-4 h-4 fill-slate-950 text-slate-950" />
+                      <span>Enviar WhatsApp</span>
                     </a>
                   ) : (
                     <button
                       disabled
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-slate-800/50 text-slate-500 font-semibold text-xs rounded-xl cursor-not-allowed border border-slate-800"
+                      className="flex-1 min-w-[140px] inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-slate-800/50 text-slate-500 font-semibold text-xs rounded-xl cursor-not-allowed border border-slate-800"
                     >
                       Sin WhatsApp
                     </button>
                   )}
 
+                  {/* Send Email or Call */}
                   {c.email ? (
                     <a
                       href={mailtoUrl}
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 active:from-indigo-700 active:to-indigo-800 text-white font-bold text-xs rounded-xl shadow-lg shadow-indigo-900/30 transition-all"
+                      className="flex-1 min-w-[130px] inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs sm:text-sm rounded-xl border border-slate-700 transition-all"
                     >
-                      <Mail className="w-4 h-4" />
-                      Enviar Correo
+                      <Mail className="w-4 h-4 text-indigo-400" />
+                      <span>Enviar Correo</span>
                     </a>
                   ) : (
                     <a
                       href={`tel:${c.phone}`}
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 transition-all"
+                      className="flex-1 min-w-[130px] inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs sm:text-sm rounded-xl border border-slate-700 transition-all"
                     >
-                      <Phone className="w-4 h-4" />
-                      Llamar Oficina
+                      <Phone className="w-4 h-4 text-slate-400" />
+                      <span>Llamar Oficina</span>
                     </a>
                   )}
+
+                  {/* Dedicated Google Maps Button */}
+                  <a
+                    href={mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 bg-slate-800/80 hover:bg-slate-700 text-slate-200 hover:text-white font-semibold text-xs sm:text-sm rounded-xl border border-slate-700 transition-all"
+                    title="Abrir en Google Maps"
+                  >
+                    <MapPin className="w-4 h-4 text-emerald-400" />
+                    <span className="hidden sm:inline">Google Maps</span>
+                  </a>
                 </div>
               </div>
             );

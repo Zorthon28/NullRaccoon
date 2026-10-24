@@ -5,6 +5,8 @@
 
 body {
   margin: 0;
+  background-color: #020617;
+  color: #f8fafc;
 }
 
 .test-box {
