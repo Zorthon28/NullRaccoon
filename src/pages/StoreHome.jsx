@@ -1,105 +1,20 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import products from "../utils/products";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight, ArrowDown, ArrowUpRight } from "lucide-react";
 import ProductCardHome from "../components/ProductCardHome";
-
-export default function StoreHome({ lang, t }) {
-  const store = t.store;
-
-  // Filter states
-  const [filterName] = useState("");
-  const [maxPrice] = useState("");
-  const [sortBy, setSortBy] = useState("popularity"); // Default sorting
-
-  // Get translated product name
-  const getTranslatedName = (product) =>
-    (t.products?.[product.nameKey] || product.nameKey).toLowerCase();
-
-  // Filter products based on name and price
-  const filteredProducts = products
-    .filter((product) => {
-      const translatedName = getTranslatedName(product);
-      const matchesName = translatedName.includes(filterName.toLowerCase());
-      const matchesPrice = maxPrice === "" || product.price <= Number(maxPrice);
-      return matchesName && matchesPrice;
-    })
-    .sort((a, b) => {
-      switch (sortBy) {
-        case "price-asc":
-          return a.price - b.price;
-        case "price-desc":
-          return b.price - a.price;
-        case "name-asc":
-          return getTranslatedName(a).localeCompare(getTranslatedName(b));
-        case "name-desc":
-          return getTranslatedName(b).localeCompare(getTranslatedName(a));
-        default:
-          return 0; // "popularity" does nothing
-      }
-    });
-
-  return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <motion.h1
-        className="text-3xl font-extrabold text-green-700 mb-8 text-center"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        {store.welcomeTitle}
-      </motion.h1>
-
-      {/* FILTER UI */}
-      <div className="mb-6 max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        {/* Optional: Other filter inputs can go here */}
-
-        <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          className="w-46 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400 sm:ml-auto"
-        >
-          <option value="popularity">
-            {t.sortByPopularity || "Sort by popularity"}
-          </option>
-          <option value="price-asc">
-            {t.sortByPriceAsc || "Price: Low to High"}
-          </option>
-          <option value="price-desc">
-            {t.sortByPriceDesc || "Price: High to Low"}
-          </option>
-          <option value="name-asc">{t.sortByNameAsc || "Name: A to Z"}</option>
-          <option value="name-desc">
-            {t.sortByNameDesc || "Name: Z to A"}
-          </option>
-        </select>
-      </div>
-
-      {/* PRODUCTS GRID */}
-      <motion.div
-        className="max-w-7xl mx-auto grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        {filteredProducts.map((product, index) => (
-          <motion.div
-            key={product.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.05 }}
-            viewport={{ once: true }}
-          >
-            <ProductCardHome product={product} lang={lang} t={t} />
-          </motion.div>
-        ))}
-
-        {filteredProducts.length === 0 && (
-          <p className="text-center text-gray-500 col-span-full">
-            {t.noProductsFound || "No products found."}
-          </p>
-        )}
-      </motion.div>
-    </div>
-  );
+import ShopReveal from "../components/ShopReveal";
+import { showroomProducts, showroomCopy, showroomPrice } from "../utils/showroom";
+export default function StoreHome({ lang }) {
+  const es = lang === "es";
+  const [sort, setSort] = useState("featured");
+  const featured = showroomProducts[0];
+  const featuredCopy = showroomCopy(featured, lang);
+  const collection = [...showroomProducts].sort((a, b) => sort === "price-asc" ? a.price - b.price : sort === "price-desc" ? b.price - a.price : sort === "name" ? showroomCopy(a, lang).name.localeCompare(showroomCopy(b, lang).name) : 0);
+  const renderProducts = items => <div className="shop-product-grid">{items.map((product, index) => <ShopReveal key={product.id} delay={index * 70}><ProductCardHome product={product} lang={lang} /></ShopReveal>)}</div>;
+  return <div className="shop-catalog"><section className="shop-hero shop-container"><div className="shop-hero-copy"><p className="shop-kicker">{es ? "La selección cotidiana / 01" : "The everyday edit / 01"}</p><h1>{es ? <>Menos ruido.<br /><em>Más de ti.</em></> : <>Less noise.<br /><em>More you.</em></>}</h1><p>{es ? "Audio y objetos de escritorio que le dan un mejor ritmo a tu día." : "Thoughtful audio and desk essentials. A better rhythm for your everyday."}</p><Link className="shop-button" to="/store/product/12">{es ? "Explorar audífonos" : "Explore headphones"}<ArrowRight size={18} /></Link><a className="shop-hero-browse" href="#collection">{es ? "Descubrir la colección" : "Discover the collection"}<ArrowDown size={15} /></a></div><Link to="/store/product/12" className="shop-hero-image" aria-label={featuredCopy.name}><img src={featured.images[0]} alt={featuredCopy.name} width="1400" height="1200" fetchPriority="high" /><span className="shop-hero-product"><span>{featuredCopy.name}</span><span>{showroomPrice(featured.price)} USD<ArrowUpRight size={17} /></span></span></Link></section>
+    <section id="collection" className="shop-container shop-collection"><div className="shop-collection-heading"><div><p className="shop-kicker">{es ? "Elegidos con intención" : "Selected with intention"}</p><h2>{es ? "Esenciales, sin exceso." : "Everyday. Anything but ordinary."}</h2></div><label className="shop-sort"><span>{es ? "Ordenar" : "Sort"}</span><select value={sort} onChange={event => setSort(event.target.value)}><option value="featured">{es ? "Nuestra selección" : "Our edit"}</option><option value="price-asc">{es ? "Precio: menor a mayor" : "Price: low to high"}</option><option value="price-desc">{es ? "Precio: mayor a menor" : "Price: high to low"}</option><option value="name">{es ? "Nombre: A–Z" : "Name: A–Z"}</option></select></label></div>{renderProducts(collection.slice(0, 3))}</section>
+    <ShopReveal className="shop-container"><section id="feature" className="shop-feature"><div><p className="shop-kicker">{es ? "Un espacio más tuyo" : "Make room for the everyday"}</p><h2>{es ? <>Pequeños detalles.<br />Un mejor día.</> : <>Small details.<br />A better day.</>}</h2><p>{es ? "Un lugar para recargar, concentrarte y empezar de nuevo. Haz que cada objeto cuente." : "A place to recharge, refocus, and begin again. Make every object count."}</p><Link to="/store/product/9" className="shop-text-link">{es ? "Conoce la estación de carga" : "Meet the charging dock"}<ArrowUpRight size={17} /></Link></div><Link to="/store/product/9" aria-label={es ? "Explorar estación de carga" : "Explore charging dock"}><img src="/images/Store/WirelessCharger/front.jpg" alt={es ? "Estación de carga para dispositivos" : "Device charging dock"} loading="lazy" width="1280" height="640" /></Link></section></ShopReveal>
+    <section className="shop-container shop-more"><div className="shop-more-heading"><h2>{es ? "Tu día, bien acompañado." : "Good company for your day."}</h2><p>{es ? "Piezas sencillas. Espacios con personalidad." : "Simple pieces. Spaces with personality."}</p></div>{renderProducts(collection.slice(3))}</section>
+    <ShopReveal className="shop-container"><div className="shop-note"><p>{es ? "Menos cosas. Mejor elegidas." : "Fewer things. Better chosen."}</p><span>{es ? "Audio · Escritorio · Todos los días" : "Audio · Desk · Everyday"}</span></div></ShopReveal>
+  </div>;
 }

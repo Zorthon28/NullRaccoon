@@ -12,52 +12,14 @@ const siteUrl = (process.env.SITE_URL || "https://www.nullraccoon.com").replace(
 );
 
 const routes = [
-  {
-    route: "/",
-    changefreq: "monthly",
-    priority: "1.0",
-    files: ["public/index.html", "src/App.js", "src/pages/Home.jsx"],
-  },
-  {
-    route: "/services",
-    changefreq: "monthly",
-    priority: "0.95",
-    files: ["src/pages/Services.jsx", "src/App.js"],
-  },
-  {
-    route: "/privacy",
-    changefreq: "yearly",
-    priority: "0.4",
-    files: ["public/privacy.html"],
-  },
-  {
-    route: "/terms",
-    changefreq: "yearly",
-    priority: "0.4",
-    files: ["public/terms.html"],
-  },
-  {
-    route: "/store",
-    changefreq: "weekly",
-    priority: "0.9",
-    files: [
-      "src/pages/StoreLanding.jsx",
-      "src/layouts/StoreLayout.jsx",
-      "src/App.js",
-    ],
-  },
-  {
-    route: "/store/products",
-    changefreq: "weekly",
-    priority: "0.8",
-    files: ["src/pages/StoreHome.jsx", "src/utils/products.js", "src/App.js"],
-  },
-  {
-    route: "/case-study/medtech-premier",
-    changefreq: "monthly",
-    priority: "0.7",
-    files: ["src/components/CaseStudy.jsx", "src/App.js"],
-  },
+  { route: "/", changefreq: "monthly", priority: "1.0", files: ["src/components/Hero.jsx", "src/utils/projects.js"] },
+  { route: "/services", changefreq: "monthly", priority: "0.9", files: ["src/pages/Services.jsx"] },
+  { route: "/projects", changefreq: "monthly", priority: "0.9", files: ["src/pages/Projects.jsx", "src/utils/projects.js"] },
+  { route: "/projects/dental", changefreq: "monthly", priority: "0.7", files: ["src/pages/ProjectDetail.jsx", "src/utils/projects.js"] },
+  { route: "/projects/community", changefreq: "monthly", priority: "0.7", files: ["src/pages/ProjectDetail.jsx", "src/utils/projects.js"] },
+  { route: "/case-study/medtech-premier", changefreq: "monthly", priority: "0.8", files: ["src/components/CaseStudy.jsx", "src/utils/translations.js"] },
+  { route: "/privacy.html", changefreq: "yearly", priority: "0.3", files: ["public/privacy.html"] },
+  { route: "/terms.html", changefreq: "yearly", priority: "0.3", files: ["public/terms.html"] },
 ];
 
 const escapeXml = (value) =>

@@ -1,0 +1,77 @@
+/* Real equipment labels are the visual anchor; the studio's dark canvas stays intact. */
+.medtech-page { --mt-accent:#76dfbf; --mt-paper:#edf5f1; --mt-muted:#a8b8ca; --mt-line:#273b49; }
+@supports (color:oklch(80% .1 165)) { .medtech-page { --mt-accent:oklch(83% .115 167); --mt-paper:oklch(96% .009 165); --mt-muted:oklch(77% .032 251); --mt-line:oklch(34% .033 233); } }
+.medtech-topline { display:flex; align-items:center; justify-content:space-between; padding-top:28px; font-size:.8rem; color:var(--mt-muted); }
+.medtech-topline a,.medtech-topline button { min-height:44px; display:inline-flex; align-items:center; gap:8px; }
+.medtech-topline button { background:none; color:var(--mt-muted); padding:8px; }
+.medtech-hero { display:grid; grid-template-columns:1.12fr 1fr; align-items:center; gap:clamp(32px,5vw,80px); padding-block:40px 72px; }
+.medtech-kicker { font-size:.85rem; font-weight:600; color:var(--mt-accent); margin-bottom:24px; }
+.medtech-kicker>span { color:var(--mt-muted); font-weight:400; }
+.medtech-hero h1 { color:#edf3f8; font-size:clamp(2.65rem,4.3vw,4.65rem); line-height:1.08; font-weight:750; letter-spacing:-.045em; max-width:17ch; text-wrap:balance; }
+.medtech-intro { font-size:1.05rem; line-height:1.75; color:var(--mt-muted); max-width:46ch; margin:24px 0 28px; }
+.medtech-primary { display:inline-flex; align-items:center; justify-content:center; gap:22px; min-height:48px; padding:13px 20px; border-radius:6px; background:var(--mt-accent); color:#102b26; font-size:.9rem; font-weight:650; }
+.medtech-primary:hover { background:#a3edd6; }
+.medtech-label-scene { position:relative; min-width:0; padding:34px 30px 28px; border:1px solid #264b47; border-radius:16px; background:#0c2228; }
+.medtech-scan-corners { display:flex; justify-content:space-between; align-items:center; color:var(--mt-accent); font-size:.75rem; letter-spacing:.1em; margin-bottom:40px; }
+.medtech-page .medtech-label-button { border:0; background:transparent; overflow:visible; border-radius:0; box-shadow:none; }
+.medtech-page .medtech-label-button img { width:100%; height:auto; object-fit:contain; border-radius:4px; box-shadow:0 18px 38px #020c1460; }
+.medtech-label-button>span { display:flex; align-items:center; justify-content:flex-end; gap:6px; padding-top:14px; font-size:.7rem; color:var(--mt-accent); }
+.medtech-label-scene figcaption { color:#d9e8e5; font-size:.85rem; line-height:1.6; margin-top:28px; }
+.medtech-label-scene figcaption small { display:block; color:#94afa9; font-size:.72rem; margin-top:4px; }
+.medtech-outcomes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px; border-block:1px solid var(--mt-line); padding-block:28px; }
+.medtech-outcomes>div { display:flex; align-items:flex-start; gap:14px; }
+.medtech-outcomes svg { color:var(--mt-accent); margin-top:3px; flex-shrink:0; }
+.medtech-outcomes h2 { font-size:1rem; font-weight:650; color:#e7f1f4; margin-bottom:6px; }
+.medtech-outcomes p { font-size:.8rem; line-height:1.65; color:var(--mt-muted); max-width:33ch; }
+.medtech-page .medtech-challenge { display:grid; grid-template-columns:1fr 1fr; gap:9%; padding-block:clamp(64px,7vw,100px); border-top:0; align-items:center; }
+.medtech-page h2 { text-wrap:balance; }
+.medtech-page .medtech-challenge h2,.medtech-section-heading h2,.medtech-operations h2,.medtech-handoff h2,.medtech-cta h2 { color:#edf3f8; font-size:clamp(1.8rem,2.6vw,2.6rem); font-weight:650; line-height:1.2; letter-spacing:-.025em; margin:0; }
+.medtech-page .medtech-challenge>p { color:var(--mt-muted); line-height:1.8; font-size:1rem; max-width:53ch; }
+.medtech-section-heading { display:flex; align-items:end; justify-content:space-between; gap:32px; margin-bottom:32px; }
+.medtech-section-heading>span { display:flex; align-items:center; gap:12px; color:var(--mt-accent); white-space:nowrap; font-size:.8rem; }
+.medtech-workflow ol { list-style:none; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+.medtech-step-title { display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+.medtech-step-title>span { color:var(--mt-accent); font-size:.75rem; }
+.medtech-step-title h3 { font-size:1.1rem; font-weight:600; color:#e5edf5; }
+.medtech-workflow li>p { font-size:.83rem; color:var(--mt-muted); margin-top:16px; line-height:1.6; max-width:40ch; }
+.medtech-page .medtech-screen { border:1px solid #486067; border-radius:8px; overflow:hidden; background:var(--mt-paper); width:100%; display:block; position:relative; padding:0; cursor:zoom-in; }
+.medtech-page .medtech-screen img { width:100%; height:auto; display:block; object-fit:contain; }
+.medtech-page .medtech-browser { display:flex; align-items:center; gap:4px; padding:9px 11px; color:#4b625a; background:#d9e6e2; border-bottom:1px solid #bfd0c9; font-size:.58rem; }
+.medtech-browser i { width:5px; height:5px; border-radius:50%; background:#8fa79d; }
+.medtech-browser>span { margin-left:8px; }
+.medtech-page .medtech-screen .medtech-expand { display:flex; position:absolute; right:8px; bottom:8px; align-items:center; gap:5px; border:1px solid #b6cbc3; background:var(--mt-paper); color:#27483c; border-radius:4px; font-size:.62rem; padding:6px 9px; }
+.medtech-page .medtech-workflow .medtech-screen { aspect-ratio:1.6; }
+.medtech-page .medtech-workflow .medtech-screen img { height:calc(100% - 30px); object-position:top; }
+.medtech-page .medtech-screen-label img { padding:28px 12px; object-position:center !important; }
+.medtech-operations { display:grid; grid-template-columns:.7fr 1.3fr; gap:40px 64px; padding-block:clamp(72px,8vw,120px); align-items:center; scroll-margin-top:110px; }
+.medtech-operations-copy>svg { color:var(--mt-accent); margin-bottom:22px; }
+.medtech-operations-copy p { color:var(--mt-muted); line-height:1.8; max-width:38ch; margin-top:20px; }
+.medtech-operations figcaption,.medtech-extra-screens figcaption { color:var(--mt-muted); font-size:.8rem; line-height:1.6; margin-top:12px; }
+.medtech-calendar { grid-column:1 / -1; width:82%; margin-top:12px; }
+.medtech-handoff { border-top:1px solid var(--mt-line); padding-block:60px 72px; display:grid; grid-template-columns:1.15fr 1fr; gap:10%; align-items:start; }
+.medtech-pilot { display:inline-flex; align-items:center; gap:9px; color:var(--mt-accent); font-size:.73rem; margin-bottom:20px; }
+.medtech-pilot>span { width:6px; height:6px; border-radius:50%; background:var(--mt-accent); }
+.medtech-handoff>div>p { color:var(--mt-muted); line-height:1.8; max-width:56ch; margin-top:20px; }
+.medtech-report { display:inline-flex; align-items:center; gap:12px; padding:18px 0; margin-top:14px; color:var(--mt-accent); font-size:.85rem; }
+.medtech-report small { display:block; color:var(--mt-muted); font-size:.7rem; margin-top:4px; }
+.medtech-stack { padding-top:28px; min-width:0; }
+.medtech-stack>span { color:var(--mt-muted); font-size:.75rem; }
+.medtech-handoff .medtech-stack>p { margin-top:12px; color:#d6e6e5; font-size:.95rem; }
+.medtech-more { margin-top:28px; border-top:1px solid var(--mt-line); }
+.medtech-more summary { padding:18px 0; cursor:pointer; font-size:.85rem; color:var(--mt-accent); }
+.medtech-more>p { font-size:.75rem; color:var(--mt-muted); line-height:1.7; margin-bottom:20px; }
+.medtech-extra-screens { display:grid; gap:24px; }
+.medtech-cta { display:flex; gap:32px; align-items:flex-start; padding:48px; margin-bottom:64px; border:1px solid #264b47; background:#0c2228; border-radius:12px; }
+.medtech-cta>img { flex-shrink:0; margin-top:16px; }
+.medtech-cta>div>p { color:var(--mt-accent); font-size:.75rem; margin-bottom:14px; }
+.medtech-cta h2 { max-width:26ch; }
+.medtech-cta>div>span { display:block; color:var(--mt-muted); line-height:1.75; margin-top:16px; }
+.medtech-cta .medtech-primary { margin-top:28px; }
+.medtech-page :is(button,a,summary):focus-visible { outline:2px solid var(--mt-accent); outline-offset:5px; }
+html[data-motion="full"] .medtech-hero-copy,html[data-motion="full"] .medtech-label-scene { animation:medtech-enter 750ms cubic-bezier(.22,1,.36,1) both; }
+html[data-motion="full"] .medtech-label-scene { animation-delay:110ms; }
+html[data-motion="full"] .medtech-screen { transition:transform 250ms cubic-bezier(.22,1,.36,1),border-color 250ms; }
+html[data-motion="full"] .medtech-screen:hover { transform:translateY(-3px); border-color:var(--mt-accent); }
+@keyframes medtech-enter { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+@media(max-width:1000px) { .medtech-hero { gap:32px; } .medtech-hero h1 { font-size:3rem; } .medtech-label-scene { padding:24px; } .medtech-outcomes { gap:20px; } .medtech-workflow ol { gap:16px; } .medtech-operations { gap:32px; } }
+@media(max-width:767px) { .medtech-hero { grid-template-columns:1fr; padding-block:28px 40px; gap:36px; } .medtech-hero h1 { font-size:clamp(2.7rem,8vw,4rem); max-width:20ch; } .medtech-intro { font-size:.95rem; margin-top:20px; } .medtech-label-scene { max-width:560px; width:100%; justify-self:center; } .medtech-outcomes { grid-template-columns:1fr; gap:22px; } .medtech-outcomes p { max-width:none; } .medtech-page .medtech-challenge { grid-template-columns:1fr; gap:24px; padding-block:56px; } .medtech-section-heading { display:block; } .medtech-section-heading>span { margin-top:20px; } .medtech-workflow ol { grid-template-columns:1fr; gap:36px; } .medtech-workflow li>p { max-width:none; } .medtech-page .medtech-workflow .medtech-screen { aspect-ratio:auto; } .medtech-page .medtech-workflow .medtech-screen img { height:auto; } .medtech-page .medtech-screen-label img { padding:32px 20px; } .medtech-operations { grid-template-columns:1fr; padding-block:64px; gap:28px; } .medtech-operations-copy p { max-width:none; } .medtech-calendar { width:100%; margin:0; } .medtech-handoff { grid-template-columns:1fr; gap:16px; padding-block:48px; } .medtech-stack { padding-top:8px; } .medtech-cta { padding:28px 24px; gap:16px; margin-bottom:40px; flex-wrap:wrap; } .medtech-cta>img { width:48px; height:48px; margin-top:0; } .medtech-topline { padding-top:16px; } .medtech-kicker { font-size:.75rem; } }

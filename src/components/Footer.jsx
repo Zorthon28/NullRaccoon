@@ -1,4 +1,5 @@
 import React from "react";
+import { MotionControl } from "../context/MotionContext";
 import { Github, Linkedin, Instagram, Facebook } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
@@ -67,7 +68,7 @@ export default function Footer({ t }) {
         </script>
       </Helmet>
 
-      <footer className="w-full bg-gray-900 text-white py-12">
+      <footer className="studio-footer w-full bg-gray-900 text-white py-12">
         <div className="max-w-screen-xl mx-auto px-4 text-center flex flex-col items-center justify-center space-y-4">
           {/* Logo */}
           <a
@@ -84,17 +85,19 @@ export default function Footer({ t }) {
             </span>
           </a>
 
+          <div className="studio-footer-nav"><a href="/">{t.home}</a><a href="/services">{t.services}</a><a href="/projects">{t.home === "Inicio" ? "Proyectos" : "Projects"}</a><a href="mailto:null.raccoon.tj@gmail.com">Email</a></div>
           <SocialIconsList />
+          <MotionControl lang={t.home === "Inicio" ? "es" : "en"} />
 
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
             <a
-              href="/privacy"
+              href="/privacy.html"
               className="text-gray-300 hover:text-green-400 transition-colors duration-300 ease-in-out"
             >
               {privacyLabel}
             </a>
             <a
-              href="/terms"
+              href="/terms.html"
               className="text-gray-300 hover:text-green-400 transition-colors duration-300 ease-in-out"
             >
               {termsLabel}
@@ -102,6 +105,7 @@ export default function Footer({ t }) {
           </div>
 
           <p className="text-sm text-gray-500"> {t.footerText}</p>
+          <div id="footer-controls-dock" className="studio-footer-controls" />
         </div>
       </footer>
     </>

@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
+import ScrollLogo from "../components/ScrollLogo";
 import { Helmet } from "react-helmet-async";
 import Header from "../components/HeaderHero";
+import Guarantees from "../components/Guarantees";
+import { ArrowUpRight, Clock3, Smartphone, Search, MessageCircle, CreditCard, ShoppingBag, Package, Users, CalendarDays, LayoutDashboard, ShieldCheck, DatabaseBackup, Headphones, Languages, Globe, Activity } from "lucide-react";
+import "./Services.css";
 
-export default function Services({ lang, t, setShowQuoteModal }) {
+const serviceVisuals = {
+  "custom-websites": { accent: "blue", image: "/images/restaurant.png", project: "Restaurant Platform", href: "https://restaurant.nullraccoon.com/", interactive: true, icons: [Smartphone, Search, MessageCircle] },
+  "ecommerce-solutions": { accent: "green", image: "/images/store-showroom-preview.jpg", project: "NullRaccoon Store", href: "/store/products", interactive: true, icons: [CreditCard, ShoppingBag, Package] },
+  "web-applications": { accent: "purple", image: "/images/Reports.png", project: "MedTech Premier", href: "/case-study/medtech-premier", interactive: false, icons: [Users, CalendarDays, LayoutDashboard] },
+  "maintenance-support": { accent: "teal", icons: [ShieldCheck, DatabaseBackup, Headphones] },
+};
+
+export default function Services({ lang, t }) {
+  const { hash } = useLocation();
+  const selectedService = hash.slice(1);
   const servicesUrl = "https://www.nullraccoon.com/services";
-  const [usdToMxnRate, setUsdToMxnRate] = useState(17.86);
-
-  useEffect(() => {
-    const fetchRate = async () => {
-      try {
-        const response = await fetch("https://open.er-api.com/v6/latest/USD");
-        const data = await response.json();
-
-        if (data?.rates?.MXN && Number.isFinite(data.rates.MXN)) {
-          setUsdToMxnRate(data.rates.MXN);
-        }
-      } catch {
-        // Keep fallback rate if request fails
-      }
-    };
-
-    fetchRate();
-  }, []);
-
   useEffect(() => {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       window.gtag("event", "view_services", {
@@ -32,202 +27,248 @@ export default function Services({ lang, t, setShowQuoteModal }) {
     }
   }, []);
 
-  const formatPrettyUsdFromMxn = (mxnAmount) => {
-    const rawUsd = mxnAmount / usdToMxnRate;
-    const prettyUsd = Math.ceil(rawUsd / 5) * 5;
-
-    return prettyUsd.toLocaleString("en-US", {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
-  };
-
-  const toPrettyUsdNumber = (mxnAmount) => {
-    const rawUsd = mxnAmount / usdToMxnRate;
-    return Math.ceil(rawUsd / 5) * 5;
-  };
-
   const services =
     lang === "es"
       ? [
           {
             id: "custom-websites",
-            title: "Sitios Web Personalizados",
+            title: "Webs que generan clientes",
+            highlights: ["Responsive","SEO","WhatsApp"],
             description:
-              "Diseño y desarrollo de sitios web profesionales, modernos y responsivos que convierten visitantes en clientes.",
+              "Sitios rápidos y responsivos que fortalecen tu marca y convierten visitas en clientes mediante WhatsApp y formularios.",
             features: [
               "Diseño responsivo para móvil y desktop",
               "Optimización SEO integral",
-              "Diseño moderno y atractivo",
+              "Diseño orientado a conversión",
               "CMS personalizado",
-              "Integración de formularios y contacto",
+              "Captación por WhatsApp y formularios",
               "Certificado SSL incluido",
             ],
-            price: "Desde $2,500 MXN",
-            startingPriceMxn: 2500,
-            timeline: "3-5 semanas",
+            idealFor: "Para clínicas, consultores y negocios locales.",
+            timeline: "5–10 días hábiles",
           },
           {
             id: "ecommerce-solutions",
-            title: "Soluciones de Comercio Electrónico",
+            title: "Tiendas que venden",
+            highlights: ["Pagos seguros","Compra fácil","Inventario"],
             description:
-              "Tiendas en línea completas con carrito de compras, pasarela de pago integrada y panel de administración.",
+              "Experiencias de compra fluidas, checkout sin fricción y control de inventario para vender con menos tareas manuales.",
             features: [
               "Catálogo de productos dinámico",
               "Carrito de compras inteligente",
               "Integración de pagos (Stripe, PayPal)",
-              "Panel admin completo",
+              "Control de inventario y administración",
               "Seguimiento de pedidos",
               "Reportes de ventas",
             ],
-            price: "Desde $5,000 MXN",
-            startingPriceMxn: 5000,
-            timeline: "6-10 semanas",
+            idealFor: "Para marcas que quieren vender en línea.",
+            timeline: "2–3 semanas",
           },
           {
             id: "web-applications",
-            title: "Aplicaciones Web Personalizadas",
+            title: "Sistemas a tu medida",
+            highlights: ["Portales","Citas","Dashboards"],
             description:
-              "Aplicaciones web robustas y escalables diseñadas específicamente para tu negocio.",
+              "Portales de clientes, sistemas de citas y herramientas internas para digitalizar y automatizar tu operación.",
             features: [
-              "Arquitectura escalable",
-              "Base de datos optimizada",
-              "API REST robusta",
+              "Arquitectura a la medida de tu operación",
+              "Portales de clientes y equipos internos",
+              "Reservas y flujos automatizados",
               "Panel de control intuitivo",
               "Autenticación segura",
               "Análisis y reportes",
             ],
-            price: "Desde $8,000 MXN",
-            startingPriceMxn: 8000,
-            timeline: "10-16 semanas",
+            idealFor: "Para empresas que quieren automatizar procesos.",
+            timeline: "MVP por fases",
           },
           {
             id: "maintenance-support",
-            title: "Mantenimiento y Soporte",
+            title: "Soporte y seguridad",
+            highlights: ["Seguridad","Respaldos","Soporte"],
             description:
-              "Servicios continuos de mantenimiento, actualizaciones y soporte técnico para tu sitio.",
+              "Monitoreo, mantenimiento preventivo y respaldos para que puedas concentrarte en tu negocio con tranquilidad.",
             features: [
               "Actualizaciones de seguridad",
               "Copias de seguridad automáticas",
               "Monitoreo de rendimiento",
-              "Soporte técnico 24/7",
+              "Soporte bilingüe según contrato",
               "Actualizaciones de contenido",
               "Optimización de velocidad",
             ],
-            price: "Desde $1,000 MXN/mes",
-            startingPriceMxn: 1000,
+            idealFor: "Para negocios que quieren delegar el cuidado de su web.",
             timeline: "Inicio en 48 horas",
           },
         ]
       : [
           {
             id: "custom-websites",
-            title: "Custom Website Development",
+            title: "Websites that win customers",
+            highlights: ["Responsive","SEO","WhatsApp"],
             description:
-              "Professional, modern, and responsive website design and development that converts visitors into customers.",
+              "Fast, responsive websites that strengthen your brand and turn visits into customers through WhatsApp and forms.",
             features: [
               "Mobile & desktop responsive design",
               "Comprehensive SEO optimization",
-              "Modern & attractive design",
+              "Conversion-focused design",
               "Custom CMS",
-              "Forms & contact integration",
+              "WhatsApp & form lead capture",
               "SSL certificate included",
             ],
-            price: `Starting at $${formatPrettyUsdFromMxn(2500)} USD`,
-            startingPriceMxn: 2500,
-            timeline: "3-5 weeks",
+            idealFor: "For clinics, consultants, and local businesses.",
+            timeline: "5–10 business days",
           },
           {
             id: "ecommerce-solutions",
-            title: "E-Commerce Solutions",
+            title: "Stores that sell",
+            highlights: ["Secure payments","Easy shopping","Inventory"],
             description:
-              "Complete online stores with shopping cart, integrated payment gateway, and administration panel.",
+              "Smooth shopping experiences, frictionless checkout, and inventory control to sell with less manual work.",
             features: [
               "Dynamic product catalog",
               "Smart shopping cart",
               "Payment integration (Stripe, PayPal)",
-              "Complete admin panel",
+              "Inventory & admin controls",
               "Order tracking",
               "Sales reports",
             ],
-            price: `Starting at $${formatPrettyUsdFromMxn(5000)} USD`,
-            startingPriceMxn: 5000,
-            timeline: "6-10 weeks",
+            idealFor: "For brands ready to sell online.",
+            timeline: "2–3 weeks",
           },
           {
             id: "web-applications",
-            title: "Custom Web Applications",
+            title: "Systems built for you",
+            highlights: ["Portals","Bookings","Dashboards"],
             description:
-              "Robust and scalable web applications specifically designed for your business needs.",
+              "Customer portals, booking systems, and internal tools to digitize and automate your operations.",
             features: [
-              "Scalable architecture",
-              "Optimized database",
-              "Robust REST API",
+              "Architecture tailored to your operations",
+              "Customer & internal team portals",
+              "Bookings & automated workflows",
               "Intuitive control panel",
               "Secure authentication",
               "Analytics & reporting",
             ],
-            price: `Starting at $${formatPrettyUsdFromMxn(8000)} USD`,
-            startingPriceMxn: 8000,
-            timeline: "10-16 weeks",
+            idealFor: "For businesses ready to automate manual work.",
+            timeline: "Phased MVP delivery",
           },
           {
             id: "maintenance-support",
-            title: "Maintenance & Support",
+            title: "Support & security",
+            highlights: ["Security","Backups","Support"],
             description:
-              "Continuous maintenance, updates, and technical support services for your website.",
+              "Monitoring, preventive maintenance, and backups so you can focus on your business with peace of mind.",
             features: [
               "Security updates",
               "Automatic backups",
               "Performance monitoring",
-              "24/7 technical support",
+              "Bilingual support under your service agreement",
               "Content updates",
               "Speed optimization",
             ],
-            price: `Starting at $${formatPrettyUsdFromMxn(1000)} USD/month`,
-            startingPriceMxn: 1000,
-            timeline: "Onboarding in 48 hours",
+            idealFor: "For businesses that want their website taken care of.",
+            timeline: "Starts in 48 hours",
           },
         ];
 
   const pageTitle =
     lang === "es"
-      ? "Servicios de Desarrollo Web | NullRaccoon"
-      : "Web Development Services | NullRaccoon";
+      ? "NullRaccoon | Desarrollo Web y Sistemas Digitales"
+      : "NullRaccoon | Web Platforms & Digital Systems";
 
   const pageDescription =
     lang === "es"
-      ? "Servicios completos de desarrollo web: sitios personalizados, tiendas en línea, aplicaciones web y soporte continuo. Expertos en React, diseño responsivo y SEO."
-      : "Complete web development services: custom websites, e-commerce, web applications, and ongoing support. React experts specializing in responsive design and SEO.";
+      ? "Estudio de desarrollo web y sistemas digitales: plataformas de alta conversión, comercio electrónico, sistemas de citas y gestión, con entrega llave en mano y soporte bilingüe."
+      : "Web development and digital systems studio: high-conversion platforms, e-commerce, booking and management systems, with turnkey delivery and bilingual support.";
 
-  const openQuoteWithService = (service) => {
+  const faqs = [
+    {
+      "@type": "Question",
+      name: lang === "es" ? "¿Cuándo empieza el plazo de entrega?" : "When does the delivery timeline start?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: lang === "es"
+          ? "El plazo comienza al aprobar el alcance y recibir contenidos y accesos. En sistemas a la medida, acordamos las fases y el MVP funcional contigo."
+          : "Timelines begin after scope approval and receipt of content and access. For custom systems, we agree on the phases and functional MVP with you.",
+      },
+    },
+    {
+      "@type": "Question",
+      name:
+        lang === "es"
+          ? "¿Qué incluye el desarrollo web?"
+          : "What's included in web development?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          lang === "es"
+            ? "Nuestros servicios incluyen diseño, desarrollo, pruebas, despliegue y soporte inicial. Todos los sitios son responsivos y optimizados para SEO."
+            : "Our web development services include design, development, testing, deployment, and initial support. All websites are mobile-responsive and SEO-optimized.",
+      },
+    },
+    {
+      "@type": "Question",
+      name:
+        lang === "es"
+          ? "¿Ofrecen hosting y dominio?"
+          : "Do you offer hosting and domain?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          lang === "es"
+            ? "Sí, podemos ayudarte con configuración de hosting y dominio según las necesidades de tu proyecto."
+            : "Yes, we can help set up hosting and domain based on your project's needs.",
+      },
+    },
+    {
+      "@type": "Question",
+      name:
+        lang === "es"
+          ? "¿Pueden rediseñar un sitio existente?"
+          : "Can you redesign my existing website?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          lang === "es"
+            ? "Sí, realizamos rediseños enfocados en mejorar experiencia de usuario, conversión y rendimiento SEO."
+            : "Absolutely. We handle redesigns focused on better UX, conversion rate, and SEO performance.",
+      },
+    },
+    {
+      "@type": "Question",
+      name:
+        lang === "es"
+          ? "¿Cuál es la diferencia entre sitio web y aplicación web?"
+          : "What's the difference between a website and a web app?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          lang === "es"
+            ? "Un sitio web suele ser informativo. Una aplicación web es más interactiva e incluye lógica de negocio para tareas específicas."
+            : "Websites are usually informational, while web applications are interactive and include business logic for specific workflows.",
+      },
+    },
+  ];
+
+  const getWhatsAppUrl = (service) => {
+    const message = lang === "es"
+      ? service
+        ? `Hola, me interesa cotizar el servicio "${service.title}". ¿Podemos conversar sobre mi proyecto?`
+        : "Hola, me gustaría agendar una llamada de 15 minutos para conversar sobre mi proyecto."
+      : service
+        ? `Hi, I'd like a quote for "${service.title}". Can we discuss my project?`
+        : "Hi, I'd like to schedule a 15-minute call to discuss my project.";
+    return `https://wa.me/526645789729?text=${encodeURIComponent(message)}`;
+  };
+
+  const trackWhatsAppClick = (service) => {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       window.gtag("event", "request_quote", {
         event_category: "engagement",
-        event_label: `Service Quote Click: ${service.title}`,
+        event_label: service ? `WhatsApp: ${service.title}` : "WhatsApp: Discovery Call",
       });
     }
-
-    const message =
-      lang === "es"
-        ? `Hola, me interesa el servicio "${service.title}" (${service.price}, ${service.timeline}).`
-        : `Hi, I'm interested in the "${service.title}" service (${service.price}, ${service.timeline}).`;
-
-    localStorage.setItem("quote_prefill_message", message);
-    setShowQuoteModal(true);
   };
 
-  const openGenericQuote = () => {
-    if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      window.gtag("event", "request_quote", {
-        event_category: "engagement",
-        event_label: "Generic Quote Click",
-      });
-    }
-
-    localStorage.removeItem("quote_prefill_message");
-    setShowQuoteModal(true);
-  };
 
   return (
     <>
@@ -261,20 +302,16 @@ export default function Services({ lang, t, setShowQuoteModal }) {
               item: {
                 "@type": "Service",
                 name: service.title,
+                serviceType: "Software Development Agency / Web Studio",
                 description: service.description,
                 provider: {
                   "@type": "ProfessionalService",
                   name: "NullRaccoon",
                   url: "https://www.nullraccoon.com",
                 },
-                offers: {
-                  "@type": "Offer",
-                  priceCurrency: lang === "es" ? "MXN" : "USD",
-                  price:
-                    lang === "es"
-                      ? service.startingPriceMxn
-                      : toPrettyUsdNumber(service.startingPriceMxn),
-                  availability: "https://schema.org/InStock",
+                audience: {
+                  "@type": "BusinessAudience",
+                  audienceType: service.idealFor,
                 },
               },
             })),
@@ -284,68 +321,11 @@ export default function Services({ lang, t, setShowQuoteModal }) {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: [
-              {
-                "@type": "Question",
-                name:
-                  lang === "es"
-                    ? "¿Qué incluye el desarrollo web?"
-                    : "What's included in web development?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text:
-                    lang === "es"
-                      ? "Nuestros servicios incluyen diseño, desarrollo, pruebas, despliegue y soporte inicial. Todos los sitios son responsivos y optimizados para SEO."
-                      : "Our web development services include design, development, testing, deployment, and initial support. All websites are mobile-responsive and SEO-optimized.",
-                },
-              },
-              {
-                "@type": "Question",
-                name:
-                  lang === "es"
-                    ? "¿Ofrecen hosting y dominio?"
-                    : "Do you offer hosting and domain?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text:
-                    lang === "es"
-                      ? "Sí, podemos ayudarte con configuración de hosting y dominio según las necesidades de tu proyecto."
-                      : "Yes, we can help set up hosting and domain based on your project's needs.",
-                },
-              },
-              {
-                "@type": "Question",
-                name:
-                  lang === "es"
-                    ? "¿Pueden rediseñar un sitio existente?"
-                    : "Can you redesign my existing website?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text:
-                    lang === "es"
-                      ? "Sí, realizamos rediseños enfocados en mejorar experiencia de usuario, conversión y rendimiento SEO."
-                      : "Absolutely. We handle redesigns focused on better UX, conversion rate, and SEO performance.",
-                },
-              },
-              {
-                "@type": "Question",
-                name:
-                  lang === "es"
-                    ? "¿Cuál es la diferencia entre sitio web y aplicación web?"
-                    : "What's the difference between a website and a web app?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text:
-                    lang === "es"
-                      ? "Un sitio web suele ser informativo. Una aplicación web es más interactiva e incluye lógica de negocio para tareas específicas."
-                      : "Websites are usually informational, while web applications are interactive and include business logic for specific workflows.",
-                },
-              },
-            ],
+            mainEntity: faqs,
           })}
         </script>
       </Helmet>
-      <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900 text-white">
+      <section className="relative min-h-screen bg-slate-950 text-white">
         {/* Animated background particles */}
         <div className="absolute inset-0 z-0">
           {[...Array(30)].map((_, i) => (
@@ -362,97 +342,81 @@ export default function Services({ lang, t, setShowQuoteModal }) {
           ))}
         </div>
 
-        <Header t={t} pageType="services" />
+        <Header t={t} heroLogo />
 
-        {/* Hero Section */}
-        <div className="relative z-10 px-6 py-16 text-center max-w-7xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300">
-              {lang === "es" ? "Servicios Web" : "Web Services"}
-            </span>
-          </h1>
-          <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-            {lang === "es"
-              ? "Soluciones web completas adaptadas a tu negocio"
-              : "Complete web solutions tailored for your business"}
-          </p>
-        </div>
-
-        {/* Services Grid */}
-        <div className="relative z-10 px-6 py-8 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className="bg-white/10 backdrop-blur-sm p-5 rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300 hover:shadow-2xl hover:scale-[1.01] flex flex-col"
-              >
-                <h2 className="text-lg font-bold text-blue-300 mb-2 leading-snug">
-                  {service.title}
-                </h2>
-                <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                  {service.description}
-                </p>
-
-                <div className="mb-4">
-                  <h3 className="text-xs font-semibold text-purple-300 uppercase tracking-wider mb-2">
-                    {lang === "es" ? "Características" : "Features"}
-                  </h3>
-                  <ul className="space-y-1.5">
-                    {service.features.map((feature, idx) => (
-                      <li
-                        key={idx}
-                        className="flex items-start text-sm text-gray-300"
-                      >
-                        <svg
-                          className="h-4 w-4 text-green-400 mr-2 mt-0.5 flex-shrink-0"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="border-t border-white/20 pt-3 mb-3 mt-auto">
-                  <div className="flex justify-between items-end gap-3">
-                    <div>
-                      <p className="text-xs text-gray-400">
-                        {lang === "es" ? "Precio base" : "Base price"}
-                      </p>
-                      <p className="text-lg font-bold text-blue-300">
-                        {service.price}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-xs text-gray-400">
-                        {lang === "es"
-                          ? "Tiempo estimado"
-                          : "Estimated timeline"}
-                      </p>
-                      <p className="text-sm font-semibold text-purple-300">
-                        {service.timeline}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <button
-                  onClick={() => openQuoteWithService(service)}
-                  className="w-full px-4 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all hover:scale-[1.02] transform duration-300"
-                >
-                  {lang === "es" ? "Solicitar Cotización" : "Request Quote"}
-                </button>
-              </div>
-            ))}
+        <div data-logo-hero className="services-hero services-width">
+          <div className="services-hero-copy">
+            <p className="services-eyebrow">NullRaccoon</p>
+            <h1>{lang === "es" ? <>¿Qué quieres mejorar<br /><span>en tu negocio?</span></> : <>What would you like<br /><span>to improve?</span></>}</h1>
+            <p className="services-intro">{lang === "es" ? "Elige una solución para captar clientes, vender o simplificar tu operación." : "Choose a solution to win customers, sell online, or simplify operations."}</p>
+            <a href={getWhatsAppUrl()} onClick={() => trackWhatsAppClick()} target="_blank" rel="noopener noreferrer" className="services-primary-cta">
+              <MessageCircle size={19} aria-hidden="true" />
+              {lang === "es" ? "Hablemos de tu proyecto" : "Let’s discuss your project"}
+              <ArrowUpRight size={18} aria-hidden="true" />
+            </a>
+          </div>
+          <div className="services-mascot" aria-hidden="true">
+            <div className="services-mascot-orbit" />
+            <ScrollLogo className="services-logo-anchor" />
+            <span className="services-mascot-tag services-mascot-tag-web"><Globe size={18} /> Web</span>
+            <span className="services-mascot-tag services-mascot-tag-systems"><LayoutDashboard size={18} /> {lang === "es" ? "Sistemas" : "Systems"}</span>
           </div>
         </div>
+        <ul className="services-trust services-width" aria-label={lang === "es" ? "Cómo trabajamos" : "How we work"}>
+          <li><Clock3 aria-hidden="true" /><span>{lang === "es" ? "Webs en 5–10 días hábiles" : "Websites in 5–10 business days"}</span></li>
+          <li><Languages aria-hidden="true" /><span>{lang === "es" ? "Soporte bilingüe" : "Bilingual support"}</span></li>
+          <li><CreditCard aria-hidden="true" /><span>Stripe & PayPal</span></li>
+          <li><Headphones aria-hidden="true" /><span>{lang === "es" ? "Soporte: inicio en 48 h" : "Support: starts in 48 h"}</span></li>
+        </ul>
+
+        {["custom-websites", "ecommerce-solutions", "web-applications", "maintenance-support"].includes(selectedService) && <div className="service-selection services-width" role="status"><span>{lang === "es" ? "Resaltamos la solución que elegiste." : "We’ve highlighted the solution you chose."}</span><Link to="/services">{lang === "es" ? "Ver todas por igual" : "Clear selection"}</Link></div>}
+        <div className="services-grid services-width">
+          {services.map((service) => {
+            const visual = serviceVisuals[service.id];
+            return (
+              <article key={service.id} id={service.id} aria-labelledby={service.id + "-title"} data-selected={selectedService === service.id ? "true" : undefined} className={`service-card service-accent-${visual.accent}`}>
+                <div className="service-timeline"><Clock3 size={14} aria-hidden="true" />{service.timeline}</div>
+                <figure className="service-visual">
+                  {visual.image ? (
+                    <>
+                      <a href={visual.href} className="service-browser" target={visual.interactive ? "_blank" : undefined} rel={visual.interactive ? "noopener noreferrer" : undefined} aria-label={visual.interactive ? (lang === "es" ? `Probar demo: ${visual.project}, abre en una nueva pestaña` : `Try demo: ${visual.project}, opens in a new tab`) : (lang === "es" ? `Ver caso de estudio: ${visual.project}` : `Read case study: ${visual.project}`)}>
+                        <div className="service-browser-chrome" aria-hidden="true"><i /><i /><i /><span>{visual.project}</span><ArrowUpRight size={12} /></div>
+                        <img src={visual.image} alt={lang === "es" ? `Captura del proyecto ${visual.project}` : `Screenshot of ${visual.project}`} loading="lazy" width="600" height="330" />
+                      </a>
+                      <figcaption><a href={visual.href} target={visual.interactive ? "_blank" : undefined} rel={visual.interactive ? "noopener noreferrer" : undefined}>{visual.interactive ? (lang === "es" ? "Probar demo · nueva pestaña" : "Try demo · new tab") : (lang === "es" ? "Ver caso de estudio" : "Read case study")}<ArrowUpRight size={14} aria-hidden="true" /></a></figcaption>
+                    </>
+                  ) : (
+                    <div className="service-support-art" role="img" aria-label={lang === "es" ? "Seguridad, monitoreo y respaldos" : "Security, monitoring, and backups"}>
+                      <div className="service-shield"><ShieldCheck size={66} strokeWidth={1.3} aria-hidden="true" /></div>
+                      <div className="service-support-signal"><Activity size={18} aria-hidden="true" /><span>{lang === "es" ? "Monitoreo continuo" : "Ongoing monitoring"}</span></div>
+                      <div className="service-support-backup"><DatabaseBackup size={17} aria-hidden="true" /><span>{lang === "es" ? "Respaldo y recuperación" : "Backup & recovery"}</span></div>
+                    </div>
+                  )}
+                </figure>
+                <div className="service-card-content">
+                  <h2 id={service.id + "-title"}>{service.title}</h2>
+                  <p className="service-audience">{service.idealFor}</p>
+                  <ul className="service-pills">
+                    {service.highlights.map((highlight, index) => {
+                      const Icon = visual.icons[index];
+                      return <li key={highlight}><Icon size={15} aria-hidden="true" />{highlight}</li>;
+                    })}
+                  </ul>
+                  <details className="service-details">
+                    <summary>{lang === "es" ? "Ver detalles" : "View details"}</summary>
+                    <p>{service.description}</p>
+                    <ul>{service.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
+                  </details>
+                  <a href={getWhatsAppUrl(service)} onClick={() => trackWhatsAppClick(service)} target="_blank" rel="noopener noreferrer" className="service-card-cta">
+                    {lang === "es" ? "Hablemos por WhatsApp" : "Let’s talk on WhatsApp"}<ArrowUpRight size={16} aria-hidden="true" />
+                  </a>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+
 
         {/* Process Section */}
         <div className="relative z-10 px-6 py-16 max-w-5xl mx-auto">
@@ -469,8 +433,8 @@ export default function Services({ lang, t, setShowQuoteModal }) {
                 title: lang === "es" ? "Consulta" : "Consultation",
                 desc:
                   lang === "es"
-                    ? "Definimos objetivos, alcance, presupuesto y plan de trabajo claro"
-                    : "We define goals, scope, budget, and a clear project plan",
+                    ? "Acordamos objetivos, alcance, calendario y contrato de prestación de servicios."
+                    : "We agree on goals, scope, delivery dates, and a service agreement.",
               },
               {
                 step: "02",
@@ -485,16 +449,16 @@ export default function Services({ lang, t, setShowQuoteModal }) {
                 title: lang === "es" ? "Desarrollo" : "Development",
                 desc:
                   lang === "es"
-                    ? "Construimos el sitio, conectamos integraciones y optimizamos velocidad"
-                    : "We build the site, connect integrations, and optimize performance",
+                    ? "Desarrollamos tu plataforma, conectamos integraciones y verificamos seguridad y rendimiento."
+                    : "We build your platform, connect integrations, and verify security and performance.",
               },
               {
                 step: "04",
                 title: lang === "es" ? "Lanzamiento" : "Launch",
                 desc:
                   lang === "es"
-                    ? "Hacemos QA final, publicamos y te entregamos soporte inicial"
-                    : "We run final QA, launch, and provide initial post-launch support",
+                    ? "Validamos contigo, desplegamos llave en mano y coordinamos tu plan de mantenimiento."
+                    : "We validate with you, deliver a turnkey launch, and arrange your maintenance plan.",
               },
             ].map((item, idx) => (
               <div key={idx} className="text-center">
@@ -508,6 +472,24 @@ export default function Services({ lang, t, setShowQuoteModal }) {
           </div>
         </div>
 
+        <div className="relative z-10 px-6 max-w-7xl mx-auto">
+          <Guarantees t={t} />
+        </div>
+
+        <section aria-labelledby="services-faq-title" className="relative z-10 px-6 py-12 max-w-5xl mx-auto">
+          <h2 id="services-faq-title" className="text-3xl font-bold mb-8">
+            {lang === "es" ? "Preguntas frecuentes" : "Frequently asked questions"}
+          </h2>
+          <div className="space-y-4">
+            {faqs.map((faq) => (
+              <details key={faq.name} className="border-t border-gray-800 pt-4">
+                <summary className="cursor-pointer text-lg font-semibold text-blue-200 py-2">{faq.name}</summary>
+                <p className="text-gray-300 leading-relaxed pt-3">{faq.acceptedAnswer.text}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
         {/* Final CTA */}
         <div className="relative z-10 px-6 py-16 text-center max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold mb-6">
@@ -517,15 +499,18 @@ export default function Services({ lang, t, setShowQuoteModal }) {
           </h2>
           <p className="text-gray-300 mb-8 text-lg">
             {lang === "es"
-              ? "Contáctanos hoy para una consulta gratuita y descubre cómo podemos ayudarte."
-              : "Contact us today for a free consultation and discover how we can help."}
+              ? "Cuéntanos qué necesitas resolver. Definimos una solución con alcance claro, contrato y facturación disponible."
+              : "Tell us what you need to solve. We define a solution with a clear scope, a service agreement, and invoicing available."}
           </p>
-          <button
-            onClick={openGenericQuote}
-            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-lg hover:shadow-lg transition-all hover:scale-105 transform duration-300"
+          <a
+            href={getWhatsAppUrl()}
+            onClick={() => trackWhatsAppClick()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-lg hover:shadow-lg transition-all hover:scale-105 transform duration-300"
           >
-            {lang === "es" ? "Empezar Ahora" : "Get Started Now"}
-          </button>
+            {lang === "es" ? "Agendar Llamada de 15 Min" : "Schedule a 15-Minute Call"}
+          </a>
         </div>
       </section>
     </>

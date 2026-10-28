@@ -1,84 +1,17 @@
-import Certifications from "../pages/Certifications";
-import Portfolio from "../pages/Portfolio";
-import Header from "../components/HeaderHero";
-
-export default function Hero({ lang, t, showQuoteModal, setShowQuoteModal }) {
-  return (
-    <section className="relative overflow-hidden min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900">
-      {/* Animated background */}
-      {/* Animated particles background */}
-      <div className="absolute inset-0 z-0">
-        {[...Array(30)].map((_, i) => (
-          <span
-            key={i}
-            className="absolute block w-1 h-1 bg-white opacity-20 rounded-full animate-float"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${4 + Math.random() * 4}s`,
-            }}
-          ></span>
-        ))}
-      </div>
-
-      <Header t={t} pageType="hero" />
-
-      <div className="relative z-10 px-6 py-20 text-center max-w-7xl mx-auto">
-        {/* Bilingual Badge */}
-        {/* <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium text-white mb-6 border border-white/10 animate-fade-in">
-          <span className="relative flex h-3 w-3 mr-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-          </span>
-          {t.bilingualBadge}
-        </div> */}
-
-        {/* Availability Badge */}
-        <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium text-white mb-6 border border-white/10 animate-fade-in">
-          <span className="relative flex h-3 w-3 mr-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-          </span>
-          {t.availability}
-        </div>
-
-        {/* Headline */}
-        <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight animate-fade-in-up">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300">
-            {t.headline}
-          </span>
-        </h1>
-
-        {/* Subheadline */}
-        <div className="mb-10">
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto animate-fade-in-up animation-delay-100">
-            {t.subheadline}
-          </p>
-        </div>
-
-        {/* Trust Indicators */}
-        <div id="portfolio" className="mt-0">
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-5 animate-fade-in animation-delay-300">
-            {t.indicators.map((text, index) => (
-              <div key={index} className="text-center">
-                <p className="inline-block px-2 py-1 rounded-full text-xs sm:text-sm text-gray-300 uppercase tracking-wider bg-white/10 border border-white/20 backdrop-blur-sm">
-                  {text}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Portfolio Section */}
-
-          <Portfolio t={t} />
-        </div>
-
-        <div id="certifications" className="mt-0">
-          {/* Certificaciones */}
-          <Certifications t={t} />
-        </div>
-      </div>
-    </section>
-  );
+import { ArrowUpRight, MessageCircle, ShoppingBag, Workflow } from "lucide-react";
+import ScrollLogo from "./ScrollLogo";
+import Header from "./HeaderHero";
+import ProjectGrid from "./ProjectGrid";
+import { getProjects } from "../utils/projects";
+import { whatsappUrl } from "../utils/contact";
+export default function Hero({ lang, t }) {
+  const es = lang === "es";
+  const paths = es ? [["Conseguir clientes", "Webs que convierten visitas en oportunidades.", "custom-websites", MessageCircle], ["Vender en línea", "Tiendas que simplifican la compra y el cobro.", "ecommerce-solutions", ShoppingBag], ["Automatizar operaciones", "Sistemas que liberan tiempo de tu equipo.", "web-applications", Workflow]] : [["Win customers", "Websites that turn visits into opportunities.", "custom-websites", MessageCircle], ["Sell online", "Stores that simplify shopping and payments.", "ecommerce-solutions", ShoppingBag], ["Automate operations", "Systems that give your team time back.", "web-applications", Workflow]];
+  return <main className="studio-page"><Header t={t} heroLogo />
+    <section data-logo-hero className="studio-home-hero studio-container"><div><p className="studio-eyebrow">NullRaccoon</p><h1>{t.headline}</h1><p className="studio-lead">{es ? "Diseñamos y desarrollamos herramientas digitales que conectan tu negocio con sus clientes y simplifican tu operación." : "We design and build digital tools that connect your business with customers and simplify operations."}</p><div className="studio-actions"><a href="/services" className="studio-button">{es ? "Explorar servicios" : "Explore services"}<ArrowUpRight size={18} /></a><a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className="studio-text-link">{es ? "Hablemos de tu proyecto" : "Let’s discuss your project"} ↗</a></div></div><ScrollLogo /></section>
+    <section className="studio-container studio-section"><h2>{es ? "¿Qué necesita tu negocio?" : "What does your business need?"}</h2><div className="studio-paths">{paths.map(([title, text, anchor, Icon]) => <a key={anchor} href={"/services#" + anchor}><Icon size={26} aria-hidden="true" /><h3>{title}</h3><p>{text}</p><span>{es ? "Ver servicio" : "Explore service"} ↗</span></a>)}</div></section>
+    <section id="portfolio" className="studio-container studio-section"><div className="studio-section-heading"><div><p className="studio-eyebrow">{es ? "Trabajo seleccionado" : "Selected work"}</p><h2>{es ? "De una necesidad a una solución real." : "From a business need to a working solution."}</h2></div><a href="/projects" className="studio-text-link">{es ? "Todos los proyectos" : "All projects"} ↗</a></div><ProjectGrid lang={lang} projects={getProjects(lang).filter(p => ["medtech", "dental"].includes(p.id))} /></section>
+    <section id="studio" className="studio-container studio-section studio-about"><div><p className="studio-eyebrow">{es ? "El estudio" : "The studio"}</p><h2>{es ? "Un equipo cercano a tu operación." : "Close to your business. Committed to the work."}</h2></div><div><p>{es ? "NullRaccoon es un estudio de desarrollo web y sistemas digitales fundado por Gustavo Tello. Trabajamos contigo para definir el problema, construir una solución útil y acompañarla después del lanzamiento." : "NullRaccoon is a web development and digital systems studio founded by Gustavo Tello. We work with you to define the problem, build a useful solution, and support it after launch."}</p><ul className="studio-about-chips" aria-label={es ? "Cómo trabajamos" : "How we work"}>{(es ? ["Soporte bilingüe", "Contrato y facturación", "Entregas según alcance"] : ["Bilingual support", "Service agreements & invoicing", "Scope-based delivery"]).map(item => <li key={item}>{item}</li>)}</ul><a href="/Portfolio/" className="studio-text-link">{es ? "Perfil del fundador" : "Founder’s profile"} ↗</a></div></section>
+    <section className="studio-container studio-section studio-home-close"><h2>{es ? "Construyamos el siguiente paso de tu negocio." : "Let’s build the next step for your business."}</h2><a className="studio-button" href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer">{es ? "Hablemos por WhatsApp" : "Let’s talk on WhatsApp"} ↗</a></section>
+  </main>;
 }

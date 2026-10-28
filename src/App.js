@@ -1,266 +1,75 @@
-import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { MotionProvider } from "./context/MotionContext";
+import React, { lazy, Suspense, useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import { ToastContainer } from "react-toastify";
-import { HelmetProvider, Helmet } from "react-helmet-async";
 import Hero from "./components/Hero";
 import CaseStudy from "./components/CaseStudy";
 import FloatingButtons from "./components/FloatingButtons";
+import Footer from "./components/Footer";
+import SiteMeta from "./components/SiteMeta";
+import Services from "./pages/Services";
+import ProjectDetail from "./pages/ProjectDetail";
+import Projects from "./pages/Projects";
+import NotFound from "./pages/NotFound";
 import StoreHome from "./pages/StoreHome";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
-import Services from "./pages/Services";
-import translations from "./utils/translations";
 import StoreLayout from "./layouts/StoreLayout";
-import StoreLanding from "./pages/StoreLanding";
-import Leads from "./pages/Leads";
+import translations from "./utils/translations";
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "./components/Footer";
-
 import "./index.css";
+import "./pages/Studio.css";
 
+// Prospect data is available only to the local development workspace, not the production bundle.
+const LocalLeads = process.env.NODE_ENV === "development" ? lazy(() => import("./pages/Leads")) : null;
+function DocumentPage({ path }) {
+  useEffect(() => { window.location.replace(path); }, [path]);
+  return <p className="studio-container"><a href={path}>Open document / Abrir documento</a></p>;
+}
 function AppContent() {
-  const [lang, setLang] = useState("es");
-  const [showQuoteModal, setShowQuoteModal] = useState(false);
-
+  const [lang, setLang] = useState("es"); const { pathname, hash } = useLocation();
+  useEffect(() => { setLang((navigator.language || "es").startsWith("es") ? "es" : "en"); }, []);
   useEffect(() => {
-    const userLang = navigator.language || navigator.userLanguage;
-    setLang(userLang.startsWith("es") ? "es" : "en");
-    console.log(
-      `App.js: Initial language set to: ${
-        userLang.startsWith("es") ? "es" : "en"
-      }`,
-    );
-  }, []);
-
+    let cancelled = false;
+    let frame;
+    const position = () => {
+      if (cancelled) return;
+      let id = "";
+      try { id = decodeURIComponent(hash.slice(1)); } catch { id = ""; }
+      const target = id && document.getElementById(id);
+      if (target) {
+        const header = document.querySelector(".studio-header, .shop-header");
+        const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - (header?.offsetHeight || 80) - 24);
+        window.scrollTo({ top, behavior: "auto" });
+      } else window.scrollTo(0, 0);
+    };
+    // Wait for initial language/layout changes and image dimensions before resolving a deep link.
+    frame = requestAnimationFrame(() => { frame = requestAnimationFrame(position); });
+    document.fonts?.ready.then(() => { if (!cancelled && hash) position(); });
+    return () => { cancelled = true; cancelAnimationFrame(frame); };
+  }, [pathname, hash, lang]);
   const t = translations[lang];
-
-  const pageTitle =
-    lang === "es"
-      ? "Desarrollador Web Profesional | Sitios Web Personalizados | Soluciones Web Tijuana"
-      : "Professional Web Developer | Custom Websites & Web Solutions | NullRaccoon";
-
-  const pageDescription =
-    lang === "es"
-      ? "Desarrollador web certificado especializado en sitios web personalizados, tiendas en línea y soluciones digitales. Experto en React, diseño responsivo y SEO. ✓ 2+ años de experiencia. ✓ Apoyo bilingüe. Obtén tu sitio web profesional hoy."
-      : "Certified web developer specializing in custom websites, e-commerce solutions & digital services. React expert, responsive design, SEO-optimized. ✓ 2+ years experience. ✓ Bilingual support. Get your professional website today.";
-
-  const keywords =
-    lang === "es"
-      ? "desarrollador web, desarrollo web, programador web, sitios web personalizados, soluciones web, tienda online, React developer, diseño web responsivo, web solutions colombia, desarrollo sitios web mexico"
-      : "web developer, web development, professional websites, web solutions, custom website development, react developer, responsive web design, online stores, freelance web developer, web development services";
-
-  return (
-    <>
-      <Helmet>
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <meta name="keywords" content={keywords} />
-        <meta name="author" content="NullRaccoon" />
-        <meta name="robots" content="index, follow" />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} />
-        <meta property="og:image" content="/logo192.png" />
-        <meta property="og:url" content="https://www.nullraccoon.com" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={pageTitle} />
-        <meta name="twitter:description" content={pageDescription} />
-        <meta name="twitter:image" content="/logo192.png" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            name: "NullRaccoon",
-            url: "https://www.nullraccoon.com",
-            logo: "https://www.nullraccoon.com/logo192.png",
-            image: "https://www.nullraccoon.com/logo192.png",
-            description: pageDescription,
-            priceRange: "$$",
-            areaServed: [
-              { "@type": "Country", name: "Mexico" },
-              { "@type": "Country", name: "Colombia" },
-              { "@type": "Country", name: "United States" },
-              { "@type": "Country", name: "Worldwide" },
-            ],
-            serviceArea: "Worldwide",
-            knowsAbout: [
-              "Web Development",
-              "React",
-              "JavaScript",
-              "Web Design",
-              "E-commerce",
-              "SEO",
-              "Web Solutions",
-              "Custom Websites",
-              "Responsive Design",
-              "Frontend Development",
-            ],
-            founder: {
-              "@type": "Person",
-              name: "Gustavo Tello",
-            },
-            contactPoint: {
-              "@type": "ContactPoint",
-              contactType: "Customer Service",
-              availableLanguage: ["en", "es"],
-            },
-            sameAs: ["https://github.com/zorthon28"],
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "5",
-              ratingCount: "2",
-            },
-            offers: {
-              "@type": "AggregateOffer",
-              priceCurrency: "USD",
-              lowPrice: "1000",
-              highPrice: "15000",
-              offers: [
-                {
-                  "@type": "Offer",
-                  name: "Custom Website Development",
-                  description:
-                    "Professional website design and development for businesses",
-                  priceCurrency: "USD",
-                  price: "2500",
-                },
-                {
-                  "@type": "Offer",
-                  name: "E-commerce Solutions",
-                  description:
-                    "Complete online store development with payment integration",
-                  priceCurrency: "USD",
-                  price: "5000",
-                },
-                {
-                  "@type": "Offer",
-                  name: "Web Application Development",
-                  description:
-                    "Custom web applications and tools built with modern technologies",
-                  priceCurrency: "USD",
-                  price: "8000",
-                },
-              ],
-            },
-          })}
-        </script>
-      </Helmet>
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Hero
-                lang={lang}
-                t={t}
-                showQuoteModal={showQuoteModal}
-                setShowQuoteModal={setShowQuoteModal}
-              />
-            }
-          />
-
-          <Route
-            path="/services"
-            element={
-              <Services
-                lang={lang}
-                t={t}
-                setShowQuoteModal={setShowQuoteModal}
-              />
-            }
-          />
-
-          <Route
-            path="/privacy"
-            element={<Navigate to="/privacy.html" replace />}
-          />
-          <Route
-            path="/terms"
-            element={<Navigate to="/terms.html" replace />}
-          />
-
-          <Route path="/leads" element={<Leads lang={lang} t={t} />} />
-          <Route
-            path="/case-study/:caseId"
-            element={
-              <CaseStudy
-                lang={lang}
-                t={t}
-                showQuoteModal={showQuoteModal}
-                setShowQuoteModal={setShowQuoteModal}
-              />
-            }
-          />
-
-          {/* 🛍️ Store Routes */}
-
-          {/* Store routes wrapped with StoreLayout */}
-          <Route path="/store" element={<StoreLayout lang={lang} t={t} />}>
-            <Route index element={<StoreLanding lang={lang} t={t} />} />
-            {/* 🏠 Landing */}
-            <Route
-              path="products"
-              element={<StoreHome lang={lang} t={t} />}
-            />{" "}
-            {/* 🛍️ Product list */}
-            <Route
-              path="product/:productId"
-              element={<Product lang={lang} t={t} />}
-            />
-            <Route path="cart" element={<Cart lang={lang} t={t} />} />
-          </Route>
-
-          <Route
-            path="*"
-            element={
-              <Hero
-                lang={lang}
-                t={t}
-                showQuoteModal={showQuoteModal}
-                setShowQuoteModal={setShowQuoteModal}
-              />
-            }
-          />
-        </Routes>
-
-        <Footer lang={lang} t={t} />
-
-        <FloatingButtons
-          lang={lang}
-          setLang={setLang}
-          showQuoteModal={showQuoteModal}
-          setShowQuoteModal={setShowQuoteModal}
-        />
-      </div>
-    </>
-  );
+  return <><SiteMeta lang={lang} /><div className="min-h-screen bg-slate-950 text-slate-100"><Routes>
+    <Route path="/" element={<Hero lang={lang} t={t} />} />
+    <Route path="/services" element={<Services lang={lang} t={t} />} />
+    <Route path="/projects" element={<Projects lang={lang} t={t} />} />
+    <Route path="/projects/:projectId" element={<ProjectDetail lang={lang} t={t} />} />
+    <Route path="/about" element={<Navigate to="/#studio" replace />} />
+    <Route path="/contact" element={<Navigate to="/services" replace />} />
+    <Route path="/privacy" element={<DocumentPage path="/privacy.html" />} />
+    <Route path="/terms" element={<DocumentPage path="/terms.html" />} />
+    <Route path="/privacy.html" element={<DocumentPage path="/privacy.html" />} />
+    <Route path="/terms.html" element={<DocumentPage path="/terms.html" />} />
+    <Route path="/leads" element={LocalLeads ? <Suspense fallback={<p>Loading…</p>}><LocalLeads lang={lang} t={t} /></Suspense> : <NotFound lang={lang} t={t} />} />
+    <Route path="/case-study/:caseId" element={<CaseStudy lang={lang} setLang={setLang} t={t} />} />
+    <Route path="/store" element={<StoreLayout lang={lang} setLang={setLang} />}>
+      <Route index element={<Navigate to="products" replace />} />
+      <Route path="products" element={<StoreHome lang={lang} t={t} />} />
+      <Route path="product/:productId" element={<Product lang={lang} t={t} />} />
+      <Route path="cart" element={<Cart lang={lang} t={t} />} />
+    </Route>
+    <Route path="*" element={<NotFound lang={lang} t={t} />} />
+  </Routes><Footer t={t} /><FloatingButtons lang={lang} setLang={setLang} /></div></>;
 }
-
-function App() {
-  return (
-    <HelmetProvider>
-      <Router>
-        <AppContent />
-        <ToastContainer
-          position="top-right"
-          autoClose={2500}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
-      </Router>
-    </HelmetProvider>
-  );
-}
-
-export default App;
+export default function App() { return <MotionProvider><HelmetProvider><Router><AppContent /><ToastContainer position="top-right" autoClose={2500} hideProgressBar theme="colored" /></Router></HelmetProvider></MotionProvider>; }

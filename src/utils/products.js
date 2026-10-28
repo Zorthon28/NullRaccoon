@@ -4,7 +4,7 @@ export const products = [
     id: 1,
     nameKey: "product1Name", // Changed to translation key
     price: 25.0,
-    images: ["/images/Store/Tshirt/front.jpg", "/images/Store/Tshirt/back.jpg"],
+    images: ["/images/Store/Tshirt/Front.jpg", "/images/Store/Tshirt/Back.jpg"],
     descriptionKey: "product1Description", // Changed to translation key
   },
   {

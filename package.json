@@ -30,7 +30,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "tailwind:init": "tailwindcss init",
-    "build:css": "tailwindcss -i ./src/index.css -o ./src/output.css --watch"
+    "build:css": "tailwindcss -i ./src/index.css -o ./src/output.css --watch",
+    "check:site": "node scripts/check-site.js"
   },
   "eslintConfig": {
     "extends": [

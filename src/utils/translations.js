@@ -2,8 +2,8 @@ const translations = {
   en: {
     bilingualBadge: "Bilingual Support",
     availability: "Accepting new clients",
-    headline: "Professional Websites",
-    subheadline: "We build websites that convert visitors into customers",
+    headline: "Web Development & Digital Systems Studio",
+    subheadline: "We engineer high-performance web platforms, booking systems, and digital solutions designed to acquire customers and scale businesses.",
     ctaStart: "Get Started",
     ctaPortfolio: "Portfolio",
     services: "Services",
@@ -11,28 +11,26 @@ const translations = {
     termsAndConditions: "Terms & Conditions",
     footerText: `© ${new Date().getFullYear()} NullRaccoon. All rights reserved.`,
     indicators: [
-      "2+ Years Experience",
-      "Bilingual Support",
-      "Quality & Testing Focus",
-      "Robust & Scalable Development",
-      "Effective Problem-Solving",
-      "Project Management & Delivery",
+      "Delivery Scheduled by Service & Scope",
+      "Proprietary & Custom-Built Systems",
+      "SEO & Conversion Optimization",
+      "Bilingual Support & Formal Invoicing"
     ],
-    portfolioTitle: "Portfolio",
+    portfolioTitle: "Our Solutions & Platforms",
     images: "Images",
-    portfolioSubtitle: "Some of our recent work",
+    portfolioSubtitle: "Proprietary platforms and custom systems developed by NullRaccoon to streamline operations and grow businesses.",
     portfolioProjects: [
       {
         title: "NullCommunity Club",
         description:
-          "Residential Community Platform: Resident & Pet Registry, Finances, Amenity Reservations, Maintenance Reports & Announcements",
+          "Administrative portal for condominiums and residential communities: amenity bookings, finances, and access control.",
         image: "/images/nullCommunity.png",
         link: "https://community.nullraccoon.com/",
       },
       {
         title: "NullDental",
         description:
-          "Dental Practice Management: Patient Registry, Appointments, Basic Messaging & Dashboard",
+          "Clinical management and automated medical booking platform with patient records and an administrative dashboard.",
         image: "/images/nullDental-main.png",
         link: "https://dental.nullraccoon.com/",
       },
@@ -44,109 +42,48 @@ const translations = {
         link: "/store",
       },
       {
-        title: "Medical Equipment Management",
+        title: "MedTech Premier",
         description:
-          "Inventory and maintenance system for medical center with QR tracking",
+          "Inventory and technical traceability system with QR codes for medical equipment centers.",
         image: "/images/medtech-premier-thumbnail.png",
         type: "CaseStudy",
         link: "/case-study/medtech-premier",
       },
       {
-        title: "Personal Portfolio",
+        title: "Professional Presence Platform",
         description:
-          "Professional presentation of the experience and projects of a biomedical engineer with a focus on technology and automation.",
+          "Custom digital presence for professional services, presenting expertise and solutions to attract business opportunities.",
         image: "/images/portfolio-project-thumbnail.png",
         link: "/Portfolio/",
       },
       {
-        title: "Restaurant Website",
+        title: "Restaurant Platform",
         description:
-          "A modern, responsive website that highlights a restaurant’s menu and services.",
+          "Digital restaurant system with a dynamic interactive menu, ordering, and local conversion optimization.",
         image: "/images/restaurant.png",
         link: "https://restaurant.nullraccoon.com/",
       },
     ],
-    certificationsTitle: "My Certifications",
-    certificationsList: [
+    portfolioNav: "Solutions",
+    guaranteesNav: "Guarantees",
+    guaranteesTitle: "NullRaccoon Guarantees",
+    guarantees: [
       {
-        name: "Codecademy User",
-        imgSrc: "/images/codecademy-logo.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28",
-        description:
-          "Active learning platform member with multiple completed courses",
-        date: "2025",
-        category: "Platform",
-        provider: "Codecademy",
+        "title": "Delivery SLA",
+        "description": "Turnkey delivery and deployment on the schedule agreed for your service and scope."
       },
       {
-        name: "CSS Certificate",
-        imgSrc: "/images/CSS-Cert.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/3a62023b0054dc793edc0adecd715fd7",
-        description: "Comprehensive CSS styling and responsive design skills",
-        date: "2025",
-        category: "Web Development",
-        provider: "Codecademy",
+        "title": "Security & Clean Code",
+        "description": "Modern architectures with React and Tailwind, without bloated templates. Fast, secure systems."
       },
       {
-        name: "Junit Certificate",
-        imgSrc: "/images/Junit-Cert.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/e95ecc4c837848d4a6548967fb8fe349",
-        description:
-          "Java unit testing and test-driven development proficiency",
-        date: "2025",
-        category: "Testing",
-        provider: "Codecademy",
+        "title": "Ongoing Maintenance & Backups",
+        "description": "Monthly technical support plans, backups, and ongoing updates."
       },
       {
-        name: "React Certificate",
-        imgSrc: "/images/React-Cert.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/af00e5032d0a68cc84879983f5d8333b",
-        description:
-          "Modern React development with hooks and component architecture",
-        date: "2025",
-        category: "Web Development",
-        provider: "Codecademy",
-      },
-      {
-        name: "Design Thinking for Innovation: Prototyping and Testing",
-        imgSrc: "/images/Testing-Cert.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/cf46232352e042c6baa6a2d3c53c62f5",
-        description:
-          "User-centered design and iterative prototyping methodologies",
-        date: "2025",
-        category: "Design",
-        provider: "Codecademy",
-      },
-      {
-        name: "Website Deployment & Hosting Fundamentals",
-        imgSrc: "/images/DeployWeb-Cert.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/358e250fca144526a6b2934ff44fbc01",
-        description:
-          "Web deployment, hosting, and production environment management",
-        date: "2025",
-        category: "DevOps",
-        provider: "Codecademy",
-      },
-      {
-        name: "Python Programming Fundamentals",
-        imgSrc: "/images/Python-Cert.png",
-        url: "https://micoach.itj.com/achievements/public/62be38f8d152f617381ade86/68dd78af37cd6a906c578535",
-        description:
-          "Foundational Python programming concepts, data structures, and problem-solving",
-        date: "2025",
-        category: "Programming",
-        provider: "Instituto Tecnológico de Tijuana",
-      },
-      {
-        name: "Intermediate SQL",
-        imgSrc: "/images/IntermediateSQL-Cert.png",
-        url: "https://www.datacamp.com/completed/statement-of-accomplishment/course/95aee834b0201a41b2a0a179e6f394d55a3898b8",
-        description:
-          "Intermediate SQL skills including advanced queries, joins, and data manipulation",
-        date: "Oct 2025",
-        category: "Database",
-        provider: "DataCamp",
-      },
+        "title": "Formal Business Terms",
+        "description": "Service agreements and invoicing available."
+      }
     ],
 
     // --- ADDED CASE STUDY SPECIFIC UI STRINGS HERE ---
@@ -164,9 +101,9 @@ const translations = {
     next: "Next",
     casestudyavailable: "Case Study Available",
     store: {
-      welcomeTitle: "Welcome to NullRaccon Store",
+      welcomeTitle: "Explore the demo catalog",
       welcomeSubtitle:
-        "Discover top-quality medical equipment and accessories tailored for clinics, hospitals, and professionals.",
+        "Explore a sample catalog and interactive cart. This is a software demonstration.",
       shopNow: "Shop Now",
       whyChooseUsTitle: "Why Choose Us?",
       features: {
@@ -176,11 +113,11 @@ const translations = {
         },
         trustedQuality: {
           title: "Trusted Quality",
-          description: "Certified and tested medical-grade products.",
+          description: "Sample products for exploring the demo.",
         },
         customerSatisfaction: {
           title: "Customer Satisfaction",
-          description: "Rated 5 stars by hundreds of happy professionals.",
+          description: "Explore sample shopping and cart interactions.",
         },
       },
       featuredProductsTitle: "Featured Products",
@@ -251,21 +188,16 @@ const translations = {
     sortByNameDesc: "Name: Z to A",
     caseStudies: {
       ecommercePlatform: {
-        title: "E-commerce Platform",
-        subtitle: "Modern online store with seamless checkout experience",
-        overview:
-          "A complete e-commerce solution built to handle high traffic volumes while maintaining fast load times and excellent user experience.",
-        challenge:
-          "The client needed a scalable platform that could handle seasonal traffic spikes while providing a smooth mobile shopping experience.",
-        solution:
-          "We developed a custom React frontend with a Node.js backend, implementing lazy loading, optimized images, and a progressive web app approach for mobile users.",
-        results: [
-          "40% increase in mobile conversion rate",
-          "2.5 second average page load time at peak traffic",
-          "30% reduction in cart abandonment",
-        ],
-        testimonial:
-          '"The new platform has transformed our online business. The mobile experience is now on par with desktop, and our sales have increased dramatically."',
+        "title": "E-commerce demonstration",
+        "subtitle": "Catalog, products, and cart with sample data",
+        "overview": "An interactive demo to explore store navigation, product details, and cart management. It does not accept orders or process payments.",
+        "challenge": "Show how a catalog, product details, and cart connect in a shopping experience.",
+        "solution": "React interface with product routes, a Context API cart, quantity controls, and Spanish and English translations. No order backend or payment integration is included.",
+        "results": [
+          "Responsive catalog and product pages",
+          "Interactive cart and quantity controls",
+          "Sample data and payments disabled"
+        ]
       },
       medtechPremier: {
         title: "Medical Equipment Management Platform",
@@ -285,12 +217,10 @@ const translations = {
           "Service Order Management",
         ],
         results: [
-          "40% reduction in equipment downtime",
+          "QR access to equipment records",
           "Centralized equipment database",
           "Automated maintenance scheduling",
         ],
-        testimonial:
-          '"The platform has revolutionized our biomedical department\'s operations, providing instant access to equipment history and streamlined maintenance processes."',
         screenshots: {
           calendar: {
             alt: "Calendar page for scheduling maintenance",
@@ -375,8 +305,6 @@ const translations = {
       "Secure Digital Records",
       "+ More Tools",
     ],
-    nullDentalTestimonial:
-      '"NullDental revolutionized our practice workflow and patient satisfaction." - Dr. Maria Rodriguez, DDS',
     pricing: {
       title: "Pricing Plans",
       subtitle: "Choose the plan that fits your dental clinic",
@@ -485,8 +413,8 @@ const translations = {
     // Existing Hero translations (from your previous Hero.jsx)
     bilingualBadge: "Soporte Bilingüe",
     availability: "Aceptando nuevos clientes",
-    headline: "Sitios web profesionales",
-    subheadline: "Creamos sitios web que convierten visitantes en clientes",
+    headline: "Estudio de Desarrollo Web y Sistemas Digitales",
+    subheadline: "Desarrollamos plataformas web de alto rendimiento, sistemas de citas y soluciones digitales diseñadas para conseguir clientes y escalar negocios.",
     ctaStart: "Comenzar",
     ctaPortfolio: "Portafolio",
     services: "Servicios",
@@ -494,27 +422,25 @@ const translations = {
     termsAndConditions: "Términos y Condiciones",
     footerText: `© ${new Date().getFullYear()} NullRaccoon. Todos los derechos reservados.`,
     indicators: [
-      "2+ Años de experiencia",
-      "Soporte bilingüe",
-      "Enfoque en Calidad y Pruebas",
-      "Desarrollo Robusto y Escalable",
-      "Resolución de Problemas Eficaz",
-      "Gestión y Entrega de Proyectos",
+      "Entregas según Servicio y Alcance",
+      "Sistemas Propietarios y a la Medida",
+      "Optimización SEO y Alta Conversión",
+      "Soporte Bilingüe y Facturación Formal"
     ],
-    portfolioTitle: "Portafolio",
-    portfolioSubtitle: "Algunos de nuestros trabajos recientes",
+    portfolioTitle: "Nuestras Soluciones y Plataformas",
+    portfolioSubtitle: "Plataformas propietarias y sistemas a la medida desarrollados por NullRaccoon para optimizar operaciones y escalar negocios.",
     portfolioProjects: [
       {
         title: "NullCommunity Club",
         description:
-          "Plataforma de Comunidad Residencial: Registro de Residentes y Mascotas, Finanzas, Reservas de Amenidades, Reportes de Mantenimiento y Anuncios",
+          "Portal administrativo para condominios y comunidades residenciales: reservas de amenidades, finanzas y control de acceso.",
         image: "/images/nullCommunity.png",
         link: "https://community.nullraccoon.com/",
       },
       {
         title: "NullDental",
         description:
-          "Gestión de Práctica Dental: Registro de Pacientes, Citas, Mensajería Básica y Panel de Control",
+          "Plataforma de gestión clínica y reservas médicas automatizadas con expediente de pacientes y panel de control.",
         image: "/images/nullDental-main.png",
         link: "https://dental.nullraccoon.com/",
       },
@@ -526,109 +452,48 @@ const translations = {
         link: "/store",
       },
       {
-        title: "Gestión de Equipos Médicos",
+        title: "MedTech Premier",
         description:
-          "Sistema de inventario y mantenimiento para un centro médico con seguimiento por QR.",
+          "Sistema de inventario y trazabilidad técnica con códigos QR para centros de equipo médico.",
         image: "/images/medtech-premier-thumbnail.png",
         type: "CaseStudy",
         link: "/case-study/medtech-premier",
       },
       {
-        title: "Portafolio Personal",
+        title: "Plataforma de Presencia Profesional",
         description:
-          "Presentación profesional de la experiencia y proyectos de un ingeniero biomédico con enfoque en tecnología y automatización.",
+          "Presencia digital a la medida para servicios profesionales, con experiencia y soluciones orientadas a atraer oportunidades comerciales.",
         image: "/images/portfolio-project-thumbnail.png",
         link: "/Portfolio/",
       },
       {
-        title: "Sitio Web de Restaurante",
+        title: "Restaurant Platform",
         description:
-          "Un sitio web moderno y responsivo que destaca el menú y los servicios del restaurante.",
+          "Sistema digital para restaurantes con menú interactivo dinámico, pedidos y optimización de conversión local.",
         image: "/images/restaurant.png",
         link: "https://restaurant.nullraccoon.com/",
       },
     ],
-    certificationsTitle: "Certificaciones",
-    certificationsList: [
+    portfolioNav: "Soluciones",
+    guaranteesNav: "Garantías",
+    guaranteesTitle: "Garantías NullRaccoon",
+    guarantees: [
       {
-        name: "Usuario de Codecademy",
-        imgSrc: "/images/codecademy-logo.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28",
-        description:
-          "Miembro activo de la plataforma de aprendizaje con múltiples cursos completados",
-        date: "2025",
-        category: "Plataforma",
-        provider: "Codecademy",
+        "title": "SLA de Entrega",
+        "description": "Entrega y despliegue llave en mano con el calendario acordado para tu servicio y alcance."
       },
       {
-        name: "Certificado de CSS",
-        imgSrc: "/images/CSS-Cert.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/3a62023b0054dc793edc0adecd715fd7",
-        description: "Habilidades completas en estilos CSS y diseño responsivo",
-        date: "2025",
-        category: "Desarrollo Web",
-        provider: "Codecademy",
+        "title": "Seguridad y Código Limpio",
+        "description": "Arquitecturas modernas (React/Tailwind), sin plantillas infladas, rápidas y seguras."
       },
       {
-        name: "Certificado de Junit",
-        imgSrc: "/images/Junit-Cert.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/e95ecc4c837848d4a6548967fb8fe349",
-        description:
-          "Competencia en pruebas unitarias Java y desarrollo guiado por pruebas",
-        date: "2025",
-        category: "Pruebas",
-        provider: "Codecademy",
+        "title": "Mantenimiento y Respaldo Continuo",
+        "description": "Planes de soporte técnico mensual, copias de seguridad y actualización constante."
       },
       {
-        name: "Certificado de React",
-        imgSrc: "/images/React-Cert.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/af00e5032d0a68cc84879983f5d8333b",
-        description:
-          "Desarrollo moderno con React usando hooks y arquitectura de componentes",
-        date: "2025",
-        category: "Desarrollo Web",
-        provider: "Codecademy",
-      },
-      {
-        name: "Design Thinking para la innovación: Prototipos y pruebas",
-        imgSrc: "/images/Testing-Cert.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/cf46232352e042c6baa6a2d3c53c62f5",
-        description:
-          "Metodologías de diseño centrado en el usuario y prototipado iterativo",
-        date: "2025",
-        category: "Diseño",
-        provider: "Codecademy",
-      },
-      {
-        name: "Fundamentos de implantación y alojamiento de sitios web",
-        imgSrc: "/images/DeployWeb-Cert.png",
-        url: "https://www.codecademy.com/profiles/Zorthon28/certificates/358e250fca144526a6b2934ff44fbc01",
-        description:
-          "Despliegue web, alojamiento y gestión de entornos de producción",
-        date: "2025",
-        category: "DevOps",
-        provider: "Codecademy",
-      },
-      {
-        name: "Fundamentos de Programación en Python",
-        imgSrc: "/images/Python-Cert.png",
-        url: "https://micoach.itj.com/achievements/public/62be38f8d152f617381ade86/68dd78af37cd6a906c578535",
-        description:
-          "Conceptos fundamentales de programación en Python, estructuras de datos y resolución de problemas",
-        date: "2025",
-        category: "Programación",
-        provider: "Instituto Tecnológico de Tijuana",
-      },
-      {
-        name: "SQL Intermedio",
-        imgSrc: "/images/IntermediateSQL-Cert.png",
-        url: "https://www.datacamp.com/completed/statement-of-accomplishment/course/95aee834b0201a41b2a0a179e6f394d55a3898b8",
-        description:
-          "Habilidades intermedias en SQL incluyendo consultas avanzadas, uniones y manipulación de datos",
-        date: "Oct 2025",
-        category: "Base de Datos",
-        provider: "DataCamp",
-      },
+        "title": "Trato Formal",
+        "description": "Contrato de prestación de servicios y facturación disponible."
+      }
     ],
     // --- ADDED CASE STUDY SPECIFIC UI STRINGS HERE ---
     backToCases: "Volver a Casos de Estudio",
@@ -645,9 +510,9 @@ const translations = {
     next: "Siguiente",
     casestudyavailable: "Análisis detallado disponible",
     store: {
-      welcomeTitle: "Bienvenido a NullRaccon Store",
+      welcomeTitle: "Explora el catálogo demo",
       welcomeSubtitle:
-        "Descubre equipos médicos y accesorios de alta calidad para clínicas, hospitales y profesionales.",
+        "Explora un catálogo de muestra y un carrito interactivo. Esta es una demostración de software.",
       shopNow: "Comprar Ahora",
       whyChooseUsTitle: "¿Por qué elegirnos?",
       features: {
@@ -657,17 +522,17 @@ const translations = {
         },
         trustedQuality: {
           title: "Calidad Confiable",
-          description: "Productos certificados y probados de grado médico.",
+          description: "Productos de muestra para explorar la demo.",
         },
         customerSatisfaction: {
           title: "Satisfacción del Cliente",
           description:
-            "Calificado con 5 estrellas por cientos de profesionales satisfechos.",
+            "Explora interacciones de compra y carrito con datos de muestra.",
         },
       },
       featuredProductsTitle: "Productos Destacados",
       viewAllProducts: "Ver Todos los Productos →",
-      footerText: `© ${new Date().getFullYear()} Gustavo Tello. Todos los derechos reservados.`,
+      footerText: `© ${new Date().getFullYear()} NullRaccoon. Todos los derechos reservados.`,
     },
     products: {
       product1Name: "Camiseta 705",
@@ -738,21 +603,16 @@ const translations = {
     sortByNameDesc: "Nombre: Z a A",
     caseStudies: {
       ecommercePlatform: {
-        title: "Plataforma de Comercio Electrónico",
-        subtitle: "Tienda en línea moderna con experiencia de pago fluida",
-        overview:
-          "Una solución completa de comercio electrónico construida para manejar grandes volúmenes de tráfico manteniendo tiempos de carga rápidos y una excelente experiencia de usuario.",
-        challenge:
-          "El cliente necesitaba una plataforma escalable que pudiera manejar picos de tráfico estacionales mientras proporcionaba una experiencia de compra móvil fluida.",
-        solution:
-          "Desarrollamos un frontend personalizado en React con un backend en Node.js, implementando lazy loading, imágenes optimizadas y un enfoque de aplicación web progresiva para usuarios móviles.",
-        results: [
-          "40% de aumento en la tasa de conversión móvil",
-          "Tiempo de carga promedio de 2.5 segundos en horas pico",
-          "30% de reducción en el abandono de carritos",
-        ],
-        testimonial:
-          '"La nueva plataforma ha transformado nuestro negocio en línea. La experiencia móvil ahora está a la par con el escritorio, y nuestras ventas han aumentado dramáticamente."',
+        "title": "Demostración de comercio electrónico",
+        "subtitle": "Catálogo, productos y carrito con datos de muestra",
+        "overview": "Una demo interactiva para explorar la navegación de una tienda, las fichas de producto y la gestión del carrito. No recibe pedidos ni procesa pagos.",
+        "challenge": "Mostrar cómo se conectan el catálogo, las fichas de producto y el carrito en una experiencia de compra.",
+        "solution": "Interfaz en React con rutas de productos, carrito mediante Context API, control de cantidades y traducciones en español e inglés. No incluye backend de pedidos ni integración de pagos.",
+        "results": [
+          "Catálogo y fichas de producto responsivos",
+          "Carrito interactivo y control de cantidades",
+          "Datos de muestra y pagos desactivados"
+        ]
       },
       medtechPremier: {
         title: "Plataforma de Gestión de Equipos Médicos",
@@ -772,12 +632,10 @@ const translations = {
           "Gestión de órdenes de servicio",
         ],
         results: [
-          "40% reducción en tiempo de inactividad",
+          "Acceso a expedientes de equipos mediante QR",
           "Base de datos centralizada de equipos",
           "Programación automática de mantenimientos",
         ],
-        testimonial:
-          '"La plataforma ha revolucionado las operaciones de nuestro departamento biomédico, proporcionando acceso instantáneo al historial de equipos y procesos de mantenimiento optimizados."',
         screenshots: {
           calendar: {
             alt: "Página de calendario para programar mantenimientos",
@@ -874,8 +732,6 @@ const translations = {
       "Registros Digitales Seguros",
       "+ Más Herramientas",
     ],
-    nullDentalTestimonial:
-      '"NullDental revolucionó nuestro flujo de trabajo y la satisfacción del paciente." - Dra. Maria Rodriguez, DDS',
     pricing: {
       title: "Planes de Precios",
       subtitle: "Elige el plan que se ajuste a tu clínica dental",

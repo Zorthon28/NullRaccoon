@@ -1,0 +1,37 @@
+
+.case-hero { display:grid; grid-template-columns:minmax(0,1.8fr) minmax(270px,1fr); gap:64px; align-items:center; padding-block:48px 64px; }
+.case-hero h1 { color:#f1f5f9; font-size:clamp(2.35rem,4vw,4rem); line-height:1.12; letter-spacing:-.04em; font-weight:800; max-width:22ch; }
+.case-intro { color:#aab8cb; font-size:1.1rem; line-height:1.8; margin-top:24px; max-width:60ch; }
+.case-hero .studio-eyebrow { margin-top:24px; }
+.case-brief { padding:28px; border:1px solid #334155; border-radius:12px; background:linear-gradient(145deg,#102334,#0f172a); }
+.case-brief dl { display:grid; gap:22px; }
+.case-brief dt { color:#94a3b8; font-size:.75rem; margin-bottom:6px; }
+.case-brief dd { color:#e2e8f0; line-height:1.6; font-size:.95rem; }
+.case-brief>a { margin-top:20px; font-size:.8rem; }
+.case-brief>p { margin-top:24px; color:#94a3b8; font-size:.8rem; line-height:1.7; }
+.case-story { display:grid; grid-template-columns:1fr 1fr; gap:64px; padding-block:48px; border-top:1px solid #1e293b; scroll-margin-top:110px; }
+.case-story h2,.case-delivery h2 { color:#f1f5f9; font-size:1.6rem; font-weight:650; margin-bottom:18px; }
+.case-story p:not(.studio-eyebrow) { line-height:1.9; color:#aab8cb; max-width:65ch; }
+.case-capabilities { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border:1px solid #263246; border-radius:10px; background:#0c1928; padding:28px; gap:24px; }
+.case-capabilities>div { display:flex; gap:14px; align-items:center; }
+.case-capabilities svg { color:#67e8f9; flex-shrink:0; }
+.case-capabilities h3 { color:#dbeafe; font-size:.9rem; font-weight:600; }
+#case-screens { scroll-margin-top:110px; }
+.case-featured-screen { margin-top:24px; }
+.case-image-button { display:block; position:relative; width:100%; overflow:hidden; border:1px solid #334155; border-radius:10px; background:#0f172a; cursor:zoom-in; text-align:left; }
+.case-image-button img { display:block; width:100%; height:230px; object-fit:cover; object-position:top; }
+.case-featured-screen .case-image-button img { height:auto; max-height:540px; object-fit:contain; background:#dbe4e9; }
+.case-image-button>span { display:flex; align-items:center; gap:8px; justify-content:flex-end; padding:10px 14px; color:#93c5fd; font-size:.75rem; }
+.case-image-button:hover { border-color:#67e8f9; }
+.case-image-button:focus-visible, .case-more summary:focus-visible { outline:2px solid #67e8f9; outline-offset:4px; }
+.case-featured-screen>figcaption { color:#94a3b8; font-size:.9rem; padding:16px 0; line-height:1.7; }
+.case-gallery { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; padding-top:28px; align-items:start; }
+.case-gallery h3 { margin:16px 0 8px; font-weight:600; color:#e2e8f0; font-size:.95rem; }
+.case-gallery p { color:#94a3b8; font-size:.8rem; line-height:1.8; }
+.case-more { margin-top:32px; color:#cbd5e1; }
+.case-more summary { cursor:pointer; padding:12px 0; color:#93c5fd; }
+.case-delivery { display:grid; grid-template-columns:1fr 1fr; gap:64px; padding-block:40px; border-top:1px solid #263246; }
+.case-delivery ul { list-style:disc; padding-left:20px; color:#cbd5e1; line-height:2; }
+.case-delivery .studio-tag { margin:0; }
+@media(max-width:900px) { .case-hero { grid-template-columns:1fr; gap:32px; padding-block:32px 40px; } .case-brief dl { grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; } .case-gallery { grid-template-columns:repeat(2,minmax(0,1fr)); } .case-story { gap:32px; } }
+@media(max-width:599px) { .case-story,.case-delivery,.case-capabilities,.case-gallery { grid-template-columns:1fr; gap:24px; } .case-brief dl { grid-template-columns:1fr; } .case-brief { padding:22px; } .case-hero h1 { font-size:2.35rem; } .case-gallery .case-image-button img { height:200px; } }
